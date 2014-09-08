@@ -398,7 +398,14 @@ public class Message extends AnnotationContainer implements HasName, HasFields
     public String getRelativeName()
     {
         StringBuilder buffer = new StringBuilder();
-        resolveRelativeName(this, buffer, null);
+        resolveRelativeName(this, buffer, null, '.');
+        return buffer.toString();
+    }
+    
+    public String getCppRelativeName()
+    {
+        StringBuilder buffer = new StringBuilder();
+        resolveRelativeName(this, buffer, null, '_');
         return buffer.toString();
     }
     
@@ -795,15 +802,16 @@ public class Message extends AnnotationContainer implements HasName, HasFields
             buffer.insert(0, message.getProto().getJavaPackageName());
     }
     
-    static void resolveRelativeName(Message message, StringBuilder buffer, Message descendant)
+    static void resolveRelativeName(Message message, StringBuilder buffer, 
+            Message descendant, char separator)
     {
         buffer.insert(0, message.name);
         if (message.parentMessage != null)
         {
             if (message.parentMessage!=descendant)
             {
-                buffer.insert(0, '.');
-                resolveRelativeName(message.parentMessage, buffer, descendant);
+                buffer.insert(0, separator);
+                resolveRelativeName(message.parentMessage, buffer, descendant, separator);
             }
         }
     }
@@ -813,7 +821,7 @@ public class Message extends AnnotationContainer implements HasName, HasFields
         if (owner==message || message.parentMessage==owner || owner.isDescendant(message))
             buffer.append(message.name);
         else if (message.isDescendant(owner))
-            Message.resolveRelativeName(message, buffer, owner);
+            Message.resolveRelativeName(message, buffer, owner, '.');
         else if (message.getProto().getJavaPackageName().equals(owner.getProto().getJavaPackageName()))
             buffer.append(message.getRelativeName());
         else

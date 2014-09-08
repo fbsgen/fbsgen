@@ -95,6 +95,11 @@ public class EnumGroup extends AnnotationContainer implements HasName, HasOption
         return isNested() ? parentMessage.getRelativeName() + "." + name : name;
     }
     
+    public String getCppRelativeName()
+    {
+        return isNested() ? parentMessage.getRelativeName() + "_" + name : name;
+    }
+    
     /* ================================================== */
     
     public Message getParentMessage()

@@ -82,6 +82,11 @@ public class Service extends AnnotationContainer implements HasName, HasOptions
         return isNested() ? parentMessage.getRelativeName() + "." + name : name;
     }
     
+    public String getCppRelativeName()
+    {
+        return isNested() ? parentMessage.getRelativeName() + "_" + name : name;
+    }
+    
     /* ================================================== */
     
     public Message getParentMessage()
