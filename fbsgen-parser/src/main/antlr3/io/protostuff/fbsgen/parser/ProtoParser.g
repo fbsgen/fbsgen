@@ -90,7 +90,7 @@ var_full
     ;
 
 comment_entry [Proto proto]
-    :   DOC_COMMENT { proto.comments.add($DOC_COMMENT.text); }
+    :   DOC_COMMENT { proto.addComment($DOC_COMMENT.text); }
     ;
 
 annotation_entry [Proto proto]
@@ -189,6 +189,7 @@ message_body [Proto proto, Message message]
     //|   extend_block[proto, message]
     //|   extensions_range[proto, message]
     |   annotation_entry[proto]
+    |   comment_entry[proto]
     |   option_entry[proto, message]
     ;
     
@@ -542,6 +543,7 @@ enum_block [Proto proto, Message message]
 enum_body [Proto proto, Message message, EnumGroup enumGroup]
     :   enum_field[proto, message, enumGroup]
     |   annotation_entry[proto]
+    |   comment_entry[proto]
     |   option_entry[proto, enumGroup]
     ;
 
@@ -579,6 +581,7 @@ service_block [Proto proto, Message message]
 service_body [Proto proto, Service service]
     :   rpc_block[proto, service]
     |   annotation_entry[proto]
+    |   comment_entry[proto]
     |   option_entry[proto, service]
     ;
     
@@ -638,6 +641,7 @@ rpc_body_block [Proto proto, Service.RpcMethod rm]
 //extend_body [Proto proto, Extension extension]
 //    :   message_field[proto, extension]
 //    |   annotation_entry[proto]
+//    |   comment_entry[proto]
 //    ;
     
 ignore_block

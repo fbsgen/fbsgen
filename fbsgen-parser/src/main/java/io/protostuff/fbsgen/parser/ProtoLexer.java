@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 io/protostuff/fbsgen/parser/ProtoLexer.g 2014-09-08 20:23:14
+// $ANTLR 3.5.2 io/protostuff/fbsgen/parser/ProtoLexer.g 2014-09-08 21:38:55
 
     package io.protostuff.fbsgen.parser;
 

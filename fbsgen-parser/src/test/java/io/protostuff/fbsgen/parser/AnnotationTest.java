@@ -41,6 +41,9 @@ public class AnnotationTest extends TestCase
         Annotation defaultPerson = person.getAnnotation("DefaultPerson");
         assertNotNull(defaultPerson);
         assertEquals("Anonymous Coward", defaultPerson.getValue("name"));
+        
+        assertEquals(1, person.getComments().size());
+        assertEquals("DefaultPerson", person.getComments().get(0));
 
         Field<?> age = person.getField("age");
         assertNotNull(age);
@@ -48,12 +51,18 @@ public class AnnotationTest extends TestCase
         Annotation defaultAge = age.getAnnotation("DefaultAge");
         assertNotNull(defaultAge);
         assertTrue(defaultAge.getParams().isEmpty());
+        
+        assertEquals(1, age.getComments().size());
+        assertEquals("DefaultAge", age.getComments().get(0));
 
         EnumGroup gender = person.getNestedEnumGroup("Gender");
         assertNotNull(gender);
 
         Annotation defaultGender = gender.getAnnotation("DefaultGender");
         assertEquals("MALE", defaultGender.getValue("value"));
+        
+        assertEquals(1, gender.getComments().size());
+        assertEquals("DefaultGender", gender.getComments().get(0));
 
         EnumGroup.Value male = gender.getValue(0);
         assertNotNull(male);
@@ -75,6 +84,9 @@ public class AnnotationTest extends TestCase
         Annotation nestedMessageAnnotation = listRequest.getAnnotation("NestedMessageAnnotation");
         assertNotNull(nestedMessageAnnotation);
         assertTrue(nestedMessageAnnotation.getParams().isEmpty());
+        
+        assertEquals(1, listRequest.getComments().size());
+        assertEquals("NestedMessageAnnotation", listRequest.getComments().get(0));
 
         Message response = listRequest.getNestedMessage("Response");
         assertNotNull(response);
@@ -82,6 +94,9 @@ public class AnnotationTest extends TestCase
         Annotation deeperMessageAnnotation = response.getAnnotation("DeeperMessageAnnotation");
         assertNotNull(deeperMessageAnnotation);
         assertTrue(deeperMessageAnnotation.getParams().isEmpty());
+        
+        assertEquals(1, response.getComments().size());
+        assertEquals("DeeperMessageAnnotation", response.getComments().get(0));
 
         Field<?> personField = response.getField("person");
         assertNotNull(personField);
@@ -92,6 +107,9 @@ public class AnnotationTest extends TestCase
         assertEquals(false, deeperMessageFieldAnnotation.getValue("nullable"));
         assertEquals(Float.valueOf(1.1f), deeperMessageFieldAnnotation.getValue("version"));
 
+        assertEquals(1, personField.getComments().size());
+        assertEquals("DeeperMessageFieldAnnotation", personField.getComments().get(0));
+        
         Field<?> keyField = response.getField("key");
         assertNotNull(keyField);
 
@@ -99,6 +117,9 @@ public class AnnotationTest extends TestCase
         assertNotNull(testNested);
         assertTrue(person == testNested.getValue("type"));
         assertTrue(gender == testNested.getValue("g"));
+        
+        assertEquals(1, keyField.getComments().size());
+        assertEquals("TestNested", keyField.getComments().get(0));
 
         /*Collection<Extension> extensions = proto.getExtensions();
         assertTrue(extensions.size() == 1);
@@ -126,6 +147,9 @@ public class AnnotationTest extends TestCase
         assertTrue(someServiceAnnotation != null && someServiceAnnotation.getParams().isEmpty());
         assertTrue(anotherServiceAnnotation != null && anotherServiceAnnotation.getParams().isEmpty());
 
+        assertEquals(1, personService.getComments().size());
+        assertEquals("SomeServiceAnnotation", personService.getComments().get(0));
+        
         Service.RpcMethod put = personService.getRpcMethod("Put");
         assertNotNull(put);
 
@@ -133,6 +157,9 @@ public class AnnotationTest extends TestCase
         assertNotNull(authRequired);
         assertTrue(authRequired.getParams().size() == 1);
         assertEquals("admin", authRequired.getValue("role"));
+        
+        assertEquals(1, put.getComments().size());
+        assertEquals("AuthRequired", put.getComments().get(0));
 
         Service.RpcMethod list = personService.getRpcMethod("List");
         assertNotNull(list);
@@ -141,6 +168,9 @@ public class AnnotationTest extends TestCase
         assertNotNull(testRpc);
         assertTrue(person == testRpc.getValue("type"));
         assertTrue(gender == testRpc.getValue("g"));
+        
+        assertEquals(1, list.getComments().size());
+        assertEquals("TestRpc", list.getComments().get(0));
     }
 
 }

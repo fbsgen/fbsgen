@@ -97,6 +97,21 @@ public class Proto extends AnnotationContainer implements HasOptions, HasName
             throw AbstractParser.err(this, "Misplaced annotations: " + annotations);
     }
     
+    void addComment(String comment)
+    {
+        // exclude the space from "/// text"
+        int start = 3, 
+                end = comment.length()-1;
+        
+        if (comment.charAt(end-1) == '\r')
+            end--;
+        
+        if (comment.charAt(start) == ' ')
+            start++;
+        
+        comments.add(comment.substring(start, end));
+    }
+    
     public String getName()
     {
         return getSourcePath();
