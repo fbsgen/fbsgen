@@ -164,6 +164,11 @@ public final class ST4Group extends STGroup implements TemplateGroup
         }
     }
     
+    protected CompiledST load(String name)
+    {
+        return templates.get(name.substring(1));
+    }
+    
     public AttributeRenderer getAttributeRenderer(Class<?> attributeType)
     {
         return DEFAULT_RENDERERS.get(attributeType);
