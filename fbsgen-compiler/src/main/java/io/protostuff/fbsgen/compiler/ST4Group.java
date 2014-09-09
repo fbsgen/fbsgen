@@ -140,6 +140,9 @@ public final class ST4Group extends STGroup implements TemplateGroup
         }
         
         this.name = name;
+        // TODO re-declare this to un-synchronize it?
+        //this.templates = new LinkedHashMap<String, CompiledST>();
+        //this.dictionaries = new HashMap<String, Map<String,Object>>();
         
         ANTLRReaderStream fs;
         try
