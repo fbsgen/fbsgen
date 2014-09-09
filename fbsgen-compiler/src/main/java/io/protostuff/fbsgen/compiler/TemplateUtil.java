@@ -25,6 +25,7 @@ import java.io.InputStreamReader;
 import java.io.PushbackReader;
 import java.io.Reader;
 import java.net.URL;
+import java.util.HashMap;
 
 /**
  * Template utils.
@@ -37,6 +38,9 @@ public final class TemplateUtil
     private TemplateUtil() {}
     
     public static final int PUSH_BACK_SIZE = 5;
+    
+    static final HashMap<String, ST4Group> STG_CACHE =
+            new HashMap<String, ST4Group>();
     
     static CodegenException err(String msg)
     {
@@ -51,38 +55,22 @@ public final class TemplateUtil
     static TemplateGroup resolveGroup(String output, String name, String fileExtension)
     {
         final char[] delim = new char[4];
+        
         String resource = output + ".stg";
+        
+        ST4Group stg = STG_CACHE.get(resource);
+        if (stg != null)
+            return stg;
+        
         Reader br = getReader(resource, delim, true);
         if (br != null)
-            return new ST4Group(name, br, delim);
+        {
+            stg = new ST4Group(name, br, delim);
+            STG_CACHE.put(resource, stg);
+            return stg;
+        }
         
         throw err("Could not load resource: " + output);
-    }
-    
-    static URL getUrl(String resource, char[] delim, boolean checkFile)
-    {
-        try
-        {
-            if (checkFile)
-            {
-                File file = new File(resource);
-                if (file.exists())
-                    return file.toURI().toURL();
-            }
-
-            URL url = DefaultProtoLoader.getResource(resource, TemplateUtil.class);
-            if (url != null)
-                return url;
-            
-            if (resource.startsWith("http://"))
-                return new URL(resource);
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
-        
-        return null;
     }
     
     static Reader getReader(String resource, char[] delim, boolean checkFile)
@@ -95,13 +83,45 @@ public final class TemplateUtil
                 if (file.exists())
                     return newReader(new FileInputStream(file), delim);
             }
-
+    
             URL url = DefaultProtoLoader.getResource(resource, TemplateUtil.class);
             if (url != null)
                 return newReader(url.openStream(), delim);
             
             if (resource.startsWith("http://"))
                 return newReader(new URL(resource).openStream(), delim);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+        
+        return null;
+    }
+
+    static URL getUrl(String resource, char[] delim, boolean checkFile)
+    {
+        try
+        {
+            if (checkFile)
+            {
+                File file = new File(resource);
+                if (file.exists())
+                {
+                    delim[4] = 1;
+                    return file.toURI().toURL();
+                }
+            }
+            
+            URL url = DefaultProtoLoader.getResource(resource, TemplateUtil.class);
+            if (url != null)
+            {
+                delim[4] = 2;
+                return url;
+            }
+            
+            if (resource.startsWith("http://"))
+                return new URL(resource);
         }
         catch (IOException e)
         {

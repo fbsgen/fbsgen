@@ -21,8 +21,8 @@ import io.protostuff.fbsgen.parser.ProtoUtil;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 /**
@@ -38,8 +38,8 @@ public abstract class TemplatedCodeGenerator implements ProtoCompiler
     
     public static final Pattern FORMAT_DELIM = Pattern.compile("&&");
     
-    static final ConcurrentHashMap<String, Formatter> DEFAULT_FORMATTERS =
-            new ConcurrentHashMap<String, Formatter>();
+    static final HashMap<String, Formatter> DEFAULT_FORMATTERS =
+            new HashMap<String, Formatter>();
     
     static
     {
