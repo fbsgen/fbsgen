@@ -14,6 +14,7 @@
 
 package io.protostuff.fbsgen.compiler;
 
+import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
 import io.protostuff.fbsgen.parser.DefaultProtoLoader;
 
 import java.io.BufferedReader;
@@ -42,16 +43,6 @@ public final class TemplateUtil
     static final HashMap<String, ST4Group> STG_CACHE =
             new HashMap<String, ST4Group>();
     
-    static CodegenException err(String msg)
-    {
-        throw new CodegenException(msg);
-    }
-    
-    static CodegenException err(String msg, Throwable cause)
-    {
-        throw new CodegenException(msg, cause);
-    }
-    
     static TemplateGroup resolveGroup(String output, String name, String fileExtension)
     {
         final char[] delim = new char[4];
@@ -70,7 +61,7 @@ public final class TemplateUtil
             return stg;
         }
         
-        throw err("Could not load resource: " + output);
+        throw err(null, "Could not load resource: " + output);
     }
     
     static Reader getReader(String resource, char[] delim, boolean checkFile)
@@ -151,7 +142,7 @@ public final class TemplateUtil
         int lastDot = resource.lastIndexOf('.');
         if (lastDot == -1)
         {
-            throw err("The resource: " + resource + " must be named like: 'foo.ext' " +
+            throw err(null, "The resource: " + resource + " must be named like: 'foo.ext' " +
                     "where '.ext' will be the file extension of the output files.");
         }
         

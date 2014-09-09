@@ -14,6 +14,7 @@
 
 package io.protostuff.fbsgen.compiler;
 
+import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.FORMAT_DELIM;
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.chainedFormat;
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.errorCount;
@@ -131,7 +132,7 @@ public final class ST4Group extends STGroup implements TemplateGroup
     public ST4Group(String name, Reader r, char[] delim)
     {
         if (delim[2] != 0 || delim[0] == '[' || delim[0] == '{')
-            throw TemplateUtil.err("This delimiter: " + new String(delim) + " is not supported by st4");
+            throw err(null, "This delimiter: " + new String(delim, 0, 2) + " is not supported by st4");
         
         if (delim[0] != 0)
         {
@@ -156,7 +157,7 @@ public final class ST4Group extends STGroup implements TemplateGroup
         }
         catch (IOException e)
         {
-            throw TemplateUtil.err(e.getMessage(), e);
+            throw err(null, e.getMessage(), e);
         }
         GroupLexer lexer = new GroupLexer(fs);
         fs.name = name;
@@ -168,7 +169,7 @@ public final class ST4Group extends STGroup implements TemplateGroup
         }
         catch (RecognitionException e)
         {
-            throw TemplateUtil.err(e.getMessage(), e);
+            throw err(null, e.getMessage(), e);
         }
     }
     
@@ -234,10 +235,10 @@ public final class ST4Group extends STGroup implements TemplateGroup
         
         final URL url = TemplateUtil.getUrl(fileName, delim, checkFile);
         if (url == null)
-            throw TemplateUtil.err("Import not found: " + fileName);
+            throw err(null, "Import not found: " + fileName);
         
         if (delim[2] != 0)
-            throw TemplateUtil.err("This delimiter: " + new String(delim) + " is not supported");
+            throw err(null, "This delimiter: " + new String(delim) + " is not supported");
         
         char delimiterStartChar = '«',
                 delimiterStopChar = '»';
