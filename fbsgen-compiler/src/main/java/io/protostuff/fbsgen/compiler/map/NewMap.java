@@ -16,6 +16,7 @@ package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
 import io.protostuff.fbsgen.compiler.TemplateGroup;
+import io.protostuff.fbsgen.compiler.Writable;
 
 /**
  * A map that simply creates objects.
@@ -57,7 +58,7 @@ public final class NewMap extends FakeMap
         {
             public Object create(Object data)
             {
-                return null;//return new Writable();
+                return new Writable();
             }
         }
         ;
