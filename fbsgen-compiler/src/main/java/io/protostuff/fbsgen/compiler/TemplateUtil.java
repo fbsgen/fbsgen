@@ -203,6 +203,11 @@ public final class TemplateUtil
     {
         switch(c0)
         {
+            case '«':
+                target[0] = '«';
+                target[1] = '»';
+                return 2;
+                
             case '[':
                 switch(c1)
                 {
