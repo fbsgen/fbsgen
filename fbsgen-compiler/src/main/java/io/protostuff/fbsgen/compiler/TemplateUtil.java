@@ -52,22 +52,25 @@ public final class TemplateUtil
     {
         final char[] delim = new char[4];
         String resource = output + ".stg";
-        Reader br = load(resource, delim);
+        Reader br = getReader(resource, delim, true);
         if (br != null)
             return new ST4Group(name, br, delim);
         
         throw err("Could not load resource: " + output);
     }
     
-    static URL getURL(String resource, char[] delim)
+    static URL getUrl(String resource, char[] delim, boolean checkFile)
     {
         try
         {
-            File file = new File(resource);
-            if (file.exists())
-                return file.toURI().toURL();
+            if (checkFile)
+            {
+                File file = new File(resource);
+                if (file.exists())
+                    return file.toURI().toURL();
+            }
 
-            URL url = DefaultProtoLoader.getResource(resource, ST4Group.class);
+            URL url = DefaultProtoLoader.getResource(resource, TemplateUtil.class);
             if (url != null)
                 return url;
             
@@ -82,15 +85,18 @@ public final class TemplateUtil
         return null;
     }
     
-    static Reader load(String resource, char[] delim)
+    static Reader getReader(String resource, char[] delim, boolean checkFile)
     {
         try
         {
-            File file = new File(resource);
-            if (file.exists())
-                return newReader(new FileInputStream(file), delim);
+            if (checkFile)
+            {
+                File file = new File(resource);
+                if (file.exists())
+                    return newReader(new FileInputStream(file), delim);
+            }
 
-            URL url = DefaultProtoLoader.getResource(resource, ST4Group.class);
+            URL url = DefaultProtoLoader.getResource(resource, TemplateUtil.class);
             if (url != null)
                 return newReader(url.openStream(), delim);
             

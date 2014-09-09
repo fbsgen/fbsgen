@@ -134,16 +134,30 @@ public final class ST4Group extends STGroup implements TemplateGroup
     public void importTemplates(Token fileNameToken)
     {
         final char[] delim = new char[4];
-        final String fileName = fileNameToken.getText();
-        final URL url = TemplateUtil.getURL(fileName, delim);
+        String fileName = fileNameToken.getText();
+        boolean checkFile = true;
+        
+        if (fileName.charAt(fileName.length()-2) == '_')
+        {
+            // extracts foo from "foo_"
+            checkFile = false;
+            fileName = fileName.substring(1, fileName.length() - 2) + ".stg";
+        }
+        else
+        {
+            // removes the quotes, extracts foo from "foo"
+            fileName = fileName.substring(1, fileName.length() - 1) + ".stg";
+        }
+        
+        final URL url = TemplateUtil.getUrl(fileName, delim, checkFile);
         if (url == null)
             throw TemplateUtil.err("Import not found: " + fileName);
         
         if (delim[2] != 0)
             throw TemplateUtil.err("This delimiter: " + new String(delim) + " is not supported");
         
-        char delimiterStartChar = this.delimiterStartChar,
-                delimiterStopChar = this.delimiterStopChar;
+        char delimiterStartChar = '<',
+                delimiterStopChar = '>';
         
         if (delim[0] != 0)
         {

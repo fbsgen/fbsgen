@@ -17,7 +17,7 @@ package io.protostuff.fbsgen.compiler;
 import junit.framework.TestCase;
 
 /**
- * TODO
+ * Template load from file/classpath test.
  * 
  * @author David Yu
  * @created Sep 9, 2014
@@ -28,11 +28,11 @@ public class LoaderTest extends TestCase
     public void testLoadBase()
     {
         char[] delim = new char[4];
-        assertNotNull(TemplateUtil.getURL("fbsgen/base.stg", delim));
+        assertNotNull(TemplateUtil.getUrl("fbsgen/base.stg", delim, true));
         assertTrue(delim[0] == 0);
         assertTrue(delim[1] == 0);
         
-        assertNotNull(TemplateUtil.load("fbsgen/test_square_delim.stg", delim));
+        assertNotNull(TemplateUtil.getReader("fbsgen/test_square_delim.stg", delim, true));
         assertTrue(delim[0] == '[');
         assertTrue(delim[1] == ']');
     }
