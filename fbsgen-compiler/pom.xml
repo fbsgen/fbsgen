@@ -1,0 +1,142 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <artifactId>fbsgen</artifactId>
+    <groupId>io.protostuff.fbsgen</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>fbsgen-compiler</artifactId>
+  <name>fbsgen :: compiler</name>
+  <description>compiles .proto files based on flatbuffers</description>
+  <packaging>jar</packaging>
+  
+  <build>
+    <defaultGoal>install</defaultGoal>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>1.6</source>
+                <target>1.6</target>
+            </configuration>
+        </plugin>
+        <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>io.protostuff.fbsgen.compiler.CompilerMain</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.protostuff.fbsgen</groupId>
+      <artifactId>fbsgen-parser</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.antlr</groupId>
+      <artifactId>ST4</artifactId>
+    </dependency>
+  </dependencies>
+  
+  <properties>
+    <jwd>package</jwd>
+  </properties>
+  
+  <profiles>
+    <profile>
+      <id>jwd</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+               <archive>
+                <manifest>
+                  <mainClass>io.protostuff.fbsgen.compiler.CompilerMain</mainClass>
+                </manifest>
+                <manifestEntries>
+                  <implementation-version>${project.version}</implementation-version>
+                </manifestEntries>
+              </archive> 
+            </configuration>
+            <executions>
+              <execution>
+                <id>make-assembly</id>
+                <phase>${jwd}</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>rmjar</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <tasks>
+                    <delete quiet="true">
+                      <fileset dir="target" includes="${project.build.finalName}-jar*.jar"/>
+                    </delete>
+                  </tasks>
+                </configuration>
+              </execution>
+              <execution>
+                <id>jarjar</id>
+                <phase>${jwd}</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <tasks>
+                    <taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" />
+                    <jarjar jarfile="target/${project.build.finalName}-jarjar.jar">
+                      <manifest>
+                        <attribute name="Main-Class" value="io.protostuff.fbsgen.compiler.CompilerMain" />
+                        <attribute name="implementation-version" value="${project.version}" />
+                      </manifest>
+                      <zipfileset src="target/${project.build.finalName}-jar-with-dependencies.jar" />
+                      <keep pattern="io.protostuff.fbsgen.compiler.**" />
+                    </jarjar>
+                  </tasks>
+                </configuration>
+              </execution>
+            </executions>
+            <dependencies>
+              <dependency>
+                <groupId>com.tonicsystems.jarjar</groupId>
+                <artifactId>jarjar</artifactId>
+                <version>1.4</version>
+                <scope>system</scope>
+                <systemPath>../lib/jarjar-1.4.jar</systemPath>
+              </dependency>
+            </dependencies>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+  
+</project>
