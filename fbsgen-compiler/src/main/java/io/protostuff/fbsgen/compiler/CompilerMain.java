@@ -34,7 +34,7 @@ public final class CompilerMain
 {
 
     public static final boolean SILENT_MODE = Boolean.parseBoolean(
-            System.getProperty("protostuff.fbsgen.compiler.silent_mode", "true"));
+            System.getProperty("fbsgen.silent_mode", "true"));
 
     public static final Pattern COMMA = Pattern.compile(",");
 
