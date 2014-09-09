@@ -14,7 +14,6 @@
 
 package io.protostuff.fbsgen.parser;
 
-import java.io.IOException;
 
 /**
  * Thrown during parse.
