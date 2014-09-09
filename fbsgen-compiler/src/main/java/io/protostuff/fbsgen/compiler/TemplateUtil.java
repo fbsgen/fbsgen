@@ -37,7 +37,7 @@ public final class TemplateUtil
 {
     private TemplateUtil() {}
     
-    public static final int PUSH_BACK_SIZE = 5;
+    static final int PUSH_BACK_SIZE = 5;
     
     static final HashMap<String, ST4Group> STG_CACHE =
             new HashMap<String, ST4Group>();
@@ -145,7 +145,7 @@ public final class TemplateUtil
     /**
      * Get the file extension of the provided stg resource.
      */
-    public static String getFileExtension(String resource)
+    static String getFileExtension(String resource)
     {
         // E.g uf foo.bar.java.stg, it is the . before "java"
         int lastDot = resource.lastIndexOf('.');
@@ -158,7 +158,7 @@ public final class TemplateUtil
         return resource.substring(lastDot);
     }
     
-    public static Reader newReader(InputStream in, char[] delim) throws IOException
+    static Reader newReader(InputStream in, char[] delim) throws IOException
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
         
@@ -188,7 +188,7 @@ public final class TemplateUtil
     }
     
     
-    public static int fillDelim(char[] target, byte[] buf, int offset)
+    static int fillDelim(char[] target, byte[] buf, int offset)
     {
         return fillDelim(target, 
                 (char)buf[offset], 
@@ -198,7 +198,7 @@ public final class TemplateUtil
                 (char)buf[offset+4]);
     }
     
-    public static int fillDelim(char[] target, char[] buf, int offset)
+    static int fillDelim(char[] target, char[] buf, int offset)
     {
         return fillDelim(target, 
                 buf[offset], 
@@ -208,7 +208,7 @@ public final class TemplateUtil
                 buf[offset+4]);
     }
 
-    public static int fillDelim(char[] target, char c0, char c1, char c2, char c3, char c4)
+    static int fillDelim(char[] target, char c0, char c1, char c2, char c3, char c4)
     {
         if(c0 != c1 || c0 != c2)
             return 0;
