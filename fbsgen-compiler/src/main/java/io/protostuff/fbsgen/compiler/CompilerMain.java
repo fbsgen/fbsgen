@@ -14,6 +14,8 @@
 
 package io.protostuff.fbsgen.compiler;
 
+import static io.protostuff.fbsgen.compiler.CompilerUtil.COMMA;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,7 +24,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
-import java.util.regex.Pattern;
 
 /**
  * The main execution point of compiling protos.
@@ -35,8 +36,6 @@ public final class CompilerMain
 
     public static final boolean SILENT_MODE = Boolean.parseBoolean(
             System.getProperty("fbsgen.silent_mode", "true"));
-
-    public static final Pattern COMMA = Pattern.compile(",");
 
     static final HashMap<String, ProtoCompiler> __compilers =
             new HashMap<String, ProtoCompiler>();

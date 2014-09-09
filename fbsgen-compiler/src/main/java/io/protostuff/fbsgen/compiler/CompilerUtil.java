@@ -22,6 +22,7 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Utilities and helpers for compiling protos.
@@ -31,6 +32,8 @@ import java.util.List;
  */
 public final class CompilerUtil
 {
+    
+    public static final Pattern COMMA = Pattern.compile(",");
 
     public static BufferedWriter newWriter(ProtoModule module, String packageName, String fileName)
             throws IOException
