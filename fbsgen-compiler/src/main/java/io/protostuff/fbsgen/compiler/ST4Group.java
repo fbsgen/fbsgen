@@ -138,6 +138,11 @@ public final class ST4Group extends STGroup implements TemplateGroup
             delimiterStartChar = delim[0];
             delimiterStopChar = delim[1];
         }
+        else
+        {
+            delimiterStartChar = '«';
+            delimiterStopChar = '»';
+        }
         
         this.name = name;
         // TODO re-declare this to un-synchronize it?
@@ -234,8 +239,8 @@ public final class ST4Group extends STGroup implements TemplateGroup
         if (delim[2] != 0)
             throw TemplateUtil.err("This delimiter: " + new String(delim) + " is not supported");
         
-        char delimiterStartChar = '<',
-                delimiterStopChar = '>';
+        char delimiterStartChar = '«',
+                delimiterStopChar = '»';
         
         if (delim[0] != 0)
         {
