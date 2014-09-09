@@ -579,18 +579,6 @@ public class Proto extends AnnotationContainer implements HasOptions, HasName
         return null;
     }
     
-    public String toString()
-    {
-        return new StringBuilder()
-            .append('{')
-            .append("packageName:").append(packageName)
-            .append(',').append("standardOptions:").append(standardOptions)
-            .append(',').append("extraOptions:").append(extraOptions)
-            .append(',').append("messages:").append(getMessages())
-            .append('}')
-            .toString();
-    }
-    
     public interface Loader
     {
         public Proto load(String path, Proto importer) throws Exception;

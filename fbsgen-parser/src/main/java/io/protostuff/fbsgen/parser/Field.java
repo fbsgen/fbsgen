@@ -226,20 +226,6 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         return false;
     }
     
-    public java.lang.String toString()
-    {
-        return new StringBuilder()
-            .append('{')
-            .append("type:").append(getClass().getSimpleName())
-            .append(',').append("name:").append(name)
-            .append(',').append("number:").append(number)
-            .append(',').append("modifier:").append(modifier)
-            .append(',').append("packable:").append(packable)
-            .append(',').append("defaultValue:").append(defaultValue)
-            .append('}')                
-            .toString();
-    }
-    
     public int compareTo(Field<?> f)
     {
         if (f.number==number)

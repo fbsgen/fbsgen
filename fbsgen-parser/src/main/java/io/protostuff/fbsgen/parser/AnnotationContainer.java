@@ -135,6 +135,11 @@ public abstract class AnnotationContainer implements HasAnnotations, HasName
     {
         return getName().hashCode();
     }
-
+    
+    @Override
+    public final String toString()
+    {
+        return getName();
+    }
     
 }

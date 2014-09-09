@@ -271,16 +271,6 @@ public class EnumGroup extends AnnotationContainer implements HasName, HasOption
         return uniqueSortedValues;
     }
     
-    public String toString()
-    {
-        return new StringBuilder()
-            .append('{')
-            .append("name:").append(name)
-            .append(',').append("values:").append(values)
-            .append('}')
-            .toString();
-    }
-
     public static class Value extends AnnotationContainer implements Comparable<Value>, HasName
     {
         public static final Comparator<Value> NO_ALIAS_COMPARATOR = 
@@ -380,12 +370,7 @@ public class EnumGroup extends AnnotationContainer implements HasName, HasOption
         {
             return field.getOptions();
         }
-
-        public String toString()
-        {
-            return new StringBuilder().append(name).append(':').append(number).toString();
-        }
-
+        
         public int compareTo(Value o)
         {
             // if equal, sort by order of declaration

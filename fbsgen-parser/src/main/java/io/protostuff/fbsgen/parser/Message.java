@@ -364,18 +364,6 @@ public class Message extends AnnotationContainer implements HasName, HasFields
         return extraOptions;
     }
     
-    public String toString()
-    {
-        return new StringBuilder()
-            .append('{')
-            .append("name:").append(name)
-            .append(',').append("enumGroups:").append(nestedEnumGroups.values())
-            //.append(',').append("extensions:").append(nestedExtensions)
-            .append(',').append("fields:").append(fields.values())
-            .append('}')
-            .toString();
-    }
-    
     public String getEnclosingNamespace()
     {
         return getFullName();
