@@ -20,6 +20,8 @@ import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.chainedFormat
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.errorCount;
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.format;
 
+import io.protostuff.fbsgen.compiler.map.FakeMapUtil;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Reader;
@@ -34,6 +36,8 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.stringtemplate.v4.AttributeRenderer;
 import org.stringtemplate.v4.AutoIndentWriter;
+import org.stringtemplate.v4.Interpreter;
+import org.stringtemplate.v4.ModelAdaptor;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STErrorListener;
 import org.stringtemplate.v4.STGroup;
@@ -42,6 +46,7 @@ import org.stringtemplate.v4.compiler.CompiledST;
 import org.stringtemplate.v4.compiler.GroupLexer;
 import org.stringtemplate.v4.compiler.GroupParser;
 import org.stringtemplate.v4.misc.STMessage;
+import org.stringtemplate.v4.misc.STNoSuchPropertyException;
 
 /**
  * String template 4 group.
@@ -52,16 +57,24 @@ import org.stringtemplate.v4.misc.STMessage;
 public final class ST4Group extends STGroup implements TemplateGroup
 {
     
-    public static final String TEMPLATE_BASE = "fbsgen";
-
     static final HashMap<Class<?>, AttributeRenderer> DEFAULT_RENDERERS =
             new HashMap<Class<?>, AttributeRenderer>();
 
-    static final HashMap<String,STGroupFile> 
-            FROM_CP_CACHE = new HashMap<String, STGroupFile>(),
-            FROM_FILE_CACHE = new HashMap<String, STGroupFile>();
+    static final HashMap<String,ST4GroupFile> 
+            FROM_CP_CACHE = new HashMap<String, ST4GroupFile>(),
+            FROM_FILE_CACHE = new HashMap<String, ST4GroupFile>();
     
-    public static final AttributeRenderer STRING_ATTRIBUTE_RENDERER = 
+    static final ModelAdaptor FAKEMAP_ADAPTOR = new ModelAdaptor()
+    {
+        @Override
+        public Object getProperty(Interpreter interp, ST self, Object o, Object property,
+                String propertyName) throws STNoSuchPropertyException
+        {
+            return ((FakeMap)o).get(property instanceof ST ? propertyName : property);
+        }
+    };
+    
+    static final AttributeRenderer STRING_ATTRIBUTE_RENDERER = 
             new AttributeRenderer()
     {
         @Override
@@ -87,8 +100,7 @@ public final class ST4Group extends STGroup implements TemplateGroup
         //GROUP_LOADER.loadGroup("base").setAttributeRenderers(DEFAULT_RENDERERS);
     }
     
-
-    public static final STErrorListener ERROR_LISTENER = new STErrorListener()
+    static final STErrorListener ERROR_LISTENER = new STErrorListener()
     {
         @Override
         public void compileTimeError(STMessage msg)
@@ -189,6 +201,12 @@ public final class ST4Group extends STGroup implements TemplateGroup
         // noop
     }
     
+    public ModelAdaptor getModelAdaptor(Class<?> attributeType)
+    {
+        return FakeMap.class.isAssignableFrom(attributeType) ? FAKEMAP_ADAPTOR : 
+            super.getModelAdaptor(attributeType);
+    }
+    
     @Override
     public Template getTemplate(String name)
     {
@@ -249,7 +267,7 @@ public final class ST4Group extends STGroup implements TemplateGroup
             delimiterStopChar = delim[1];
         }
         
-        final STGroupFile stgf = new STGroupFile(url, "UTF-8", 
+        final ST4GroupFile stgf = new ST4GroupFile(url, "UTF-8", 
                 delimiterStartChar, delimiterStopChar);
         importTemplates(stgf, false);
         
@@ -262,7 +280,51 @@ public final class ST4Group extends STGroup implements TemplateGroup
             case 2:
                 // from classpath
                 FROM_CP_CACHE.put(fileName, stgf);
+                
+                // add the maps to the base template
+                if (fileName.equals("fbsgen/dict.stg"))
+                    FakeMapUtil.addMapsTo(stgf);
                 break;
+        }
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public void put(String name, FakeMap map)
+    {
+        // hack
+        Map<?,?> m = map;
+        dictionaries.put(name, (Map<String, Object>)m);
+    }
+    
+    public static final class ST4GroupFile extends STGroupFile implements TemplateGroup
+    {
+
+        public ST4GroupFile(URL url, String encoding, char delimiterStartChar,
+                char delimiterStopChar)
+        {
+            super(url, encoding, delimiterStartChar, delimiterStopChar);
+        }
+        
+        public ModelAdaptor getModelAdaptor(Class<?> attributeType)
+        {
+            return FakeMap.class.isAssignableFrom(attributeType) ? FAKEMAP_ADAPTOR : 
+                super.getModelAdaptor(attributeType);
+        }
+
+        @Override
+        public Template getTemplate(String name)
+        {
+            throw new UnsupportedOperationException();
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        public void put(String name, FakeMap map)
+        {
+            // hack
+            Map<?,?> m = map;
+            dictionaries.put(name, (Map<String, Object>)m);
         }
     }
     

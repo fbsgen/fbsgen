@@ -25,5 +25,7 @@ public interface TemplateGroup
 {
     
     Template getTemplate(String name);
+    
+    void put(String name, FakeMap map);
 
 }
