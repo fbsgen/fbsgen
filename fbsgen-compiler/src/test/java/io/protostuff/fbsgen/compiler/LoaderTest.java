@@ -27,7 +27,7 @@ public class LoaderTest extends TestCase
     
     public void testLoadBase()
     {
-        char[] delim = new char[4];
+        char[] delim = new char[5];
         assertNotNull(TemplateUtil.getUrl("fbsgen/base.stg", delim, true));
         assertTrue(delim[0] == 0);
         assertTrue(delim[1] == 0);

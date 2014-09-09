@@ -14,6 +14,7 @@
 
 package io.protostuff.fbsgen.compiler;
 
+import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Message;
 import io.protostuff.fbsgen.parser.Proto;
@@ -141,6 +142,31 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
         {
             for (EnumGroup eg : proto.getEnumGroups())
             {
+                if (!eg.getA().isEmpty())
+                {
+                    Annotation a = eg.getAnnotation("Exclude");
+                    if (a != null)
+                    {
+                        if (!getOutputId().startsWith(String.valueOf(
+                                a.getP().get("unless_output"))))
+                        {
+                            continue;
+                        }
+                        
+                        //@Exclude(unless_output = "foo.java.stg")
+                    }
+                    else if (null != (a = eg.getAnnotation("Include")))
+                    {
+                        if (getOutputId().startsWith(String.valueOf(
+                                a.getP().get("unless_output"))))
+                        {
+                            continue;
+                        }
+                        
+                        //@Include(unless_output = "bar.java.stg")
+                    }
+                }
+                
                 compileEnumBlock(module, eg, packageName,
                         resolveFileName(eg.getName()), enumBlockTemplate);
             }
@@ -150,6 +176,31 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
         {
             for (Message message : proto.getMessages())
             {
+                if (!message.getA().isEmpty())
+                {
+                    Annotation a = message.getAnnotation("Exclude");
+                    if (a != null)
+                    {
+                        if (!getOutputId().startsWith(String.valueOf(
+                                a.getP().get("unless_output"))))
+                        {
+                            continue;
+                        }
+                        
+                        //@Exclude(unless_output = "foo.java.stg")
+                    }
+                    else if (null != (a = message.getAnnotation("Include")))
+                    {
+                        if (getOutputId().startsWith(String.valueOf(
+                                a.getP().get("unless_output"))))
+                        {
+                            continue;
+                        }
+                        
+                        //@Include(unless_output = "bar.java.stg")
+                    }
+                }
+                
                 compileMessageBlock(module, message, packageName,
                         resolveFileName(message.getName()), messageBlockTemplate);
             }
