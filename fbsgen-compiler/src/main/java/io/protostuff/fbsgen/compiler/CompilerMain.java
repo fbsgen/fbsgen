@@ -577,8 +577,10 @@ public final class CompilerMain
         {
             if (args.length == 0)
                 compileWithNoArgs();
-            else
+            else if (args[0].endsWith(".properties"))
                 compileWithArgs(args, 0, args.length);
+            else
+                AnonTemplateUtil.compileTemplates(args);
         }
         catch(Exception e)
         {

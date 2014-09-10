@@ -92,9 +92,9 @@ public final class CountMap extends FakeMap
             public int count(Message message)
             {
                 int found = 0;
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() > 2)
+                    if (f.getNumber() > 2)
                         found++;
                 }
                 
@@ -107,9 +107,9 @@ public final class CountMap extends FakeMap
             public int count(Message message)
             {
                 int found = 0;
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() > 2 && Boolean.TRUE.equals(f.getOption("immutable")))
+                    if (f.getNumber() > 2 && Boolean.TRUE.equals(f.getOption("immutable")))
                         found++;
                 }
                 
@@ -121,9 +121,9 @@ public final class CountMap extends FakeMap
             public int count(Message message)
             {
                 int found = 0;
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(Boolean.TRUE.equals(f.getOption("provided")))
+                    if (Boolean.TRUE.equals(f.getOption("provided")))
                         found++;
                 }
                 
@@ -135,9 +135,9 @@ public final class CountMap extends FakeMap
             public int count(Message message)
             {
                 int found = 0;
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(Boolean.TRUE.equals(f.getOption("readonly")))
+                    if (Boolean.TRUE.equals(f.getOption("readonly")))
                         found++;
                 }
                 
@@ -149,9 +149,9 @@ public final class CountMap extends FakeMap
             public int count(Message message)
             {
                 int found = 0;
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(Boolean.TRUE.equals(f.getOption("index")))
+                    if (Boolean.TRUE.equals(f.getOption("index")))
                         found++;
                 }
                 
@@ -201,18 +201,18 @@ public final class CountMap extends FakeMap
             public int count(Message message)
             {
                 int count = 0;
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3)
+                    if (f.getNumber() < 3)
                         continue;
                     
-                    if(Field.UInt32.class.isAssignableFrom(f.getClass()))
+                    if (Field.UInt32.class.isAssignableFrom(f.getClass()))
                     {
                         // uint32 field with the option: [onebyte = true]
-                        if(Boolean.TRUE.equals(f.getOption("onebyte")))
+                        if (Boolean.TRUE.equals(f.getOption("onebyte")))
                             count++;
                     }
-                    else if(f.isEnumField() && 
+                    else if (f.isEnumField() && 
                             null != ((EnumField)f).getEnumGroup().getAnnotation("OneByte"))
                     {
                         // links to an enum with the annotation: @OneByte
@@ -229,13 +229,13 @@ public final class CountMap extends FakeMap
             public int count(Message message)
             {
                 int count = 0;
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3)
+                    if (f.getNumber() < 3)
                         continue;
                     
                     // fixed64 fields with the option: [date = true] or [datetime = true]
-                    if(Field.UInt64.class.isAssignableFrom(f.getClass()) && 
+                    if (Field.UInt64.class.isAssignableFrom(f.getClass()) && 
                             (Boolean.TRUE.equals(f.getOption("date")) || 
                                     Boolean.TRUE.equals(f.getOption("datetime"))))
                     {
@@ -259,9 +259,9 @@ public final class CountMap extends FakeMap
             public int count(Message message)
             {
                 int count = 0;
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.isBytesField() && f.getName().endsWith("_key") 
+                    if (f.isBytesField() && f.getName().endsWith("_key") 
                             && !Boolean.TRUE.equals(f.getOption("readonly")))
                     {
                         count++;
@@ -276,9 +276,9 @@ public final class CountMap extends FakeMap
             public int count(Message message)
             {
                 int count = 0;
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.isBytesField() && f.getName().endsWith("_key") 
+                    if (f.isBytesField() && f.getName().endsWith("_key") 
                             && !Boolean.TRUE.equals(f.getOption("readonly"))
                             && !Boolean.TRUE.equals(f.getOption("provided")))
                     {
@@ -294,9 +294,9 @@ public final class CountMap extends FakeMap
             public int count(Message message)
             {
                 int count = 0;
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.isBytesField() && f.getName().endsWith("_key") 
+                    if (f.isBytesField() && f.getName().endsWith("_key") 
                             && !Boolean.TRUE.equals(f.getOption("readonly"))
                             && !Boolean.TRUE.equals(f.getOption("immutable")))
                     {

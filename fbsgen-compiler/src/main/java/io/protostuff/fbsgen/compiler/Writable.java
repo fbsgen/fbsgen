@@ -50,9 +50,9 @@ public final class Writable
         @SuppressWarnings("unchecked")
         public Object get(Object entry)
         {
-            if(currentKey != null)
+            if (currentKey != null)
             {
-                if(currentKey == K_INIT)
+                if (currentKey == K_INIT)
                     throw new RuntimeException("Misuse of chain.");
                 
                 int index = currentKey instanceof Number ? 
@@ -106,7 +106,7 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            if(currentKey == null || currentKey == K_INIT)
+            if (currentKey == null || currentKey == K_INIT)
                 throw new RuntimeException("Misuse of chain.");
             
             final String str = currentKey.toString();
@@ -167,7 +167,7 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            if(currentKey == null || currentKey == K_INIT)
+            if (currentKey == null || currentKey == K_INIT)
                 throw new RuntimeException("Misuse of chain.");
             
             Boolean ret = currentKey.equals(entry) ? Boolean.TRUE : Boolean.FALSE;
@@ -258,7 +258,7 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            if(entry instanceof Integer)
+            if (entry instanceof Integer)
             {
                 list.remove(((Integer)entry).intValue());
             }
@@ -305,7 +305,7 @@ public final class Writable
         public Object get(Object map)
         {
             final Object k = currentKey;
-            if(k == null || k == K_INIT)
+            if (k == null || k == K_INIT)
                 throw new RuntimeException("Misuse of chain.");
             
             currentKey = null;
@@ -323,7 +323,7 @@ public final class Writable
         public Object get(Object map)
         {
             final Object k = currentKey;
-            if(k == null || k == K_INIT)
+            if (k == null || k == K_INIT)
                 throw new RuntimeException("Misuse of chain.");
             
             currentKey = null;
@@ -340,9 +340,9 @@ public final class Writable
     {
         public Object get(Object key)
         {
-            if(currentKey != null)
+            if (currentKey != null)
             {
-                if(currentKey != K_INIT)
+                if (currentKey != K_INIT)
                     throw new RuntimeException("Misuse of chain.");
                 
                 // sets the key
@@ -369,9 +369,9 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            if(currentKey != null)
+            if (currentKey != null)
             {
-                if(currentKey == K_INIT)
+                if (currentKey == K_INIT)
                     throw new RuntimeException("Misuse of chain.");
                 
                 addput(currentKey, entry);
@@ -395,9 +395,9 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            if(currentKey != null)
+            if (currentKey != null)
             {
-                if(currentKey == K_INIT)
+                if (currentKey == K_INIT)
                     throw new RuntimeException("Misuse of chain.");
                 
                 adduput(currentKey, entry);
@@ -415,7 +415,7 @@ public final class Writable
     {
         list.add(value);
         
-        if(!map.containsKey(key))
+        if (!map.containsKey(key))
         {
             // unique, 
             map.put(key, value);
@@ -426,9 +426,9 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            if(currentKey != null)
+            if (currentKey != null)
             {
-                if(currentKey == K_INIT)
+                if (currentKey == K_INIT)
                     throw new RuntimeException("Misuse of chain.");
                 
                 map.put(currentKey, entry);
@@ -446,9 +446,9 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            if(currentKey != null)
+            if (currentKey != null)
             {
-                if(currentKey == K_INIT)
+                if (currentKey == K_INIT)
                     throw new RuntimeException("Misuse of chain.");
                 
                 uput(currentKey, entry);
@@ -464,7 +464,7 @@ public final class Writable
     
     void uput(Object key, Object value)
     {
-        if(!map.containsKey(key))
+        if (!map.containsKey(key))
         {
             // unique
             map.put(key, value);
@@ -475,9 +475,9 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            if(currentKey != null)
+            if (currentKey != null)
             {
-                if(currentKey == K_INIT)
+                if (currentKey == K_INIT)
                     throw new RuntimeException("Misuse of chain.");
                 
                 uputadd(currentKey, entry);
@@ -493,7 +493,7 @@ public final class Writable
     
     void uputadd(Object key, Object value)
     {
-        if(!map.containsKey(key))
+        if (!map.containsKey(key))
         {
             // unique, 
             map.put(key, value);
@@ -505,9 +505,9 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            if(currentKey != null)
+            if (currentKey != null)
             {
-                if(currentKey == K_INIT)
+                if (currentKey == K_INIT)
                     throw new RuntimeException("Misuse of chain.");
                 
                 putlist(currentKey, entry);
@@ -525,7 +525,7 @@ public final class Writable
     void putlist(Object key, Object value)
     {
         ArrayList<Object> existing = (ArrayList<Object>)map.get(key);
-        if(existing == null)
+        if (existing == null)
         {
             existing = new ArrayList<Object>();
             map.put(key, existing);
@@ -572,7 +572,7 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            if(currentKey == null || currentKey == K_INIT)
+            if (currentKey == null || currentKey == K_INIT)
                 throw new RuntimeException("Misuse of chain.");
             
             String str = currentKey.toString();
@@ -587,7 +587,7 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            if(currentKey == null || currentKey == K_INIT)
+            if (currentKey == null || currentKey == K_INIT)
                 throw new RuntimeException("Misuse of chain.");
             
             String str = currentKey.toString();
@@ -603,14 +603,14 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            if(currentKey == null || currentKey == K_INIT)
+            if (currentKey == null || currentKey == K_INIT)
                 throw new RuntimeException("Misuse of chain.");
             
             String str = currentKey.toString();
             currentKey = null;
             
             int count = 1 + ((Integer)entry).intValue(), start = 0;
-            for(int i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 int idx = str.indexOf("__", start);
                 if (idx == -1)
@@ -630,9 +630,9 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            if(currentKey != null)
+            if (currentKey != null)
             {
-                if(currentKey == K_INIT)
+                if (currentKey == K_INIT)
                     throw new RuntimeException("Misuse of chain.");
                 
                 Object ret = unique(currentKey, entry);
@@ -647,7 +647,7 @@ public final class Writable
     
     Object unique(Object key, Object value)
     {
-        if(!map.containsKey(key))
+        if (!map.containsKey(key))
         {
             // unique
             map.put(key, value);
@@ -664,9 +664,9 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            if(currentKey != null)
+            if (currentKey != null)
             {
-                if(currentKey == K_INIT)
+                if (currentKey == K_INIT)
                     throw new RuntimeException("Misuse of chain.");
                 
                 Object ret = fill((String)currentKey, entry);
@@ -692,18 +692,18 @@ public final class Writable
             {
                 final AnnotationContainer ac = (AnnotationContainer)value;
                 final int dot = key.indexOf('.');
-                if(dot == -1)
+                if (dot == -1)
                 {
                     // copies the contents.
                     Annotation a = ac.getAnnotation(key.substring(1));
-                    if(a != null)
+                    if (a != null)
                         map.putAll(a.getP());
                     
                     return this;
                 }
                 
                 final Annotation a = ac.getAnnotation(key.substring(1, dot));
-                if(a != null)
+                if (a != null)
                 {
                     //map.putAll(a.getP());
                     
@@ -936,7 +936,7 @@ public final class Writable
     /**
      * Checks the arg if it exists.
      * 
-     * Called from stringtemplate via "&lt;if(writable.arg.(""+field.o.("foo")).andArgs)&gt;"
+     * Called from stringtemplate via "&lt;if (writable.arg.(""+field.o.("foo")).andArgs)&gt;"
      */
     public FakeMap getArg()
     {
@@ -954,7 +954,7 @@ public final class Writable
     /**
      * Checks the arg if it does not exist.
      * 
-     * Called from stringtemplate via "&lt;if(writable.notarg.(""+field.o.("foo")).andArgs)&gt;"
+     * Called from stringtemplate via "&lt;if (writable.notarg.(""+field.o.("foo")).andArgs)&gt;"
      */
     public FakeMap getNotarg()
     {
@@ -972,7 +972,7 @@ public final class Writable
     /**
      * Checks if the key is inside the arg.
      * 
-     * Called from stringtemplate via "&lt;if(writable.k.("foo").in.(options).andArgs)&gt;"
+     * Called from stringtemplate via "&lt;if (writable.k.("foo").in.(options).andArgs)&gt;"
      */
     public FakeMap getIn()
     {
@@ -982,7 +982,7 @@ public final class Writable
     /**
      * Checks if the key is not inside the arg.
      * 
-     * Called from stringtemplate via "&lt;if(writable.k.("foo").notin.(options).andArgs)&gt;"
+     * Called from stringtemplate via "&lt;if (writable.k.("foo").notin.(options).andArgs)&gt;"
      */
     public FakeMap getNotin()
     {
@@ -992,7 +992,7 @@ public final class Writable
     /**
      * Evaluates the args (added to {@link #list}).
      * 
-     * Called from stringtemplate via "&lt;if(writable.a.(""+field.o.("1")).a.(""+field.o.("2")).andArgs)&gt;"
+     * Called from stringtemplate via "&lt;if (writable.a.(""+field.o.("1")).a.(""+field.o.("2")).andArgs)&gt;"
      */
     public boolean getAndArgs()
     {
@@ -1007,7 +1007,7 @@ public final class Writable
     /**
      * Evaluates the args (added to {@link #list}).
      * 
-     * Called from stringtemplate via "&lt;if(writable.a.(""+field.o.("1")).a.(""+field.o.("2")).orArgs)&gt;"
+     * Called from stringtemplate via "&lt;if (writable.a.(""+field.o.("1")).a.(""+field.o.("2")).orArgs)&gt;"
      */
     public boolean getOrArgs()
     {
@@ -1255,7 +1255,7 @@ public final class Writable
      */
     public FakeMap getK()
     {
-        if(currentKey != null)
+        if (currentKey != null)
             throw new RuntimeException("Misuse of chain.");
         
         currentKey = K_INIT;
@@ -1302,12 +1302,12 @@ public final class Writable
     @SuppressWarnings("rawtypes")
     public boolean isListAndKeySameSize()
     {
-        if(currentKey == null || currentKey == K_INIT)
+        if (currentKey == null || currentKey == K_INIT)
             throw new RuntimeException("Misuse of chain.");
         
         Object existing = map.get(currentKey);
         currentKey = null;
-        if(existing instanceof Map)
+        if (existing instanceof Map)
             return list.size() == ((Map)existing).size();
         
         return list.size() == ((Collection)existing).size();

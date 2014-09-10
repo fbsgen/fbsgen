@@ -119,7 +119,7 @@ public final class FormatMap extends FakeMap
                     .append(((Integer)children.get(0).getOptions().get(
                             "~entity.kind")).intValue());
                 
-                for(int i = 1, len = children.size(); i < len; i++)
+                for (int i = 1, len = children.size(); i < len; i++)
                 {
                     sb.append(',').append(((Integer)children.get(i).getOptions().get(
                             "~entity.kind")).intValue());
@@ -135,14 +135,14 @@ public final class FormatMap extends FakeMap
             public Object format(Object data)
             {
                 final List<HasName> list = (List<HasName>)data;
-                if(list == null || list.size() == 0)
+                if (list == null || list.size() == 0)
                     return "";
                 
                 final StringBuilder sb = new StringBuilder()
                     // append first child
                     .append(list.get(0).getName());
                 
-                for(int i = 1, len = list.size(); i < len; i++)
+                for (int i = 1, len = list.size(); i < len; i++)
                     sb.append(", ").append(list.get(i).getName());
                 
                 return sb.toString();

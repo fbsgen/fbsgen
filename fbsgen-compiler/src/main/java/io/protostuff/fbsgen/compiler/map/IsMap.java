@@ -80,7 +80,7 @@ public final class IsMap extends FakeMap
         {
             public boolean is(Object data)
             {
-                if(data == null)
+                if (data == null)
                     return true;
                 
                 return data instanceof Map ? ((Map<?,?>)data).isEmpty() : 
@@ -155,7 +155,7 @@ public final class IsMap extends FakeMap
                 
                 Boolean b = (Boolean)v.getOptions().get("auth_required");
                 
-                if(b != null)
+                if (b != null)
                     return b.booleanValue();
                 
                 Annotation a = v.getEnumGroup().getAnnotation("ServiceGroup");
@@ -163,14 +163,14 @@ public final class IsMap extends FakeMap
             }
         },
         
-        /*ENTITY
+        ENTITY
         {
             public boolean is(Object data)
             {
                 return data instanceof Message && IsMessageMap.Functions.ENTITY.query(
                         (Message)data);
             }
-        },*/
+        },
         
         PROTO_PROTOSTUFF_DS_PKG
         {

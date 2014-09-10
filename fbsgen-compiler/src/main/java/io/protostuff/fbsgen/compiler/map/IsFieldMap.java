@@ -31,6 +31,8 @@ package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
 import io.protostuff.fbsgen.compiler.TemplateGroup;
+import io.protostuff.fbsgen.compiler.registry.QueryUtil;
+import io.protostuff.fbsgen.parser.CodegenUtil;
 import io.protostuff.fbsgen.parser.Field;
 
 /**
@@ -77,13 +79,13 @@ public final class IsFieldMap extends FakeMap
             }
         },
         
-        /*ONEBYTE
+        ONEBYTE
         {
             public boolean query(Field<?> f)
             {
                 return CodegenUtil.isOneByte(f);
             }
-        },*/
+        },
         
         DATE
         {
@@ -117,7 +119,7 @@ public final class IsFieldMap extends FakeMap
         {
             public boolean query(Field<?> f)
             {
-                if(f.isRepeated() || f.isMessageField())
+                if (f.isRepeated() || f.isMessageField())
                     return false;
                 
                 return f.isOptional() && (f.getA().isEmpty() || 
@@ -142,7 +144,7 @@ public final class IsFieldMap extends FakeMap
             }
         },
         
-        /*ARG_OVERLOADABLE
+        ARG_OVERLOADABLE
         {
             public boolean query(Field<?> f)
             {
@@ -154,7 +156,7 @@ public final class IsFieldMap extends FakeMap
                     default: return false;
                 }
             }
-        },*/
+        },
         
         KEY
         {

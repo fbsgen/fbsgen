@@ -12,22 +12,31 @@
 //limitations under the License.
 //========================================================================
 
-/**
- * 
- */
 package io.protostuff.fbsgen.compiler.map;
 
-
-
-import static io.protostuff.fbsgen.compiler.CompilerUtil.COMMA;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
+import static io.protostuff.fbsgen.compiler.ErrorUtil.getProto;
+import static io.protostuff.fbsgen.compiler.registry.QueryUtil.getConfigTargetFieldMap;
+import static io.protostuff.fbsgen.compiler.registry.QueryUtil.getConfigTargetFields;
+import static io.protostuff.fbsgen.compiler.registry.QueryUtil.getUusvFields;
+import static io.protostuff.fbsgen.compiler.registry.QueryUtil.getUusvForeignFields;
+import static io.protostuff.fbsgen.compiler.registry.QueryUtil.getUusvIdxCsv;
+import static io.protostuff.fbsgen.compiler.registry.QueryUtil.getUusvIdxString;
+import io.protostuff.fbsgen.compiler.ErrorUtil;
 import io.protostuff.fbsgen.compiler.FakeMap;
 import io.protostuff.fbsgen.compiler.TemplateGroup;
+import io.protostuff.fbsgen.compiler.registry.Config;
+import io.protostuff.fbsgen.compiler.registry.EntityUtil;
+import io.protostuff.fbsgen.compiler.registry.QueryUtil;
+import io.protostuff.fbsgen.compiler.registry.Verbs;
 import io.protostuff.fbsgen.parser.Annotation;
+import io.protostuff.fbsgen.parser.EnumField;
+import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Field;
 import io.protostuff.fbsgen.parser.Message;
 import io.protostuff.fbsgen.parser.MessageField;
 import io.protostuff.fbsgen.parser.Proto;
+import io.protostuff.fbsgen.parser.Service.RpcMethod;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,7 +104,7 @@ public final class GetMap extends FakeMap
         {
             public Object get(Object data)
             {
-                return data == null ? Collections.EMPTY_LIST : Arrays.asList(COMMA.split(data.toString()));
+                return data == null ? Collections.EMPTY_LIST : Arrays.asList(QueryUtil.COMMA.split(data.toString()));
             }
         },
         
@@ -105,10 +114,10 @@ public final class GetMap extends FakeMap
             {
                 Proto proto = (Proto)data;
                 String opPkg = proto.getExtraOption("op_pkg");
-                if(opPkg == null)
+                if (opPkg == null)
                     return proto.getJavaPackageName();
                 
-                if(opPkg.charAt(0) == '.')
+                if (opPkg.charAt(0) == '.')
                     return proto.getJavaPackageName() + opPkg;
                 
                 return opPkg;
@@ -121,33 +130,33 @@ public final class GetMap extends FakeMap
             {
                 Proto proto = (Proto)data;
                 String viewPkg = proto.getExtraOption("view_pkg");
-                if(viewPkg == null)
+                if (viewPkg == null)
                     return proto.getJavaPackageName();
                 
-                if(viewPkg.charAt(0) == '.')
+                if (viewPkg.charAt(0) == '.')
                     return proto.getJavaPackageName() + viewPkg;
                 
                 return viewPkg;
             }
         },
         
-        /*VERB_VIEW
+        VERB_VIEW
         {
             public Object get(Object data)
             {
                 RpcMethod rm = (RpcMethod)data;
                 String name = rm.getName();
                 
-                if(name.startsWith("get"))
+                if (name.startsWith("get"))
                     return Verbs.View.GET;
                 
-                if(name.startsWith("list"))
+                if (name.startsWith("list"))
                     return Verbs.View.LIST;
                 
-                if(name.startsWith("find"))
+                if (name.startsWith("find"))
                     return Verbs.View.FIND;
                 
-                if(name.charAt(0) == 'q' && Verbs.isUppercase(name.charAt(1)))
+                if (name.charAt(0) == 'q' && Verbs.isUppercase(name.charAt(1)))
                     return Verbs.View.Q;
                 
                 return null;
@@ -161,31 +170,31 @@ public final class GetMap extends FakeMap
                 RpcMethod rm = (RpcMethod)data;
                 String name = rm.getName();
                 
-                if(name.startsWith("new"))
+                if (name.startsWith("new"))
                     return Verbs.Op.NEW;
                 
-                if(name.startsWith("update"))
+                if (name.startsWith("update"))
                     return Verbs.Op.UPDATE;
                 
-                if(name.startsWith("delete"))
+                if (name.startsWith("delete"))
                     return Verbs.Op.DELETE;
                 
-                if(name.startsWith("mark"))
+                if (name.startsWith("mark"))
                     return Verbs.Op.MARK;
                 
                 return null;
             }
-        },*/
+        },
         
-        /*CONFIG
+        CONFIG
         {
             public Object get(Object data)
             {
                 return data == null ? null : Config.getConfig((EnumGroup)data);
             }
-        },*/
+        },
         
-        /*ENTITY_PARENT
+        ENTITY_PARENT
         {
             public Object get(Object data)
             {
@@ -216,13 +225,13 @@ public final class GetMap extends FakeMap
                 RpcMethod rm = (RpcMethod)data;
                 Message message = rm.getReturnType();
                 
-                if(IsMessageMap.Functions.ENTITY.query(message))
+                if (IsMessageMap.Functions.ENTITY.query(message))
                     return message;
                 
-                if(message.getName().equals("PList"))
+                if (message.getName().equals("PList"))
                 {
                     Message parent = message.getParentMessage();
-                    if(IsMessageMap.Functions.ENTITY.query(parent))
+                    if (IsMessageMap.Functions.ENTITY.query(parent))
                         return parent;
                 }
                 
@@ -239,14 +248,14 @@ public final class GetMap extends FakeMap
                 
                 final StringBuilder sb = new StringBuilder();
                 int start = 0;
-                if(tag)
+                if (tag)
                 {
                     // tag idx
-                    if(v.getEntries().isEmpty())
+                    if (v.getEntries().isEmpty())
                     {
                         throw err("The tag (1-223) index entry: " + 
                                 v.getEg().getRelativeName() + "." + v.getName() + 
-                                " must have an option f0 that points to a tag.", v);
+                                " must have an option f0 that points to a tag.", v.getV());
                     }
                     
                     Config.Value.Entry entry = v.getEntries().get(start++);
@@ -256,7 +265,7 @@ public final class GetMap extends FakeMap
                         .append('.')
                         .append(ev.getName());
                     
-                    if(0 == (v.getEntrySize() - start))
+                    if (0 == (v.getEntrySize() - start))
                         return sb.toString();
                 }
                 else
@@ -264,13 +273,13 @@ public final class GetMap extends FakeMap
                     // entity idx
                     sb.append("IDX_").append(v.getName());
                     
-                    if(v.getEntries().isEmpty())
+                    if (v.getEntries().isEmpty())
                         return sb.toString();
                 }
                 
                 sb.append(", 0");
                 
-                for(int i = start, len = v.getEntrySize(); i < len; i++)
+                for (int i = start, len = v.getEntrySize(); i < len; i++)
                 {
                     Config.Value.Entry entry = v.getEntries().get(i);
                     EnumGroup.Value ev = ((EnumField)entry.getField()).getEv();
@@ -289,7 +298,7 @@ public final class GetMap extends FakeMap
         {
             public Object get(Object obj)
             {
-                if(obj instanceof EnumGroup.Value)
+                if (obj instanceof EnumGroup.Value)
                 {
                     EnumGroup.Value v = (EnumGroup.Value)obj;
                     
@@ -308,7 +317,7 @@ public final class GetMap extends FakeMap
         {
             public Object get(Object obj)
             {
-                if(obj instanceof EnumGroup.Value)
+                if (obj instanceof EnumGroup.Value)
                 {
                     EnumGroup.Value v = (EnumGroup.Value)obj;
                     
@@ -327,7 +336,7 @@ public final class GetMap extends FakeMap
         {
             public Object get(Object obj)
             {
-                if(obj instanceof EnumGroup.Value)
+                if (obj instanceof EnumGroup.Value)
                 {
                     EnumGroup.Value v = (EnumGroup.Value)obj;
                     
@@ -346,7 +355,7 @@ public final class GetMap extends FakeMap
         {
             public Object get(Object obj)
             {
-                if(obj instanceof EnumGroup.Value)
+                if (obj instanceof EnumGroup.Value)
                 {
                     EnumGroup.Value v = (EnumGroup.Value)obj;
                     
@@ -365,10 +374,10 @@ public final class GetMap extends FakeMap
         {
             public Object get(Object obj)
             {
-                if(obj instanceof EnumGroup.Value)
+                if (obj instanceof EnumGroup.Value)
                     return getConfigTargetFields((EnumGroup.Value)obj, "f", false);
                 
-                if(obj instanceof Field<?>)
+                if (obj instanceof Field<?>)
                     return getConfigTargetFields((Field<?>)obj, "f", false);
                 
                 throw err("Codegen error calling get_config_fields.(x) where x is" + 
@@ -380,10 +389,10 @@ public final class GetMap extends FakeMap
         {
             public Object get(Object obj)
             {
-                if(obj instanceof EnumGroup.Value)
+                if (obj instanceof EnumGroup.Value)
                     return getConfigTargetFields((EnumGroup.Value)obj, "f", true);
                 
-                if(obj instanceof Field<?>)
+                if (obj instanceof Field<?>)
                     return getConfigTargetFields((Field<?>)obj, "f", true);
                 
                 throw err("Codegen error calling get_config_fields.(x) where x is" + 
@@ -395,10 +404,10 @@ public final class GetMap extends FakeMap
         {
             public Object get(Object obj)
             {
-                if(obj instanceof EnumGroup)
+                if (obj instanceof EnumGroup)
                     return getConfigTargetFieldMap((EnumGroup)obj, "f", false);
                 
-                if(obj instanceof Message)
+                if (obj instanceof Message)
                     return getConfigTargetFieldMap((Message)obj, "f", false);
                 
                 throw err("Codegen error calling get_map_config_fields.(x) where x is" + 
@@ -410,16 +419,16 @@ public final class GetMap extends FakeMap
         {
             public Object get(Object obj)
             {
-                if(obj instanceof EnumGroup)
+                if (obj instanceof EnumGroup)
                     return getConfigTargetFieldMap((EnumGroup)obj, "f", true);
                 
-                if(obj instanceof Message)
+                if (obj instanceof Message)
                     return getConfigTargetFieldMap((Message)obj, "f", true);
                 
                 throw err("Codegen error calling get_map_config_fields.(x) where x is" + 
                         obj.getClass().getSimpleName(), getProto(obj));
             }
-        },*/
+        },
         
         MAP_ENTITY_FIELD_VALUE_OFFSET
         {
@@ -434,17 +443,17 @@ public final class GetMap extends FakeMap
                 
                 //int lastOffset = 0;
                 //Field<?> lastField = null;
-                for(int i = sortedFields.size(); i-- > 0;)
+                for (int i = sortedFields.size(); i-- > 0;)
                 {
                     Field<?> f = sortedFields.get(i);
                     Integer vo = (Integer)f.getOptions().get("~vo");
-                    if(vo == null)
+                    if (vo == null)
                         break;
                     
                     offsets.put(vo, f);
-                    /*if(f.isBoolField() || CodegenUtil.isOneByte(f))
+                    /*if (f.isBoolField() || CodegenUtil.isOneByte(f))
                     {
-                        if(lastField == null)
+                        if (lastField == null)
                             lastOffset = 1;
                         else
                             lastOffset = 1 + EntityUtil.sizeOf(lastField.getNumber()) + lastOffset;
@@ -455,11 +464,11 @@ public final class GetMap extends FakeMap
                         continue;
                     }
                     
-                    if(f instanceof Field.Fixed32 
+                    if (f instanceof Field.Fixed32 
                             || f instanceof Field.SFixed32 
                             || f instanceof Field.Float)
                     {
-                        if(lastField == null)
+                        if (lastField == null)
                             lastOffset = 4;
                         else
                             lastOffset = 4 + EntityUtil.sizeOf(lastField.getNumber()) + lastOffset;
@@ -470,11 +479,11 @@ public final class GetMap extends FakeMap
                         continue;
                     }
                     
-                    if(f instanceof Field.Fixed64 
+                    if (f instanceof Field.Fixed64 
                             || f instanceof Field.SFixed64
                             || f instanceof Field.Double)
                     {
-                        if(lastField == null)
+                        if (lastField == null)
                             lastOffset = 8;
                         else
                             lastOffset = 8 + EntityUtil.sizeOf(lastField.getNumber()) + lastOffset;
@@ -485,9 +494,9 @@ public final class GetMap extends FakeMap
                         continue;
                     }
                     
-                    if(f.isBytesField() && f.getName().endsWith("key"))
+                    if (f.isBytesField() && f.getName().endsWith("key"))
                     {
-                        if(lastField == null)
+                        if (lastField == null)
                             lastOffset = 9;
                         else
                             lastOffset = 9 + EntityUtil.sizeOf(lastField.getNumber()) + lastOffset;
@@ -513,11 +522,11 @@ public final class GetMap extends FakeMap
                 int result = 0;
                 Field<?> f = (Field<?>)data;
                 
-                if(Boolean.TRUE.equals(f.getOption("readonly")))
+                if (Boolean.TRUE.equals(f.getOption("readonly")))
                     result |= 1;
-                if(Boolean.TRUE.equals(f.getOption("provided")))
+                if (Boolean.TRUE.equals(f.getOption("provided")))
                     result |= 2;
-                if(Boolean.TRUE.equals(f.getOption("immutable")))
+                if (Boolean.TRUE.equals(f.getOption("immutable")))
                     result |= 4;
                 
                 return result;
@@ -539,11 +548,11 @@ public final class GetMap extends FakeMap
             public Object get(Object data)
             {
                 Field<?> f = (Field<?>)data;
-                if(f.isBytesField())
+                if (f.isBytesField())
                 {
                     Message message;
                     Annotation key = f.getAnnotation("Key");
-                    if(key == null || (message = key.getValue("entity")) == null)
+                    if (key == null || (message = key.getValue("entity")) == null)
                     {
                         throw err("The field: " + f.getName() + " of " + 
                                 f.getOwner().getRelativeName() + 
@@ -589,9 +598,9 @@ public final class GetMap extends FakeMap
                 
                 return f0 != null ? m.getField(f0) : m.getField("key");
             }
-        }
+        },
         
-        /*VALIDATED_ENTITY_IDX_STRING
+        VALIDATED_ENTITY_IDX_STRING
         {
             public Object get(Object data)
             {
@@ -633,7 +642,7 @@ public final class GetMap extends FakeMap
                 
                 return str;
             }
-        }*/
+        }
         ;
         public final GetMap map;
 

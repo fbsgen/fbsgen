@@ -43,7 +43,7 @@ public final class TemplateUtil
     static final HashMap<String, ST4Group> STG_CACHE =
             new HashMap<String, ST4Group>();
     
-    static TemplateGroup resolveGroup(String output, String name, String fileExtension)
+    public static TemplateGroup resolveGroup(String output, String name, String fileExtension)
     {
         final char[] delim = new char[4];
         
@@ -53,15 +53,21 @@ public final class TemplateUtil
         if (stg != null)
             return stg;
         
-        Reader br = getReader(resource, delim, true);
-        if (br != null)
+        Reader reader = getReader(resource, delim, true);
+        if (reader != null)
         {
-            stg = new ST4Group(name, br, delim);
+            stg = new ST4Group(name, reader, delim);
             STG_CACHE.put(resource, stg);
             return stg;
         }
         
         throw err(null, "Could not load resource: " + output);
+    }
+    
+    static TemplateGroup newGroup(String name, InputStream in, char[] delim, 
+            boolean parseDelim) throws IOException
+    {
+        return new ST4Group(name, newReader(in, parseDelim ? delim : null), delim);
     }
     
     static Reader getReader(String resource, char[] delim, boolean checkFile)
@@ -125,10 +131,10 @@ public final class TemplateUtil
     /**
      * Returns "foo" from "path/to/foo.java.stg".
      */
-    static String getOutputName(String resource)
+    public static String getOutputName(String resource)
     {
-        final int secondToTheLastDot = resource.lastIndexOf('.', resource.length() - 5), slash = resource.lastIndexOf(
-                '/', secondToTheLastDot);
+        final int secondToTheLastDot = resource.lastIndexOf('.', resource.length() - 5), 
+                slash = resource.lastIndexOf('/', secondToTheLastDot);
 
         return resource.substring(slash + 1, secondToTheLastDot);
     }
@@ -136,7 +142,7 @@ public final class TemplateUtil
     /**
      * Get the file extension of the provided stg resource.
      */
-    static String getFileExtension(String resource)
+    public static String getFileExtension(String resource)
     {
         // E.g uf foo.bar.java.stg, it is the . before "java"
         int lastDot = resource.lastIndexOf('.');
@@ -152,6 +158,8 @@ public final class TemplateUtil
     static Reader newReader(InputStream in, char[] delim) throws IOException
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+        if (delim == null)
+            return br;
         
         PushbackReader reader = new PushbackReader(br, PUSH_BACK_SIZE);
         
@@ -201,7 +209,7 @@ public final class TemplateUtil
 
     static int fillDelim(char[] target, char c0, char c1, char c2, char c3, char c4)
     {
-        if(c0 != c1 || c0 != c2)
+        if (c0 != c1 || c0 != c2)
             return 0;
         
         switch(c0)

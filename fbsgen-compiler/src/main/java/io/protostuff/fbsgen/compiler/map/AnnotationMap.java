@@ -70,14 +70,14 @@ public final class AnnotationMap extends FakeMap
             final String key, final String prefix)
     {
         final Annotation a = ac.getAnnotation(name);
-        if(a == null)
+        if (a == null)
             return 0;
         
         int count = 0, filterCount = 0;
         
         while(a.getP().containsKey(key + count))
         {
-            if(Boolean.TRUE.equals(a.getP().get(prefix + key + count)))
+            if (Boolean.TRUE.equals(a.getP().get(prefix + key + count)))
                 filterCount++;
             
             count++;
@@ -90,7 +90,7 @@ public final class AnnotationMap extends FakeMap
             final String key)
     {
         final Annotation a = ac.getAnnotation(name);
-        if(a == null)
+        if (a == null)
             return 0;
         
         int count = 0;
@@ -105,7 +105,7 @@ public final class AnnotationMap extends FakeMap
             final String key)
     {
         final Annotation a = ac.getAnnotation(name);
-        if(a == null)
+        if (a == null)
             return Collections.emptyList();
         
         return fillList(new ArrayList<Object>(), a, key);
@@ -114,7 +114,7 @@ public final class AnnotationMap extends FakeMap
     public static List<Object> fillList(final ArrayList<Object> list, 
             final Annotation a, final String key)
     {
-        for(String k = key + list.size(); a.getP().containsKey(k); k = key + list.size())
+        for (String k = key + list.size(); a.getP().containsKey(k); k = key + list.size())
             list.add(a.getP().get(k));
         
         return list;
@@ -124,7 +124,7 @@ public final class AnnotationMap extends FakeMap
             final String key)
     {
         final Annotation a = ac.getAnnotation(name);
-        if(a == null)
+        if (a == null)
             return Collections.emptyList();
         
         return fillKeys(new ArrayList<String>(), a, key);
@@ -133,7 +133,7 @@ public final class AnnotationMap extends FakeMap
     public static List<String> fillKeys(final ArrayList<String> list, 
             final Annotation a, final String key)
     {
-        for(String k = key + list.size(); a.getP().containsKey(k); k = key + list.size())
+        for (String k = key + list.size(); a.getP().containsKey(k); k = key + list.size())
             list.add(k);
         
         return list;
@@ -142,7 +142,7 @@ public final class AnnotationMap extends FakeMap
     public static List<Object> fillList(final ArrayList<Object> list, 
             final Annotation a, final String key, Map<Object,Object> valueIndexMap)
     {
-        for(String k = key + list.size(); a.getP().containsKey(k); k = key + list.size())
+        for (String k = key + list.size(); a.getP().containsKey(k); k = key + list.size())
         {
             Object value = a.getP().get(k);
             valueIndexMap.put(value, list.size());
@@ -155,7 +155,7 @@ public final class AnnotationMap extends FakeMap
     /*public static List<String> fillKeys(final ArrayList<String> list, 
             final Annotation a, final String key, Map<Object,Object> valueIndexMap)
     {
-        for(String k = key + list.size(); a.getP().containsKey(k); k = key + list.size())
+        for (String k = key + list.size(); a.getP().containsKey(k); k = key + list.size())
         {
             valueIndexMap.put(a.getP().get(k), list.size());
             list.add(k);
@@ -168,7 +168,7 @@ public final class AnnotationMap extends FakeMap
             final String name, final String key)
     {
         final Annotation a = ac.getAnnotation(name);
-        if(a == null)
+        if (a == null)
             return Collections.emptyMap();
         
         return fillMap(new LinkedHashMap<String, Object>(), a, key);
@@ -177,7 +177,7 @@ public final class AnnotationMap extends FakeMap
     public static Map<String,Object> fillMap(final Map<String,Object> map, 
             final Annotation a, final String key)
     {
-        for(String k = key + map.size(); a.getP().containsKey(k); k = key + map.size())
+        for (String k = key + map.size(); a.getP().containsKey(k); k = key + map.size())
             map.put(k, a.getP().get(k));
         
         return map;

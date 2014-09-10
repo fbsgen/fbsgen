@@ -32,7 +32,7 @@ public final class ErrorUtil
     
     public static CodegenException err(Proto proto, String msg)
     {
-        if(proto == null)
+        if (proto == null)
             return new CodegenException(msg);
         
         return new CodegenException(msg + " [" + proto.getSourcePath() + "]");
@@ -40,7 +40,7 @@ public final class ErrorUtil
     
     public static CodegenException err(Proto proto, String msg, Throwable cause)
     {
-        if(proto == null)
+        if (proto == null)
             return new CodegenException(msg, cause);
         
         return new CodegenException(msg + " [" + proto.getSourcePath() + "]", cause);
@@ -53,7 +53,7 @@ public final class ErrorUtil
     
     public static CodegenException err(String msg, Proto proto)
     {
-        if(proto == null)
+        if (proto == null)
             return new CodegenException(msg);
         
         return new CodegenException(msg + " [" + proto.getSourcePath() + "]");

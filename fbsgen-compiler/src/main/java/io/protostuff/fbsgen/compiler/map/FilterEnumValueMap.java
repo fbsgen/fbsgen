@@ -54,8 +54,8 @@ public final class FilterEnumValueMap extends FakeMap
     
     public static void addAllTo(TemplateGroup group)
     {
-        for (Functions c : Functions.values())
-            group.put(c.map.id, c.map);
+        for (Functions f : Functions.values())
+            group.put(f.map.id, f.map);
     }
     
     public enum Functions implements Function
@@ -67,9 +67,9 @@ public final class FilterEnumValueMap extends FakeMap
             {
                 final ArrayList<Value> list = new ArrayList<Value>();
                 
-                for(Value v : eg.getValues())
+                for (Value v : eg.getValues())
                 {
-                    if(v.getAnnotation("UserManaged") != null)
+                    if (v.getAnnotation("UserManaged") != null)
                         list.add(v);
                 }
                 

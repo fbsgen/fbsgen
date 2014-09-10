@@ -58,13 +58,13 @@ public final class FilterMap extends FakeMap
             Annotation a1 = f1.getAnnotation("Display");
             Annotation a2 = f2.getAnnotation("Display");
             
-            if(a1 == null)
+            if (a1 == null)
             {
                 return a2 != null && a2.getValue("order") != null ? 1 : 
                     f1.getNumber() - f2.getNumber();
             }
             
-            if(a2 == null)
+            if (a2 == null)
             {
                 return a1.getValue("order") != null ? -1 : 
                     f1.getNumber() - f2.getNumber();
@@ -72,10 +72,10 @@ public final class FilterMap extends FakeMap
             
             Integer o1 = a1.getValue("order");
             Integer o2 = a2.getValue("order");
-            if(o1 == null)
+            if (o1 == null)
                 return o2 != null ? 1 : f1.getNumber() - f2.getNumber();
             
-            if(o2 == null)
+            if (o2 == null)
                 return -1;
             
             int diff = o1 - o2;
@@ -105,8 +105,8 @@ public final class FilterMap extends FakeMap
     
     public static void addAllTo(TemplateGroup group)
     {
-        for (Functions c : Functions.values())
-            group.put(c.map.id, c.map);
+        for (Functions f : Functions.values())
+            group.put(f.map.id, f.map);
     }
     
     public enum Functions implements Function
@@ -117,9 +117,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() || !f.isMessageField())
+                    if (!f.isRepeated() || !f.isMessageField())
                         list.add(f);
                 }
                 
@@ -131,9 +131,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.isRequired())
+                    if (f.isRequired())
                         list.add(f);
                 }
                 
@@ -145,9 +145,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated())
+                    if (!f.isRepeated())
                         list.add(f);
                 }
                 
@@ -159,9 +159,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && f.isBoolField())
+                    if (!f.isRepeated() && f.isBoolField())
                         list.add(f);
                 }
                 
@@ -173,9 +173,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && !f.isBytesField() && !Boolean.TRUE.equals(f.getOption("readonly")))
+                    if (!f.isRepeated() && !f.isBytesField() && !Boolean.TRUE.equals(f.getOption("readonly")))
                         list.add(f);
                 }
                 
@@ -187,9 +187,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && !f.isBytesField() && !Boolean.TRUE.equals(f.getOption("readonly")))
+                    if (!f.isRepeated() && !f.isBytesField() && !Boolean.TRUE.equals(f.getOption("readonly")))
                         list.add(f);
                 }
                 
@@ -203,9 +203,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && f.isMessageField() 
+                    if (!f.isRepeated() && f.isMessageField() 
                             && !Boolean.TRUE.equals(f.getOption("readonly")))
                     {
                         list.add(f);
@@ -220,9 +220,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && f.isMessageField() 
+                    if (!f.isRepeated() && f.isMessageField() 
                             && !Boolean.TRUE.equals(f.getOption("readonly"))
                             && !Boolean.TRUE.equals(f.getOption("provided")))
                     {
@@ -238,9 +238,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && !f.isBytesField() && !f.isMessageField() && !Boolean.TRUE.equals(f.getOption("readonly")))
+                    if (!f.isRepeated() && !f.isBytesField() && !f.isMessageField() && !Boolean.TRUE.equals(f.getOption("readonly")))
                         list.add(f);
                 }
                 
@@ -252,12 +252,12 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.isRepeated() || f.isBytesField() || f.isMessageField() || Boolean.TRUE.equals(f.getOption("readonly")))
+                    if (f.isRepeated() || f.isBytesField() || f.isMessageField() || Boolean.TRUE.equals(f.getOption("readonly")))
                         continue;
                     
-                    if(f.isOptional() && (f.getA().isEmpty() || (f.getA().size() == 1 && f.getAnnotation("Display") != null)))
+                    if (f.isOptional() && (f.getA().isEmpty() || (f.getA().size() == 1 && f.getAnnotation("Display") != null)))
                         continue;
                     
                     list.add(f);
@@ -271,9 +271,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && f.isNumberField() && "int".equals(f.getJavaType()) && !Boolean.TRUE.equals(f.getOption("readonly")))
+                    if (!f.isRepeated() && f.isNumberField() && "int".equals(f.getJavaType()) && !Boolean.TRUE.equals(f.getOption("readonly")))
                         list.add(f);
                 }
                 
@@ -285,9 +285,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && f.isNumberField() && "long".equals(f.getJavaType()) && !Boolean.TRUE.equals(f.getOption("readonly")))
+                    if (!f.isRepeated() && f.isNumberField() && "long".equals(f.getJavaType()) && !Boolean.TRUE.equals(f.getOption("readonly")))
                         list.add(f);
                 }
                 
@@ -299,9 +299,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && f instanceof Field.Float && !Boolean.TRUE.equals(f.getOption("readonly")))
+                    if (!f.isRepeated() && f instanceof Field.Float && !Boolean.TRUE.equals(f.getOption("readonly")))
                         list.add(f);
                 }
                 
@@ -313,9 +313,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && f instanceof Field.Double && !Boolean.TRUE.equals(f.getOption("readonly")))
+                    if (!f.isRepeated() && f instanceof Field.Double && !Boolean.TRUE.equals(f.getOption("readonly")))
                         list.add(f);
                 }
                 
@@ -327,9 +327,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && f.isStringField() && !Boolean.TRUE.equals(f.getOption("readonly")))
+                    if (!f.isRepeated() && f.isStringField() && !Boolean.TRUE.equals(f.getOption("readonly")))
                         list.add(f);
                 }
                 
@@ -341,9 +341,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && f.isBoolField() && !Boolean.TRUE.equals(f.getOption("readonly")))
+                    if (!f.isRepeated() && f.isBoolField() && !Boolean.TRUE.equals(f.getOption("readonly")))
                         list.add(f);
                 }
                 
@@ -356,14 +356,14 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3)
+                    if (f.getNumber() < 3)
                         continue;
                     
-                    if(!f.isRepeated() && f.isNumberField() && "int".equals(f.getJavaType()) && !f.getA().isEmpty())
+                    if (!f.isRepeated() && f.isNumberField() && "int".equals(f.getJavaType()) && !f.getA().isEmpty())
                     {
-                        if(f.getA().size() == 1 && f.getAnnotation("Display") != null)
+                        if (f.getA().size() == 1 && f.getAnnotation("Display") != null)
                             continue;
                         
                         list.add(f);
@@ -378,14 +378,14 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3 || Boolean.TRUE.equals(f.getOption("immutable")))
+                    if (f.getNumber() < 3 || Boolean.TRUE.equals(f.getOption("immutable")))
                         continue;
                     
-                    if(!f.isRepeated() && f.isNumberField() && "int".equals(f.getJavaType()) && !f.getA().isEmpty())
+                    if (!f.isRepeated() && f.isNumberField() && "int".equals(f.getJavaType()) && !f.getA().isEmpty())
                     {
-                        if(f.getA().size() == 1 && f.getAnnotation("Display") != null)
+                        if (f.getA().size() == 1 && f.getAnnotation("Display") != null)
                             continue;
                         
                         list.add(f);
@@ -400,14 +400,14 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3)
+                    if (f.getNumber() < 3)
                         continue;
                     
-                    if(!f.isRepeated() && f.isNumberField() && "long".equals(f.getJavaType()) && !f.getA().isEmpty())
+                    if (!f.isRepeated() && f.isNumberField() && "long".equals(f.getJavaType()) && !f.getA().isEmpty())
                     {
-                        if(f.getA().size() == 1 && f.getAnnotation("Display") != null)
+                        if (f.getA().size() == 1 && f.getAnnotation("Display") != null)
                             continue;
                         
                         list.add(f);
@@ -422,14 +422,14 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3 || Boolean.TRUE.equals(f.getOption("immutable")))
+                    if (f.getNumber() < 3 || Boolean.TRUE.equals(f.getOption("immutable")))
                         continue;
                     
-                    if(!f.isRepeated() && f.isNumberField() && "long".equals(f.getJavaType()) && !f.getA().isEmpty())
+                    if (!f.isRepeated() && f.isNumberField() && "long".equals(f.getJavaType()) && !f.getA().isEmpty())
                     {
-                        if(f.getA().size() == 1 && f.getAnnotation("Display") != null)
+                        if (f.getA().size() == 1 && f.getAnnotation("Display") != null)
                             continue;
                         
                         list.add(f);
@@ -444,14 +444,14 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3)
+                    if (f.getNumber() < 3)
                         continue;
                     
-                    if(!f.isRepeated() && f instanceof Field.Float && !f.getA().isEmpty())
+                    if (!f.isRepeated() && f instanceof Field.Float && !f.getA().isEmpty())
                     {
-                        if(f.getA().size() == 1 && f.getAnnotation("Display") != null)
+                        if (f.getA().size() == 1 && f.getAnnotation("Display") != null)
                             continue;
                         
                         list.add(f);
@@ -466,14 +466,14 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3 || Boolean.TRUE.equals(f.getOption("immutable")))
+                    if (f.getNumber() < 3 || Boolean.TRUE.equals(f.getOption("immutable")))
                         continue;
                     
-                    if(!f.isRepeated() && f instanceof Field.Float && !f.getA().isEmpty())
+                    if (!f.isRepeated() && f instanceof Field.Float && !f.getA().isEmpty())
                     {
-                        if(f.getA().size() == 1 && f.getAnnotation("Display") != null)
+                        if (f.getA().size() == 1 && f.getAnnotation("Display") != null)
                             continue;
                         
                         list.add(f);
@@ -488,14 +488,14 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3)
+                    if (f.getNumber() < 3)
                         continue;
                     
-                    if(!f.isRepeated() && f instanceof Field.Double && !f.getA().isEmpty())
+                    if (!f.isRepeated() && f instanceof Field.Double && !f.getA().isEmpty())
                     {
-                        if(f.getA().size() == 1 && f.getAnnotation("Display") != null)
+                        if (f.getA().size() == 1 && f.getAnnotation("Display") != null)
                             continue;
                         
                         list.add(f);
@@ -510,14 +510,14 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3 || Boolean.TRUE.equals(f.getOption("immutable")))
+                    if (f.getNumber() < 3 || Boolean.TRUE.equals(f.getOption("immutable")))
                         continue;
                     
-                    if(!f.isRepeated() && f instanceof Field.Double && !f.getA().isEmpty())
+                    if (!f.isRepeated() && f instanceof Field.Double && !f.getA().isEmpty())
                     {
-                        if(f.getA().size() == 1 && f.getAnnotation("Display") != null)
+                        if (f.getA().size() == 1 && f.getAnnotation("Display") != null)
                             continue;
                         
                         list.add(f);
@@ -532,14 +532,14 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3)
+                    if (f.getNumber() < 3)
                         continue;
                     
-                    if(!f.isRepeated() && f.isStringField() && !f.getA().isEmpty())
+                    if (!f.isRepeated() && f.isStringField() && !f.getA().isEmpty())
                     {
-                        if(f.getA().size() == 1 && f.getAnnotation("Display") != null)
+                        if (f.getA().size() == 1 && f.getAnnotation("Display") != null)
                             continue;
                         
                         list.add(f);
@@ -554,14 +554,14 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3 || Boolean.TRUE.equals(f.getOption("immutable")))
+                    if (f.getNumber() < 3 || Boolean.TRUE.equals(f.getOption("immutable")))
                         continue;
                     
-                    if(!f.isRepeated() && f.isStringField() && !f.getA().isEmpty())
+                    if (!f.isRepeated() && f.isStringField() && !f.getA().isEmpty())
                     {
-                        if(f.getA().size() == 1 && f.getAnnotation("Display") != null)
+                        if (f.getA().size() == 1 && f.getAnnotation("Display") != null)
                             continue;
                         
                         list.add(f);
@@ -576,14 +576,14 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3)
+                    if (f.getNumber() < 3)
                         continue;
                     
-                    if(!f.isRepeated() && f.isBoolField() && !f.getA().isEmpty())
+                    if (!f.isRepeated() && f.isBoolField() && !f.getA().isEmpty())
                     {
-                        if(f.getA().size() == 1 && f.getAnnotation("Display") != null)
+                        if (f.getA().size() == 1 && f.getAnnotation("Display") != null)
                             continue;
                         
                         list.add(f);
@@ -598,14 +598,14 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3 || Boolean.TRUE.equals(f.getOption("immutable")))
+                    if (f.getNumber() < 3 || Boolean.TRUE.equals(f.getOption("immutable")))
                         continue;
                     
-                    if(!f.isRepeated() && f.isBoolField() && !f.getA().isEmpty())
+                    if (!f.isRepeated() && f.isBoolField() && !f.getA().isEmpty())
                     {
-                        if(f.getA().size() == 1 && f.getAnnotation("Display") != null)
+                        if (f.getA().size() == 1 && f.getAnnotation("Display") != null)
                             continue;
                         
                         list.add(f);
@@ -621,9 +621,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() > 2)
+                    if (f.getNumber() > 2)
                         list.add(f);
                 }
                 
@@ -635,9 +635,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() > 2 && !f.isRepeated() && !f.isBytesField() && !Boolean.TRUE.equals(f.getOption("readonly")))
+                    if (f.getNumber() > 2 && !f.isRepeated() && !f.isBytesField() && !Boolean.TRUE.equals(f.getOption("readonly")))
                         list.add(f);
                 }
                 
@@ -649,9 +649,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() > 2 && !f.isRepeated() && !f.isBytesField() && !Boolean.TRUE.equals(f.getOption("readonly")))
+                    if (f.getNumber() > 2 && !f.isRepeated() && !f.isBytesField() && !Boolean.TRUE.equals(f.getOption("readonly")))
                         list.add(f);
                 }
                 
@@ -665,9 +665,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() > 2 && !f.isRepeated() && !f.isBytesField() && !f.isMessageField() && !Boolean.TRUE.equals(f.getOption("readonly")))
+                    if (f.getNumber() > 2 && !f.isRepeated() && !f.isBytesField() && !f.isMessageField() && !Boolean.TRUE.equals(f.getOption("readonly")))
                         list.add(f);
                 }
                 
@@ -679,12 +679,12 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3 || f.isRepeated() || f.isBytesField() || f.isMessageField() || Boolean.TRUE.equals(f.getOption("readonly")))
+                    if (f.getNumber() < 3 || f.isRepeated() || f.isBytesField() || f.isMessageField() || Boolean.TRUE.equals(f.getOption("readonly")))
                         continue;
                     
-                    if(f.isOptional() && (f.getA().isEmpty() || (f.getA().size() == 1 && f.getAnnotation("Display") != null)))
+                    if (f.isOptional() && (f.getA().isEmpty() || (f.getA().size() == 1 && f.getAnnotation("Display") != null)))
                         continue;
                     
                     list.add(f);
@@ -698,9 +698,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() > 2 && f.isOptional() && !Boolean.TRUE.equals(f.getOption("dvoor")))
+                    if (f.getNumber() > 2 && f.isOptional() && !Boolean.TRUE.equals(f.getOption("dvoor")))
                         list.add(f);
                 }
                 
@@ -712,18 +712,18 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(Boolean.TRUE.equals(f.getOption("provided")))
+                    if (Boolean.TRUE.equals(f.getOption("provided")))
                     {
-                        if(!f.isOptional())
+                        if (!f.isOptional())
                         {
                             throw err(f.getName() + 
                                     " of " + message.getRelativeName() + 
                                     " must be optional when it is provided.", message);
                         }
                         
-                        if(f.getNumber() > 2)
+                        if (f.getNumber() > 2)
                             list.add(f);
                     }
                 }
@@ -736,9 +736,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3 || f.isRepeated() || f.isMessageField() || Boolean.TRUE.equals(f.getOption("immutable")))
+                    if (f.getNumber() < 3 || f.isRepeated() || f.isMessageField() || Boolean.TRUE.equals(f.getOption("immutable")))
                         continue;
                     
                     list.add(f);
@@ -752,9 +752,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.getNumber() < 3 || f.isRepeated() || !f.isEnumField() || Boolean.TRUE.equals(f.getOption("immutable")))
+                    if (f.getNumber() < 3 || f.isRepeated() || !f.isEnumField() || Boolean.TRUE.equals(f.getOption("immutable")))
                         continue;
                     
                     list.add(f);
@@ -768,9 +768,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && f.isBytesField() && f.getName().endsWith("_key") 
+                    if (!f.isRepeated() && f.isBytesField() && f.getName().endsWith("_key") 
                             && !Boolean.TRUE.equals(f.getOption("readonly")))
                     {
                         list.add(f);
@@ -785,9 +785,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && f.isBytesField() && f.getName().endsWith("_key") 
+                    if (!f.isRepeated() && f.isBytesField() && f.getName().endsWith("_key") 
                             && !Boolean.TRUE.equals(f.getOption("readonly")))
                     {
                         list.add(f);
@@ -804,9 +804,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.isRequired() && f.isBytesField() && f.getName().endsWith("_key") 
+                    if (f.isRequired() && f.isBytesField() && f.getName().endsWith("_key") 
                             && !Boolean.TRUE.equals(f.getOption("readonly")))
                     {
                         list.add(f);
@@ -821,9 +821,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && f.isBytesField() && f.getName().endsWith("_key") 
+                    if (!f.isRepeated() && f.isBytesField() && f.getName().endsWith("_key") 
                             && !Boolean.TRUE.equals(f.getOption("readonly"))
                             && !Boolean.TRUE.equals(f.getOption("provided")))
                     {
@@ -839,9 +839,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && f.isBytesField() && f.getName().endsWith("_key") 
+                    if (!f.isRepeated() && f.isBytesField() && f.getName().endsWith("_key") 
                             && !Boolean.TRUE.equals(f.getOption("readonly"))
                             && !Boolean.TRUE.equals(f.getOption("provided")))
                     {
@@ -859,9 +859,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.isRequired() && f.isBytesField() && f.getName().endsWith("_key") 
+                    if (f.isRequired() && f.isBytesField() && f.getName().endsWith("_key") 
                             && !Boolean.TRUE.equals(f.getOption("readonly"))
                             && !Boolean.TRUE.equals(f.getOption("provided")))
                     {
@@ -877,9 +877,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && f.isBytesField() && f.getName().endsWith("_key") 
+                    if (!f.isRepeated() && f.isBytesField() && f.getName().endsWith("_key") 
                             && !Boolean.TRUE.equals(f.getOption("readonly"))
                             && !Boolean.TRUE.equals(f.getOption("immutable")))
                     {
@@ -895,9 +895,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(f.isRequired() && f.isBytesField() && f.getName().endsWith("_key")
+                    if (f.isRequired() && f.isBytesField() && f.getName().endsWith("_key")
                             && !Boolean.TRUE.equals(f.getOption("readonly"))
                             && !Boolean.TRUE.equals(f.getOption("immutable")))
                     {
@@ -913,9 +913,9 @@ public final class FilterMap extends FakeMap
             public Collection<Field<?>> filter(Message message)
             {
                 ArrayList<Field<?>> list = new ArrayList<Field<?>>();
-                for(Field<?> f : message.getFields())
+                for (Field<?> f : message.getFields())
                 {
-                    if(!f.isRepeated() && f.isBytesField() && f.getName().endsWith("_key") 
+                    if (!f.isRepeated() && f.isBytesField() && f.getName().endsWith("_key") 
                             && !Boolean.TRUE.equals(f.getOption("readonly"))
                             && Boolean.TRUE.equals(f.getOption("immutable")))
                     {

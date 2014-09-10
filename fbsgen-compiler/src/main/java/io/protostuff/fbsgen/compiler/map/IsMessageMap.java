@@ -71,7 +71,7 @@ public final class IsMessageMap extends FakeMap
                 return message.getOptions().containsKey("~entity.kind") && 
                         message.getOptions().get("~entity.parent") instanceof Message;
                 /*Annotation entity = message.getAnnotationMap().get("Entity");
-                if(entity != null)
+                if (entity != null)
                     return entity.getValue("parent") instanceof Message;
 
                 return message.getOptions().get("entity.kind") instanceof Integer
@@ -90,7 +90,7 @@ public final class IsMessageMap extends FakeMap
         {
             public boolean query(Message message)
             {
-                if(!ENTITY.query(message))
+                if (!ENTITY.query(message))
                     return false;
                 
                 Annotation display = message.getAnnotation("Display");
@@ -103,7 +103,7 @@ public final class IsMessageMap extends FakeMap
         {
             public boolean query(Message message)
             {
-                if(!ENTITY.query(message))
+                if (!ENTITY.query(message))
                     return false;
                 
                 Annotation display = message.getAnnotation("NForm");
@@ -116,7 +116,7 @@ public final class IsMessageMap extends FakeMap
         {
             public boolean query(Message message)
             {
-                if(!ENTITY.query(message))
+                if (!ENTITY.query(message))
                     return false;
                 
                 Annotation display = message.getAnnotation("UForm");

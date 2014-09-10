@@ -72,6 +72,72 @@ public interface Formatter
         },
         
         /**
+         * Returns the first character of a string.
+         */
+        FC
+        {
+            public String format(String str)
+            {
+                return str.substring(0, 1);
+            }
+        },
+        
+        /**
+         * Removes the first character of a string.
+         */
+        RM_FC
+        {
+            public String format(String str)
+            {
+                return str.substring(1);
+            }
+        },
+        
+        /**
+         * Returns the last character of a string.
+         */
+        LC
+        {
+            public String format(String str)
+            {
+                return str.substring(str.length()-1);
+            }
+        },
+        
+        /**
+         * Removes the last character of a string.
+         */
+        RM_LC
+        {
+            public String format(String str)
+            {
+                return str.substring(0, str.length()-1);
+            }
+        },
+        
+        /**
+         * Returns the length of a string.
+         */
+        LEN
+        {
+            public String format(String str)
+            {
+                return "" + str.length();
+            }
+        },
+        
+        /**
+         * Returns the trimmed string.
+         */
+        TRIM
+        {
+            public String format(String str)
+            {
+                return str.trim();
+            }
+        },
+        
+        /**
          * camel-case.
          * 
          * <pre>
