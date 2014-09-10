@@ -41,12 +41,15 @@ public final class CompilerUtil
         String encoding = module.getEncoding();
         if (encoding == null || encoding.isEmpty())
             encoding = "UTF-8";
-
-        File packageDir = new File(module.getOutputDir(), packageName.replace('.', '/'));
-        if (!packageDir.exists())
-            packageDir.mkdirs();
-
-        File outputFile = new File(packageDir, fileName);
+        
+        final File outputDir = module.getO().containsKey("without_package_dir") ? 
+                module.getOutputDir() : 
+                    new File(module.getOutputDir(), packageName.replace('.', '/'));
+        
+        if (!outputDir.exists())
+            outputDir.mkdirs();
+        
+        File outputFile = new File(outputDir, fileName);
         FileOutputStream out = new FileOutputStream(outputFile);
         return new BufferedWriter(new OutputStreamWriter(out, encoding));
     }
