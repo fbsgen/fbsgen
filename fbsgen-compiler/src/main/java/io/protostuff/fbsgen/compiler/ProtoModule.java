@@ -44,12 +44,11 @@ public class ProtoModule implements Serializable
 
     public ProtoModule()
     {
-
+        
     }
 
     public ProtoModule(File source, String output, String encoding, File outputDir)
     {
-        super();
         this.source = source;
         this.output = output;
         this.encoding = encoding;
@@ -131,6 +130,14 @@ public class ProtoModule implements Serializable
     {
         return options;
     }
+    
+    /**
+     * Alias to {@link #getOptions()}.
+     */
+    public Properties getO()
+    {
+        return getOptions();
+    }
 
     /**
      * @param options
@@ -170,16 +177,24 @@ public class ProtoModule implements Serializable
         attributes.put(key, value);
     }
 
+    public HashMap<String, Object> getAttributes()
+    {
+        return attributes;
+    }
+    
     /**
      * Alias for {@link #getAttributes()}.
      */
     public HashMap<String, Object> getAttrs()
     {
-        return attributes;
+        return getAttributes();
     }
-
-    public HashMap<String, Object> getAttributes()
+    
+    /**
+     * Alias for {@link #getAttributes()}.
+     */
+    public HashMap<String, Object> getA()
     {
-        return attributes;
+        return getAttributes();
     }
 }

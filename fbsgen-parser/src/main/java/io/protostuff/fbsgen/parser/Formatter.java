@@ -41,6 +41,14 @@ public interface Formatter
      */
     public enum BUILTIN implements Formatter
     {
+        NONE
+        {
+            public String format(String str)
+            {
+                return str;
+            }
+        },
+        
         /**
          * uppercase.
          */
