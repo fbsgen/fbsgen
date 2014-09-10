@@ -204,7 +204,7 @@ public final class ST4Group extends STGroup implements TemplateGroup
             fileName = fileName.substring(1, fileName.length() - 1) + ".stg";
             
             STGroupFile existing = FROM_FILE_CACHE.get(fileName);
-            if (existing != null)
+            if (existing != null || (existing = FROM_CP_CACHE.get(fileName)) != null)
             {
                 // cached
                 importTemplates(existing, false);
