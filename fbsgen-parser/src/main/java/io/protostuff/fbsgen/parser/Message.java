@@ -41,8 +41,8 @@ public class Message extends AnnotationContainer implements HasName, HasFields
     //final ArrayList<Extension> nestedExtensions = new ArrayList<Extension>();
     final ArrayList<Field<?>> sortedFields = new ArrayList<Field<?>>();
     
-    final ArrayList<int[]> extensionRanges = new ArrayList<int[]>();
-    final LinkedHashMap<Integer, Field<?>> extensions = new LinkedHashMap<Integer,Field<?>>();
+    //final ArrayList<int[]> extensionRanges = new ArrayList<int[]>();
+    //final LinkedHashMap<Integer, Field<?>> extensions = new LinkedHashMap<Integer,Field<?>>();
     final LinkedHashMap<String,Object> standardOptions = new LinkedHashMap<String,Object>();
     final LinkedHashMap<String,Object> extraOptions = new LinkedHashMap<String,Object>();
     boolean extensible;
@@ -271,13 +271,13 @@ public class Message extends AnnotationContainer implements HasName, HasFields
             throw err("Duplicate message field: " + field.name, getProto());
     }
     
-    public void defineExtensionRange(int first, int last)
+    /*public void defineExtensionRange(int first, int last)
     {
         extensionRanges.add(new int[]{ first, last });
         this.extensible = true;
     }
 
-    /*public void addNestedExtension(Extension extension) 
+    public void addNestedExtension(Extension extension) 
     {
         this.nestedExtensions.add(extension);
     }
