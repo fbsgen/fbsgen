@@ -230,23 +230,28 @@ public final class ST4Group extends STGroup implements TemplateGroup
         
         final ST4GroupFile stgf = new ST4GroupFile(url, "UTF-8", 
                 delimiterStartChar, delimiterStopChar);
-        importTemplates(stgf, false);
         
         switch ((int)delim[4])
         {
             case 1:
                 // from file
                 FROM_FILE_CACHE.put(fileName, stgf);
+                
+                if (fileName.equals("fbsgen/dict.stg"))
+                    FakeMapUtil.addMapsTo(stgf);
+                
                 break;
             case 2:
                 // from classpath
                 FROM_CP_CACHE.put(fileName, stgf);
                 
-                // add the maps to the base template
                 if (fileName.equals("fbsgen/dict.stg"))
                     FakeMapUtil.addMapsTo(stgf);
+                
                 break;
         }
+        
+        importTemplates(stgf, false);
     }
     
     protected CompiledST load(String name)
