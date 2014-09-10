@@ -75,17 +75,10 @@ public final class ProtoUtil
         loadFrom(new ANTLRReaderStream(reader), target);
     }
     
-    public static Proto parseProto(File file)
+    public static Proto parseProto(File file) throws IOException
     {
         Proto proto = new Proto(file);
-        try
-        {
-            loadFrom(file, proto);
-        }
-        catch (Exception e)
-        {
-            throw new RuntimeException(e);
-        }
+        loadFrom(file, proto);
         return proto;
     }
     

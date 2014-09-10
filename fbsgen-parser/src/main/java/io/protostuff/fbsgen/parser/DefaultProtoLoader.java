@@ -14,6 +14,8 @@
 
 package io.protostuff.fbsgen.parser;
 
+import static io.protostuff.fbsgen.parser.AbstractParser.err;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -118,8 +120,7 @@ public class DefaultProtoLoader implements Proto.Loader
                 return loadFrom(protoFile, importer);
         }
         
-        throw new IllegalStateException("Imported proto " + path + 
-                " not found. (" + importer.getSourcePath() + ")");
+        throw err(importer, "The imported proto " + path + " could not be found.");
     }
     
     /**
@@ -144,10 +145,7 @@ public class DefaultProtoLoader implements Proto.Loader
         // classpath
         Proto protoFromOtherResource = loadFromOtherResource(path, importer);
         if (protoFromOtherResource == null)
-        {
-            throw new IllegalStateException("Imported proto " + path + 
-                    " not found. (" + importer.getSourcePath() + ")");
-        }
+            throw err(importer, "The imported proto " + path + " could not be found.");
         
         return protoFromOtherResource;
     }
@@ -206,10 +204,7 @@ public class DefaultProtoLoader implements Proto.Loader
         // last resort (defaults to classpath lookup).
         Proto protoFromOtherResource = loadFromOtherResource(path, importer);
         if (protoFromOtherResource == null)
-        {
-            throw new IllegalStateException("Imported proto " + path + 
-                    " not found. (" + importer.getSourcePath() + ")");
-        }
+            throw err(importer, "The imported proto " + path + " could not be found.");
         
         return protoFromOtherResource;
     }

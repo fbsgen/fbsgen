@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 io/protostuff/fbsgen/parser/ProtoParser.g 2014-09-08 21:38:56
+// $ANTLR 3.5.2 io/protostuff/fbsgen/parser/ProtoParser.g 2014-09-10 11:28:27
 
     package io.protostuff.fbsgen.parser;
 
@@ -773,7 +773,7 @@ public class ProtoParser extends AbstractParser {
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, var19.getTree());
 
-			if ( state.backtracking==0 ) { annotation = new Annotation((var19!=null?input.toString(var19.start,var19.stop):null)); }
+			if ( state.backtracking==0 ) { annotation = new Annotation((var19!=null?input.toString(var19.start,var19.stop):null), proto); }
 			// io/protostuff/fbsgen/parser/ProtoParser.g:101:9: ( LEFTPAREN annotation_keyval[proto, annotation] ( COMMA annotation_keyval[proto, annotation] )* RIGHTPAREN )?
 			int alt6=2;
 			int LA6_0 = input.LA(1);

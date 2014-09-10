@@ -29,7 +29,7 @@ public class Mutable<T>
     public Mutable(T value)
     {
         if (value == null)
-            throw new IllegalArgumentException("The arg 'value' cannot be null.");
+            throw new IllegalArgumentException("value cannot be null.");
         
         current = value;
     }

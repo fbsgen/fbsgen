@@ -14,6 +14,8 @@
 
 package io.protostuff.fbsgen.parser;
 
+import static io.protostuff.fbsgen.parser.AnnotationContainer.err;
+
 import java.util.LinkedHashMap;
 
 /**
@@ -24,15 +26,16 @@ import java.util.LinkedHashMap;
  */
 public class Annotation implements HasName
 {
-    
     final String name;
+    final Proto proto;
     
     final LinkedHashMap<String,Object> refs = new LinkedHashMap<String,Object>(); 
     final LinkedHashMap<String,Object> params = new LinkedHashMap<String,Object>();
     
-    public Annotation(String name)
+    public Annotation(String name, Proto proto)
     {
         this.name = name;
+        this.proto = proto;
     }
     
     public LinkedHashMap<String,Object> getParams()
@@ -60,7 +63,7 @@ public class Annotation implements HasName
     void put(String key, Object value)
     {
         if (params.put(key, value) != null)
-            throw new IllegalStateException("Duplicate annotation key: " + key);
+            throw err("@" + name + "::" + key + " cannot be defined more than once.", proto);
     }
     
     void putRef(String key, Object value)

@@ -160,20 +160,13 @@ public abstract class TemplatedCodeGenerator implements ProtoCompiler
             compile(module, parseProto(source, module), compileImports, recursive);
     }
 
-    protected static Proto parseProto(File file, ProtoModule module)
+    protected static Proto parseProto(File file, ProtoModule module) throws IOException
     {
         CachingProtoLoader loader = module.getCachingProtoLoader();
         if (loader == null)
             return ProtoUtil.parseProto(file);
-
-        try
-        {
-            return loader.loadFrom(file, null);
-        }
-        catch (Exception e)
-        {
-            throw new RuntimeException(e);
-        }
+        
+        return loader.loadFrom(file, null);
     }
 
     protected void compile(ProtoModule module, Proto proto, boolean compileImports,

@@ -97,7 +97,7 @@ annotation_entry [Proto proto]
 @init {
     Annotation annotation = null;
 }
-    :   AT var { annotation = new Annotation($var.text); }
+    :   AT var { annotation = new Annotation($var.text, proto); }
         (LEFTPAREN 
         annotation_keyval[proto, annotation] (COMMA annotation_keyval[proto, annotation])* 
         RIGHTPAREN)? {
