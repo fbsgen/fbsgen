@@ -60,11 +60,10 @@ import java.nio.charset.Charset;
  */
 public final class TextFormat
 {
-    private TextFormat()
-    {
-    }
+    private TextFormat() {}
 
-    static final Charset UTF8 = Charset.forName("UTF-8"), ISO_8859_1 = Charset.forName("ISO-8859-1");
+    static final Charset UTF8 = Charset.forName("UTF-8"), 
+            ISO_8859_1 = Charset.forName("ISO-8859-1");
 
     // =================================================================
     // Utility functions

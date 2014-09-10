@@ -37,7 +37,7 @@ import java.util.LinkedHashMap;
  * @author David Yu
  * @created Dec 22, 2011
  */
-public class ConfiguredReference
+public final class ConfiguredReference
 {
     public static final boolean RESOLVE_ENUM_VALUE_REF = Boolean.getBoolean(
             "fbsgen.resolve_enum_value_ref");

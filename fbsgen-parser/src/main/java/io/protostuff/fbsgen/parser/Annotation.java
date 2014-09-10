@@ -24,7 +24,7 @@ import java.util.LinkedHashMap;
  * @author David Yu
  * @created Dec 30, 2010
  */
-public class Annotation implements HasName
+public final class Annotation implements HasName
 {
     final String name;
     final Proto proto;

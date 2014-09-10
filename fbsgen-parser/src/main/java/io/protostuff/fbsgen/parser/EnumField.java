@@ -23,7 +23,7 @@ package io.protostuff.fbsgen.parser;
  * @author David Yu
  * @created Dec 19, 2009
  */
-public class EnumField extends Field<EnumGroup.Value>
+public final class EnumField extends Field<EnumGroup.Value>
 {
     
     //java.lang.String javaType;

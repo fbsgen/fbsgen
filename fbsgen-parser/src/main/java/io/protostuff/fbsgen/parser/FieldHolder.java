@@ -20,7 +20,7 @@ package io.protostuff.fbsgen.parser;
  * @author David Yu
  * @created Dec 21, 2009
  */
-public class FieldHolder
+public final class FieldHolder
 {
     
     Field<?> field;

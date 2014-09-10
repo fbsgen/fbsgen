@@ -38,7 +38,7 @@ public class DefaultProtoLoaderTest extends TestCase
 
     public void testLoadProtoFromClasspath() throws Exception
     {
-        Proto proto = DefaultProtoLoader.loadFromClasspath(
+        Proto proto = DefaultProtoLoader.fromClasspath(
                 "google/protobuf/unittest_import.proto", null);
         assertNotNull(proto);
         assertEquals("protobuf_unittest_import", proto.getPackageName());

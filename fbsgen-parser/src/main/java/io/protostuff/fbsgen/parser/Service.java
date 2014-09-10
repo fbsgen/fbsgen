@@ -23,7 +23,7 @@ import java.util.LinkedHashMap;
  * @author David Yu
  * @created Jun 18, 2010
  */
-public class Service extends AnnotationContainer implements HasName, HasOptions
+public final class Service extends AnnotationContainer implements HasName, HasOptions
 {
     
     final String name;

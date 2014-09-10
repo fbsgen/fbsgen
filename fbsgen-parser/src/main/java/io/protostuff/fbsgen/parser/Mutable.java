@@ -21,7 +21,7 @@ package io.protostuff.fbsgen.parser;
  * @author David Yu
  * @created May 10, 2010
  */
-public class Mutable<T>
+public final class Mutable<T>
 {
     
     private T current, last;

@@ -139,11 +139,11 @@ public class DefaultProtoLoader implements Proto.Loader
         }
         
         // classpath
-        Proto protoFromOtherResource = loadFromOtherResource(path, importer);
-        if (protoFromOtherResource == null)
+        Proto proto = loadFromClasspath(path, importer);
+        if (proto == null)
             throw err(importer, "The imported proto " + path + " could not be found.");
         
-        return protoFromOtherResource;
+        return proto;
     }
     
     /**
@@ -198,7 +198,7 @@ public class DefaultProtoLoader implements Proto.Loader
             return loadFrom(protoFile, importer);
         
         // last resort (defaults to classpath lookup).
-        Proto protoFromOtherResource = loadFromOtherResource(path, importer);
+        Proto protoFromOtherResource = loadFromClasspath(path, importer);
         if (protoFromOtherResource == null)
             throw err(importer, "The imported proto " + path + " could not be found.");
         
@@ -221,7 +221,7 @@ public class DefaultProtoLoader implements Proto.Loader
         return baseDir;
     }
     
-    protected Proto loadFromOtherResource(String path, Proto importer) throws IOException
+    protected Proto loadFromClasspath(String path, Proto importer) throws IOException
     {
         // defaults to lookup from classpath.
         URL resource = getResource(path, DefaultProtoLoader.class);
@@ -246,7 +246,7 @@ public class DefaultProtoLoader implements Proto.Loader
     /**
      * Loads a proto from the classpath.
      */
-    public static Proto loadFromClasspath(String path, Proto importer) throws Exception
+    public static Proto fromClasspath(String path, Proto importer) throws Exception
     {
         URL resource = getResource(path, DefaultProtoLoader.class);
         if (resource == null)
