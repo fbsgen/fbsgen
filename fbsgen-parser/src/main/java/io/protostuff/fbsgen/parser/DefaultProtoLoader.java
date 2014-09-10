@@ -56,13 +56,9 @@ public class DefaultProtoLoader implements Proto.Loader
                 String path = tokenizer.nextToken().trim();
                 File dir = new File(path);
                 if (dir.exists() && dir.isDirectory())
-                {
                     __protoLoadDirs.add(dir);
-                }
                 else
-                {
                     System.err.println("warn: " + path + " not found.");
-                }
             }
         }
     }
