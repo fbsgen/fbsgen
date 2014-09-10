@@ -32,6 +32,7 @@ import io.protostuff.fbsgen.parser.DefaultProtoLoader;
 import io.protostuff.fbsgen.parser.Proto;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
@@ -62,7 +63,7 @@ public class CachingProtoLoader extends DefaultProtoLoader
         return loadedProtos.values();
     }
 
-    public Proto loadFrom(File file, Proto importer) throws Exception
+    public Proto loadFrom(File file, Proto importer) throws IOException
     {
         String key = file.getCanonicalPath();
         Proto proto = loadedProtos.get(key);
@@ -72,7 +73,7 @@ public class CachingProtoLoader extends DefaultProtoLoader
         return proto;
     }
 
-    public Proto loadFrom(URL resource, Proto importer) throws Exception
+    public Proto loadFrom(URL resource, Proto importer) throws IOException
     {
         String key = resource.toExternalForm();
         Proto proto = loadedProtos.get(key);

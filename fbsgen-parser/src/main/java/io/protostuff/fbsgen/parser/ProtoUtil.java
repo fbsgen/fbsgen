@@ -16,6 +16,7 @@ package io.protostuff.fbsgen.parser;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
@@ -23,6 +24,7 @@ import java.net.URL;
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.ANTLRReaderStream;
 import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.RecognitionException;
 
 /**
  * Utility for loading protos from various input.
@@ -38,7 +40,7 @@ public final class ProtoUtil
     /**
      * Loads the proto from an {@link ANTLRReaderStream}.
      */
-    public static void loadFrom(ANTLRReaderStream input, Proto target) throws Exception
+    public static void loadFrom(ANTLRReaderStream input, Proto target) throws IOException
     {
         // Create an ExprLexer that feeds from that stream
         ProtoLexer lexer = new ProtoLexer(input);
@@ -47,13 +49,20 @@ public final class ProtoUtil
         // Create a parser that feeds off the token stream
         ProtoParser parser = new ProtoParser(tokens);
         // Begin parsing at rule parse
-        parser.parse(target);
+        try
+        {
+            parser.parse(target);
+        }
+        catch (RecognitionException e)
+        {
+            throw new ParseException(e.getMessage(), e);
+        }
     }
     
     /**
      * Loads the proto from an {@link InputStream}.
      */
-    public static void loadFrom(InputStream in, Proto target) throws Exception
+    public static void loadFrom(InputStream in, Proto target) throws IOException
     {
         loadFrom(new ANTLRInputStream(in), target);
     }
@@ -61,7 +70,7 @@ public final class ProtoUtil
     /**
      * Loads the proto from a {@link Reader}.
      */
-    public static void loadFrom(Reader reader, Proto target) throws Exception
+    public static void loadFrom(Reader reader, Proto target) throws IOException
     {
         loadFrom(new ANTLRReaderStream(reader), target);
     }
@@ -80,7 +89,7 @@ public final class ProtoUtil
         return proto;
     }
     
-    public static void loadFrom(File file, Proto target) throws Exception
+    public static void loadFrom(File file, Proto target) throws IOException
     {
         FileInputStream in = new FileInputStream(file);
         try
@@ -93,7 +102,7 @@ public final class ProtoUtil
         }
     }
     
-    public static void loadFrom(URL resource, Proto target) throws Exception
+    public static void loadFrom(URL resource, Proto target) throws IOException
     {
         InputStream in = resource.openStream();
         try

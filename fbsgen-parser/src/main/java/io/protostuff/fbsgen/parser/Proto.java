@@ -15,6 +15,7 @@
 package io.protostuff.fbsgen.parser;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -336,9 +337,9 @@ public class Proto extends AnnotationContainer implements HasOptions, HasName
         {
             addImportedProto(loader.load(path, this));
         }
-        catch (Exception e)
+        catch (IOException e)
         {
-            throw new RuntimeException(e);
+            throw err("Failed to import " + path, this);
         }
     }
     
@@ -581,7 +582,7 @@ public class Proto extends AnnotationContainer implements HasOptions, HasName
     
     public interface Loader
     {
-        public Proto load(String path, Proto importer) throws Exception;
+        public Proto load(String path, Proto importer) throws IOException;
     }
 
 

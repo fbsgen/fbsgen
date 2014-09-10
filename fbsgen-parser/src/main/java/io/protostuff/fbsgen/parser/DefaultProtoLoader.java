@@ -15,6 +15,7 @@
 package io.protostuff.fbsgen.parser;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -81,7 +82,7 @@ public class DefaultProtoLoader implements Proto.Loader
         this.protoSearchStrategy = protoSearchStrategy;
     }
     
-    public Proto load(String path, Proto importer) throws Exception
+    public Proto load(String path, Proto importer) throws IOException
     {
         switch (protoSearchStrategy)
         {
@@ -107,7 +108,7 @@ public class DefaultProtoLoader implements Proto.Loader
      * -Dproto_path=$path -Dproto_search_strategy=1
      * </pre>
      */
-    protected Proto searchFromProtoPathOnly(String path, Proto importer) throws Exception
+    protected Proto searchFromProtoPathOnly(String path, Proto importer) throws IOException
     {
         // proto_path
         File protoFile;
@@ -130,7 +131,7 @@ public class DefaultProtoLoader implements Proto.Loader
      * </pre>
      */
     protected Proto searchFromProtoPathAndClasspath(String path, Proto importer) 
-            throws Exception
+            throws IOException
     {
         // proto_path
         File protoFile;
@@ -162,7 +163,7 @@ public class DefaultProtoLoader implements Proto.Loader
      * 3. classpath
      * </pre>
      */
-    protected Proto searchFromAll(String path, Proto importer) throws Exception
+    protected Proto searchFromAll(String path, Proto importer) throws IOException
     {
         if (path.startsWith("http://"))
         {
@@ -229,21 +230,21 @@ public class DefaultProtoLoader implements Proto.Loader
         return baseDir;
     }
     
-    protected Proto loadFromOtherResource(String path, Proto importer) throws Exception
+    protected Proto loadFromOtherResource(String path, Proto importer) throws IOException
     {
         // defaults to lookup from classpath.
         URL resource = getResource(path, DefaultProtoLoader.class);
         return resource == null ? null : loadFrom(resource, importer);
     }
     
-    protected Proto loadFrom(File file, Proto importer) throws Exception
+    protected Proto loadFrom(File file, Proto importer) throws IOException
     {
         Proto proto = new Proto(file, this, importer);
         ProtoUtil.loadFrom(file, proto);
         return proto;
     }
     
-    protected Proto loadFrom(URL resource, Proto importer) throws Exception
+    protected Proto loadFrom(URL resource, Proto importer) throws IOException
     {
         Proto proto = new Proto(resource, this, importer);
         ProtoUtil.loadFrom(resource, proto);
