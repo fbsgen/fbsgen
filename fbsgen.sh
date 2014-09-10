@@ -14,7 +14,7 @@ if [ ! -e $SCRIPT_DIR/fbsgen/base.stg ]; then
 fi
 
 JAR_FILE=$SCRIPT_DIR/fbsgen-compiler/target/fbsgen.jar
-[ -e $SCRIPT_DIR/fbsgen.jar ] && JAR_FILE=$SCRIPT_DIR/fbsgen.jar
+[ -e $SCRIPT_DIR/lib/fbsgen.jar ] && JAR_FILE=$SCRIPT_DIR/lib/fbsgen.jar
 
 PROTO_PATH=.
 [ -d $CURRENT_DIR/proto ] && PROTO_PATH=proto
