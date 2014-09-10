@@ -70,24 +70,35 @@ public class EnumGroup extends AnnotationContainer implements HasName, HasOption
         return name;
     }
     
-    public String getFullName()
+    private String fullName(String packageName)
     {
         StringBuilder buffer = new StringBuilder();
         if (isNested())
-            buffer.append(parentMessage.getFullName()).append('.').append(name);
+            Message.resolveFullName(parentMessage, buffer, packageName);
         else
-            buffer.append(getProto().getPackageName()).append('.').append(name);
-        return buffer.toString();
+            buffer.append(packageName);
+        
+        return buffer.append('.').append(name).toString();
+    }
+    
+    public String getFullName()
+    {
+        return fullName(getProto().getPackageName());
+    }
+    
+    public String getDeclaredFullName()
+    {
+        return fullName(getProto().getDeclaredPackageName());
     }
     
     public String getJavaFullName()
     {
-        StringBuilder buffer = new StringBuilder();
-        if (isNested())
-            buffer.append(parentMessage.getJavaFullName()).append('.').append(name);
-        else
-            buffer.append(getProto().getJavaPackageName()).append('.').append(name);
-        return buffer.toString();
+        return fullName(getProto().getJavaPackageName());
+    }
+    
+    public String getDeclaredJavaFullName()
+    {
+        return fullName(getProto().getDeclaredJavaPackageName());
     }
     
     public String getRelativeName()

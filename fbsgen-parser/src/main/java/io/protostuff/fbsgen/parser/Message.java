@@ -368,18 +368,31 @@ public class Message extends AnnotationContainer implements HasName, HasFields
         return getFullName();
     }
     
-    public String getFullName()
+    private String fullName(String packageName)
     {
         StringBuilder buffer = new StringBuilder();
-        resolveFullName(this, buffer);
+        resolveFullName(this, buffer, packageName);
         return buffer.toString();
+    }
+    
+    public String getFullName()
+    {
+        return fullName(getProto().getPackageName());
+    }
+    
+    public String getDeclaredFullName()
+    {
+        return fullName(getProto().getDeclaredPackageName());
     }
     
     public String getJavaFullName()
     {
-        StringBuilder buffer = new StringBuilder();
-        resolveJavaFullName(this, buffer);
-        return buffer.toString();
+        return fullName(getProto().getJavaPackageName());
+    }
+    
+    public String getDeclaredJavaFullName()
+    {
+        return fullName(getProto().getDeclaredJavaPackageName());
     }
     
     public String getRelativeName()
@@ -775,22 +788,13 @@ public class Message extends AnnotationContainer implements HasName, HasFields
         to.extraOptions.putAll(from.extraOptions);
     }
     
-    static void resolveFullName(Message message, StringBuilder buffer)
+    static void resolveFullName(Message message, StringBuilder buffer, String packageName)
     {
         buffer.insert(0, message.name).insert(0, '.');
         if (message.isNested())
-            resolveFullName(message.parentMessage, buffer);
+            resolveFullName(message.parentMessage, buffer, packageName);
         else
-            buffer.insert(0, message.getProto().getPackageName());
-    }
-    
-    static void resolveJavaFullName(Message message, StringBuilder buffer)
-    {
-        buffer.insert(0, message.name).insert(0, '.');
-        if (message.isNested())
-            resolveFullName(message.parentMessage, buffer);
-        else
-            buffer.insert(0, message.getProto().getJavaPackageName());
+            buffer.insert(0, packageName);
     }
     
     static void resolveRelativeName(Message message, StringBuilder buffer, 

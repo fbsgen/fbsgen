@@ -65,6 +65,11 @@ public class Mutable<T>
         return last;
     }
     
+    public T getLastOrValue()
+    {
+        return last != null ? last : current;
+    }
+    
     public boolean isOverridden()
     {
         return last != null;
