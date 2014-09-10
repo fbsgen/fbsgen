@@ -30,6 +30,11 @@ public final class ErrorUtil
 {
     private ErrorUtil() {}
     
+    public static CodegenException err(String msg)
+    {
+        return new CodegenException(msg);
+    }
+    
     public static CodegenException err(Proto proto, String msg)
     {
         if (proto == null)

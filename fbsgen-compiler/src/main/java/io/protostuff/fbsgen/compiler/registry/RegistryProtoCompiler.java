@@ -31,6 +31,7 @@ package io.protostuff.fbsgen.compiler.registry;
 
 import static io.protostuff.fbsgen.compiler.CompilerUtil.COMMA;
 import static io.protostuff.fbsgen.compiler.CompilerUtil.SEMI_COLON;
+import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
 import io.protostuff.fbsgen.compiler.CachingProtoLoader;
 import io.protostuff.fbsgen.compiler.CompilerMain;
 import io.protostuff.fbsgen.compiler.CompilerUtil;
@@ -81,7 +82,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
         final String activeStgsOption = module.getOption("active_stgs");
         
         if (stgsOption == null && activeStgsOption == null)
-            throw new IllegalStateException("Required option: stgs or active_stgs");
+            throw err("Required option: stgs or active_stgs");
         
         final String[] stgs = stgsOption == null ? new String[0] : 
             SEMI_COLON.split(stgsOption);
@@ -122,7 +123,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
         {
             String ref = module.getConfig().getProperty(stg);
             if (ref == null)
-                throw new RuntimeException("Missing property: " + stg);
+                throw err("Missing property: " + stg);
             
             for (String s : COMMA.split(ref))
                 compile(module, registry, overridden, s.trim(), active);
@@ -134,7 +135,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
         
         final TemplateGroup group = TemplateUtil.resolveGroup(stg, name, fileExtension);
         if (group == null)
-            throw new RuntimeException("Unknown stg: " + stg);
+            throw err("Unknown stg: " + stg);
         
         String optionsParam = module.getConfig().getProperty(stg + ".options");
         final Properties previousOptions;
@@ -238,7 +239,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
         if (value == null && 
                 null == (value = module.getConfig().getProperty(name)))
         {
-            throw new RuntimeException("Missing config: " + name);
+            throw err("Missing config: " + name);
         }
         
         return value;
@@ -308,10 +309,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
         }
         
         if (templates == 0)
-        {
-            throw new RuntimeException("Registry requires " +
-                    "proto_block|message_block|enum_block for " + stg);
-        }
+            throw err("Registry requires proto_block|message_block|enum_block for " + stg);
     }
     
     static void filterAndCompile(final ProtoModule module, final Registry registry, 
@@ -331,7 +329,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
         if (protos != null)
         {
             if (compiler.protoBlockTemplate == null)
-                throw new RuntimeException("Registry requires proto_block for " + stg);
+                throw err("Registry requires proto_block for " + stg);
             
             for (Proto proto : protos)
             {
@@ -345,7 +343,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
         if (messages != null)
         {
             if (compiler.messageBlockTemplate == null)
-                throw new RuntimeException("Registry requires message_block for " + stg);
+                throw err("Registry requires message_block for " + stg);
             
             for (Message message : messages)
             {
@@ -363,7 +361,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
         if (enumGroups != null)
         {
             if (compiler.enumBlockTemplate == null)
-                throw new RuntimeException("Registry requires enum_block for " + stg);
+                throw err("Registry requires enum_block for " + stg);
             
             for (EnumGroup eg : enumGroups)
             {
@@ -383,7 +381,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
     {
         final String packageName = module.getOption(stg + ".package_name");
         if (packageName == null || packageName.isEmpty())
-            throw new IllegalStateException("Missing option: " + stg + ".package_name");
+            throw err("Missing option: " + stg + ".package_name");
         
         final String outputDir = getRequiredStgConfigFrom(module, stg + ".output_dir");
 

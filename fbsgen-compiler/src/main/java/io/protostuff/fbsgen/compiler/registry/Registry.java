@@ -374,7 +374,7 @@ public final class Registry
             {
                 if (child == entity)
                 {
-                    throw new RuntimeException("An entity cannot be its own parent: " + 
+                    throw err("An entity cannot be its own parent: " + 
                             entity.getRelativeName());
                 }
                 

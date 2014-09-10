@@ -15,6 +15,7 @@
 package io.protostuff.fbsgen.compiler;
 
 import static io.protostuff.fbsgen.compiler.CompilerUtil.COMMA;
+import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -154,15 +155,15 @@ public final class CompilerMain
     {
         String source = props.getProperty(name + ".source");
         if (source == null)
-            throw new IllegalStateException(name + " must have a source");
+            throw err(name + " must have a source");
 
         String output = props.getProperty(name + ".output");
         if (output == null)
-            throw new IllegalStateException(name + " must have an output");
+            throw err(name + " must have an output");
 
         String outputDir = props.getProperty(name + ".outputDir");
         if (outputDir == null)
-            throw new IllegalStateException(name + " must have an outputDir");
+            throw err(name + " must have an outputDir");
 
         String encoding = props.getProperty(name + ".encoding");
 
@@ -344,7 +345,7 @@ public final class CompilerMain
         String moduleString = props.getProperty(profile);
         if (moduleString == null || moduleString.length() == 0)
         {
-            throw new RuntimeException("No modules for profile: " + profile);
+            throw err("No modules for profile: " + profile);
         }
 
         for (int i = 0; i < nestCount; i++)

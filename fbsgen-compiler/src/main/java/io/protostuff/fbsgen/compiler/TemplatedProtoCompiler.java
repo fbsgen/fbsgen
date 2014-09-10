@@ -14,6 +14,7 @@
 
 package io.protostuff.fbsgen.compiler;
 
+import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Message;
@@ -75,7 +76,7 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
 
             if (enumBlockTemplate == null && messageBlockTemplate == null)
             {
-                throw new IllegalStateException("At least one of these templates " +
+                throw err("At least one of these templates " +
                         "(proto_block|message_block|enum_block) " +
                         "need to be declared in " + module.getOutput());
             }
@@ -125,7 +126,7 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
     {
         if (!this.module.getOutput().startsWith(module.getOutput()))
         {
-            throw new IllegalArgumentException("Wrong module: " +
+            throw err("Wrong module: " +
                     this.module.getOutput() + " != " + module.getOutput());
         }
 

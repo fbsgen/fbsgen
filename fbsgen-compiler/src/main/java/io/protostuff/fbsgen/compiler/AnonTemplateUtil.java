@@ -14,6 +14,7 @@
 
 package io.protostuff.fbsgen.compiler;
 
+import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
 import static io.protostuff.fbsgen.compiler.TemplateUtil.PUSH_BACK_SIZE;
 
 import java.io.BufferedWriter;
@@ -86,7 +87,7 @@ public final class AnonTemplateUtil
             int read = in.read(header, offset, PUSH_BACK_SIZE);
             if (read < PUSH_BACK_SIZE)
             {
-                throw new IOException("Template's content has less than " + 
+                throw err("Template's content has less than " + 
                         PUSH_BACK_SIZE + " characters.");
             }
             
@@ -234,14 +235,14 @@ public final class AnonTemplateUtil
         {
             if (len < 5 || !"-i".equals(args[offset]) || !"-o".equals(args[offset+2]))
             {
-                throw new IllegalArgumentException("The required options must be in this order: " +
+                throw err("The required options must be in this order: " +
                         "-i in_dir -o out_dir [-options options --] <paths>");
             }
         }
         else if (len < 8 || !"-i".equals(args[offset]) || !"-o".equals(args[offset+2]) || 
                 !"-options".equals(args[offset+4]))
         {
-            throw new IllegalArgumentException("The required options must be in this order: " +
+            throw err("The required options must be in this order: " +
             		"-i in_dir -o out_dir -options options -- <paths>");
         }
         
@@ -249,10 +250,10 @@ public final class AnonTemplateUtil
                 out = new File(args[offset+3]);
         
         if (!in.exists() || !in.isDirectory())
-            throw new IllegalArgumentException("The in_dir " + in + " is not a directory");
+            throw err("The in_dir " + in + " is not a directory");
         
         if (!out.exists() || !out.isDirectory())
-            throw new IllegalArgumentException("The out_dir " + out + " is not a directory");
+            throw err("The out_dir " + out + " is not a directory");
         
         final int limit = offset + len;
         
@@ -281,13 +282,13 @@ public final class AnonTemplateUtil
             }
             
             if (doubleHyphenOffset == -1)
-                throw new IllegalArgumentException("The -- separator is missing at group: " + group);
+                throw err("The -- separator is missing at group: " + group);
             
             if (i == start)
-                throw new IllegalArgumentException("Empty options (-options --) at group: " + group);
+                throw err("Empty options (-options --) at group: " + group);
             
             if (doubleHyphenOffset == limit)
-                throw new IllegalArgumentException("No path(s) specified at group: " + group);
+                throw err("No path(s) specified at group: " + group);
             
             pathOffset = doubleHyphenOffset + 1;
         }
@@ -313,13 +314,13 @@ public final class AnonTemplateUtil
         {
             globalOptions = newGlobalOptions(args, ++start, args.length, separator);
             if (globalOptions.isEmpty())
-                throw new IllegalArgumentException("The global options must have at least one entry");
+                throw err("The global options must have at least one entry");
             
             // move to the offset after the separator
             start += (1 + globalOptions.size());
             
             if (start == args.length)
-                throw new IllegalArgumentException("No entries after global options");
+                throw err("No entries after global options");
         }
         else
         {
