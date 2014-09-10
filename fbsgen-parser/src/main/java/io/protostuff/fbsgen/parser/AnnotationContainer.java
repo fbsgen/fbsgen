@@ -116,12 +116,46 @@ public abstract class AnnotationContainer implements HasAnnotations, HasName
         return comments.isEmpty();
     }
     
-    public static IllegalStateException err(String msg, Proto proto)
+    public static ParseException err(EnumGroup.Value v, String msg, Proto proto)
+    {
+        return err(v.getEnumGroup().getRelativeName() + "::" + v.name + msg, proto);
+    }
+    
+    public static ParseException err(EnumGroup eg, String msg, Proto proto)
+    {
+        return err(eg.getRelativeName() + msg, proto);
+    }
+    
+    public static ParseException err(Field<?> field, String msg, Proto proto)
+    {
+        Message owner = field.getOwner();
+        if (owner == null)
+            return err("The field: " + field.name + " " + msg, proto);
+        
+        return err(owner.getRelativeName() + "::" + field.name + msg, proto);
+    }
+    
+    public static ParseException err(Message message, String msg, Proto proto)
+    {
+        return err(message.getRelativeName() + message.name + msg, proto);
+    }
+    
+    public static ParseException err(Service.RpcMethod rpc, String msg, Proto proto)
+    {
+        return err(rpc.getOwner().getRelativeName() + "::" + rpc.name + msg, proto);
+    }
+    
+    public static ParseException err(Service service, String msg, Proto proto)
+    {
+        return err(service.getRelativeName() + service.name + msg, proto);
+    }
+    
+    public static ParseException err(String msg, Proto proto)
     {
         if (proto == null)
-            return new IllegalStateException(msg);
+            return new ParseException(msg);
         
-        return new IllegalStateException(msg + " [" + proto.getSourcePath() + "]");
+        return new ParseException(msg + " [" + proto.getSourcePath() + "]");
     }
 
     @Override

@@ -53,35 +53,6 @@ public class EnumField extends Field<EnumGroup.Value>
         return ev;
     }
     
-    public void putExtraOption(java.lang.String key, Object value)
-    {
-        if (extraOptions.put(key, value) != null)
-        {
-            final Proto proto;
-            final java.lang.String ofOwner;
-            if (owner != null)
-            {
-                // message field
-                proto = owner.getProto();
-                ofOwner = " of " + owner.getRelativeName();
-            }
-            else if (ev != null)
-            {
-                // enum field/value
-                proto = enumGroup.getProto();
-                ofOwner = " of the enum " + enumGroup.getRelativeName();
-            }
-            else
-            {
-                proto = null;
-                ofOwner = "";
-            }
-            
-            throw err("The field " + name + ofOwner + 
-                    " contains a duplicate option: " + key, proto);
-        }
-    }
-
     public boolean isDefaultValueSet()
     {
         return defaultValueSet;

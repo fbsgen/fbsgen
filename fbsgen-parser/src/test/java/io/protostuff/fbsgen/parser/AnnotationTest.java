@@ -37,6 +37,7 @@ public class AnnotationTest extends TestCase
 
         Message person = proto.getMessage("Person");
         assertNotNull(person);
+        assertTrue(person.isSequentialFieldNumbers());
 
         Annotation defaultPerson = person.getAnnotation("DefaultPerson");
         assertNotNull(defaultPerson);

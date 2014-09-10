@@ -140,8 +140,7 @@ public class Message extends AnnotationContainer implements HasName, HasFields
     {
         if (nestedMessages.put(message.name, message) != null)
         {
-            throw err("Duplicate nested message: " + 
-                    message.name + " from message: " + name, getProto());
+            throw err(message, " cannot be defined more than once.", getProto());
         }
     }
     
@@ -174,8 +173,7 @@ public class Message extends AnnotationContainer implements HasName, HasFields
     {
         if (nestedEnumGroups.put(enumGroup.name, enumGroup) != null)
         {
-            throw err("Duplicate nested enum: " + 
-                    enumGroup.name + " from message: " + name, getProto());
+            throw err(enumGroup, " cannot be defined more than once.", getProto());
         }
     }
     
@@ -208,8 +206,7 @@ public class Message extends AnnotationContainer implements HasName, HasFields
     {
         if (nestedServices.put(service.name, service) != null)
         {
-            throw err("Duplicate nested service: " + 
-                    service.name + " from message: " + name, getProto());
+            throw err(service, " cannot be defined more than once.", getProto());
         }
     }
     
@@ -231,6 +228,11 @@ public class Message extends AnnotationContainer implements HasName, HasFields
     public List<Field<?>> getFields()
     {
         return sortedFields;
+    }
+    
+    public Collection<Field<?>> getDeclaredFields()
+    {
+        return fields.values();
     }
     
     public Field<?> getField(String name)
@@ -261,14 +263,11 @@ public class Message extends AnnotationContainer implements HasName, HasFields
     
     public void addField(Field<?> field)
     {
-        if (field.number<1)
-        {
-            throw new IllegalArgumentException("Invalid field number " + field.number 
-                    + " from field " + field.name);
-        }
+        if (field.number < 1)
+            throw err(field, " has an invalid field number: " + field.number, getProto());
         
         if (fields.put(field.name, field) != null)
-            throw err("Duplicate message field: " + field.name, getProto());
+            throw err(field, " cannot be defined more than once.", getProto());
     }
     
     /*public void defineExtensionRange(int first, int last)
@@ -330,7 +329,7 @@ public class Message extends AnnotationContainer implements HasName, HasFields
     public void putExtraOption(String key, Object value)
     {
         if (extraOptions.put(key, value) != null)
-            throw err("Duplicate message option: " + key, getProto());
+            throw err(this, " has multiple definitions of the option: " + key, getProto());
     }
     
     public LinkedHashMap<String,Object> getStandardOptions()
@@ -581,6 +580,11 @@ public class Message extends AnnotationContainer implements HasName, HasFields
         return getScalarFieldCount() - repeatedEnumFieldCount - singularEnumFieldCount;
     }
     
+    public boolean isSequentialFieldNumbers()
+    {
+        return sortedFields.size() == sortedFields.get(sortedFields.size() - 1).number;
+    }
+    
     // post parse
     
     void resolveReferences(Message root)
@@ -695,7 +699,7 @@ public class Message extends AnnotationContainer implements HasName, HasFields
                     continue;
                 }
                 
-                throw err("unknown field: " + fullRefName, getProto());
+                throw err(this, " contains an unknown field: " + fullRefName, getProto());
             }
             
             // references inside options
@@ -704,6 +708,8 @@ public class Message extends AnnotationContainer implements HasName, HasFields
         }
         sortedFields.addAll(fields.values());
         Collections.sort(sortedFields);
+        //if (sortedFields.size() - 1 != sortedFields.get(sortedFields.size() - 1).number)
+        //    throw err(this, " must define fields with sequential numbers (no holes in-between)", getProto());
         
         //for (Extension extension : this.nestedExtensions)
         //    extension.resolveReferences();
@@ -752,10 +758,7 @@ public class Message extends AnnotationContainer implements HasName, HasFields
             ef.defaultValueSet = true;
             ef.defaultValue = enumGroup.getValue(refName);
             if (ef.defaultValue == null)
-            {
-                throw err("The field: " + ef.name + 
-                        " contains an unknown enum value: " + refName, owner.getProto());
-            }
+                throw err(ef, " contains an unknown enum value: " + refName, owner.getProto());
         }
         copy(fr, ef);
         //System.err.println(owner.getRelativeName() + "." + ef.name +": " + ef.getJavaType());

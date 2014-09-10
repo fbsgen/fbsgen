@@ -128,7 +128,7 @@ public class EnumGroup extends AnnotationContainer implements HasName, HasOption
     public void putExtraOption(String key, Object value)
     {
         if (extraOptions.put(key, value) != null)
-            throw err("Duplicate enum option: " + key, getProto());
+            throw err(this, " has multiple definitions of the option: " + key, getProto());
     }
     
     public LinkedHashMap<String,Object> getStandardOptions()
@@ -214,10 +214,7 @@ public class EnumGroup extends AnnotationContainer implements HasName, HasOption
     void add(Value value)
     {
         if (values.put(value.name, value) != null)
-        {
-            throw err("The enum " + name + " has duplicate names: " + value.name, 
-                    getProto());
-        }
+            throw err(value, " cannot be defined more than once.", getProto());
         
         sortedValues.add(value);
     }
@@ -280,10 +277,7 @@ public class EnumGroup extends AnnotationContainer implements HasName, HasOption
             {
                 if (v1.number == v2.number)
                 {
-                    throw err("The enum value " + 
-                            v2.enumGroup.getName() + "." + v2.getName() + 
-                            " cannot have the same number as " + 
-                            v1.enumGroup.getName() + "." + v1.getName(), 
+                    throw err(v2, " cannot have the same number as " + v1.getName(), 
                             v2.enumGroup.getProto());
                 }
                 

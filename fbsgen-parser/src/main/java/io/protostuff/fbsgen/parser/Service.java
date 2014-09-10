@@ -159,7 +159,7 @@ public class Service extends AnnotationContainer implements HasName, HasOptions
     public void putExtraOption(String key, Object value)
     {
         if (extraOptions.put(key, value) != null)
-            throw err("Duplicate service option: " + key, getProto());
+            throw err(this, " has multiple definitions of the option: " + key, getProto());
     }
     
     public Object getExtraOption(String name)
@@ -215,10 +215,7 @@ public class Service extends AnnotationContainer implements HasName, HasOptions
             this.retPackage = retPackage;
             
             if (service.rpcMethods.put(name, this) != null)
-            {
-                throw err("Duplicate rpc method: " + name + 
-                        " from service " + service.name, service.getProto());
-            }
+                throw err(this, " cannot be defined more than once.", service.getProto());
         }
 
         public String getName()
@@ -308,7 +305,7 @@ public class Service extends AnnotationContainer implements HasName, HasOptions
         public void putExtraOption(String key, Object value)
         {
             if (extraOptions.put(key, value) != null)
-                throw err("Duplicate rpc option: " + key, getProto());
+                throw err(this, " has multiple definitions of the option: " + key, getProto());
         }
         
         public Object getExtraOption(String name)
@@ -338,10 +335,7 @@ public class Service extends AnnotationContainer implements HasName, HasOptions
             {
                 Message argType = proto.findMessageReference(fullArgName, enclosingNs);
                 if (argType == null)
-                {
-                    throw err("The message " + fullArgName + " is not defined", 
-                            proto);
-                }
+                    throw err(this, " has an unresolved arg type: " + fullArgName, proto);
                 
                 this.argType = argType;
             }
@@ -351,10 +345,7 @@ public class Service extends AnnotationContainer implements HasName, HasOptions
             {
                 Message returnType = proto.findMessageReference(fullReturnName, enclosingNs);
                 if (returnType == null)
-                {
-                    throw err("The message " + fullReturnName + " is not defined", 
-                            proto);
-                }
+                    throw err(this, " has an unresolved return type: " + fullReturnName, proto);
                 
                 this.returnType = returnType;
             }

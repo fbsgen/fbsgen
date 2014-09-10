@@ -228,7 +228,7 @@ public class Proto extends AnnotationContainer implements HasOptions, HasName
     public void putExtraOption(String key, Object value)
     {
         if (extraOptions.put(key, value) != null)
-            throw err("Duplicate proto option: " + key, this);
+            throw err("Cannot have multiple definitions of the option: " + key, getProto());
     }
     
     @SuppressWarnings("unchecked")
@@ -255,7 +255,7 @@ public class Proto extends AnnotationContainer implements HasOptions, HasName
     void addMessage(Message message)
     {
         if (messages.put(message.name, message) != null)
-            throw err("Duplicate message: " + message.name, this);
+            throw err(message, " cannot be defined more than once.", this);
     }
     
     public Map<String,EnumGroup> getEnumGroupMap()
@@ -276,7 +276,7 @@ public class Proto extends AnnotationContainer implements HasOptions, HasName
     void addEnumGroup(EnumGroup enumGroup)
     {
         if (enumGroups.put(enumGroup.name, enumGroup) != null)
-            throw err("Duplicate enum: " + enumGroup.name, this);
+            throw err(enumGroup, " cannot be defined more than once.", this);
     }
     
     public Map<String,Service> getServiceMap()
@@ -297,7 +297,7 @@ public class Proto extends AnnotationContainer implements HasOptions, HasName
     void addService(Service service)
     {
         if (services.put(service.name, service) != null)
-            throw err("Duplicate service: " + service.name, this);
+            throw err(service, " cannot be defined more than once.", this);
     }
 
     /*public void addExtension(Extension extension)
