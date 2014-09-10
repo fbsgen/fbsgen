@@ -98,7 +98,7 @@
                 <configuration>
                   <tasks>
                     <delete quiet="true">
-                      <fileset dir="target" includes="${project.build.finalName}-jar*.jar"/>
+                      <fileset dir="target" includes="fbsgen*.jar"/>
                     </delete>
                   </tasks>
                 </configuration>
@@ -112,7 +112,7 @@
                 <configuration>
                   <tasks>
                     <taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" />
-                    <jarjar jarfile="target/${project.build.finalName}-jarjar.jar">
+                    <jarjar jarfile="target/fbsgen.jar">
                       <manifest>
                         <attribute name="Main-Class" value="io.protostuff.fbsgen.compiler.CompilerMain" />
                         <attribute name="implementation-version" value="${project.version}" />
