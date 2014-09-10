@@ -11,9 +11,5 @@ base_header(proto, module, prefix, suffix="") ::= <<
 >>
 
 base_var(val, module, fmt="NONE") ::= <%
-«if(module.o.("underscore_on_vars"))»
-«val; format={«fmt»&&_}»
-«else»
-«val; format=fmt»
-«endif»
+«val; format=fmt»«if(module.o.("underscore_on_vars"))»_«endif»
 %>

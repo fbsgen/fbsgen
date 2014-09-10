@@ -74,13 +74,13 @@ public final class ST4Group extends STGroup implements TemplateGroup
         }
     };
     
-    static final AttributeRenderer STRING_ATTRIBUTE_RENDERER = 
+    static final AttributeRenderer STRING_RENDERER = 
             new AttributeRenderer()
     {
         @Override
         public String toString(Object o, String formatName, Locale locale)
         {
-            String str = (String) o;
+            String str = o.toString();
             if (formatName == null)
                 return str;
 
@@ -90,15 +90,6 @@ public final class ST4Group extends STGroup implements TemplateGroup
                     chainedFormat(str, formats);
         }
     };
-
-    static
-    {
-        // attribute renderers
-
-        setAttributeRenderer(String.class, STRING_ATTRIBUTE_RENDERER);
-
-        //GROUP_LOADER.loadGroup("base").setAttributeRenderers(DEFAULT_RENDERERS);
-    }
     
     static final STErrorListener ERROR_LISTENER = new STErrorListener()
     {
@@ -185,36 +176,6 @@ public final class ST4Group extends STGroup implements TemplateGroup
         }
     }
     
-    protected CompiledST load(String name)
-    {
-        return templates.get(name.substring(1));
-    }
-    
-    public AttributeRenderer getAttributeRenderer(Class<?> attributeType)
-    {
-        return DEFAULT_RENDERERS.get(attributeType);
-    }
-    
-    public void registerRenderer(Class<?> attributeType, 
-            AttributeRenderer r, boolean recursive)
-    {
-        // noop
-    }
-    
-    public ModelAdaptor getModelAdaptor(Class<?> attributeType)
-    {
-        return FakeMap.class.isAssignableFrom(attributeType) ? FAKEMAP_ADAPTOR : 
-            super.getModelAdaptor(attributeType);
-    }
-    
-    @Override
-    public Template getTemplate(String name)
-    {
-        CompiledST st = rawGetTemplate(name);
-        
-        return st == null ? null : new ST4Template(this, st);
-    }
-    
     public void importTemplates(Token fileNameToken)
     {
         final char[] delim = new char[5];
@@ -288,6 +249,37 @@ public final class ST4Group extends STGroup implements TemplateGroup
         }
     }
     
+    protected CompiledST load(String name)
+    {
+        return templates.get(name.substring(1));
+    }
+    
+    @Override
+    public Template getTemplate(String name)
+    {
+        CompiledST st = rawGetTemplate(name);
+        
+        return st == null ? null : new ST4Template(this, st);
+    }
+    
+    public AttributeRenderer getAttributeRenderer(Class<?> attributeType)
+    {
+        AttributeRenderer r = DEFAULT_RENDERERS.get(attributeType);
+        return r == null ? STRING_RENDERER : r;
+    }
+    
+    public void registerRenderer(Class<?> attributeType, 
+            AttributeRenderer r, boolean recursive)
+    {
+        // noop
+    }
+    
+    public ModelAdaptor getModelAdaptor(Class<?> attributeType)
+    {
+        return FakeMap.class.isAssignableFrom(attributeType) ? FAKEMAP_ADAPTOR : 
+            super.getModelAdaptor(attributeType);
+    }
+    
     @SuppressWarnings("unchecked")
     @Override
     public void put(String name, FakeMap map)
@@ -305,12 +297,6 @@ public final class ST4Group extends STGroup implements TemplateGroup
         {
             super(url, encoding, delimiterStartChar, delimiterStopChar);
         }
-        
-        public ModelAdaptor getModelAdaptor(Class<?> attributeType)
-        {
-            return FakeMap.class.isAssignableFrom(attributeType) ? FAKEMAP_ADAPTOR : 
-                super.getModelAdaptor(attributeType);
-        }
 
         @Override
         public Template getTemplate(String name)
@@ -318,6 +304,24 @@ public final class ST4Group extends STGroup implements TemplateGroup
             throw new UnsupportedOperationException();
         }
 
+        public AttributeRenderer getAttributeRenderer(Class<?> attributeType)
+        {
+            AttributeRenderer r = DEFAULT_RENDERERS.get(attributeType);
+            return r == null ? STRING_RENDERER : r;
+        }
+        
+        public void registerRenderer(Class<?> attributeType, 
+                AttributeRenderer r, boolean recursive)
+        {
+            // noop
+        }
+        
+        public ModelAdaptor getModelAdaptor(Class<?> attributeType)
+        {
+            return FakeMap.class.isAssignableFrom(attributeType) ? FAKEMAP_ADAPTOR : 
+                super.getModelAdaptor(attributeType);
+        }
+        
         @SuppressWarnings("unchecked")
         @Override
         public void put(String name, FakeMap map)
