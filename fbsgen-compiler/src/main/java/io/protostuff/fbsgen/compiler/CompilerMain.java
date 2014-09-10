@@ -37,6 +37,9 @@ public final class CompilerMain
     public static final boolean SILENT_MODE = Boolean.parseBoolean(
             System.getProperty("fbsgen.silent_mode", "true"));
 
+    static final boolean PRINT_STACK_TRACE = Boolean.parseBoolean(
+            System.getProperty("fbsgen.print_stack_trace", "false"));
+
     static final HashMap<String, ProtoCompiler> __compilers =
             new HashMap<String, ProtoCompiler>();
     
@@ -570,10 +573,20 @@ public final class CompilerMain
 
     public static void main(String[] args) throws Exception
     {
-        if (args.length == 0)
-            compileWithNoArgs();
-        else
-            compileWithArgs(args, 0, args.length);
+        try
+        {
+            if (args.length == 0)
+                compileWithNoArgs();
+            else
+                compileWithArgs(args, 0, args.length);
+        }
+        catch(Exception e)
+        {
+            if (PRINT_STACK_TRACE)
+                e.printStackTrace();
+            else
+                System.err.println(e.getMessage());
+        }
     }
 
 }

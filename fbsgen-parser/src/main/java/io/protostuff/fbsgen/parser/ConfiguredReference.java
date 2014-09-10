@@ -40,7 +40,7 @@ import java.util.LinkedHashMap;
 public class ConfiguredReference
 {
     public static final boolean RESOLVE_ENUM_VALUE_REF = Boolean.getBoolean(
-            "protostuff.resolve_enum_value_ref");
+            "fbsgen.resolve_enum_value_ref");
     
     // could be same
     final LinkedHashMap<String,Object> source, destination;

@@ -137,7 +137,7 @@ public abstract class AnnotationContainer implements HasAnnotations, HasName
     
     public static ParseException err(Message message, String msg, Proto proto)
     {
-        return err(message.getRelativeName() + message.name + msg, proto);
+        return err(message.getRelativeName() + msg, proto);
     }
     
     public static ParseException err(Service.RpcMethod rpc, String msg, Proto proto)
@@ -147,7 +147,7 @@ public abstract class AnnotationContainer implements HasAnnotations, HasName
     
     public static ParseException err(Service service, String msg, Proto proto)
     {
-        return err(service.getRelativeName() + service.name + msg, proto);
+        return err(service.getRelativeName() + msg, proto);
     }
     
     public static ParseException err(String msg, Proto proto)

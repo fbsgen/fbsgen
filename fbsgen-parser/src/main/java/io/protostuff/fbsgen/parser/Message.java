@@ -29,6 +29,9 @@ import java.util.List;
 public class Message extends AnnotationContainer implements HasName, HasFields
 {
     
+    static final boolean SEQUENTIAL_FIELD_NUMBERS = Boolean.parseBoolean(
+            System.getProperty("fbsgen.sequential_field_numbers", "false"));
+    
     final String name;
     final Message parentMessage;
     final Proto proto;
@@ -598,6 +601,14 @@ public class Message extends AnnotationContainer implements HasName, HasFields
         return sortedFields.size() == sortedFields.get(sortedFields.size() - 1).number;
     }
     
+    /**
+     * Alias to {@link #isSequentialFieldNumbers()}.
+     */
+    public boolean isSfn()
+    {
+        return isSequentialFieldNumbers();
+    }
+    
     // post parse
     
     void resolveReferences(Message root)
@@ -605,7 +616,18 @@ public class Message extends AnnotationContainer implements HasName, HasFields
         final Proto proto = getProto();
         final String fullName = getFullName();
         
-        for (Field<?> f : fields.values())
+        if (!fields.isEmpty())
+        {
+            sortedFields.addAll(fields.values());
+            
+            if (fields.size() > 1)
+                Collections.sort(sortedFields);
+            
+            if (SEQUENTIAL_FIELD_NUMBERS && !isSequentialFieldNumbers())
+                throw err(this, " must have sequential field numbers (starts at 1, no gaps in-between)", proto);
+        }
+        
+        for (Field<?> f : sortedFields)
         {
             f.owner = this;
             
@@ -712,17 +734,13 @@ public class Message extends AnnotationContainer implements HasName, HasFields
                     continue;
                 }
                 
-                throw err(this, " contains an unknown field: " + fullRefName, getProto());
+                throw err(this, " contains an unknown field: " + fullRefName, proto);
             }
             
             // references inside options
             if (!f.standardOptions.isEmpty())
                 proto.references.add(new ConfiguredReference(f.standardOptions, f.extraOptions, fullName));
         }
-        sortedFields.addAll(fields.values());
-        Collections.sort(sortedFields);
-        //if (sortedFields.size() - 1 != sortedFields.get(sortedFields.size() - 1).number)
-        //    throw err(this, " must define fields with sequential numbers (no holes in-between)", getProto());
         
         //for (Extension extension : this.nestedExtensions)
         //    extension.resolveReferences();
