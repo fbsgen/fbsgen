@@ -137,6 +137,8 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
         if (group == null)
             throw err("Unknown stg: " + stg);
         
+        final Template registryBlockTemplate = group.getTemplate("registry_block");
+        
         String optionsParam = module.getConfig().getProperty(stg + ".options");
         final Properties previousOptions;
         if (optionsParam != null)
@@ -178,8 +180,6 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
         {
             for (Proto proto : registry.getProtos())
                 overrideAndAddTo(overridden, module, proto, registry, foreignProtoPathMap);
-            
-            final Template registryBlockTemplate = group.getTemplate("registry_block");
             
             if (registryBlockTemplate != null)
                 compileToSingleFile(module, registry, stg, registryBlockTemplate);

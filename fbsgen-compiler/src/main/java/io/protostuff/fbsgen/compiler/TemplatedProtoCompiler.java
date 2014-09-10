@@ -36,11 +36,8 @@ import java.util.HashMap;
 public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
 {
 
-    /**
-     * To enable, specify -Dppc.check_filename_placeholder=true
-     */
-    protected static final boolean CHECK_FILENAME_PLACEHOLDER =
-            Boolean.getBoolean("ppc.check_filename_placeholder");
+    protected static final boolean CHECK_PLACEHOLDER = Boolean.parseBoolean(
+            System.getProperty("fbsgen.check_placeholder", "true"));
     
     public final ProtoModule module;
     public final TemplateGroup group;
@@ -50,10 +47,10 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
 
     public TemplatedProtoCompiler(ProtoModule module)
     {
-        this(module, CHECK_FILENAME_PLACEHOLDER);
+        this(module, CHECK_PLACEHOLDER);
     }
 
-    public TemplatedProtoCompiler(ProtoModule module, boolean checkFilenamePlaceHolder)
+    public TemplatedProtoCompiler(ProtoModule module, boolean checkPlaceHolder)
     {
         super(module.getOutput());
 
@@ -86,10 +83,8 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
             enumBlockTemplate = null;
             messageBlockTemplate = null;
         }
-
-
-
-        final int placeHolder = checkFilenamePlaceHolder ? outputName.indexOf('$') : -1;
+        
+        final int placeHolder = checkPlaceHolder ? outputName.indexOf('$') : -1;
         if (placeHolder == -1)
         {
             // no placeholder
