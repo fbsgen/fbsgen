@@ -32,7 +32,8 @@ message Foo {
   repeated bytes rep_bytes = 13;
   repeated Size rep_size = 14;
   repeated Bar rep_bar = 15;
-  repeated Hello.World rep_hello_world = 16;
+  repeated Hello.Feedback rep_hello_feedback = 16;
+  repeated Hello.World rep_hello_world = 17;
 }
 
 message Bar {
@@ -51,7 +52,8 @@ message Bar {
   optional bytes some_bytes = 13;
   optional Size some_size = 14;
   optional Baz some_baz = 15;
-  optional Hello.World some_hello_world = 16;
+  optional Hello.Feedback some_hello_feedback = 16;
+  optional Hello.World some_hello_world = 17;
 }
 
 @Struct
