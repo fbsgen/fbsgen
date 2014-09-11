@@ -20,6 +20,12 @@ main_proto_block(proto, module, writable) ::= <<
     div.message h2 {
       margin-bottom: 0;
     }
+    div.message h2 div {
+      font-weight: normal;
+      font-size: 0.75em;
+      padding: 0;
+      margin: 0;
+    }
     div.message h2 a {
       color: #CD5C5C;
     }
@@ -51,7 +57,11 @@ main_proto_block(proto, module, writable) ::= <<
 
 message_block(message, module, writable) ::= <<
 <div class="message">
-  <h2><span>«message_kind(message, module, writable)»</span> <a href="#«message.relativeName; format="\.==-"»" id="«message.relativeName; format="\.==-"»">«message.name»</a></h2>
+  <h2>
+    «message_ann(message, module, writable)»
+    <span>«message_kind(message, module, writable)»</span>
+    <a href="#«message.relativeName; format="\.==-"»" id="«message.relativeName; format="\.==-"»">«message.name»</a>
+  </h2>
   «if(module.o.("raw"))»
   «message.declaredFields:raw_field_decl(module, writable)»
   «else»
@@ -67,6 +77,12 @@ message
 struct
 «else»
 table
+«endif»
+%>
+
+message_ann(message, module, writable) ::= <%
+«if(module.o.("raw") && message.a.("Struct"))»
+<div>@Struct</div>
 «endif»
 %>
 
