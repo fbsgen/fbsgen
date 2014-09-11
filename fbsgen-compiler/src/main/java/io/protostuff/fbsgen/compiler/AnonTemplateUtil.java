@@ -274,8 +274,7 @@ public final class AnonTemplateUtil
         
         final int limit = offset + len;
         
-        final int paramOffset = !hasGlobalParams || "-p".equals(args[offset+4]) ? 
-                offset + 5 : -1;
+        final int paramOffset = "-p".equals(args[offset+4]) ? offset + 5 : -1;
         
         final int pathOffset;
         if (paramOffset == -1)
@@ -285,7 +284,7 @@ public final class AnonTemplateUtil
         }
         else
         {
-            int doubleHyphenOffset = -1, start = offset + 6, i = start;
+            int doubleHyphenOffset = -1, start = offset + 4, i = start;
             
             for (; i < limit; i++)
             {
