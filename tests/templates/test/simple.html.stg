@@ -19,7 +19,7 @@ proto_block(proto, module) ::= <<
       color: #CD5C5C;
     }
     div.message h2 span {
-      font-size: 0.8em;
+      font-size: 0.73em;
     }
     div.field {
       margin-left: 1em;
