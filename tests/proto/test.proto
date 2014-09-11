@@ -1,5 +1,10 @@
 package hello.world;
 
+@Struct
+message Baz {
+  required string name = 1;
+}
+
 @Root
 message Foo {
   repeated int8 rep_byte = 1;
@@ -33,9 +38,3 @@ message Bar {
   optional string some_string = 12;
   optional Baz some_baz = 13;
 } //root_type Bar;
-
-@Root
-message Baz {
-  required string name = 1;
-} //root_type Baz;
-

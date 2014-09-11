@@ -4,7 +4,7 @@ proto_block(proto, module) ::= <<
 <!DOCTYPE html>
 <html>
 <head>
-  <title>«proto.sourcePath»</title>
+  <title>«if(module.o.("pb"))»pb«else»fbs«endif»: «proto.sourcePath»</title>
   <style>
     body {
       color: #333;
@@ -18,6 +18,12 @@ proto_block(proto, module) ::= <<
     div.message h2 a {
       color: #CD5C5C;
     }
+    div.message h2 span {
+      font-size: 0.8em;
+    }
+    div.field {
+      margin-left: 1em;
+    }
     div.field > span {
       color: #4682B4;
     }
@@ -27,14 +33,14 @@ proto_block(proto, module) ::= <<
   </style>
 </head>
 <body>
-  <h3>«proto.sourcePath»</h3>
+  <div>«if(module.o.("pb"))»pb«else»fbs«endif»: «proto.sourcePath»</div>
   «proto.messages:message_block(module)»
 </body>
 >>
 
 message_block(message, module) ::= <<
 <div class="message">
-  <h2><a href="#«message.relativeName; format="\.==-"»" id="«message.relativeName; format="\.==-"»">«message.name»</a></h2>
+  <h2><span>«message_type(message, module)»</span> <a href="#«message.relativeName; format="\.==-"»" id="«message.relativeName; format="\.==-"»">«message.name»</a></h2>
   «if(module.o.("pb"))»
   «message.declaredFields:pb_field_decl(module)»
   «else»
@@ -42,6 +48,16 @@ message_block(message, module) ::= <<
   «endif»
 </div>
 >>
+
+message_type(message, module) ::= <%
+«if(module.o.("pb"))»
+message
+«elseif(message.a.("Struct"))»
+struct
+«else»
+table
+«endif»
+%>
 
 fbs_field_decl(field, module) ::= <<
 <div class="field"><span>«field.name»</span>: «if(field.repeated)»[«endif»<b>«fbs_field_type(field, module)»</b>«if(field.repeated)»]«endif» (id: «field.number»);</div>
