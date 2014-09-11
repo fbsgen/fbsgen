@@ -63,6 +63,11 @@ public final class EnumField extends Field<EnumGroup.Value>
         return enumGroup;
     }
     
+    public HasName getUserDefinedType()
+    {
+        return enumGroup;
+    }
+    
     public java.lang.String getJavaType()
     {
         //if (javaType != null)
@@ -87,6 +92,11 @@ public final class EnumField extends Field<EnumGroup.Value>
         return buffer.toString();
         //return (javaType=buffer.toString());
         
+    }
+    
+    public java.lang.String getFbsType()
+    {
+        return getJavaType().replace('.', '_');
     }
     
     public java.lang.String getRegularType()

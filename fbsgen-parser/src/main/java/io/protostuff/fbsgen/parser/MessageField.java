@@ -42,6 +42,11 @@ public class MessageField extends Field<Message>
     {
         return message;
     }
+    
+    public HasName getUserDefinedType()
+    {
+        return message;
+    }
 
     public java.lang.String getJavaType()
     {
@@ -53,6 +58,11 @@ public class MessageField extends Field<Message>
 
         return buffer.toString();
         //return (javaType=buffer.toString());
+    }
+    
+    public java.lang.String getFbsType()
+    {
+        return getJavaType().replace('.', '_');
     }
     
     public java.lang.String getRegularType()

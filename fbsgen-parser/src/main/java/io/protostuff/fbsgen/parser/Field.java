@@ -221,7 +221,17 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         return f.number < number ? 1 : -1;
     }
     
+    /**
+     * Returns null by default.
+     */
+    public HasName getUserDefinedType()
+    {
+        return null;
+    }
+    
     public abstract java.lang.String getJavaType();
+    
+    public abstract java.lang.String getFbsType();
     
     public java.lang.String getDefaultValueAsString()
     {
@@ -247,6 +257,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "byte";
         }
+        
+        public java.lang.String getFbsType()
+        {
+            return "byte";
+        }
     }
     
     public static class UInt8 extends Number<Integer>
@@ -254,6 +269,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         public java.lang.String getJavaType()
         {
             return "byte";
+        }
+        
+        public java.lang.String getFbsType()
+        {
+            return "ubyte";
         }
     }
     
@@ -263,6 +283,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "int";
         }
+        
+        public java.lang.String getFbsType()
+        {
+            return "short";
+        }
     }
     
     public static class UInt16 extends Number<Integer>
@@ -271,11 +296,21 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "int";
         }
+        
+        public java.lang.String getFbsType()
+        {
+            return "ushort";
+        }
     }
     
     public static class Int32 extends Number<Integer>
     {
         public java.lang.String getJavaType()
+        {
+            return "int";
+        }
+        
+        public java.lang.String getFbsType()
         {
             return "int";
         }
@@ -287,11 +322,21 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "int";
         }
+        
+        public java.lang.String getFbsType()
+        {
+            return "uint";
+        }
     }
     
     public static class Int64 extends Number<Long>
     {
         public java.lang.String getJavaType()
+        {
+            return "long";
+        }
+        
+        public java.lang.String getFbsType()
         {
             return "long";
         }
@@ -303,6 +348,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "long";
         }
+        
+        public java.lang.String getFbsType()
+        {
+            return "ulong";
+        }
     }
     
     public static class Float extends Number<java.lang.Float>
@@ -311,11 +361,21 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "float";
         }
+        
+        public java.lang.String getFbsType()
+        {
+            return "float";
+        }
     }
     
     public static class Double extends Number<java.lang.Double>
     {
         public java.lang.String getJavaType()
+        {
+            return "double";
+        }
+        
+        public java.lang.String getFbsType()
         {
             return "double";
         }
@@ -331,6 +391,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "boolean";
         }
+        
+        public java.lang.String getFbsType()
+        {
+            return "bool";
+        }
     }
     
     public static class String extends Field<java.lang.String>
@@ -342,6 +407,10 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         public java.lang.String getJavaType()
         {
             return "String";
+        }
+        public java.lang.String getFbsType()
+        {
+            return "string";
         }
         public java.lang.String getDefaultValueAsString()
         {
@@ -362,6 +431,10 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         public java.lang.String getJavaType()
         {
             return "ByteString";
+        }
+        public java.lang.String getFbsType()
+        {
+            return "string";
         }
         public java.lang.String getDefaultValueAsString()
         {
@@ -399,6 +472,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         public java.lang.String getJavaType()
         {
             return refName;
+        }
+        
+        public java.lang.String getFbsType()
+        {
+            return getJavaType().replace('.', '_');
         }
     }
 
