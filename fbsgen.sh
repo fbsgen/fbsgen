@@ -23,6 +23,7 @@ PROTO_PATH=.
 [ -d $CURRENT_DIR/proto ] && PROTO_PATH=proto
 
 # -Dproto_search_strategy=2 means search from classpath if the file is not found.
+# The search strategy for templates is the same as above (except it cannot be changed).
 
 java -Dtemplate_path=$TEMPLATE_PATH,$SCRIPT_DIR/templates \
     -Dproto_path=$PROTO_PATH \
