@@ -4,7 +4,7 @@ CURRENT_DIR=$PWD
 
 SCRIPT_DIR=$CURRENT_DIR
 
-if [ ! -e $SCRIPT_DIR/../fbsgen/base.stg ]; then
+if [ ! -d $SCRIPT_DIR/../fbsgen-compiler ]; then
     
     SCRIPT=$(readlink -f "$0")
     # Absolute path this script is in
