@@ -35,7 +35,7 @@ public class ProtoModule implements Serializable
     private String encoding;
     private File outputDir;
 
-    private Properties options = new Properties();
+    private Properties options;
     Properties config;
 
     private CachingProtoLoader protoLoader;
@@ -44,11 +44,18 @@ public class ProtoModule implements Serializable
 
     public ProtoModule()
     {
-        
+        this(new Properties());
+    }
+    
+    public ProtoModule(Properties options)
+    {
+        this.options = options;
     }
 
     public ProtoModule(File source, String output, String encoding, File outputDir)
     {
+        this(new Properties());
+        
         this.source = source;
         this.output = output;
         this.encoding = encoding;

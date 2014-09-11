@@ -14,6 +14,7 @@
 
 package io.protostuff.fbsgen.compiler;
 
+import static io.protostuff.fbsgen.compiler.CompilerUtil.COMMA;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
 import static io.protostuff.fbsgen.compiler.TemplateUtil.PUSH_BACK_SIZE;
 
@@ -37,7 +38,8 @@ import java.util.HashMap;
 public final class AnonTemplateUtil
 {
     
-    static final String STG_PARENT = System.getProperty("stg.parent", "base");
+    static final String IMPORTS = System.getProperty("imports", ""),
+            OPTIONS = System.getProperty("options", "");
     
     static final char CLI_SEPARATOR = parseSeparator(
             System.getProperty("cli.separator", ""));
@@ -66,24 +68,36 @@ public final class AnonTemplateUtil
     
     static final class InWrapper extends InputStream
     {
-        static final byte[] HEADER = ("group anon : " + STG_PARENT + 
-                ";\nanon_block(args) ::= <<\n").getBytes(), 
-                FOOTER = "\n>>\n".getBytes();
+        static final byte[] templateFooter = "\n>>\n".getBytes();
+        final byte[] templateHeader;
 
         final char[] delim = new char[4];
         final InputStream in;
         
         private int footerOffset, headerOffset;
-        private final byte[] header = new byte[HEADER.length + PUSH_BACK_SIZE];
+        private final byte[] header;
         private final int headerLen;
         
         InWrapper(InputStream in) throws IOException
         {
             this.in = in;
             
-            System.arraycopy(HEADER, 0, header, 0, HEADER.length);
+            StringBuilder sb = new StringBuilder();
             
-            int offset = HEADER.length;
+            if (!IMPORTS.isEmpty())
+            {
+                for (String i : COMMA.split(IMPORTS))
+                    sb.append("import \"").append(i).append('"').append('\n');
+            }
+            
+            templateHeader = sb.append("anon_block(params, module, options) ::= <<")
+                    .toString().getBytes();
+            
+            header = new byte[templateHeader.length + PUSH_BACK_SIZE];
+            
+            System.arraycopy(templateHeader, 0, header, 0, templateHeader.length);
+            
+            int offset = templateHeader.length;
             int read = in.read(header, offset, PUSH_BACK_SIZE);
             if (read < PUSH_BACK_SIZE)
             {
@@ -106,7 +120,7 @@ public final class AnonTemplateUtil
         @Override
         public int read(byte[] buf, int offset, int len) throws IOException
         {
-            if (footerOffset == FOOTER.length)
+            if (footerOffset == templateFooter.length)
                 return -1;
             
             if (headerOffset != headerLen)
@@ -137,8 +151,8 @@ public final class AnonTemplateUtil
                 return read;
             
             // body fully read, copy footer
-            int copyLen = Math.min(FOOTER.length - footerOffset, len);
-            System.arraycopy(FOOTER, footerOffset, buf, offset, copyLen);
+            int copyLen = Math.min(templateFooter.length - footerOffset, len);
+            System.arraycopy(templateFooter, footerOffset, buf, offset, copyLen);
             
             footerOffset += copyLen;
             
@@ -146,10 +160,10 @@ public final class AnonTemplateUtil
         }
     }
     
-    static HashMap<String,String> newGlobalOptions(String[] args, int offset, int limit, 
+    static HashMap<String,String> newGlobalParams(String[] args, int offset, int limit, 
             char limitChar)
     {
-        final HashMap<String,String> options = new HashMap<String,String>();
+        final HashMap<String,String> params = new HashMap<String,String>();
         
         for (int colon; offset < limit; offset++)
         {
@@ -159,37 +173,37 @@ public final class AnonTemplateUtil
                 break;
             
             if (-1 == (colon = arg.indexOf(':')))
-                options.put(arg, "");
+                params.put(arg, "");
             else
-                options.put(arg.substring(0, colon), arg.substring(colon + 1));
+                params.put(arg.substring(0, colon), arg.substring(colon + 1));
         }
         
-        return options;
+        return params;
     }
     
-    static void putTemplateOptionsTo(HashMap<String,String> options, 
+    static void putTemplateParamsTo(HashMap<String,String> params, 
             String[] args, int offset, int limit)
     {
         for (int colon; offset < limit; offset++)
         {
             String arg = args[offset];
             if (-1 == (colon = arg.indexOf(':')))
-                options.put(arg, "");
+                params.put(arg, "");
             else
-                options.put(arg.substring(0, colon), arg.substring(colon + 1));
+                params.put(arg.substring(0, colon), arg.substring(colon + 1));
         }
     }
     
-    static HashMap<String,String> newTemplateOptions(String[] args, int offset, int limit)
+    static HashMap<String,String> newTemplateParams(String[] args, int offset, int limit)
     {
-        final HashMap<String,String> options = new HashMap<String,String>();
+        final HashMap<String,String> params = new HashMap<String,String>();
         
-        putTemplateOptionsTo(options, args, offset, limit);
+        putTemplateParamsTo(params, args, offset, limit);
         
-        return options;
+        return params;
     }
     
-    static void compileTemplate(HashMap<String,String> args, 
+    static void compileTemplate(HashMap<String,String> params, ProtoModule module, 
             InputStream in, OutputStream out) throws IOException
     {
         final InWrapper iw = new InWrapper(in);
@@ -197,13 +211,15 @@ public final class AnonTemplateUtil
         
         final Template template = group.getTemplate("anon_block");
         
-        HashMap<String,Object> params = new HashMap<String, Object>();
-        params.put("args", args);
+        HashMap<String,Object> args = new HashMap<String, Object>();
+        args.put("params", params);
+        args.put("module", module);
+        args.put("options", module.getOptions());
         
         final BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(out, "UTF-8"));
         
-        template.renderTo(writer, params);
+        template.renderTo(writer, args);
         
         writer.close();
     }
@@ -213,37 +229,37 @@ public final class AnonTemplateUtil
         static final int TEMPLATE_OPTION_OFFSET = 5;
         
         final File in, out;
-        final int offset, optionOffset, pathOffset, limit;
+        final int offset, paramOffset, pathOffset, limit;
         
         ArgGroup(File in, File out, 
-                int offset, int optionOffset, int pathOffset, int limit)
+                int offset, int paramOffset, int pathOffset, int limit)
         {
             this.in = in;
             this.out = out;
             
             this.offset = offset;
-            this.optionOffset = optionOffset;
+            this.paramOffset = paramOffset;
             this.pathOffset = pathOffset;
             this.limit = limit;
         }
     }
     
     static ArgGroup parse(final String[] args, final int offset, final int len, 
-            boolean hasGlobalOptions, int group)
+            boolean hasGlobalParams, int group)
     {
-        if (hasGlobalOptions)
+        if (hasGlobalParams)
         {
             if (len < 5 || !"-i".equals(args[offset]) || !"-o".equals(args[offset+2]))
             {
-                throw err("The required options must be in this order: " +
-                        "-i in_dir -o out_dir [-options options --] <paths>");
+                throw err("The required params must be in this order: " +
+                        "-i in_dir -o out_dir [-params params --] <paths>");
             }
         }
         else if (len < 8 || !"-i".equals(args[offset]) || !"-o".equals(args[offset+2]) || 
-                !"-options".equals(args[offset+4]))
+                !"-params".equals(args[offset+4]))
         {
-            throw err("The required options must be in this order: " +
-            		"-i in_dir -o out_dir -options options -- <paths>");
+            throw err("The required params must be in this order: " +
+            		"-i in_dir -o out_dir -params params -- <paths>");
         }
         
         final File in = new File(args[offset+1]), 
@@ -257,13 +273,13 @@ public final class AnonTemplateUtil
         
         final int limit = offset + len;
         
-        final int optionOffset = !hasGlobalOptions || "-options".equals(args[offset+4]) ? 
+        final int paramOffset = !hasGlobalParams || "-params".equals(args[offset+4]) ? 
                 offset + 5 : -1;
         
         final int pathOffset;
-        if (optionOffset == -1)
+        if (paramOffset == -1)
         {
-            // all global options
+            // all global params
             pathOffset = offset + 4;
         }
         else
@@ -285,7 +301,7 @@ public final class AnonTemplateUtil
                 throw err("The -- separator is missing at group: " + group);
             
             if (i == start)
-                throw err("Empty options (-options --) at group: " + group);
+                throw err("Empty params (-params --) at group: " + group);
             
             if (doubleHyphenOffset == limit)
                 throw err("No path(s) specified at group: " + group);
@@ -293,38 +309,51 @@ public final class AnonTemplateUtil
             pathOffset = doubleHyphenOffset + 1;
         }
         
-        return new ArgGroup(in, out, offset, optionOffset, pathOffset, limit);
+        return new ArgGroup(in, out, offset, paramOffset, pathOffset, limit);
     }
     
     static void compileTemplates(String[] args) throws IOException
     {
+        final ProtoModule module = new ProtoModule();
+        if (!OPTIONS.isEmpty())
+        {
+            for (String o : COMMA.split(OPTIONS))
+            {
+                int idx = o.indexOf(':');
+                if (idx == -1)
+                    module.setOption(o.trim(), "");
+                else
+                    module.setOption(o.substring(0, idx).trim(), o.substring(idx + 1).trim());
+            }
+        }
+        
         char separator = getSeparator(args[0]);
         if (0 == separator)
         {
             // using unix pipes
-            compileTemplate(newTemplateOptions(args, 0, args.length), 
+            compileTemplate(newTemplateParams(args, 0, args.length), module, 
                     System.in, System.out);
             return;
         }
         
         int start = 1;
         
-        final HashMap<String,String> globalOptions;
-        if (args.length > 1 && "-goptions".equals(args[1]))
+        final HashMap<String,String> globalParams;
+        if (args.length > 1 && "-gparams".equals(args[1]))
         {
-            globalOptions = newGlobalOptions(args, ++start, args.length, separator);
-            if (globalOptions.isEmpty())
-                throw err("The global options must have at least one entry");
+            globalParams = newGlobalParams(args, ++start, args.length, separator);
+            if (globalParams.isEmpty())
+                throw err("The global params must have at least one entry");
             
             // move to the offset after the separator
-            start += (1 + globalOptions.size());
+            start += (1 + globalParams.size());
             
             if (start == args.length)
-                throw err("No entries after global options");
+                throw err("No entries after global params");
         }
         else
         {
-            globalOptions = null;
+            globalParams = null;
         }
         
         final ArrayList<ArgGroup> list = new ArrayList<ArgGroup>();
@@ -334,7 +363,7 @@ public final class AnonTemplateUtil
         {
             if (isSeparator(args[offset], separator))
             {
-                list.add(parse(args, start, offset - start, globalOptions != null, count++));
+                list.add(parse(args, start, offset - start, globalParams != null, count++));
                 start = offset + 1;
             }
         }
@@ -342,24 +371,24 @@ public final class AnonTemplateUtil
         if (!isSeparator(args[args.length - 1], separator))
         {
             // append the last entry
-            list.add(parse(args, start, args.length - start, globalOptions != null, count++));
+            list.add(parse(args, start, args.length - start, globalParams != null, count++));
         }
         
         for (ArgGroup ag : list)
         {
-            final HashMap<String, String> options;
-            if (ag.optionOffset == -1)
+            final HashMap<String, String> params;
+            if (ag.paramOffset == -1)
             {
-                options = globalOptions;
+                params = globalParams;
             }
             else
             {
-                options = new HashMap<String,String>();
+                params = new HashMap<String,String>();
                 
-                if (globalOptions != null)
-                    options.putAll(globalOptions);
+                if (globalParams != null)
+                    params.putAll(globalParams);
                 
-                putTemplateOptionsTo(options, args, ag.optionOffset, 
+                putTemplateParamsTo(params, args, ag.paramOffset, 
                         // the offset of the delimiter "--" as limit
                         ag.pathOffset - 1);
             }
@@ -369,8 +398,7 @@ public final class AnonTemplateUtil
                 FileInputStream in = new FileInputStream(new File(ag.in, args[i]));
                 FileOutputStream out = new FileOutputStream(new File(ag.out, args[i]));
                 
-                // copy options since stringtemplate modifies it
-                compileTemplate(new HashMap<String, String>(options), in, out);
+                compileTemplate(params, module, in, out);
             }
         }
     }
