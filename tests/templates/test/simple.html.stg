@@ -35,17 +35,33 @@ proto_block(proto, module) ::= <<
 message_block(message, module) ::= <<
 <div class="message">
   <h2><a href="#«message.relativeName; format="\.==-"»" id="«message.relativeName; format="\.==-"»">«message.name»</a></h2>
-  «message.declaredFields:field_decl(module)»
+  «if(module.o.("pb"))»
+  «message.declaredFields:pb_field_decl(module)»
+  «else»
+  «message.declaredFields:fbs_field_decl(module)»
+  «endif»
 </div>
 >>
 
-field_decl(field, module) ::= <<
-<div class="field"><i>«field.modifier; format="LOWER"»</i> <b>«field_type(field, module)»</b> <span>«field.name»</span> = «field.number»;</div>
+fbs_field_decl(field, module) ::= <<
+<div class="field"><span>«field.name»</span>: «if(field.repeated)»[«endif»<b>«fbs_field_type(field, module)»</b>«if(field.repeated)»]«endif» (id: «field.number»);</div>
 >>
 
-field_type(field, module) ::= <%
-«if(field.messageField)»
-<a href="#«field.message.relativeName; format="\.==-"»"><i>«field.javaType»</i></a>
+fbs_field_type(field, module) ::= <%
+«if(field.userDefinedType)»
+<a href="#«field.userDefinedType.relativeName; format="\.==-"»"><i>«field.fbsType»</i></a>
+«else»
+<span>«field.fbsType»</span>
+«endif»
+%>
+
+pb_field_decl(field, module) ::= <<
+<div class="field"><i>«field.modifier; format="LOWER"»</i> <b>«pb_field_type(field, module)»</b> <span>«field.name»</span> = «field.number»;</div>
+>>
+
+pb_field_type(field, module) ::= <%
+«if(field.userDefinedType)»
+<a href="#«field.userDefinedType.relativeName; format="\.==-"»"><i>«field.javaType»</i></a>
 «else»
 <span>«field.class.simpleName; format="LOWER"»</span>
 «endif»
