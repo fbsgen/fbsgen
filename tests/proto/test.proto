@@ -58,18 +58,15 @@ message Bar {
 
 @Struct
 message Baz {
-  required string name = 1;
+  required uint64 id = 1;
+  required string name = 2;
 }
 
-/// a doc comment on a message.
-/// another doc comment.
 message Hello {
   optional string name = 1;
   
   /// a nested message
   message World {
-    /// a doc comment on a field.
-    /// another doc comment.
     optional uint64 id = 1;
   }
   
