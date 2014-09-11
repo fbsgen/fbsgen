@@ -1,6 +1,6 @@
 package hello.world;
 
-@uint8
+@int8
 enum Size {
   SMALL = 1;
   MEDIUM = 2;
@@ -8,7 +8,7 @@ enum Size {
   EXTRA_LARGE = 4;
 }
 
-@int8(bit_flags = true)
+@uint8(bit_flags = true)
 enum SizeBF {
   SMALL = 1;
   MEDIUM = 2;
@@ -16,7 +16,6 @@ enum SizeBF {
   EXTRA_LARGE = 8;
 }
 
-@Root
 message Foo {
   repeated int8 rep_byte = 1;
   repeated uint8 rep_ubyte = 2;
@@ -34,9 +33,8 @@ message Foo {
   repeated Bar rep_bar = 14;
   repeated Hello.World rep_hello_world = 15;
   repeated Size rep_size = 16;
-} //root_type Foo;
+}
 
-@Root
 message Bar {
   optional int8 some_byte = 1;
   optional uint8 some_ubyte = 2;
@@ -54,7 +52,7 @@ message Bar {
   optional Baz some_baz = 14;
   optional Hello.World some_hello_world = 15;
   optional Size some_size = 16;
-} //root_type Bar;
+}
 
 @Struct
 message Baz {

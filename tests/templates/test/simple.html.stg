@@ -93,7 +93,7 @@ enum_block(eg, module, writable, nested=false) ::= <<
 enum_top(eg, module, writable) ::= <%
 «if(module.o.("raw"))»
 «eg.comments:{c|<div class="comment">/// «c»</div>}; separator="\n"»
-«eg.a:{k|<div>@«k»</div>}; separator="\n"»
+«eg.a.values:{a|<div>@«a.name»«if(!a.emptyP)»(«a.p:{k|«k» = «a.p.(k)»}; separator=", "»)«endif»</div>}; separator="\n"»
 «endif»
 %>
 
@@ -133,7 +133,7 @@ message_block(message, module, writable, nested=false) ::= <<
 message_top(message, module, writable) ::= <%
 «if(module.o.("raw"))»
 «message.comments:{c|<div class="comment">/// «c»</div>}; separator="\n"»
-«message.a:{k|<div>@«k»</div>}; separator="\n"»
+«message.a.values:{a|<div>@«a.name»«if(!a.emptyP)»(«a.p:{k|«k» = «a.p.(k)»}; separator=", "»)«endif»</div>}; separator="\n"»
 «endif»
 %>
 
