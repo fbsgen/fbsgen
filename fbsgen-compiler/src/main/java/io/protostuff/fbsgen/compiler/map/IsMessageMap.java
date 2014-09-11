@@ -15,9 +15,10 @@
 package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
-import io.protostuff.fbsgen.compiler.TemplateGroup;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.Message;
+
+import java.util.List;
 
 /**
  * Codegen helper for message queries.
@@ -33,12 +34,11 @@ public final class IsMessageMap extends FakeMap
         boolean query(Message message);
     }
 
-    public final String id;
     public final Function func;
     
-    public IsMessageMap(String id, Function func)
+    public IsMessageMap(String name, Function func)
     {
-        this.id = id;
+        super(name);
         this.func = func;
     }
     
@@ -47,10 +47,10 @@ public final class IsMessageMap extends FakeMap
         return key instanceof Message && func.query((Message)key);
     }
     
-    public static void addAllTo(TemplateGroup group)
+    public static void addAllTo(List<FakeMap> list)
     {
         for (Functions c : Functions.values())
-            group.put(c.map.id, c.map);
+            list.add(c.map);
     }
     
     public enum Functions implements Function

@@ -30,10 +30,11 @@
 package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
-import io.protostuff.fbsgen.compiler.TemplateGroup;
 import io.protostuff.fbsgen.compiler.registry.QueryUtil;
 import io.protostuff.fbsgen.parser.CodegenUtil;
 import io.protostuff.fbsgen.parser.Field;
+
+import java.util.List;
 
 /**
  * Codegen helper for field queries.
@@ -49,12 +50,11 @@ public final class IsFieldMap extends FakeMap
         boolean query(Field<?> f);
     }
 
-    public final String id;
     public final Function func;
     
-    public IsFieldMap(String id, Function func)
+    public IsFieldMap(String name, Function func)
     {
-        this.id = id;
+        super(name);
         this.func = func;
     }
     
@@ -63,10 +63,10 @@ public final class IsFieldMap extends FakeMap
         return key instanceof Field<?> && func.query((Field<?>)key);
     }
     
-    public static void addAllTo(TemplateGroup group)
+    public static void addAllTo(List<FakeMap> list)
     {
         for (Functions c : Functions.values())
-            group.put(c.map.id, c.map);
+            list.add(c.map);
     }
     
     public enum Functions implements Function

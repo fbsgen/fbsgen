@@ -45,7 +45,7 @@ public final class Writable
     
     Object currentKey = null;
     
-    final FakeMap get = new FakeMap()
+    final FakeMap get = new FakeMap("get")
     {
         @SuppressWarnings("unchecked")
         public Object get(Object entry)
@@ -89,7 +89,7 @@ public final class Writable
         return list.size() > index ? list.get(index) : null;
     }
     
-    final FakeMap set0 = new FakeMap()
+    final FakeMap set0 = new FakeMap("set0")
     {
         public Object get(Object entry)
         {
@@ -102,7 +102,7 @@ public final class Writable
         }
     };
     
-    final FakeMap fmt = new FakeMap()
+    final FakeMap fmt = new FakeMap("fmt")
     {
         public Object get(Object entry)
         {
@@ -115,7 +115,7 @@ public final class Writable
         }
     };
     
-    final FakeMap eq = new FakeMap()
+    final FakeMap eq = new FakeMap("eq")
     {
         public Object get(Object entry)
         {
@@ -131,7 +131,7 @@ public final class Writable
         }
     };
     
-    final FakeMap gt = new FakeMap()
+    final FakeMap gt = new FakeMap("gt")
     {
         public Object get(Object entry)
         {
@@ -139,7 +139,7 @@ public final class Writable
         }
     };
     
-    final FakeMap gte = new FakeMap()
+    final FakeMap gte = new FakeMap("gte")
     {
         public Object get(Object entry)
         {
@@ -147,7 +147,7 @@ public final class Writable
         }
     };
     
-    final FakeMap lt = new FakeMap()
+    final FakeMap lt = new FakeMap("lt")
     {
         public Object get(Object entry)
         {
@@ -155,7 +155,7 @@ public final class Writable
         }
     };
     
-    final FakeMap lte = new FakeMap()
+    final FakeMap lte = new FakeMap("lte")
     {
         public Object get(Object entry)
         {
@@ -163,7 +163,7 @@ public final class Writable
         }
     };
     
-    final FakeMap keq = new FakeMap()
+    final FakeMap keq = new FakeMap("keq")
     {
         public Object get(Object entry)
         {
@@ -176,7 +176,7 @@ public final class Writable
         }
     };
     
-    final FakeMap intersect = new FakeMap()
+    final FakeMap intersect = new FakeMap("intersect")
     {
         public Object get(Object entry)
         {
@@ -187,7 +187,7 @@ public final class Writable
         }
     };
     
-    final FakeMap and = new FakeMap()
+    final FakeMap and = new FakeMap("and")
     {
         public Object get(Object entry)
         {
@@ -197,7 +197,7 @@ public final class Writable
         }
     };
     
-    final FakeMap or = new FakeMap()
+    final FakeMap or = new FakeMap("or")
     {
         public Object get(Object entry)
         {
@@ -207,7 +207,7 @@ public final class Writable
         }
     };
     
-    final FakeMap xor = new FakeMap()
+    final FakeMap xor = new FakeMap("xor")
     {
         public Object get(Object entry)
         {
@@ -217,7 +217,7 @@ public final class Writable
         }
     };
     
-    final FakeMap setnumber = new FakeMap()
+    final FakeMap setnumber = new FakeMap("setnumber")
     {
         public Object get(Object entry)
         {
@@ -227,7 +227,7 @@ public final class Writable
         }
     };
     
-    final FakeMap incby = new FakeMap()
+    final FakeMap incby = new FakeMap("incby")
     {
         public Object get(Object entry)
         {
@@ -236,7 +236,7 @@ public final class Writable
         }
     };
     
-    final FakeMap decby = new FakeMap()
+    final FakeMap decby = new FakeMap("decby")
     {
         public Object get(Object entry)
         {
@@ -245,7 +245,7 @@ public final class Writable
         }
     };
     
-    final FakeMap mremove = new FakeMap()
+    final FakeMap mremove = new FakeMap("mremove")
     {
         public Object get(Object entry)
         {
@@ -254,7 +254,7 @@ public final class Writable
         }
     };
     
-    final FakeMap lremove = new FakeMap()
+    final FakeMap lremove = new FakeMap("lremove")
     {
         public Object get(Object entry)
         {
@@ -270,7 +270,7 @@ public final class Writable
         }
     };
     
-    final FakeMap arg = new FakeMap()
+    final FakeMap arg = new FakeMap("arg")
     {
         public Object get(Object key)
         {
@@ -285,7 +285,7 @@ public final class Writable
         }
     };
     
-    final FakeMap notarg = new FakeMap()
+    final FakeMap notarg = new FakeMap("notarg")
     {
         public Object get(Object key)
         {
@@ -300,7 +300,7 @@ public final class Writable
         }
     };
     
-    final FakeMap in = new FakeMap()
+    final FakeMap in = new FakeMap("in")
     {
         public Object get(Object map)
         {
@@ -318,7 +318,7 @@ public final class Writable
         }
     };
     
-    final FakeMap notin = new FakeMap()
+    final FakeMap notin = new FakeMap("notin")
     {
         public Object get(Object map)
         {
@@ -336,7 +336,7 @@ public final class Writable
         }
     };
     
-    final FakeMap add = new FakeMap()
+    final FakeMap add = new FakeMap("add")
     {
         public Object get(Object key)
         {
@@ -355,7 +355,7 @@ public final class Writable
         }
     };
     
-    final FakeMap addall = new FakeMap()
+    final FakeMap addall = new FakeMap("addall")
     {
         @SuppressWarnings("unchecked")
         public Object get(Object key)
@@ -365,7 +365,7 @@ public final class Writable
         }
     };
     
-    final FakeMap addput = new FakeMap()
+    final FakeMap addput = new FakeMap("addput")
     {
         public Object get(Object entry)
         {
@@ -391,7 +391,7 @@ public final class Writable
         map.put(key, value);
     }
     
-    final FakeMap adduput = new FakeMap()
+    final FakeMap adduput = new FakeMap("adduput")
     {
         public Object get(Object entry)
         {
@@ -422,7 +422,7 @@ public final class Writable
         }
     }
     
-    final FakeMap put = new FakeMap()
+    final FakeMap put = new FakeMap("put")
     {
         public Object get(Object entry)
         {
@@ -442,7 +442,7 @@ public final class Writable
         }
     };
     
-    final FakeMap uput = new FakeMap()
+    final FakeMap uput = new FakeMap("uput")
     {
         public Object get(Object entry)
         {
@@ -471,7 +471,7 @@ public final class Writable
         }
     }
     
-    final FakeMap uputadd = new FakeMap()
+    final FakeMap uputadd = new FakeMap("uputadd")
     {
         public Object get(Object entry)
         {
@@ -501,7 +501,7 @@ public final class Writable
         }
     }
     
-    final FakeMap putlist = new FakeMap()
+    final FakeMap putlist = new FakeMap("putlist")
     {
         public Object get(Object entry)
         {
@@ -534,7 +534,7 @@ public final class Writable
         existing.add(value);
     }
     
-    final FakeMap sublist = new FakeMap()
+    final FakeMap sublist = new FakeMap("sublist")
     {
         public Object get(Object entry)
         {
@@ -551,7 +551,7 @@ public final class Writable
         }
     };
     
-    final FakeMap pfxlist = new FakeMap()
+    final FakeMap pfxlist = new FakeMap("pfxlist")
     {
         public Object get(Object entry)
         {
@@ -568,7 +568,7 @@ public final class Writable
         }
     };
     
-    final FakeMap substr = new FakeMap()
+    final FakeMap substr = new FakeMap("substr")
     {
         public Object get(Object entry)
         {
@@ -583,7 +583,7 @@ public final class Writable
         }
     };
     
-    final FakeMap pfxstr = new FakeMap()
+    final FakeMap pfxstr = new FakeMap("pfxstr")
     {
         public Object get(Object entry)
         {
@@ -599,7 +599,7 @@ public final class Writable
         }
     };
     
-    final FakeMap pfxstr__ = new FakeMap()
+    final FakeMap pfxstr__ = new FakeMap("pfxstr__")
     {
         public Object get(Object entry)
         {
@@ -626,7 +626,7 @@ public final class Writable
     /**
      * Atomic query and put.  Returns null if not unique.
      */
-    final FakeMap unique = new FakeMap()
+    final FakeMap unique = new FakeMap("unique")
     {
         public Object get(Object entry)
         {
@@ -660,7 +660,7 @@ public final class Writable
     /**
      * Fill objects.
      */
-    final FakeMap fill = new FakeMap()
+    final FakeMap fill = new FakeMap("fill")
     {
         public Object get(Object entry)
         {

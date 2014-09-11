@@ -14,6 +14,8 @@
 
 package io.protostuff.fbsgen.compiler;
 
+import io.protostuff.fbsgen.parser.HasName;
+
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -24,8 +26,20 @@ import java.util.Set;
  * @author David Yu
  * @created Aug 10, 2013
  */
-public abstract class FakeMap implements Map<Object,Object>
+public abstract class FakeMap implements Map<Object,Object>, HasName
 {
+    
+    public final String name;
+    
+    public FakeMap(String name)
+    {
+        this.name = name;
+    }
+    
+    public String getName()
+    {
+        return name;
+    }
     
     public boolean containsKey(Object arg0)
     {

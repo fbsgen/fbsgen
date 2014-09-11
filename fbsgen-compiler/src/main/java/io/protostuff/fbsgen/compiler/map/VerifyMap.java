@@ -17,10 +17,11 @@ package io.protostuff.fbsgen.compiler.map;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.getProto;
 import io.protostuff.fbsgen.compiler.FakeMap;
-import io.protostuff.fbsgen.compiler.TemplateGroup;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Field;
 import io.protostuff.fbsgen.parser.Message;
+
+import java.util.List;
 
 /**
  * A map that simply verifies a param and returns it.
@@ -36,12 +37,11 @@ public final class VerifyMap extends FakeMap
         Object verify(Object obj);
     }
 
-    public final String id;
     public final Function func;
     
-    public VerifyMap(String id, Function func)
+    public VerifyMap(String name, Function func)
     {
-        this.id = id;
+        super(name);
         this.func = func;
     }
     
@@ -50,10 +50,10 @@ public final class VerifyMap extends FakeMap
         return func.verify(key);
     }
     
-    public static void addAllTo(TemplateGroup group)
+    public static void addAllTo(List<FakeMap> list)
     {
         for (Functions c : Functions.values())
-            group.put(c.map.id, c.map);
+            list.add(c.map);
     }
     
     static int sizeOf(int fieldNumber)

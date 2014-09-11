@@ -60,7 +60,7 @@ public final class Registry
     
     static final int MIN_ADJECTIVE_LEN = Integer.getInteger("rpc.min_adjective_len", 3);
     
-    final FakeMap lookupEntityMap = new FakeMap()
+    final FakeMap lookupEntityMap = new FakeMap("lookupEntityMap")
     {
         public Object get(Object key)
         {

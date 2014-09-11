@@ -15,8 +15,9 @@
 package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
-import io.protostuff.fbsgen.compiler.TemplateGroup;
 import io.protostuff.fbsgen.compiler.Writable;
+
+import java.util.List;
 
 /**
  * A map that simply creates objects.
@@ -32,12 +33,11 @@ public final class NewMap extends FakeMap
         Object create(Object data);
     }
 
-    public final String id;
     public final Function func;
     
-    public NewMap(String id, Function func)
+    public NewMap(String name, Function func)
     {
-        this.id = id;
+        super(name);
         this.func = func;
     }
     
@@ -46,10 +46,10 @@ public final class NewMap extends FakeMap
         return func.create(key);
     }
     
-    public static void addAllTo(TemplateGroup group)
+    public static void addAllTo(List<FakeMap> list)
     {
         for (Functions c : Functions.values())
-            group.put(c.map.id, c.map);
+            list.add(c.map);
     }
     
     public enum Functions implements Function

@@ -15,7 +15,6 @@
 package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
-import io.protostuff.fbsgen.compiler.TemplateGroup;
 import io.protostuff.fbsgen.parser.HasName;
 import io.protostuff.fbsgen.parser.Message;
 import io.protostuff.fbsgen.parser.ProtoUtil;
@@ -40,12 +39,11 @@ public final class FormatMap extends FakeMap
         Object format(Object data);
     }
 
-    public final String id;
     public final Function func;
     
-    public FormatMap(String id, Function func)
+    public FormatMap(String name, Function func)
     {
-        this.id = id;
+        super(name);
         this.func = func;
     }
     
@@ -54,10 +52,10 @@ public final class FormatMap extends FakeMap
         return func.format(key);
     }
     
-    public static void addAllTo(TemplateGroup group)
+    public static void addAllTo(List<FakeMap> list)
     {
         for (Functions c : Functions.values())
-            group.put(c.map.id, c.map);
+            list.add(c.map);
     }
     
     static int sizeOf(int fieldNumber)

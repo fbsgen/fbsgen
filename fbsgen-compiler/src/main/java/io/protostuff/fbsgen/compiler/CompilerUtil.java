@@ -35,6 +35,7 @@ public final class CompilerUtil
     
     public static final Pattern COMMA = Pattern.compile(",");
     public static final Pattern SEMI_COLON = Pattern.compile(";");
+    public static final Pattern DOUBLE_UNDERSCORE = Pattern.compile("__");
 
     public static BufferedWriter newWriter(ProtoModule module, String packageName, String fileName)
             throws IOException

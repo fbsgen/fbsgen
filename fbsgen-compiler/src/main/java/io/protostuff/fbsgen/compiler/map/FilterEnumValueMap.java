@@ -15,13 +15,13 @@
 package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
-import io.protostuff.fbsgen.compiler.TemplateGroup;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.EnumGroup.Value;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Codegen helper for filtering enum values.
@@ -37,12 +37,11 @@ public final class FilterEnumValueMap extends FakeMap
         Collection<Value> filter(EnumGroup eg);
     }
     
-    public final String id;
     public final Function func;
     
-    public FilterEnumValueMap(String id, Function func)
+    public FilterEnumValueMap(String name, Function func)
     {
-        this.id = id;
+        super(name);
         this.func = func;
     }
 
@@ -52,10 +51,10 @@ public final class FilterEnumValueMap extends FakeMap
             Collections.EMPTY_LIST;
     }
     
-    public static void addAllTo(TemplateGroup group)
+    public static void addAllTo(List<FakeMap> list)
     {
-        for (Functions f : Functions.values())
-            group.put(f.map.id, f.map);
+        for (Functions c : Functions.values())
+            list.add(c.map);
     }
     
     public enum Functions implements Function

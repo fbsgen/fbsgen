@@ -15,16 +15,8 @@
 package io.protostuff.fbsgen.compiler.registry;
 
 import static io.protostuff.fbsgen.compiler.CompilerUtil.COMMA;
+import static io.protostuff.fbsgen.compiler.CompilerUtil.DOUBLE_UNDERSCORE;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.regex.Pattern;
-
-import io.protostuff.fbsgen.compiler.CompilerMain;
-import io.protostuff.fbsgen.compiler.CompilerUtil;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.AnnotationContainer;
 import io.protostuff.fbsgen.parser.CodegenUtil;
@@ -33,6 +25,12 @@ import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Field;
 import io.protostuff.fbsgen.parser.HasName;
 import io.protostuff.fbsgen.parser.Message;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Util for query *Map objects.
@@ -43,9 +41,6 @@ import io.protostuff.fbsgen.parser.Message;
 public final class QueryUtil
 {
     private QueryUtil() {}
-    
-    public static final Pattern DOUBLE_UNDERSCORE = Pattern.compile("__"), 
-            COMMA = Pattern.compile(",");
     
     static final String[] ANN_NAMES = new String[]{
         "Display", "Exclude"

@@ -14,6 +14,9 @@
 
 package io.protostuff.fbsgen.compiler.map;
 
+import java.util.ArrayList;
+
+import io.protostuff.fbsgen.compiler.FakeMap;
 import io.protostuff.fbsgen.compiler.TemplateGroup;
 
 
@@ -26,33 +29,41 @@ import io.protostuff.fbsgen.compiler.TemplateGroup;
 public final class FakeMapUtil
 {
     private FakeMapUtil() {}
-
-    public static void addMapsTo(TemplateGroup group)
+    
+    public static final ArrayList<FakeMap> LIST = new ArrayList<FakeMap>();
+    
+    static
     {
         // message fields
-        CountMap.addAllTo(group);
-        FilterMap.addAllTo(group);
+        CountMap.addAllTo(LIST);
+        FilterMap.addAllTo(LIST);
         
         // enum values
-        FilterEnumValueMap.addAllTo(group);
+        FilterEnumValueMap.addAllTo(LIST);
         
         // message
-        IsMessageMap.addAllTo(group);
+        IsMessageMap.addAllTo(LIST);
         
         // field
-        IsFieldMap.addAllTo(group);
+        IsFieldMap.addAllTo(LIST);
         
         // any annotation container:
         // EnumGroup, EnumGroup.Value, 
         // Service, Service.RpcMethod,
         // Message, Field
-        AnnotationMap.addAllTo(group);
+        AnnotationMap.addAllTo(LIST);
         
         // any object
-        IsMap.addAllTo(group);
-        GetMap.addAllTo(group);
-        NewMap.addAllTo(group);
-        VerifyMap.addAllTo(group);
-        FormatMap.addAllTo(group);
+        IsMap.addAllTo(LIST);
+        GetMap.addAllTo(LIST);
+        NewMap.addAllTo(LIST);
+        VerifyMap.addAllTo(LIST);
+        FormatMap.addAllTo(LIST);
+    }
+
+    public static void addMapsTo(TemplateGroup group)
+    {
+        for (FakeMap map : LIST)
+            group.put(map.name, map);
     }
 }

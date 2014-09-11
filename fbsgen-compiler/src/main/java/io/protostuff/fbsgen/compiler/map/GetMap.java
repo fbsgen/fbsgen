@@ -14,6 +14,7 @@
 
 package io.protostuff.fbsgen.compiler.map;
 
+import static io.protostuff.fbsgen.compiler.CompilerUtil.COMMA;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.getProto;
 import static io.protostuff.fbsgen.compiler.registry.QueryUtil.getConfigTargetFieldMap;
@@ -24,10 +25,8 @@ import static io.protostuff.fbsgen.compiler.registry.QueryUtil.getUusvIdxCsv;
 import static io.protostuff.fbsgen.compiler.registry.QueryUtil.getUusvIdxString;
 import io.protostuff.fbsgen.compiler.ErrorUtil;
 import io.protostuff.fbsgen.compiler.FakeMap;
-import io.protostuff.fbsgen.compiler.TemplateGroup;
 import io.protostuff.fbsgen.compiler.registry.Config;
 import io.protostuff.fbsgen.compiler.registry.EntityUtil;
-import io.protostuff.fbsgen.compiler.registry.QueryUtil;
 import io.protostuff.fbsgen.compiler.registry.Verbs;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.EnumField;
@@ -60,12 +59,11 @@ public final class GetMap extends FakeMap
         Object get(Object data);
     }
 
-    public final String id;
     public final Function func;
     
-    public GetMap(String id, Function func)
+    public GetMap(String name, Function func)
     {
-        this.id = id;
+        super(name);
         this.func = func;
     }
     
@@ -74,10 +72,10 @@ public final class GetMap extends FakeMap
         return func.get(key);
     }
     
-    public static void addAllTo(TemplateGroup group)
+    public static void addAllTo(List<FakeMap> list)
     {
         for (Functions c : Functions.values())
-            group.put(c.map.id, c.map);
+            list.add(c.map);
     }
     
     public enum Functions implements Function
@@ -104,7 +102,7 @@ public final class GetMap extends FakeMap
         {
             public Object get(Object data)
             {
-                return data == null ? Collections.EMPTY_LIST : Arrays.asList(QueryUtil.COMMA.split(data.toString()));
+                return data == null ? Collections.EMPTY_LIST : Arrays.asList(COMMA.split(data.toString()));
             }
         },
         

@@ -15,7 +15,6 @@
 package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
-import io.protostuff.fbsgen.compiler.TemplateGroup;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.AnnotationContainer;
 
@@ -39,12 +38,11 @@ public final class AnnotationMap extends FakeMap
         Object query(AnnotationContainer target);
     }
 
-    public final String id;
     public final Function func;
     
-    public AnnotationMap(String id, Function func)
+    public AnnotationMap(String name, Function func)
     {
-        this.id = id;
+        super(name);
         this.func = func;
     }
     
@@ -53,10 +51,10 @@ public final class AnnotationMap extends FakeMap
         return func.query((AnnotationContainer)key);
     }
     
-    public static void addAllTo(TemplateGroup group)
+    public static void addAllTo(List<FakeMap> list)
     {
         for (Functions c : Functions.values())
-            group.put(c.map.id, c.map);
+            list.add(c.map);
     }
     
     static Object get(final AnnotationContainer ac, final String name, 

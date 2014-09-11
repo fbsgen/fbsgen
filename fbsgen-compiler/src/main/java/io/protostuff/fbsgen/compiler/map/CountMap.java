@@ -30,11 +30,12 @@
 package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
-import io.protostuff.fbsgen.compiler.TemplateGroup;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.EnumField;
 import io.protostuff.fbsgen.parser.Field;
 import io.protostuff.fbsgen.parser.Message;
+
+import java.util.List;
 
 /**
  * Codegen helper for counting the filtered fields.
@@ -50,12 +51,11 @@ public final class CountMap extends FakeMap
         int count(Message message);
     }
     
-    public final String id;
     public final Function func;
     
-    public CountMap(String id, Function func)
+    public CountMap(String name, Function func)
     {
-        this.id = id;
+        super(name);
         this.func = func;
     }
 
@@ -64,10 +64,10 @@ public final class CountMap extends FakeMap
         return Integer.valueOf(key instanceof Message ? func.count((Message)key) : 0);
     }
     
-    public static void addAllTo(TemplateGroup group)
+    public static void addAllTo(List<FakeMap> list)
     {
         for (Functions c : Functions.values())
-            group.put(c.map.id, c.map);
+            list.add(c.map);
     }
     
     public enum Functions implements Function
