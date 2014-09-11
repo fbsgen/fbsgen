@@ -44,9 +44,10 @@ public final class CompilerUtil
         if (encoding == null || encoding.isEmpty())
             encoding = "UTF-8";
         
-        final File outputDir = module.getO().containsKey("without_package_dir") ? 
-                module.getOutputDir() : 
-                    new File(module.getOutputDir(), packageName.replace('.', '/'));
+        final File outputDir = module.getOutput().endsWith(".java") || 
+                module.getO().containsKey("with_package_dir") ? 
+                new File(module.getOutputDir(), packageName.replace('.', '/')) : 
+                    module.getOutputDir();
         
         if (!outputDir.exists())
             outputDir.mkdirs();
