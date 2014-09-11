@@ -393,7 +393,6 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
         HashMap<String,Object> args = new HashMap<String, Object>();
         args.put("registry", registry);
         args.put("module", module);
-        args.put("options", module.getOptions());
         
         registryBlockTemplate.renderTo(writer, args);
         

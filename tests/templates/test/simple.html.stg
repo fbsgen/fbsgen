@@ -1,6 +1,7 @@
 import "fbsgen/base"
 
-proto_block(proto, module, options) ::= <<
+proto_block(proto, module) ::= <<
+<!DOCTYPE html>
 <html>
 <head>
   <title>«proto.sourcePath»</title>

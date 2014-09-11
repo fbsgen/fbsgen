@@ -221,7 +221,6 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
         HashMap<String,Object> args = new HashMap<String, Object>();
         args.put("eg", eg);
         args.put("module", module);
-        args.put("options", module.getOptions());
         
         enumBlockTemplate.renderTo(writer, args);
     }
@@ -244,7 +243,6 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
         HashMap<String,Object> args = new HashMap<String,Object>();
         args.put("message", message);
         args.put("module", module);
-        args.put("options", module.getOptions());
         
         messageBlockTemplate.renderTo(writer, args);
     }
@@ -287,7 +285,6 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
         HashMap<String,Object> args = new HashMap<String, Object>();
         args.put("proto", proto);
         args.put("module", module);
-        args.put("options", module.getOptions());
         
         protoBlockTemplate.renderTo(writer, args);
 

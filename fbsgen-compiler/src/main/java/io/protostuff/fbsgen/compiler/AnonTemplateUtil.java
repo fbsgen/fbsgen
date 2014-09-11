@@ -91,7 +91,7 @@ public final class AnonTemplateUtil
                     sb.append("import \"").append(i).append('"').append('\n');
             }
             
-            templateHeader = sb.append("anon_block(params, module, options) ::= <<")
+            templateHeader = sb.append("anon_block(params, module) ::= <<")
                     .toString().getBytes();
             
             header = new byte[templateHeader.length + PUSH_BACK_SIZE];
@@ -215,7 +215,6 @@ public final class AnonTemplateUtil
         HashMap<String,Object> args = new HashMap<String, Object>();
         args.put("params", params);
         args.put("module", module);
-        args.put("options", module.getOptions());
         
         final BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(out, "UTF-8"));

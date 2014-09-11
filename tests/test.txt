@@ -1,4 +1,4 @@
-«options:{k|option «k»:«options.(k)»}; separator="\n"»
+«module.o:{k|option «k»:«module.o.(k)»}; separator="\n"»
 «params:{k|param «k»:«params.(k)»}; separator="\n"»
-«options:{k|«format_print_out.({option «k»:«options.(k)»})»}»
+«module.o:{k|«format_print_out.({option «k»:«module.o.(k)»})»}»
 «params:{k|«format_print_out.({param «k»:«params.(k)»})»}»

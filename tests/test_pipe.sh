@@ -21,6 +21,6 @@ java -Dtemplate_path=$TEMPLATE_PATH,$SCRIPT_DIR/../templates \
     -Dcli.imports=fbsgen/base \
     -Dcli.options=hello:world,foo:bar \
     -jar $JAR_FILE one:1 two:2 $@ <<EOF
-«options:{k|option «k»:«options.(k)»}; separator="\n"»
+«module.o:{k|option «k»:«module.o.(k)»}; separator="\n"»
 «params:{k|param «k»:«params.(k)»}; separator="\n"»
 EOF
