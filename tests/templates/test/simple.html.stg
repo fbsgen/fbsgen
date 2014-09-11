@@ -9,7 +9,7 @@ main_proto_block(proto, module, writable) ::= <<
 <!DOCTYPE html>
 <html>
 <head>
-  <title>«if(module.o.("pb"))»pb«else»fbs«endif»: «proto.sourcePath»</title>
+  <title>«if(module.o.("raw"))»raw«else»fbs«endif»: «proto.sourcePath»</title>
   <style>
     body {
       color: #555;
@@ -44,24 +44,24 @@ main_proto_block(proto, module, writable) ::= <<
   <div class="comment">
     // source: «proto.sourcePath»
   </div>
-  <div><b>«if(module.o.("pb"))»package«else»namespace«endif»</b> «proto.declaredPackageName»;</div>
+  <div><b>«if(module.o.("raw"))»package«else»namespace«endif»</b> «proto.declaredPackageName»;</div>
   «proto.messages:message_block(module, writable)»
 </body>
 >>
 
 message_block(message, module, writable) ::= <<
 <div class="message">
-  <h2><span>«message_type(message, module, writable)»</span> <a href="#«message.relativeName; format="\.==-"»" id="«message.relativeName; format="\.==-"»">«message.name»</a></h2>
-  «if(module.o.("pb"))»
-  «message.declaredFields:pb_field_decl(module, writable)»
+  <h2><span>«message_kind(message, module, writable)»</span> <a href="#«message.relativeName; format="\.==-"»" id="«message.relativeName; format="\.==-"»">«message.name»</a></h2>
+  «if(module.o.("raw"))»
+  «message.declaredFields:raw_field_decl(module, writable)»
   «else»
   «message.declaredFields:fbs_field_decl(module, writable)»
   «endif»
 </div>
 >>
 
-message_type(message, module, writable) ::= <%
-«if(module.o.("pb"))»
+message_kind(message, module, writable) ::= <%
+«if(module.o.("raw"))»
 message
 «elseif(message.a.("Struct"))»
 struct
@@ -82,11 +82,11 @@ fbs_field_type(field, module, writable) ::= <%
 «endif»
 %>
 
-pb_field_decl(field, module, writable) ::= <<
-<div class="field"><i>«field.modifier; format="LOWER"»</i> <b>«pb_field_type(field, module, writable)»</b> <span>«field.name»</span> = «field.number»;</div>
+raw_field_decl(field, module, writable) ::= <<
+<div class="field"><i>«field.modifier; format="LOWER"»</i> <b>«raw_field_type(field, module, writable)»</b> <span>«field.name»</span> = «field.number»;</div>
 >>
 
-pb_field_type(field, module, writable) ::= <%
+raw_field_type(field, module, writable) ::= <%
 «if(field.userDefinedType)»
 <a href="#«field.userDefinedType.relativeName; format="\.==-"»"><i>«field.javaType»</i></a>
 «else»
