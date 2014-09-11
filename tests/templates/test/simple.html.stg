@@ -1,13 +1,18 @@
 import "fbsgen/base"
+import "fbsgen/dict"
 
 proto_block(proto, module) ::= <<
+«main_proto_block(proto, module, new_writable.(""))»
+>>
+
+main_proto_block(proto, module, writable) ::= <<
 <!DOCTYPE html>
 <html>
 <head>
   <title>«if(module.o.("pb"))»pb«else»fbs«endif»: «proto.sourcePath»</title>
   <style>
     body {
-      color: #333;
+      color: #555;
       background-color: #EEE;
       font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
       font-size: 1.1em;
@@ -40,22 +45,22 @@ proto_block(proto, module) ::= <<
     // source: «proto.sourcePath»
   </div>
   <div><b>«if(module.o.("pb"))»package«else»namespace«endif»</b> «proto.declaredPackageName»;</div>
-  «proto.messages:message_block(module)»
+  «proto.messages:message_block(module, writable)»
 </body>
 >>
 
-message_block(message, module) ::= <<
+message_block(message, module, writable) ::= <<
 <div class="message">
-  <h2><span>«message_type(message, module)»</span> <a href="#«message.relativeName; format="\.==-"»" id="«message.relativeName; format="\.==-"»">«message.name»</a></h2>
+  <h2><span>«message_type(message, module, writable)»</span> <a href="#«message.relativeName; format="\.==-"»" id="«message.relativeName; format="\.==-"»">«message.name»</a></h2>
   «if(module.o.("pb"))»
-  «message.declaredFields:pb_field_decl(module)»
+  «message.declaredFields:pb_field_decl(module, writable)»
   «else»
-  «message.declaredFields:fbs_field_decl(module)»
+  «message.declaredFields:fbs_field_decl(module, writable)»
   «endif»
 </div>
 >>
 
-message_type(message, module) ::= <%
+message_type(message, module, writable) ::= <%
 «if(module.o.("pb"))»
 message
 «elseif(message.a.("Struct"))»
@@ -65,11 +70,11 @@ table
 «endif»
 %>
 
-fbs_field_decl(field, module) ::= <<
-<div class="field"><span>«field.name»</span>: «if(field.repeated)»[«endif»<b>«fbs_field_type(field, module)»</b>«if(field.repeated)»]«endif» (id: «field.number»);</div>
+fbs_field_decl(field, module, writable) ::= <<
+<div class="field"><span>«field.name»</span>: «if(field.repeated)»[«endif»<b>«fbs_field_type(field, module, writable)»</b>«if(field.repeated)»]«endif» (id: «writable.n.(field.number).dec.num»);</div>
 >>
 
-fbs_field_type(field, module) ::= <%
+fbs_field_type(field, module, writable) ::= <%
 «if(field.userDefinedType)»
 <a href="#«field.userDefinedType.relativeName; format="\.==-"»"><i>«field.fbsType»</i></a>
 «else»
@@ -77,11 +82,11 @@ fbs_field_type(field, module) ::= <%
 «endif»
 %>
 
-pb_field_decl(field, module) ::= <<
-<div class="field"><i>«field.modifier; format="LOWER"»</i> <b>«pb_field_type(field, module)»</b> <span>«field.name»</span> = «field.number»;</div>
+pb_field_decl(field, module, writable) ::= <<
+<div class="field"><i>«field.modifier; format="LOWER"»</i> <b>«pb_field_type(field, module, writable)»</b> <span>«field.name»</span> = «field.number»;</div>
 >>
 
-pb_field_type(field, module) ::= <%
+pb_field_type(field, module, writable) ::= <%
 «if(field.userDefinedType)»
 <a href="#«field.userDefinedType.relativeName; format="\.==-"»"><i>«field.javaType»</i></a>
 «else»
