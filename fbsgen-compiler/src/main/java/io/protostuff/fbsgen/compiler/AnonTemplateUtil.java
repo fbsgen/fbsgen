@@ -28,6 +28,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Codegen via anonymous template.
@@ -160,10 +161,10 @@ public final class AnonTemplateUtil
         }
     }
     
-    static HashMap<String,String> newGlobalParams(String[] args, int offset, int limit, 
+    static LinkedHashMap<String,String> newGlobalParams(String[] args, int offset, int limit, 
             char limitChar)
     {
-        final HashMap<String,String> params = new HashMap<String,String>();
+        final LinkedHashMap<String,String> params = new LinkedHashMap<String,String>();
         
         for (int colon; offset < limit; offset++)
         {
@@ -181,7 +182,7 @@ public final class AnonTemplateUtil
         return params;
     }
     
-    static void putTemplateParamsTo(HashMap<String,String> params, 
+    static void putTemplateParamsTo(LinkedHashMap<String,String> params, 
             String[] args, int offset, int limit)
     {
         for (int colon; offset < limit; offset++)
@@ -194,16 +195,16 @@ public final class AnonTemplateUtil
         }
     }
     
-    static HashMap<String,String> newTemplateParams(String[] args, int offset, int limit)
+    static LinkedHashMap<String,String> newTemplateParams(String[] args, int offset, int limit)
     {
-        final HashMap<String,String> params = new HashMap<String,String>();
+        final LinkedHashMap<String,String> params = new LinkedHashMap<String,String>();
         
         putTemplateParamsTo(params, args, offset, limit);
         
         return params;
     }
     
-    static void compileTemplate(HashMap<String,String> params, ProtoModule module, 
+    static void compileTemplate(LinkedHashMap<String,String> params, ProtoModule module, 
             InputStream in, OutputStream out) throws IOException
     {
         final InWrapper iw = new InWrapper(in);
@@ -338,7 +339,7 @@ public final class AnonTemplateUtil
         
         int start = 1;
         
-        final HashMap<String,String> globalParams;
+        final LinkedHashMap<String,String> globalParams;
         if (args.length > 1 && "-gp".equals(args[1]))
         {
             globalParams = newGlobalParams(args, ++start, args.length, separator);
@@ -376,14 +377,14 @@ public final class AnonTemplateUtil
         
         for (ArgGroup ag : list)
         {
-            final HashMap<String, String> params;
+            final LinkedHashMap<String, String> params;
             if (ag.paramOffset == -1)
             {
                 params = globalParams;
             }
             else
             {
-                params = new HashMap<String,String>();
+                params = new LinkedHashMap<String,String>();
                 
                 if (globalParams != null)
                     params.putAll(globalParams);
@@ -395,10 +396,9 @@ public final class AnonTemplateUtil
             
             for (int i = ag.pathOffset, limit = ag.limit; i < limit; i++)
             {
-                FileInputStream in = new FileInputStream(new File(ag.in, args[i]));
-                FileOutputStream out = new FileOutputStream(new File(ag.out, args[i]));
-                
-                compileTemplate(params, module, in, out);
+                compileTemplate(params, module, 
+                        new FileInputStream(new File(ag.in, args[i])), 
+                        new FileOutputStream(new File(ag.out, args[i])));
             }
         }
     }
