@@ -186,7 +186,7 @@ public final class EnumGroup extends AnnotationContainer implements HasName, Has
         return values.get(name);
     }
     
-    public Collection<Value> getValues()
+    public Collection<Value> getDeclaredValues()
     {
         return values.values();
     }
@@ -204,7 +204,7 @@ public final class EnumGroup extends AnnotationContainer implements HasName, Has
         return getValueMap();
     }
     
-    public ArrayList<Value> getSortedValues()
+    public ArrayList<Value> getValues()
     {
         return sortedValues;
     }

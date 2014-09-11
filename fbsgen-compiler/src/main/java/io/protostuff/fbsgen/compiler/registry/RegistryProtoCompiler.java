@@ -433,7 +433,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
     {
         target.add(eg, module);
         
-        for (EnumGroup.Value v : eg.getSortedValues())
+        for (EnumGroup.Value v : eg.getValues())
             target.add(v, module);
     }
     

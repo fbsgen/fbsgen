@@ -70,7 +70,7 @@ public final class VerifyMap extends FakeMap
                 if (obj instanceof EnumGroup)
                 {
                     EnumGroup eg = (EnumGroup)obj;
-                    EnumGroup.Value v = eg.getSortedValues().get(0);
+                    EnumGroup.Value v = eg.getValues().get(0);
                     if (v.getNumber() <= 0)
                     {
                         throw err("The config "  + eg.getName() + 
