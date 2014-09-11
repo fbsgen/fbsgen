@@ -17,14 +17,18 @@ main_proto_block(proto, module, writable) ::= <<
       font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
       font-size: 1.1em;
     }
+    div.message.nested {
+      margin-left: 1em;
+    }
+    div.message.nested h2 {
+      margin-top: 0.2em;
+    }
     div.message h2 {
       margin-bottom: 0;
     }
     div.message h2 div {
       font-weight: normal;
       font-size: 0.75em;
-      padding: 0;
-      margin: 0;
     }
     div.message h2 a {
       color: #CD5C5C;
@@ -55,19 +59,29 @@ main_proto_block(proto, module, writable) ::= <<
 </body>
 >>
 
-message_block(message, module, writable) ::= <<
-<div class="message">
+message_block(message, module, writable, nested=false) ::= <<
+<div class="message«if(nested)» nested«endif»">
   <h2>
     «message_ann(message, module, writable)»
     <span>«message_kind(message, module, writable)»</span>
-    <a href="#«message.relativeName; format="\.==-"»" id="«message.relativeName; format="\.==-"»">«message.name»</a>
+    <a href="#«message.relativeName; format="\.==-"»" id="«message.relativeName; format="\.==-"»">
+      «if(module.o.("raw"))»
+      «message.name»
+      «else»
+      «message.cppRelativeName»
+      «endif»
+    </a>
   </h2>
   «if(module.o.("raw"))»
   «message.declaredFields:raw_field_decl(module, writable)»
+  «message.nestedMessages:message_block(module, writable, true)»
   «else»
   «message.declaredFields:fbs_field_decl(module, writable)»
   «endif»
 </div>
+«if(!module.o.("raw"))»
+«message.nestedMessages:message_block(module, writable)»
+«endif»
 >>
 
 message_kind(message, module, writable) ::= <%

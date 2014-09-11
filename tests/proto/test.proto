@@ -1,10 +1,5 @@
 package hello.world;
 
-@Struct
-message Baz {
-  required string name = 1;
-}
-
 @Root
 message Foo {
   repeated int8 rep_byte = 1;
@@ -21,6 +16,7 @@ message Foo {
   repeated string rep_string = 12;
   repeated bytes rep_bytes = 13;
   repeated Bar rep_bar = 14;
+  repeated Hello.World rep_hello_world = 15;
 } //root_type Foo;
 
 @Root
@@ -39,4 +35,18 @@ message Bar {
   optional string some_string = 12;
   optional bytes some_bytes = 13;
   optional Baz some_baz = 14;
+  optional Hello.World some_hello_world = 15;
 } //root_type Bar;
+
+@Struct
+message Baz {
+  required string name = 1;
+}
+
+message Hello {
+  required string name = 1;
+  
+  message World {
+    required uint64 id = 1;
+  }
+}
