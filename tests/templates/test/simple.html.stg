@@ -2,7 +2,7 @@ import "fbsgen/base"
 import "fbsgen/dict"
 
 proto_block(proto, module) ::= <<
-«main_proto_block(proto, module, new_writable.(""))»
+«main_proto_block(proto, module, new_writable.(true))»
 >>
 
 main_proto_block(proto, module, writable) ::= <<
@@ -54,8 +54,10 @@ main_proto_block(proto, module, writable) ::= <<
   <div class="comment">
     // source: «proto.sourcePath»
   </div>
-  <div><b>«if(module.o.("raw"))»package«else»namespace«endif»</b> «proto.declaredPackageName»;</div>
-  «proto.messages:message_block(module, writable)»
+  <div>
+    <b>«if(module.o.("raw"))»package«else»namespace«endif»</b> «proto.declaredPackageName»;
+  </div>
+  «proto.messages:message_block(module, writable); separator="\n"»
 </body>
 >>
 
@@ -73,14 +75,14 @@ message_block(message, module, writable, nested=false) ::= <<
     </a>
   </h2>
   «if(module.o.("raw"))»
-  «message.declaredFields:raw_field_decl(module, writable)»
-  «message.nestedMessages:message_block(module, writable, true)»
+  «message.declaredFields:raw_field_decl(module, writable); separator="\n"»
+  «message.nestedMessages:message_block(module, writable, true); separator="\n"»
   «else»
-  «message.declaredFields:fbs_field_decl(module, writable)»
+  «message.declaredFields:fbs_field_decl(module, writable); separator="\n"»
   «endif»
 </div>
 «if(!module.o.("raw"))»
-«message.nestedMessages:message_block(module, writable)»
+«message.nestedMessages:message_block(module, writable); separator="\n"»
 «endif»
 >>
 
@@ -101,7 +103,10 @@ message_ann(message, module, writable) ::= <%
 %>
 
 fbs_field_decl(field, module, writable) ::= <<
-<div class="field"><span>«field.name»</span>: «if(field.repeated)»[«endif»<b>«fbs_field_type(field, module, writable)»</b>«if(field.repeated)»]«endif» (id: «writable.n.(field.number).dec.num»);</div>
+<div class="field">
+  <span>«field.name»</span>: «if(field.repeated)»[«endif»<b>«fbs_field_type(field, module, writable)»</b>«if(field.repeated)»]«endif»
+  (id: «writable.n.(field.number).dec.num»);
+</div>
 >>
 
 fbs_field_type(field, module, writable) ::= <%
