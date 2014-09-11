@@ -56,7 +56,7 @@ message Bar {
   optional Hello.World some_hello_world = 17;
 }
 
-@Struct
+@struct
 message Baz {
   required uint64 id = 1;
   required string name = 2;
@@ -74,7 +74,7 @@ message Hello {
   @uint16
   enum Feedback {
     BAD = 1;
-    NEEDS_IMPOVEMENT = 2;
+    NEEDS_IMPROVEMENT = 2;
     GOOD = 3;
     GREAT = 4;
   }

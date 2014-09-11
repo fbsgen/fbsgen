@@ -147,7 +147,7 @@ message_top(message, module, writable) ::= <%
 message_kind(message, module, writable) ::= <%
 «if(module.o.("raw"))»
 message
-«elseif(message.a.("Struct"))»
+«elseif(message.a.("struct"))»
 struct
 «else»
 table
