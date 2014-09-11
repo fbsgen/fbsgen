@@ -250,16 +250,16 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
     public void compileProtoBlock(ProtoModule module, Proto proto,
             String packageName, Template protoBlockTemplate) throws IOException
     {
-        String name = ProtoUtil.toPascalCase(proto.getFile().getName().replace(
-                ".proto", "")).toString();
-
+        String name = proto.getFile().getName().replace(".proto", "");
         if (javaOutput)
         {
             String outerClassname = proto.getExtraOption("java_outer_classname");
             if (outerClassname != null)
                 name = outerClassname;
+            else
+                name = ProtoUtil.toPascalCase(name).toString();
         }
-
+        
         final String fileName;
         if (outputPrefix.isEmpty() && outputSuffix.isEmpty())
         {
