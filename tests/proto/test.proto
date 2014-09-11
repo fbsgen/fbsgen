@@ -59,13 +59,13 @@ message Baz {
   required string name = 1;
 }
 
-/// a doc comment.
+/// a doc comment on a message.
 /// another doc comment.
 message Hello {
   optional string name = 1;
   
   message World {
-    /// a doc comment.
+    /// a doc comment on a field.
     /// another doc comment.
     optional uint64 id = 1;
   }
