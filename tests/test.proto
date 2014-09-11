@@ -1,0 +1,41 @@
+package hello.world;
+
+@Root
+message Foo {
+  repeated int8 rep_byte = 1;
+  repeated uint8 rep_ubyte = 2;
+  repeated bool rep_bool = 3;
+  repeated int16 rep_short = 4;
+  repeated uint16 rep_ushort = 5;
+  repeated int32 rep_int = 6;
+  repeated uint32 rep_uint = 7;
+  repeated float rep_float = 8;
+  repeated int64 rep_long = 9;
+  repeated uint64 rep_ulong = 10;
+  repeated double rep_double = 11;
+  repeated string rep_string = 12;
+  repeated Bar rep_bar = 13;
+} //root_type Foo;
+
+@Root
+message Bar {
+  optional int8 some_byte = 1;
+  optional uint8 some_ubyte = 2;
+  optional bool some_bool = 3;
+  optional int16 some_short = 4;
+  optional uint16 some_ushort = 5;
+  optional int32 some_int = 6;
+  optional uint32 some_uint = 7;
+  optional float some_float = 8;
+  optional int64 some_long = 9;
+  optional uint64 some_ulong = 10;
+  optional double some_double = 11;
+  optional string some_string = 12;
+  optional Baz some_baz = 13;
+} //root_type Bar;
+
+@Root
+message Baz {
+  required string name = 1;
+} //root_type Baz;
+
