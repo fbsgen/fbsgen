@@ -30,10 +30,16 @@ proto_block(proto, module) ::= <<
     div.field b a {
       color: #CD5C5C;
     }
+    .comment {
+      color: #999988;
+    }
   </style>
 </head>
 <body>
-  <div>«if(module.o.("pb"))»pb«else»fbs«endif»: «proto.sourcePath»</div>
+  <div class="comment">
+    // source: «proto.sourcePath»
+  </div>
+  <div><b>«if(module.o.("pb"))»package«else»namespace«endif»</b> «proto.declaredPackageName»;</div>
   «proto.messages:message_block(module)»
 </body>
 >>
