@@ -19,7 +19,8 @@ message Foo {
   repeated uint64 rep_ulong = 10;
   repeated double rep_double = 11;
   repeated string rep_string = 12;
-  repeated Bar rep_bar = 13;
+  repeated bytes rep_bytes = 13;
+  repeated Bar rep_bar = 14;
 } //root_type Foo;
 
 @Root
@@ -36,5 +37,6 @@ message Bar {
   optional uint64 some_ulong = 10;
   optional double some_double = 11;
   optional string some_string = 12;
-  optional Baz some_baz = 13;
+  optional bytes some_bytes = 13;
+  optional Baz some_baz = 14;
 } //root_type Bar;
