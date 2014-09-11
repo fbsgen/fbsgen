@@ -67,7 +67,7 @@ public final class AnonTemplateUtil
     static final class InWrapper extends InputStream
     {
         static final byte[] HEADER = ("group anon : " + STG_PARENT + 
-                ";\nanon_block(options) ::= <<\n").getBytes(), 
+                ";\nanon_block(args) ::= <<\n").getBytes(), 
                 FOOTER = "\n>>\n".getBytes();
 
         final char[] delim = new char[4];
@@ -189,7 +189,7 @@ public final class AnonTemplateUtil
         return options;
     }
     
-    static void compileTemplate(HashMap<String,String> options, 
+    static void compileTemplate(HashMap<String,String> args, 
             InputStream in, OutputStream out) throws IOException
     {
         final InWrapper iw = new InWrapper(in);
@@ -197,13 +197,13 @@ public final class AnonTemplateUtil
         
         final Template template = group.getTemplate("anon_block");
         
-        HashMap<String,Object> args = new HashMap<String, Object>();
-        args.put("options", options);
+        HashMap<String,Object> params = new HashMap<String, Object>();
+        params.put("args", args);
         
         final BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(out, "UTF-8"));
         
-        template.renderTo(writer, args);
+        template.renderTo(writer, params);
         
         writer.close();
     }
