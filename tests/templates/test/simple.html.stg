@@ -9,7 +9,9 @@ main_proto_block(proto, module, writable) ::= <<
 <!DOCTYPE html>
 <html>
 <head>
-  <title>«if(module.o.("raw"))»raw«else»fbs«endif»: «proto.sourcePath»</title>
+  <title>
+    «if(module.o.("raw"))»raw«else»fbs«endif»: «proto.sourcePath»
+  </title>
   <style>
     body {
       color: #555;
@@ -48,7 +50,6 @@ main_proto_block(proto, module, writable) ::= <<
     .comment {
       color: #999988;
     }
-    
     div.message > h2 > div.comment {
       font-size: 0.70em;
     }
