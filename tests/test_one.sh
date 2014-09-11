@@ -1,0 +1,27 @@
+#!/bin/sh
+
+CURRENT_DIR=$PWD
+
+SCRIPT_DIR=$CURRENT_DIR
+
+if [ ! -e $SCRIPT_DIR/../fbsgen/base.stg ]; then
+    
+    SCRIPT=$(readlink -f "$0")
+    # Absolute path this script is in
+    SCRIPT_DIR=$(dirname "$SCRIPT")
+fi
+
+JAR_FILE=$SCRIPT_DIR/../fbsgen-compiler/target/fbsgen.jar
+[ -e $SCRIPT_DIR/../lib/fbsgen.jar ] && JAR_FILE=$SCRIPT_DIR/../lib/fbsgen.jar
+
+TEMPLATE_PATH=.
+[ -d $CURRENT_DIR/templates ] && TEMPLATE_PATH=templates
+
+TARGET_DIR=$SCRIPT_DIR/target/test_one
+mkdir -p $TARGET_DIR
+
+java -Dtemplate_path=$TEMPLATE_PATH,$SCRIPT_DIR/../templates \
+    -Dcli.separator=! \
+    -Dcli.imports=fbsgen/base,fbsgen/dict \
+    -Dcli.options=hello:world,foo:bar \
+    -jar $JAR_FILE ! -gp one:1 two:2 $@ ! -i $SCRIPT_DIR -o $TARGET_DIR test.txt
