@@ -25,12 +25,9 @@ import junit.framework.TestCase;
 public class LoaderTest extends TestCase
 {
     
-    public void testLoadBase()
+    public void testLoad()
     {
         char[] delim = new char[5];
-        assertNotNull(TemplateUtil.getUrl("fbsgen/base.stg", delim, true));
-        assertTrue(delim[0] == 0);
-        assertTrue(delim[1] == 0);
         
         assertNotNull(TemplateUtil.getReader("fbsgen/test_square_delim.stg", delim, true));
         assertTrue(delim[0] == '[');
