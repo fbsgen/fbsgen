@@ -26,7 +26,9 @@ import java.io.InputStreamReader;
 import java.io.PushbackReader;
 import java.io.Reader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
 /**
  * Template utils.
@@ -40,8 +42,27 @@ public final class TemplateUtil
     
     static final int PUSH_BACK_SIZE = 5;
     
-    static final HashMap<String, ST4Group> STG_CACHE =
-            new HashMap<String, ST4Group>();
+    static final HashMap<String, ST4Group> STG_CACHE = new HashMap<String, ST4Group>();
+    
+    private static final ArrayList<File> __templateLoadDirs = new ArrayList<File>();
+    
+    static
+    {
+        String templatePath = System.getProperty("template_path");
+        if (templatePath != null)
+        {
+            StringTokenizer tokenizer = new StringTokenizer(templatePath, ",:;");
+            while (tokenizer.hasMoreTokens())
+            {
+                String path = tokenizer.nextToken().trim();
+                File dir = new File(path);
+                if (dir.exists() && dir.isDirectory())
+                    __templateLoadDirs.add(dir);
+                else
+                    System.err.println("warn: template dir does not exist " + path);
+            }
+        }
+    }
     
     public static TemplateGroup resolveGroup(String output, String name, String fileExtension)
     {
@@ -76,9 +97,12 @@ public final class TemplateUtil
         {
             if (checkFile)
             {
-                File file = new File(resource);
-                if (file.exists())
-                    return newReader(new FileInputStream(file), delim);
+                for (File dir : __templateLoadDirs)
+                {
+                    File file = new File(dir, resource);
+                    if (file.exists())
+                        return newReader(new FileInputStream(file), delim);
+                }
             }
     
             URL url = DefaultProtoLoader.getResource(resource, TemplateUtil.class);
@@ -102,18 +126,21 @@ public final class TemplateUtil
         {
             if (checkFile)
             {
-                File file = new File(resource);
-                if (file.exists())
+                for (File dir : __templateLoadDirs)
                 {
-                    delim[4] = 1;
-                    return file.toURI().toURL();
+                    File file = new File(dir, resource);
+                    if (file.exists())
+                    {
+                        delim[4] = 1; // marker to indicate found from file
+                        return file.toURI().toURL();
+                    }
                 }
             }
             
             URL url = DefaultProtoLoader.getResource(resource, TemplateUtil.class);
             if (url != null)
             {
-                delim[4] = 2;
+                delim[4] = 2; // marker to indicate found from classpath
                 return url;
             }
             

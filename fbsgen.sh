@@ -16,12 +16,16 @@ fi
 JAR_FILE=$SCRIPT_DIR/fbsgen-compiler/target/fbsgen.jar
 [ -e $SCRIPT_DIR/lib/fbsgen.jar ] && JAR_FILE=$SCRIPT_DIR/lib/fbsgen.jar
 
+TEMPLATE_PATH=.
+[ -d $CURRENT_DIR/templates ] && TEMPLATE_PATH=templates
+
 PROTO_PATH=.
 [ -d $CURRENT_DIR/proto ] && PROTO_PATH=proto
 
 # -Dproto_search_strategy=2 means search from classpath if the file is not found.
 
-java -Dproto_path=$PROTO_PATH \
+java -Dtemplate_path=$TEMPLATE_PATH,$SCRIPT_DIR/templates \
+    -Dproto_path=$PROTO_PATH \
     -Dproto_search_strategy=2 \
     -Dfbsgen.print_stack_trace=false \
     -Dfbsgen.sequential_field_numbers=true \

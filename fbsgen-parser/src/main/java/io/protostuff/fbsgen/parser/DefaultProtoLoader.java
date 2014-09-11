@@ -58,7 +58,7 @@ public class DefaultProtoLoader implements Proto.Loader
                 if (dir.exists() && dir.isDirectory())
                     __protoLoadDirs.add(dir);
                 else
-                    System.err.println("warn: " + path + " not found.");
+                    System.err.println("warn: proto dir does not exist " + path);
             }
         }
     }
