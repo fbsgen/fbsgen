@@ -19,23 +19,26 @@ main_proto_block(proto, module, writable) ::= <<
       font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
       font-size: 1.1em;
     }
-    div.message.nested {
+    div.nested {
       margin-left: 1em;
     }
-    div.message.nested h2 {
+    div.nested h2 {
       margin-top: 0.2em;
     }
-    div.message h2 {
+    div.message h2, div.enum h2 {
       margin-bottom: 0;
     }
-    div.message h2 div {
+    div.message h2 div, div.enum h2 div {
       font-weight: normal;
       font-size: 0.75em;
     }
     div.message h2 a {
       color: #CD5C5C;
     }
-    div.message h2 span {
+    div.enum h2 a {
+      color: #F08080;
+    }
+    div.message h2 span, div.enum h2 span {
       font-size: 0.73em;
     }
     div.field {
@@ -50,7 +53,7 @@ main_proto_block(proto, module, writable) ::= <<
     .comment {
       color: #999988;
     }
-    div.message > h2 > div.comment {
+    div.message > h2 > div.comment, div.enum > h2 > div.comment {
       font-size: 0.70em;
     }
   </style>
@@ -63,7 +66,38 @@ main_proto_block(proto, module, writable) ::= <<
     <b>«if(module.o.("raw"))»package«else»namespace«endif»</b> «proto.declaredPackageName»;
   </div>
   «proto.messages:message_block(module, writable); separator="\n"»
+  «proto.enumGroups:enum_block(module, writable); separator="\n"»
 </body>
+>>
+
+enum_block(eg, module, writable, nested=false) ::= <<
+<div class="enum«if(nested)» nested«endif»">
+  <h2>
+    «enum_top(eg, module, writable)»
+    <span>enum</span>
+    <a href="#«eg.relativeName; format="\.==-"»" id="«eg.relativeName; format="\.==-"»">
+      «if(module.o.("raw"))»
+      «eg.name»
+      «else»
+      «eg.cppRelativeName»
+      «endif»
+    </a>
+    «eg.declaredValues:v_decl(module, writable); separator="\n"»
+  </h2>
+</div>
+>>
+
+enum_top(eg, module, writable) ::= <%
+«if(module.o.("raw"))»
+«eg.comments:{c|<div class="comment">/// «c»</div>}; separator="\n"»
+«eg.a:{k|<div>@«k»</div>}; separator="\n"»
+«endif»
+%>
+
+v_decl(v, module, writable) ::= <<
+<div class="field">
+  <span>«v.name»</span> = «v.number»;
+</div>
 >>
 
 message_block(message, module, writable, nested=false) ::= <<
@@ -82,14 +116,23 @@ message_block(message, module, writable, nested=false) ::= <<
   «if(module.o.("raw"))»
   «message.declaredFields:raw_field_decl(module, writable); separator="\n"»
   «message.nestedMessages:message_block(module, writable, true); separator="\n"»
+  «message.nestedEnumGroups:enum_block(module, writable, true); separator="\n"»
   «else»
   «message.declaredFields:fbs_field_decl(module, writable); separator="\n"»
   «endif»
 </div>
 «if(!module.o.("raw"))»
 «message.nestedMessages:message_block(module, writable); separator="\n"»
+«message.nestedEnumGroups:enum_block(module, writable); separator="\n"»
 «endif»
 >>
+
+message_top(message, module, writable) ::= <%
+«if(module.o.("raw"))»
+«message.comments:{c|<div class="comment">/// «c»</div>}; separator="\n"»
+«message.a:{k|<div>@«k»</div>}; separator="\n"»
+«endif»
+%>
 
 message_kind(message, module, writable) ::= <%
 «if(module.o.("raw"))»
@@ -98,15 +141,6 @@ message
 struct
 «else»
 table
-«endif»
-%>
-
-message_top(message, module, writable) ::= <%
-«if(module.o.("raw"))»
-«message.comments:{c|<div class="comment">/// «c»</div>}; separator="\n"»
-«endif»
-«if(module.o.("raw") && message.a.("Struct"))»
-<div>@Struct</div>
 «endif»
 %>
 

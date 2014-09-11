@@ -1,5 +1,21 @@
 package hello.world;
 
+@uint8
+enum Size {
+  SMALL = 1;
+  MEDIUM = 2;
+  LARGE = 3;
+  EXTRA_LARGE = 4;
+}
+
+@int8(bit_flags = true)
+enum SizeBF {
+  SMALL = 1;
+  MEDIUM = 2;
+  LARGE = 4;
+  EXTRA_LARGE = 8;
+}
+
 @Root
 message Foo {
   repeated int8 rep_byte = 1;
