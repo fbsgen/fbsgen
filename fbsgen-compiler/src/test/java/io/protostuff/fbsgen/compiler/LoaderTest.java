@@ -29,9 +29,9 @@ public class LoaderTest extends TestCase
     {
         char[] delim = new char[5];
         
-        assertNotNull(TemplateUtil.getReader("fbsgen/test_square_delim.stg", delim, true));
-        assertTrue(delim[0] == '[');
-        assertTrue(delim[1] == ']');
+        assertNotNull(TemplateUtil.getReader("fbsgen/test_ng_delim.stg", delim, true));
+        assertTrue(delim[0] == '<');
+        assertTrue(delim[1] == '>');
     }
 
 }
