@@ -38,8 +38,8 @@ import java.util.HashMap;
 public final class AnonTemplateUtil
 {
     
-    static final String IMPORTS = System.getProperty("imports", ""),
-            OPTIONS = System.getProperty("options", "");
+    static final String IMPORTS = System.getProperty("cli.imports", ""),
+            OPTIONS = System.getProperty("cli.options", "");
     
     static final char CLI_SEPARATOR = parseSeparator(
             System.getProperty("cli.separator", ""));
@@ -252,14 +252,14 @@ public final class AnonTemplateUtil
             if (len < 5 || !"-i".equals(args[offset]) || !"-o".equals(args[offset+2]))
             {
                 throw err("The required params must be in this order: " +
-                        "-i in_dir -o out_dir [-params params --] <paths>");
+                        "-i in_dir -o out_dir [-p params --] <paths>");
             }
         }
         else if (len < 8 || !"-i".equals(args[offset]) || !"-o".equals(args[offset+2]) || 
-                !"-params".equals(args[offset+4]))
+                !"-p".equals(args[offset+4]))
         {
             throw err("The required params must be in this order: " +
-            		"-i in_dir -o out_dir -params params -- <paths>");
+            		"-i in_dir -o out_dir -p params -- <paths>");
         }
         
         final File in = new File(args[offset+1]), 
@@ -273,7 +273,7 @@ public final class AnonTemplateUtil
         
         final int limit = offset + len;
         
-        final int paramOffset = !hasGlobalParams || "-params".equals(args[offset+4]) ? 
+        final int paramOffset = !hasGlobalParams || "-p".equals(args[offset+4]) ? 
                 offset + 5 : -1;
         
         final int pathOffset;
@@ -301,7 +301,7 @@ public final class AnonTemplateUtil
                 throw err("The -- separator is missing at group: " + group);
             
             if (i == start)
-                throw err("Empty params (-params --) at group: " + group);
+                throw err("Empty params (-p --) at group: " + group);
             
             if (doubleHyphenOffset == limit)
                 throw err("No path(s) specified at group: " + group);
@@ -339,7 +339,7 @@ public final class AnonTemplateUtil
         int start = 1;
         
         final HashMap<String,String> globalParams;
-        if (args.length > 1 && "-gparams".equals(args[1]))
+        if (args.length > 1 && "-gp".equals(args[1]))
         {
             globalParams = newGlobalParams(args, ++start, args.length, separator);
             if (globalParams.isEmpty())
