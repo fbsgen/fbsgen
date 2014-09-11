@@ -1,0 +1,51 @@
+import "fbsgen/base"
+
+proto_block(proto, module, options) ::= <<
+<html>
+<head>
+  <title>«proto.sourcePath»</title>
+  <style>
+    body {
+      color: #333;
+      background-color: #EEE;
+      font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+      font-size: 1.1em;
+    }
+    div.message h2 {
+      margin-bottom: 0;
+    }
+    div.message h2 a {
+      color: #CD5C5C;
+    }
+    div.field > span {
+      color: #4682B4;
+    }
+    div.field b a {
+      color: #CD5C5C;
+    }
+  </style>
+</head>
+<body>
+  <h3>«proto.sourcePath»</h3>
+  «proto.messages:message_block(module)»
+</body>
+>>
+
+message_block(message, module) ::= <<
+<div class="message">
+  <h2><a href="#«message.relativeName; format="\.==-"»" id="«message.relativeName; format="\.==-"»">«message.name»</a></h2>
+  «message.declaredFields:field_decl(module)»
+</div>
+>>
+
+field_decl(field, module) ::= <<
+<div class="field"><i>«field.modifier; format="LOWER"»</i> <b>«field_type(field, module)»</b> <span>«field.name»</span> = «field.number»;</div>
+>>
+
+field_type(field, module) ::= <%
+«if(field.messageField)»
+<a href="#«field.message.relativeName; format="\.==-"»"><i>«field.javaType»</i></a>
+«else»
+<span>«field.class.simpleName; format="LOWER"»</span>
+«endif»
+%>
