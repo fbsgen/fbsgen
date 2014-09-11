@@ -36,7 +36,7 @@ main_proto_block(proto, module, writable) ::= <<
       color: #CD5C5C;
     }
     div.enum h2 a {
-      color: #F08080;
+      color: #FFA07A;
     }
     div.message h2 span, div.enum h2 span {
       font-size: 0.73em;
@@ -47,8 +47,11 @@ main_proto_block(proto, module, writable) ::= <<
     div.field > span {
       color: #4682B4;
     }
-    div.field b a {
+    div.field > b > a {
       color: #CD5C5C;
+    }
+    div.e.field > b > a {
+      color: #FFA07A;
     }
     .comment {
       color: #999988;
@@ -145,7 +148,7 @@ table
 %>
 
 fbs_field_decl(field, module, writable) ::= <<
-<div class="field">
+<div class="field«if(field.enumField)» e«endif»">
   <span>«field.name»</span>: «if(field.repeated)»[«endif»<b>«fbs_field_type(field, module, writable)»</b>«if(field.repeated)»]«endif»
   (id: «writable.n.(field.number).dec.num»);
 </div>
@@ -160,7 +163,7 @@ fbs_field_type(field, module, writable) ::= <%
 %>
 
 raw_field_decl(field, module, writable) ::= <<
-<div class="field">
+<div class="field«if(field.enumField)» e«endif»">
   «field.comments:{c|<div class="comment">/// «c»</div>}; separator="\n"»
   <i>«field.modifier; format="LOWER"»</i> <b>«raw_field_type(field, module, writable)»</b> <span>«field.name»</span> = «field.number»;
 </div>

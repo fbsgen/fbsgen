@@ -33,6 +33,7 @@ message Foo {
   repeated bytes rep_bytes = 13;
   repeated Bar rep_bar = 14;
   repeated Hello.World rep_hello_world = 15;
+  repeated Size rep_size = 16;
 } //root_type Foo;
 
 @Root
@@ -52,6 +53,7 @@ message Bar {
   optional bytes some_bytes = 13;
   optional Baz some_baz = 14;
   optional Hello.World some_hello_world = 15;
+  optional Size some_size = 16;
 } //root_type Bar;
 
 @Struct
