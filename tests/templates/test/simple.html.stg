@@ -48,6 +48,10 @@ main_proto_block(proto, module, writable) ::= <<
     .comment {
       color: #999988;
     }
+    
+    div.message > h2 > div.comment {
+      font-size: 0.70em;
+    }
   </style>
 </head>
 <body>
@@ -64,7 +68,7 @@ main_proto_block(proto, module, writable) ::= <<
 message_block(message, module, writable, nested=false) ::= <<
 <div class="message«if(nested)» nested«endif»">
   <h2>
-    «message_ann(message, module, writable)»
+    «message_top(message, module, writable)»
     <span>«message_kind(message, module, writable)»</span>
     <a href="#«message.relativeName; format="\.==-"»" id="«message.relativeName; format="\.==-"»">
       «if(module.o.("raw"))»
@@ -96,7 +100,10 @@ table
 «endif»
 %>
 
-message_ann(message, module, writable) ::= <%
+message_top(message, module, writable) ::= <%
+«if(module.o.("raw"))»
+«message.comments:{c|<div class="comment">/// «c»</div>}; separator="\n"»
+«endif»
 «if(module.o.("raw") && message.a.("Struct"))»
 <div>@Struct</div>
 «endif»
@@ -118,7 +125,10 @@ fbs_field_type(field, module, writable) ::= <%
 %>
 
 raw_field_decl(field, module, writable) ::= <<
-<div class="field"><i>«field.modifier; format="LOWER"»</i> <b>«raw_field_type(field, module, writable)»</b> <span>«field.name»</span> = «field.number»;</div>
+<div class="field">
+  «field.comments:{c|<div class="comment">/// «c»</div>}; separator="\n"»
+  <i>«field.modifier; format="LOWER"»</i> <b>«raw_field_type(field, module, writable)»</b> <span>«field.name»</span> = «field.number»;
+</div>
 >>
 
 raw_field_type(field, module, writable) ::= <%

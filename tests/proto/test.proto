@@ -43,10 +43,14 @@ message Baz {
   required string name = 1;
 }
 
+/// a doc comment.
+/// another doc comment.
 message Hello {
   required string name = 1;
   
   message World {
+    /// a doc comment.
+    /// another doc comment.
     required uint64 id = 1;
   }
 }
