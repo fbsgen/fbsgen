@@ -23,7 +23,7 @@ main_proto_block(proto, module, writable) ::= <<
       margin-left: 1em;
     }
     div.nested h2 {
-      margin-top: 0.2em;
+      margin-top: 0.5em;
     }
     div.message h2, div.enum h2 {
       margin-bottom: 0;

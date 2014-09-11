@@ -64,9 +64,19 @@ message Baz {
 message Hello {
   optional string name = 1;
   
+  /// a nested message
   message World {
     /// a doc comment on a field.
     /// another doc comment.
     optional uint64 id = 1;
+  }
+  
+  /// a nested enum
+  @uint16
+  enum Feedback {
+    BAD = 1;
+    NEEDS_IMPOVEMENT = 2;
+    GOOD = 3;
+    GREAT = 4;
   }
 }
