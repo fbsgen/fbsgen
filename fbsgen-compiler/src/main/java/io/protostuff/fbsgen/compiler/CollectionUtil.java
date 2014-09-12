@@ -12,10 +12,9 @@
 //limitations under the License.
 //========================================================================
 
-package io.protostuff.fbsgen.compiler.registry;
+package io.protostuff.fbsgen.compiler;
 
 import static io.protostuff.fbsgen.compiler.CompilerUtil.COMMA;
-import io.protostuff.fbsgen.compiler.ProtoModule;
 import io.protostuff.fbsgen.parser.Proto;
 
 import java.util.ArrayList;

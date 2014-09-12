@@ -44,16 +44,10 @@ public final class CompilerMain
     static final HashMap<String, ProtoCompiler> __compilers =
             new HashMap<String, ProtoCompiler>();
     
-    /*static
+    static
     {
-        addCompiler(new ProtoToJavaBeanCompiler());
-        addCompiler(new ProtoToJavaBeanPrimitiveCompiler());
-        addCompiler(new ProtoToJavaBeanMeCompiler());
-        addCompiler(new ProtoToGwtOverlayCompiler());
-        addCompiler(new ProtoToJavaV2ProtocSchemaCompiler());
-        addCompiler(new ProtoToJavaBeanModelCompiler());
-        addCompiler(new ProtoToProtoCompiler());
-    }*/
+        addCompiler(new BatchProtoCompiler());
+    }
 
     public static void addCompiler(ProtoCompiler compiler)
     {

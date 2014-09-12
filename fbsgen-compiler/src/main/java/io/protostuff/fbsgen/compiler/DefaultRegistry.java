@@ -12,11 +12,10 @@
 //limitations under the License.
 //========================================================================
 
-package io.protostuff.fbsgen.compiler.registry;
+package io.protostuff.fbsgen.compiler;
 
+import static io.protostuff.fbsgen.compiler.CollectionUtil.addTo;
 import static io.protostuff.fbsgen.compiler.CompilerUtil.COMMA;
-import static io.protostuff.fbsgen.compiler.registry.CollectionUtil.addTo;
-import io.protostuff.fbsgen.compiler.ProtoModule;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Message;
 import io.protostuff.fbsgen.parser.Proto;

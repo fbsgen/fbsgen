@@ -12,13 +12,12 @@
 //limitations under the License.
 //========================================================================
 
-package io.protostuff.fbsgen.compiler.registry;
+package io.protostuff.fbsgen.compiler;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import io.protostuff.fbsgen.compiler.ProtoModule;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Message;
 import io.protostuff.fbsgen.parser.Proto;

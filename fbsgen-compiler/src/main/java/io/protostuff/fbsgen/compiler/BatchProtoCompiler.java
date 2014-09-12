@@ -27,20 +27,11 @@
 //================================================================================
 
 
-package io.protostuff.fbsgen.compiler.registry;
+package io.protostuff.fbsgen.compiler;
 
 import static io.protostuff.fbsgen.compiler.CompilerUtil.COMMA;
 import static io.protostuff.fbsgen.compiler.CompilerUtil.SEMI_COLON;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
-import io.protostuff.fbsgen.compiler.CachingProtoLoader;
-import io.protostuff.fbsgen.compiler.CompilerMain;
-import io.protostuff.fbsgen.compiler.CompilerUtil;
-import io.protostuff.fbsgen.compiler.ProtoModule;
-import io.protostuff.fbsgen.compiler.Template;
-import io.protostuff.fbsgen.compiler.TemplateGroup;
-import io.protostuff.fbsgen.compiler.TemplateUtil;
-import io.protostuff.fbsgen.compiler.TemplatedCodeGenerator;
-import io.protostuff.fbsgen.compiler.TemplatedProtoCompiler;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Message;
 import io.protostuff.fbsgen.parser.Proto;
@@ -54,13 +45,13 @@ import java.util.HashMap;
 import java.util.Properties;
 
 /**
- * Collects all the proto components and allows the delegates (stg) to generate code 
- * based on the {@link Registry}.
+ * Batches the compilation after collecting all the proto components.
+ * This delegates code generation based on the stg mapping in the {@link Registry}.
  *
  * @author David Yu
  * @created Dec 5, 2011
  */
-public class RegistryProtoCompiler extends TemplatedCodeGenerator
+public final class BatchProtoCompiler extends TemplatedCodeGenerator
 {
     
     private static Class<? extends Registry> registryClass = DefaultRegistry.class;
@@ -71,9 +62,9 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
             registryClass = clazz;
     }
     
-    public RegistryProtoCompiler()
+    public BatchProtoCompiler()
     {
-        super("registry");
+        super("batch");
     }
     
     @Override
