@@ -572,16 +572,21 @@ public final class CompilerMain
         return options;
     }
 
+    public static void run(String[] args) throws Exception
+    {
+        if (args.length == 0)
+            compileWithNoArgs();
+        else if (args[0].endsWith(".properties"))
+            compileWithArgs(args, 0, args.length);
+        else
+            AnonTemplateUtil.compileTemplates(args);
+    }
+    
     public static void main(String[] args) throws Exception
     {
         try
         {
-            if (args.length == 0)
-                compileWithNoArgs();
-            else if (args[0].endsWith(".properties"))
-                compileWithArgs(args, 0, args.length);
-            else
-                AnonTemplateUtil.compileTemplates(args);
+            run(args);
         }
         catch(Exception e)
         {
