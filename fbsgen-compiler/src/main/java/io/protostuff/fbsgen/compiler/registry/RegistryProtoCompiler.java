@@ -42,7 +42,6 @@ import io.protostuff.fbsgen.compiler.TemplateUtil;
 import io.protostuff.fbsgen.compiler.TemplatedCodeGenerator;
 import io.protostuff.fbsgen.compiler.TemplatedProtoCompiler;
 import io.protostuff.fbsgen.parser.EnumGroup;
-import io.protostuff.fbsgen.parser.Field;
 import io.protostuff.fbsgen.parser.Message;
 import io.protostuff.fbsgen.parser.Proto;
 import io.protostuff.fbsgen.parser.Service;
@@ -64,12 +63,14 @@ import java.util.Properties;
 public class RegistryProtoCompiler extends TemplatedCodeGenerator
 {
     
-    static
+    private static Class<? extends Registry> registryClass = DefaultRegistry.class;
+    
+    static void setRegistryClass(Class<? extends Registry> clazz)
     {
-        Config.initRenderers();
-        Verbs.initRenderers();
+        if (clazz != null)
+            registryClass = clazz;
     }
-
+    
     public RegistryProtoCompiler()
     {
         super("registry");
@@ -97,7 +98,16 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
             module.setCachingProtoLoader(new CachingProtoLoader());
         }
         
-        final Registry registry = new Registry();
+        final Registry registry;
+        try
+        {
+            registry = registryClass.newInstance();
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
+        
         collect(module, registry);
         
         final ArrayList<Proto> overridden = new ArrayList<Proto>();
@@ -219,7 +229,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
             // TODO this is freakishly slow, fix this
             String sourcePath = p.getSourcePath();
             
-            if (!registry.protoPathMap.containsKey(sourcePath) && 
+            if (!registry.getProtoPathMap().containsKey(sourcePath) && 
                     !foreignProtoPathMap.containsKey(sourcePath))
             {
                 // its a foreign proto (not within the base path)
@@ -325,7 +335,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
         // hack
         module.setOutputDir(new File(outputDir.trim()));
         
-        final ArrayList<Proto> protos = registry.stgProtoMapping.get(stg);
+        final ArrayList<Proto> protos = registry.getStgProtoMapping().get(stg);
         if (protos != null)
         {
             if (compiler.protoBlockTemplate == null)
@@ -339,7 +349,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
             }
         }
         
-        final ArrayList<Message> messages = registry.stgMessageMapping.get(stg);
+        final ArrayList<Message> messages = registry.getStgMessageMapping().get(stg);
         if (messages != null)
         {
             if (compiler.messageBlockTemplate == null)
@@ -357,7 +367,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
             }
         }
         
-        final ArrayList<EnumGroup> enumGroups = registry.stgEnumGroupMapping.get(stg);
+        final ArrayList<EnumGroup> enumGroups = registry.getStgEnumGroupMapping().get(stg);
         if (enumGroups != null)
         {
             if (compiler.enumBlockTemplate == null)
@@ -410,9 +420,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
         else
             collect(parseProto(source, module), module, target);
         
-        target.complete();
-        
-        module.setAttribute("registry", target);
+        module.setAttribute("registry", target.complete(module));
     }
     
     static void collect(Proto proto, ProtoModule module, Registry target)
@@ -420,7 +428,7 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
         target.add(proto, module);
         
         for (EnumGroup eg : proto.getEnumGroups())
-            collect(eg, module, target);
+            target.add(eg, module);
         
         for (Message m : proto.getMessages())
             collect(m, module, target);
@@ -429,27 +437,16 @@ public class RegistryProtoCompiler extends TemplatedCodeGenerator
             target.add(s, module);
     }
     
-    static void collect(EnumGroup eg, ProtoModule module, Registry target)
-    {
-        target.add(eg, module);
-        
-        for (EnumGroup.Value v : eg.getValues())
-            target.add(v, module);
-    }
-    
     static void collect(Message message, ProtoModule module, Registry target)
     {
         for (Service s : message.getNestedServices())
             target.add(s, module);
         
         for (EnumGroup eg : message.getNestedEnumGroups())
-            collect(eg, module, target);
+            target.add(eg, module);
         
         for (Message m : message.getNestedMessages())
             collect(m, module, target);
-        
-        for (Field<?> f : message.getFields())
-            target.add(f, module);
         
         target.add(message, module);
     }

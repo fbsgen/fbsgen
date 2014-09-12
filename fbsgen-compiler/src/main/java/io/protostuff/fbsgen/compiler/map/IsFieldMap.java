@@ -30,8 +30,6 @@
 package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
-import io.protostuff.fbsgen.compiler.registry.QueryUtil;
-import io.protostuff.fbsgen.parser.CodegenUtil;
 import io.protostuff.fbsgen.parser.Field;
 
 import java.util.List;
@@ -79,42 +77,6 @@ public final class IsFieldMap extends FakeMap
             }
         },
         
-        ONEBYTE
-        {
-            public boolean query(Field<?> f)
-            {
-                return CodegenUtil.isOneByte(f);
-            }
-        },
-        
-        DATE
-        {
-            public boolean query(Field<?> f)
-            {
-                return f instanceof Field.UInt64 && 
-                        Boolean.TRUE.equals(f.getOptions().get("date"));
-            }
-        },
-        
-        DATETIME
-        {
-            public boolean query(Field<?> f)
-            {
-                return f instanceof Field.UInt64 && 
-                        Boolean.TRUE.equals(f.getOptions().get("datetime"));
-            }
-        },
-        
-        DATE_OR_DATETIME
-        {
-            public boolean query(Field<?> f)
-            {
-                return f instanceof Field.UInt64 && 
-                        (Boolean.TRUE.equals(f.getOptions().get("date")) || 
-                        Boolean.TRUE.equals(f.getOptions().get("datetime")));
-            }
-        },
-        
         VALIDATED
         {
             public boolean query(Field<?> f)
@@ -142,42 +104,8 @@ public final class IsFieldMap extends FakeMap
             {
                 return f.isBytesField() || VALIDATED.query(f);
             }
-        },
-        
-        ARG_OVERLOADABLE
-        {
-            public boolean query(Field<?> f)
-            {
-                switch(QueryUtil.getFieldIdxChar(f, null, null))
-                {
-                    case 'D':
-                    case 'S':
-                        return true;
-                    default: return false;
-                }
-            }
-        },
-        
-        KEY
-        {
-            public boolean query(Field<?> f)
-            {
-                return f.isBytesField() && f.getName().endsWith("_key");
-            }
-        },
-        
-        KEY_OR_ENDS_WITH
-        {
-            public boolean query(Field<?> f)
-            {
-                if (!f.isBytesField())
-                    return false;
-                
-                final String str = f.getName();
-                
-                return str.length() == 3 ? str.equals("key") : str.endsWith("_key");
-            }
         }
+        
         ;
         
         public final IsFieldMap map;

@@ -14,6 +14,10 @@
 
 package io.protostuff.fbsgen.compiler.registry;
 
+import static io.protostuff.fbsgen.compiler.CompilerUtil.COMMA;
+import io.protostuff.fbsgen.compiler.ProtoModule;
+import io.protostuff.fbsgen.parser.Proto;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,5 +57,30 @@ public final class CollectionUtil
         }
         
         existing.add(entry);
+    }
+    
+    public static <T> void addTo(final HashMap<String,ArrayList<T>> map, final T entry, 
+            final ProtoModule module, final String[] stgs, final Proto proto)
+    {
+        for (String stg : stgs)
+        {
+            stg = stg.trim();
+            
+            if (stg.charAt(0) == '_')
+            {
+                // search in proto, then options then config
+                String csv = proto == null ? null : (String)proto.getOptions().get(stg);
+                if (null != csv 
+                        || null != (csv = module.getOptions().getProperty(stg))
+                        || null != (csv = module.getConfig().getProperty(stg)))
+                {
+                    // referenced
+                    addTo(map, entry, module, COMMA.split(csv), null);
+                    continue;
+                }
+            }
+            
+            CollectionUtil.addTo(map, entry, stg);
+        }
     }
 }
