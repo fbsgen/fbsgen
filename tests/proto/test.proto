@@ -59,15 +59,18 @@ message Bar {
 @struct
 message Baz {
   required uint64 id = 1;
-  required string name = 2;
 }
 
+@table(original_order = true)
 message Hello {
-  optional string name = 1;
+  optional uint64 id = 1;
+  optional string name = 2 [deprecated = true];
   
   /// a nested message
+  @struct(force_align = 16)
   message World {
     optional uint64 id = 1;
+    required uint32 kind = 2;
   }
   
   /// a nested enum

@@ -19,6 +19,9 @@ main_proto_block(proto, module, writable) ::= <<
       font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
       font-size: 1.1em;
     }
+    a {
+      text-decoration: none;
+    }
     div.nested {
       margin-left: 1em;
     }
@@ -56,6 +59,9 @@ main_proto_block(proto, module, writable) ::= <<
     .comment {
       color: #999988;
     }
+    .attr {
+      font-weight: normal;
+    }
     div.message > h2 > div.comment, div.enum > h2 > div.comment {
       font-size: 0.70em;
     }
@@ -86,7 +92,7 @@ enum_block(eg, module, writable, nested=false) ::= <<
       «endif»
     </a>
     «if(!module.o.("raw"))»
-    <span>: «get_fbs_int_type.(eg.ta.name)» «if(eg.ta.p.("bit_flags"))»(bit_flags)«endif»</span>
+    <span class="attr">: <b>«get_fbs_int_type.(eg.ta.name)»</b>«if(!eg.ta.emptyP)» («eg.ta.p:{k|«k»: «eg.ta.p.(k)»}; separator=", "»)«endif»</span>
     «endif»
     «eg.declaredValues:v_decl(module, writable); separator="\n"»
   </h2>
@@ -118,6 +124,11 @@ message_block(message, module, writable, nested=false) ::= <<
       «message.cppRelativeName»
       «endif»
     </a>
+    «if(!module.o.("raw") && message.ta)»
+    «if(!message.ta.emptyP)»
+    <span class="attr">: («message.ta.p:{k|«k»: «message.ta.p.(k)»}; separator=", "»)</span>
+    «endif»
+    «endif»
   </h2>
   «if(module.o.("raw"))»
   «message.declaredFields:raw_field_decl(module, writable); separator="\n"»
@@ -153,7 +164,7 @@ table
 fbs_field_decl(field, module, writable) ::= <<
 <div class="field«if(field.enumField)» e«endif»">
   <span>«field.name»</span>: «if(field.repeated)»[«endif»<b>«fbs_field_type(field, module, writable)»</b>«if(field.repeated)»]«endif»
-  (id: «writable.n.(field.number).dec.num»);
+  (id: «writable.n.(field.number).dec.num»«if(field.o.("deprecated"))», deprecated«endif»);
 </div>
 >>
 
