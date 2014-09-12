@@ -250,6 +250,16 @@ public final class EnumGroup extends AnnotationContainer implements HasName, Has
         else
             Collections.sort(sortedValues, Value.NO_ALIAS_COMPARATOR);
         
+        if (Boolean.TRUE.equals(getO().get("bit_flags")) || (typeAnnotation != null && 
+                Boolean.TRUE.equals(typeAnnotation.getP().get("bit_flags"))))
+        {
+            for(Value v : sortedValues)
+            {
+                if (v.number <= 0 || 0 != (v.number & v.number-1))
+                    throw err(v, " is not a valid bit flag (not a power-of-two): " + v.number, getProto());
+            }
+        }
+        
         final Proto proto = getProto();
         final String fullName = getFullName();
         
