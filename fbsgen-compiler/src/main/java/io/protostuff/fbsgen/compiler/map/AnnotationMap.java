@@ -183,51 +183,6 @@ public final class AnnotationMap extends FakeMap
     
     public enum Functions implements Function
     {
-        count_Display_item
-        {
-            public Object query(AnnotationContainer ac)
-            {
-                return count(ac, "Display", "item");
-            }
-        },
-        count_Display_new_item
-        {
-            public Object query(AnnotationContainer ac)
-            {
-                return count(ac, "Display", "item", "new_");
-            }
-        },
-        count_Display_update_item
-        {
-            public Object query(AnnotationContainer ac)
-            {
-                return count(ac, "Display", "item", "update_");
-            }
-        },
-        list_Display_item
-        {
-            public Object query(AnnotationContainer ac)
-            {
-                return list(ac, "Display", "item");
-            }
-        },
-        keys_Display_item
-        {
-            public Object query(AnnotationContainer ac)
-            {
-                return keys(ac, "Display", "item");
-            }
-        },
-        map_Display_item
-        {
-            public Object query(AnnotationContainer ac)
-            {
-                return map(ac, "Display", "item");
-            }
-        },
-        
-        // =====================================
-        
         count_Display_entry
         {
             public Object query(AnnotationContainer ac)

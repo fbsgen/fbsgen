@@ -38,9 +38,6 @@ public final class FakeMapUtil
         CountMap.addAllTo(LIST);
         FilterMap.addAllTo(LIST);
         
-        // enum values
-        FilterEnumValueMap.addAllTo(LIST);
-        
         // message
         IsMessageMap.addAllTo(LIST);
         
