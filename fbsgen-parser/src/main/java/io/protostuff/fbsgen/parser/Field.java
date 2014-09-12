@@ -15,6 +15,7 @@
 package io.protostuff.fbsgen.parser;
 
 import java.nio.ByteBuffer;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 /**
@@ -36,6 +37,31 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return name();
         }
+    }
+    
+    
+    static final HashMap<java.lang.String,java.lang.String> INT_TYPES = 
+            new HashMap<java.lang.String, java.lang.String>();
+    static
+    {
+        putIntType(Int8.class, "byte");
+        putIntType(UInt8.class, "ubyte");
+        putIntType(Int16.class, "short");
+        putIntType(UInt16.class, "ushort");
+        putIntType(Int32.class, "int");
+        putIntType(UInt32.class, "uint");
+        putIntType(Int64.class, "long");
+        putIntType(UInt64.class, "ulong");
+    }
+    
+    private static void putIntType(Class<?> c, java.lang.String fbsType)
+    {
+        INT_TYPES.put(c.getSimpleName().toLowerCase(), fbsType);
+    }
+    
+    public static java.lang.String fbsIntType(java.lang.String fieldType)
+    {
+        return INT_TYPES.get(fieldType);
     }
    
     

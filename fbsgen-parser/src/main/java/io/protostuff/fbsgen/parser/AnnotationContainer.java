@@ -32,11 +32,26 @@ public abstract class AnnotationContainer implements HasAnnotations, HasName
         new LinkedHashMap<String,Annotation>();
     
     final ArrayList<String> comments = new ArrayList<String>();
+    
+    protected Annotation typeAnnotation;
 
     public void add(Annotation annotation)
     {
         if (annotations.put(annotation.name, annotation) != null)
             throw err("Duplicate annotation: " + annotation.name, null);
+    }
+    
+    public Annotation getTypeAnnotation()
+    {
+        return typeAnnotation;
+    }
+    
+    /**
+     * Alias to {@link #getTypeAnnotation()}.
+     */
+    public Annotation getTa()
+    {
+        return getTypeAnnotation(); 
     }
 
     public Map<String, Annotation> getAnnotationMap()

@@ -105,12 +105,7 @@ public final class Annotation implements HasName
     
     public String toString()
     {
-        return new StringBuilder()
-            .append("Annotation|")
-            .append(name)
-            .append('|')
-            .append(params)
-            .toString();
+        return getName();
     }
 
 }

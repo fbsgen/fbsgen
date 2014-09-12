@@ -34,7 +34,7 @@ public final class EnumGroup extends AnnotationContainer implements HasName, Has
      * was changed later on).
      */
     public static final boolean ENUM_ALLOW_ALIAS = Boolean.parseBoolean(
-            "protostuff.enum_allow_alias");
+            "fbsgen.enum_allow_alias");
     
     final String name;
     final Message parentMessage;
@@ -232,10 +232,15 @@ public final class EnumGroup extends AnnotationContainer implements HasName, Has
     
     void cacheFullyQualifiedName()
     {
-        final Boolean b = (Boolean)getOptions().get("allow_alias");
-        if (b != null)
+        if (Message.SEQUENTIAL_FIELD_NUMBERS && typeAnnotation == null)
+            throw err(this, " requires a type annotation (int) ... something like @uint8", getProto());
+        
+        // no alias allowed if field numbers should have no holes.
+        final Boolean allowAlias = Message.SEQUENTIAL_FIELD_NUMBERS ? 
+                Boolean.FALSE : (Boolean)getOptions().get("allow_alias");
+        if (allowAlias != null)
         {
-            if (b.booleanValue())
+            if (allowAlias.booleanValue())
                 Collections.sort(sortedValues);
             else
                 Collections.sort(sortedValues, Value.NO_ALIAS_COMPARATOR);

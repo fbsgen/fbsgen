@@ -269,6 +269,9 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
         if (field.number < 1)
             throw err(field, " has an invalid field number: " + field.number, getProto());
         
+        // if it errors, the err msg (below) will include the field's owner.
+        field.owner = this;
+        
         if (fields.put(field.name, field) != null)
             throw err(field, " cannot be defined more than once.", getProto());
     }
@@ -629,8 +632,6 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
         
         for (Field<?> f : sortedFields)
         {
-            f.owner = this;
-            
             if (f.isRepeated())
             {
                 repeatedFieldCount++;

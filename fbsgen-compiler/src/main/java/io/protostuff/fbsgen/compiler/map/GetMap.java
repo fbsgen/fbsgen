@@ -41,7 +41,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,46 +78,13 @@ public final class GetMap extends FakeMap
             list.add(c.map);
     }
     
-    static final HashMap<String,String> INT_TYPES = 
-            new HashMap<String, String>();
-    static
-    {
-        putIntType(Field.Int8.class, "byte");
-        putIntType(Field.UInt8.class, "ubyte");
-        putIntType(Field.Int16.class, "short");
-        putIntType(Field.UInt16.class, "ushort");
-        putIntType(Field.Int32.class, "int");
-        putIntType(Field.UInt32.class, "uint");
-        putIntType(Field.Int64.class, "long");
-        putIntType(Field.UInt64.class, "ulong");
-    }
-    
-    private static void putIntType(Class<?> c, String fbsType)
-    {
-        INT_TYPES.put(c.getSimpleName().toLowerCase(), fbsType);
-    }
-    
     public enum Functions implements Function
     {
-        ANN_INT_TYPE
-        {
-            public Object get(Object data)
-            {
-                EnumGroup eg = (EnumGroup)data;
-                for (Annotation a : eg.getA().values())
-                {
-                    if (INT_TYPES.get(a.getName()) != null)
-                        return a;
-                }
-                return null;
-            }
-        },
-        
         FBS_INT_TYPE
         {
             public Object get(Object data)
             {
-                return INT_TYPES.get((String)data);
+                return Field.fbsIntType((String)data);
             }
         },
         

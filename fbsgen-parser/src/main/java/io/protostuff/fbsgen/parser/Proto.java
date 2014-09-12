@@ -50,6 +50,7 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
     
     // from options and annotations
     final ArrayList<ConfiguredReference> references = new ArrayList<ConfiguredReference>();
+    final ArrayList<Annotation> typeAnnotations = new ArrayList<Annotation>();
     int refOffset;
     
     private String sourcePath;
@@ -380,6 +381,9 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
     {
         super.add(annotation);
         
+        if (Character.isLowerCase(annotation.name.charAt(0)))
+            typeAnnotations.add(annotation);
+        
         if (!annotation.refs.isEmpty())
             references.add(new ConfiguredReference(annotation.refs, annotation.params, null));
     }
@@ -396,6 +400,14 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
                     references.get(refOffset++).enclosingNamespace = enclosingNamespace;
             }
         }
+        
+        if (typeAnnotations.isEmpty())
+            return;
+        
+        if (typeAnnotations.size() > 1)
+            throw err(target, " has multiple (must only be one) type annotations: " + typeAnnotations, this);
+        
+        target.typeAnnotation = typeAnnotations.remove(0);
     }
     
     void addAnnotationsTo(EnumGroup target)
@@ -410,6 +422,14 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
                     references.get(refOffset++).enclosingNamespace = enclosingNamespace;
             }
         }
+        
+        if (typeAnnotations.isEmpty())
+            return;
+        
+        if (typeAnnotations.size() > 1)
+            throw err(target, " has multiple (must only be one) type annotations: " + typeAnnotations, this);
+        
+        target.typeAnnotation = typeAnnotations.remove(0);
     }
     
     void addAnnotationsTo(EnumGroup.Value target)
@@ -424,6 +444,14 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
                     references.get(refOffset++).enclosingNamespace = enclosingNamespace;
             }
         }
+        
+        if (typeAnnotations.isEmpty())
+            return;
+        
+        if (typeAnnotations.size() > 1)
+            throw err(target, " has multiple (must only be one) type annotations: " + typeAnnotations, this);
+        
+        target.typeAnnotation = typeAnnotations.remove(0);
     }
     
     void addAnnotationsTo(Field<?> target, String enclosingNamespace)
@@ -437,6 +465,14 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
                     references.get(refOffset++).enclosingNamespace = enclosingNamespace;
             }
         }
+        
+        if (typeAnnotations.isEmpty())
+            return;
+        
+        if (typeAnnotations.size() > 1)
+            throw err(target, " has multiple (must only be one) type annotations: " + typeAnnotations, this);
+        
+        target.typeAnnotation = typeAnnotations.remove(0);
     }
     
     void addAnnotationsTo(Service target)
@@ -444,6 +480,14 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
         // enclosingNamespace not necessary
         if (target.addAnnotations(this, true))
             refOffset = references.size();
+        
+        if (typeAnnotations.isEmpty())
+            return;
+        
+        if (typeAnnotations.size() > 1)
+            throw err(target, " has multiple (must only be one) type annotations: " + typeAnnotations, this);
+        
+        target.typeAnnotation = typeAnnotations.remove(0);
     }
     
     void addAnnotationsTo(Service.RpcMethod target)
@@ -451,6 +495,14 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
         // enclosingNamespace not necessary
         if (target.addAnnotations(this, true))
             refOffset = references.size();
+        
+        if (typeAnnotations.isEmpty())
+            return;
+        
+        if (typeAnnotations.size() > 1)
+            throw err(target, " has multiple (must only be one) type annotations: " + typeAnnotations, this);
+        
+        target.typeAnnotation = typeAnnotations.remove(0);
     }
     
     /*void addAnnotationsTo(Extension target)
