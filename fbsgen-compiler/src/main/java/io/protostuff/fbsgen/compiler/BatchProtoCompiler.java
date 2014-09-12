@@ -56,7 +56,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
     
     private static Class<? extends Registry> registryClass = DefaultRegistry.class;
     
-    static void setRegistryClass(Class<? extends Registry> clazz)
+    public static void setRegistryClass(Class<? extends Registry> clazz)
     {
         if (clazz != null)
             registryClass = clazz;
