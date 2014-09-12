@@ -14,7 +14,6 @@
 
 package io.protostuff.fbsgen.compiler.map;
 
-import static io.protostuff.fbsgen.compiler.CompilerUtil.COMMA;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.getProto;
 import static io.protostuff.fbsgen.compiler.registry.QueryUtil.getConfigTargetFieldMap;
@@ -38,7 +37,6 @@ import io.protostuff.fbsgen.parser.Proto;
 import io.protostuff.fbsgen.parser.Service.RpcMethod;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -103,14 +101,6 @@ public final class GetMap extends FakeMap
             {
                 return data instanceof Map ? ((Map<?,?>)data).values().iterator().next() : 
                     ((Collection<?>)data).iterator().next();
-            }
-        },
-        
-        CSV_SPLIT
-        {
-            public Object get(Object data)
-            {
-                return data == null ? Collections.EMPTY_LIST : Arrays.asList(COMMA.split(data.toString()));
             }
         },
         

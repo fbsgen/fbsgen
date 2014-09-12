@@ -53,6 +53,9 @@ public final class FakeMapUtil
         // Message, Field
         AnnotationMap.addAllTo(LIST);
         
+        // string
+        SplitMap.addAllTo(LIST);
+        
         // any object
         IsMap.addAllTo(LIST);
         GetMap.addAllTo(LIST);
