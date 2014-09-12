@@ -34,12 +34,9 @@ public final class FakeMapUtil
     
     static
     {
-        // message fields
+        // fields
         CountMap.addAllTo(LIST);
         FilterMap.addAllTo(LIST);
-        
-        // message
-        IsMessageMap.addAllTo(LIST);
         
         // field
         IsFieldMap.addAllTo(LIST);

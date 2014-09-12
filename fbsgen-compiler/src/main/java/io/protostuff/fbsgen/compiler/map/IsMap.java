@@ -15,13 +15,6 @@
 package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
-import io.protostuff.fbsgen.parser.Annotation;
-import io.protostuff.fbsgen.parser.EnumGroup;
-import io.protostuff.fbsgen.parser.Field;
-import io.protostuff.fbsgen.parser.HasName;
-import io.protostuff.fbsgen.parser.Message;
-import io.protostuff.fbsgen.parser.Proto;
-import io.protostuff.fbsgen.parser.Service.RpcMethod;
 
 import java.util.Collection;
 import java.util.List;
@@ -114,15 +107,6 @@ public final class IsMap extends FakeMap
             }
         },
         
-        GT15
-        {
-            public boolean is(Object data)
-            {
-                return data instanceof Integer && ((Integer)data).intValue() > 15 ? 
-                        Boolean.TRUE : Boolean.FALSE;
-            }
-        },
-        
         POWER_OF_TWO
         {
             public boolean is(Object data)
@@ -132,129 +116,11 @@ public final class IsMap extends FakeMap
             }
         },
         
-        RPC_READ_ONLY
-        {
-            public boolean is(Object data)
-            {
-                RpcMethod rm = (RpcMethod)data;
-                String name = rm.getName();
-                
-                return name.startsWith("get") || name.startsWith("list") || 
-                        name.startsWith("find") || 
-                        // q followed by [A-Z]
-                        (name.charAt(0) == 'q' && name.charAt(1) > 96);
-            }
-        },
-        
-        AUTH_REQUIRED
-        {
-            public boolean is(Object data)
-            {
-                EnumGroup.Value v = (EnumGroup.Value)data;
-                
-                Boolean b = (Boolean)v.getOptions().get("auth_required");
-                
-                if (b != null)
-                    return b.booleanValue();
-                
-                Annotation a = v.getEnumGroup().getAnnotation("ServiceGroup");
-                return a != null && Boolean.TRUE.equals(a.getValue("auth_required"));
-            }
-        },
-        
-        ENTITY
-        {
-            public boolean is(Object data)
-            {
-                return data instanceof Message && IsMessageMap.Functions.ENTITY.query(
-                        (Message)data);
-            }
-        },
-        
-        PROTO_PROTOSTUFF_DS_PKG
-        {
-            public boolean is(Object data)
-            {
-                return data instanceof Proto && ((Proto)data).getPackageName().startsWith(
-                        "com.dyuproject.protostuff.ds.");
-            }
-        },
-        
-        STR_ENDS_WITH_UPPER_S
-        {
-            public boolean is(Object data)
-            {
-                return data instanceof String && ((String)data).endsWith("S");
-            }
-        },
-        
-        TYPE_STRING
+        INSTANCEOF_STRING
         {
             public boolean is(Object data)
             {
                 return data instanceof String;
-            }
-        },
-        
-        STARTS_WITH_DOT
-        {
-            public boolean is(Object data)
-            {
-                return data.toString().charAt(0) == '.';
-            }
-        },
-        
-        STARTS_WITH_SI
-        {
-            public boolean is(Object data)
-            {
-                return data.toString().startsWith("SI_");
-            }
-        },
-        
-        SINGLE_COMPUTED_UPDATE_FIELD
-        {
-            public boolean is(Object data)
-            {
-                final Object first;
-                if (data instanceof Map)
-                {
-                    if (((Map<?,?>)data).size() != 1)
-                        return false;
-                    
-                    first = ((Map<?,?>)data).values().iterator().next();
-                }
-                else
-                {
-                    if (((Collection<?>)data).size() != 1)
-                        return false;
-                    
-                    first = ((Collection<?>)data).iterator().next();
-                }
-                
-                return ((Field<?>)first).getO().containsKey("compute_to_parent");
-            }
-        },
-        
-        PARAM_UPDATE
-        {
-            public boolean is(Object data)
-            {
-                return ((Message)data).getName().indexOf("Update") != -1;
-            }
-        },
-        
-        KEY_OR_ENDS_WITH
-        {
-            public boolean is(Object data)
-            {
-                if (data == null)
-                    return false;
-                
-                final String str = data instanceof HasName ? 
-                        ((HasName)data).getName() : data.toString();
-                
-                return str.length() == 3 ? str.equals("key") : str.endsWith("_key");
             }
         }
         ;

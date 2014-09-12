@@ -16,8 +16,6 @@ package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
 import io.protostuff.fbsgen.parser.HasName;
-import io.protostuff.fbsgen.parser.Message;
-import io.protostuff.fbsgen.parser.ProtoUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -77,19 +75,6 @@ public final class FormatMap extends FakeMap
             }
         },
         
-        TO_FIELD_KEY
-        {
-            public Object format(Object data)
-            {
-                Message message = (Message)data;
-                
-                String alias = message.getAnnotation("Entity").getValue("key_alias");
-                
-                return alias != null ? alias : ProtoUtil.toUnderscoreCase(
-                        message.getName()).append("_key").toString();
-            }
-        },
-        
         TO_CLASSNAME
         {
             public Object format(Object data)
@@ -103,27 +88,6 @@ public final class FormatMap extends FakeMap
             public Object format(Object data)
             {
                 return data instanceof Integer ? data : Integer.parseInt(data.toString());
-            }
-        },
-        
-        TO_LITERAL_JAVA_INT_ARRAY
-        {
-            public Object format(Object data)
-            {
-                @SuppressWarnings("unchecked")
-                final List<Message> children = (List<Message>)data;
-                final StringBuilder sb = new StringBuilder()
-                    .append("new int[]{")
-                    .append(((Integer)children.get(0).getOptions().get(
-                            "~entity.kind")).intValue());
-                
-                for (int i = 1, len = children.size(); i < len; i++)
-                {
-                    sb.append(',').append(((Integer)children.get(i).getOptions().get(
-                            "~entity.kind")).intValue());
-                }
-                
-                return sb.append('}');
             }
         },
         

@@ -15,7 +15,6 @@
 package io.protostuff.fbsgen.compiler.map;
 
 import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
-import static io.protostuff.fbsgen.compiler.ErrorUtil.getProto;
 import io.protostuff.fbsgen.compiler.FakeMap;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Field;
@@ -63,36 +62,6 @@ public final class VerifyMap extends FakeMap
     
     public enum Functions implements Function
     {
-        CONFIG
-        {
-            public Object verify(Object obj)
-            {
-                if (obj instanceof EnumGroup)
-                {
-                    EnumGroup eg = (EnumGroup)obj;
-                    EnumGroup.Value v = eg.getValues().get(0);
-                    if (v.getNumber() <= 0)
-                    {
-                        throw err("The config "  + eg.getName() + 
-                                " cannot have a field with a negative/zero number: " + 
-                                v.getName(), eg.getProto());
-                    }
-                    
-                    return eg;
-                }
-                
-                if (obj instanceof Message)
-                {
-                    // TODO
-                    
-                    return obj;
-                }
-                
-                throw err("codegen error - passed wrong param: " + 
-                        String.valueOf(obj), getProto(obj));
-            }
-        },
-        
         POWER_OF_TWO
         {
             public Object verify(Object obj)
