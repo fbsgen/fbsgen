@@ -73,6 +73,7 @@ proto_block(proto, module) ::= <<
   «proto.messages:message_block(module); separator="\n"»
   «proto.enumGroups:enum_block(module); separator="\n"»
 </body>
+</html>
 >>
 
 enum_block(eg, module, nested=false) ::= <<
