@@ -14,7 +14,7 @@ if [ ! -d $SCRIPT_DIR/fbsgen-compiler ]; then
 fi
 
 JAR_FILE=$SCRIPT_DIR/fbsgen-compiler/target/fbsgen.jar
-[ -e $SCRIPT_DIR/lib/fbsgen.jar ] && JAR_FILE=$SCRIPT_DIR/lib/fbsgen.jar
+[ -e $SCRIPT_DIR/templates/fbsgen.jar ] && JAR_FILE=$SCRIPT_DIR/templates/fbsgen.jar
 
 if [ -z $TEMPLATE_PATH ]; then
     TEMPLATE_PATH=.,$SCRIPT_DIR/templates
@@ -34,5 +34,4 @@ java -Dtemplate_path=$TEMPLATE_PATH \
     -Dproto_search_strategy=2 \
     -Dfbsgen.print_stack_trace=false \
     -Dfbsgen.sequential_field_numbers=true \
-    -Dfbsgen.resolve_enum_value_ref=true \
     -jar $JAR_FILE codegen.properties $@
