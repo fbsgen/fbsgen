@@ -15,6 +15,7 @@
 package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
+import io.protostuff.fbsgen.compiler.ProtoModule;
 import io.protostuff.fbsgen.compiler.Writable;
 
 import java.util.List;
@@ -58,7 +59,12 @@ public final class NewMap extends FakeMap
         {
             public Object create(Object data)
             {
-                return new Writable();
+                Writable w = new Writable();
+                
+                if (data instanceof ProtoModule)
+                    ((ProtoModule)data).setAttribute("w", w);
+                    
+                return w;
             }
         }
         ;

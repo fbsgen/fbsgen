@@ -75,6 +75,9 @@ public final class IsMap extends FakeMap
                 if (data == null)
                     return true;
                 
+                if (data instanceof String)
+                    return ((String)data).isEmpty();
+                
                 return data instanceof Map ? ((Map<?,?>)data).isEmpty() : 
                     ((Collection<?>)data).isEmpty();
             }
