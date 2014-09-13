@@ -33,32 +33,47 @@ import java.util.Map;
  */
 public final class Writable
 {
+    static final FakeMap EMPTY = new FakeMap("EMPTY")
+    {
+        @Override
+        public Object get(Object arg0)
+        {
+            return "";
+        }
+    };
     
-    static final Object K_INIT = new String("");
+    public Object key = null;
+    
+    public int number = 0;
     
     public final ArrayList<Object> list = new ArrayList<Object>();
     
     public final LinkedHashMap<Object,Object> map = new LinkedHashMap<Object,Object>();
     
-    int number = 0, argCount = 0, argFalseCount = 0;
+    int argCount = 0, argFalseCount = 0;
     
-    Object currentKey = null;
-    
-    final FakeMap get = new FakeMap("get")
+    /**
+     * Get the element at index from list if k was set.  Otherwise, the arg will 
+     * be read as 'key.0' where 'key' is used to retrieve the list from the map 
+     * and '0' is the index.
+     * <pre>
+     *   «writable.k.("0").get.(message.fields)»
+     *   «writable.k.(1).get.(message.fields)»
+     *   «(writable.get.("key.0"))»
+     * </pre>
+     */
+    public final FakeMap get = new FakeMap("get")
     {
         @SuppressWarnings("unchecked")
         public Object get(Object entry)
         {
-            if (currentKey != null)
+            if (key != null)
             {
-                if (currentKey == K_INIT)
-                    throw new RuntimeException("Misuse of chain.");
+                int index = key instanceof Number ? 
+                        ((Number)key).intValue() : Integer.parseInt(
+                                key.toString());
                 
-                int index = currentKey instanceof Number ? 
-                        ((Number)currentKey).intValue() : Integer.parseInt(
-                                currentKey.toString());
-                
-                currentKey = null;
+                key = null;
                 
                 return entry instanceof List ? $get(index, (List<Object>)entry) : null;
             }
@@ -88,7 +103,13 @@ public final class Writable
         return list.size() > index ? list.get(index) : null;
     }
     
-    final FakeMap set0 = new FakeMap("set0")
+    /**
+     * Sets the first element of the list.
+     * <pre>
+     *   «writable.set0.("foo")»
+     * </pre>
+     */
+    public final FakeMap set0 = new FakeMap("set0")
     {
         public Object get(Object entry)
         {
@@ -101,36 +122,54 @@ public final class Writable
         }
     };
     
-    final FakeMap fmt = new FakeMap("fmt")
+    /**
+     * Formats the key with the arg.
+     * <pre>
+     *   «writable.k.(message.name).fmt.("UC")»
+     * </pre>
+     */
+    public final FakeMap fmt = new FakeMap("fmt")
     {
         public Object get(Object entry)
         {
-            if (currentKey == null || currentKey == K_INIT)
+            if (key == null)
                 throw new RuntimeException("Misuse of chain.");
             
-            final String str = currentKey.toString();
-            currentKey = null;
+            final String str = key.toString();
+            key = null;
             return TemplatedCodeGenerator.format(str, entry.toString());
         }
     };
     
-    final FakeMap eq = new FakeMap("eq")
+    /**
+     * Compares the number against the arg.
+     * <pre>
+     *   «writable.n.(0).eq.(0)»
+     * </pre>
+     */
+    public final FakeMap eq = new FakeMap("eq")
     {
-        public Object get(Object entry)
+        public Object get(Object arg)
         {
-            if (entry instanceof String)
+            if (arg instanceof String)
             {
-                String str = (String)entry;
+                String str = (String)arg;
                 return !str.isEmpty() && number == Integer.parseInt(str) ? 
                         Boolean.TRUE : Boolean.FALSE;
             }
             
-            return entry instanceof Integer && number == ((Integer)entry).intValue() ? 
+            return arg instanceof Integer && number == ((Integer)arg).intValue() ? 
                     Boolean.TRUE : Boolean.FALSE;
         }
     };
     
-    final FakeMap gt = new FakeMap("gt")
+    /**
+     * Compares the number against the arg.
+     * <pre>
+     *   «writable.n.(0).gt.(0)»
+     * </pre>
+     */
+    public final FakeMap gt = new FakeMap("gt")
     {
         public Object get(Object entry)
         {
@@ -138,7 +177,13 @@ public final class Writable
         }
     };
     
-    final FakeMap gte = new FakeMap("gte")
+    /**
+     * Compares the number against the arg.
+     * <pre>
+     *   «writable.n.(0).gte.(0)»
+     * </pre>
+     */
+    public final FakeMap gte = new FakeMap("gte")
     {
         public Object get(Object entry)
         {
@@ -146,7 +191,13 @@ public final class Writable
         }
     };
     
-    final FakeMap lt = new FakeMap("lt")
+    /**
+     * Compares the number against the arg.
+     * <pre>
+     *   «writable.n.(0).lt.(0)»
+     * </pre>
+     */
+    public final FakeMap lt = new FakeMap("lt")
     {
         public Object get(Object entry)
         {
@@ -154,7 +205,13 @@ public final class Writable
         }
     };
     
-    final FakeMap lte = new FakeMap("lte")
+    /**
+     * Compares the number against the arg.
+     * <pre>
+     *   «writable.n.(0).lte.(0)»
+     * </pre>
+     */
+    public final FakeMap lte = new FakeMap("lte")
     {
         public Object get(Object entry)
         {
@@ -162,89 +219,142 @@ public final class Writable
         }
     };
     
-    final FakeMap keq = new FakeMap("keq")
+    /**
+     * Compares the key against the arg.
+     * <pre>
+     *   «writable.k.("foo").keq.("foo")»
+     * </pre>
+     */
+    public final FakeMap keq = new FakeMap("keq")
     {
         public Object get(Object entry)
         {
-            if (currentKey == null || currentKey == K_INIT)
+            if (key == null)
                 throw new RuntimeException("Misuse of chain.");
             
-            Boolean ret = currentKey.equals(entry) ? Boolean.TRUE : Boolean.FALSE;
-            currentKey = null;
+            Boolean ret = key.equals(entry) ? Boolean.TRUE : Boolean.FALSE;
+            key = null;
             return ret;
         }
     };
     
-    final FakeMap intersect = new FakeMap("intersect")
+    static int $int(Object arg)
     {
-        public Object get(Object entry)
+        return arg instanceof Integer ? 
+                ((Integer)arg).intValue() : Integer.parseInt(arg.toString());
+    }
+    
+    /**
+     * Returns true if {@link #number} & arg is not zero.
+     * <pre>
+     *   «writable.n.("5").intersect.("1")»
+     * </pre>
+     */
+    public final FakeMap intersect = new FakeMap("intersect")
+    {
+        public Object get(Object arg)
         {
-            int num = entry instanceof Integer ? 
-                    ((Integer)entry).intValue() : Integer.parseInt(entry.toString());
-            
-            return 0 != (num & number) ? Boolean.TRUE : Boolean.FALSE;
+            return 0 != (number & $int(arg)) ? Boolean.TRUE : Boolean.FALSE;
         }
     };
     
-    final FakeMap and = new FakeMap("and")
+    /**
+     * The operator "&=" applied to the number with the arg.
+     * <pre>
+     *   «writable.n.("5").and.("7")»
+     * </pre>
+     */
+    public final FakeMap and = new FakeMap("and")
     {
-        public Object get(Object entry)
+        public Object get(Object arg)
         {
-            number &= entry instanceof Integer ? 
-                    ((Integer)entry).intValue() : Integer.parseInt(entry.toString());
+            number &= $int(arg);
             return Writable.this;
         }
     };
     
-    final FakeMap or = new FakeMap("or")
+    /**
+     * The operator "|=" applied to the number with the arg.
+     * <pre>
+     *   «writable.n.("5").or.("7")»
+     * </pre>
+     */
+    public final FakeMap or = new FakeMap("or")
     {
-        public Object get(Object entry)
+        public Object get(Object arg)
         {
-            number |= entry instanceof Integer ? 
-                    ((Integer)entry).intValue() : Integer.parseInt(entry.toString());
+            number |= $int(arg);
             return Writable.this;
         }
     };
     
-    final FakeMap xor = new FakeMap("xor")
+    /**
+     * The operator "^=" applied to the number with the arg.
+     * <pre>
+     *   «writable.n.("5").xor.("7")»
+     * </pre>
+     */
+    public final FakeMap xor = new FakeMap("xor")
     {
-        public Object get(Object entry)
+        public Object get(Object arg)
         {
-            number ^= entry instanceof Integer ? 
-                    ((Integer)entry).intValue() : Integer.parseInt(entry.toString());
+            number ^= $int(arg);
             return Writable.this;
         }
     };
     
-    final FakeMap setnumber = new FakeMap("setnumber")
+    /**
+     * Sets the number.
+     * <pre>
+     *   «(writable.setnumber.(field.number))»
+     * </pre>
+     */
+    public final FakeMap setnumber = new FakeMap("setnumber")
     {
-        public Object get(Object entry)
+        public Object get(Object arg)
         {
-            number = entry instanceof Integer ? 
-                    ((Integer)entry).intValue() : Integer.parseInt(entry.toString());
+            number = $int(arg);
             return Writable.this;
         }
     };
     
-    final FakeMap incby = new FakeMap("incby")
+    /**
+     * Increments the number.
+     * <pre>
+     *   «(writable.incby.("2"))»
+     * </pre>
+     */
+    public final FakeMap incby = new FakeMap("incby")
     {
-        public Object get(Object entry)
+        public Object get(Object arg)
         {
-            number += ((Integer)entry).intValue();
+            number += $int(arg);
             return Writable.this;
         }
     };
     
-    final FakeMap decby = new FakeMap("decby")
+    /**
+     * Decrements the number.
+     * <pre>
+     *   «(writable.decby.("2")»
+     * </pre>
+     */
+    public final FakeMap decby = new FakeMap("decby")
     {
-        public Object get(Object entry)
+        public Object get(Object arg)
         {
-            number -= ((Integer)entry).intValue();
+            number -= $int(arg);
             return Writable.this;
         }
     };
     
-    final FakeMap mremove = new FakeMap("mremove")
+    /**
+     * Removes an item from the map.
+     * <pre>
+     *   «(writable.map_remove.("foo"))»
+     * </pre>
+     */
+    public final FakeMap map_remove = new FakeMap("map_remove")
     {
         public Object get(Object entry)
         {
@@ -253,61 +363,76 @@ public final class Writable
         }
     };
     
-    final FakeMap lremove = new FakeMap("lremove")
+    /**
+     * Removes an item from the list.
+     * <pre>
+     *   «(writable.list_remove.(writable.number))»
+     * </pre>
+     */
+    public final FakeMap list_remove = new FakeMap("list_remove")
     {
         public Object get(Object entry)
         {
             if (entry instanceof Integer)
-            {
                 list.remove(((Integer)entry).intValue());
-            }
             else
-            {
                 list.remove(entry);
-            }
-            return Writable.this;
-        }
-    };
-    
-    final FakeMap arg = new FakeMap("arg")
-    {
-        public Object get(Object key)
-        {
-            argCount++;
-            if (key.toString().isEmpty())
-                argFalseCount++;
-            //final String str = key.toString();
-            //if (str.isEmpty() || str.equals("false"))
-            //    argFalseCount++;
             
             return Writable.this;
         }
     };
     
-    final FakeMap notarg = new FakeMap("notarg")
+    /**
+     * The arg is evaluated.
+     * <pre>
+     *   «if(writable.arg.({«message.o.("foo")»}).arg(message.o.({«message.o.("bar")»})).andArgs)»
+     * </pre>
+     */
+    public final FakeMap arg = new FakeMap("arg")
     {
-        public Object get(Object key)
+        public Object get(Object arg)
         {
             argCount++;
-            if (!key.toString().isEmpty())
+            if (arg.toString().isEmpty())
                 argFalseCount++;
-            //final String str = key.toString();
-            //if (!str.isEmpty() && !str.equals("false"))
-            //    argFalseCount++;
             
             return Writable.this;
         }
     };
     
-    final FakeMap in = new FakeMap("in")
+    /**
+     * The arg is evaluated.
+     * <pre>
+     *   «if(writable.notarg.({«message.o.("foo")»}).notarg(message.o.({«message.o.("bar")»})).andArgs)»
+     * </pre>
+     */
+    public final FakeMap notarg = new FakeMap("notarg")
+    {
+        public Object get(Object arg)
+        {
+            argCount++;
+            if (!arg.toString().isEmpty())
+                argFalseCount++;
+            
+            return Writable.this;
+        }
+    };
+    
+    /**
+     * Checks if the key is inside the arg.
+     * <pre>
+     *   «if(writable.k.("foo").in.(message.o).k.("bar").in.(message.o).andArgs)»
+     * </pre>
+     */
+    public final FakeMap in = new FakeMap("in")
     {
         public Object get(Object map)
         {
-            final Object k = currentKey;
-            if (k == null || k == K_INIT)
+            final Object k = key;
+            if (k == null)
                 throw new RuntimeException("Misuse of chain.");
             
-            currentKey = null;
+            key = null;
             
             argCount++;
             if (!((Map<?,?>)map).containsKey(k))
@@ -317,15 +442,21 @@ public final class Writable
         }
     };
     
-    final FakeMap notin = new FakeMap("notin")
+    /**
+     * Checks if the key is not inside the arg.
+     * <pre>
+     *   «if(writable.k.("foo").notin.(message.o).k.("bar").notin.(message.o).andArgs)»
+     * </pre>
+     */
+    public final FakeMap notin = new FakeMap("notin")
     {
         public Object get(Object map)
         {
-            final Object k = currentKey;
-            if (k == null || k == K_INIT)
+            final Object k = key;
+            if (k == null)
                 throw new RuntimeException("Misuse of chain.");
             
-            currentKey = null;
+            key = null;
             
             argCount++;
             if (((Map<?,?>)map).containsKey(k))
@@ -335,82 +466,112 @@ public final class Writable
         }
     };
     
-    final FakeMap add = new FakeMap("add")
+    /**
+     * Returns a map that the caller should use to set the key and then chain.
+     * <pre>
+     *   «writable.setkey.("key").put.("value")».
+     * 
+     * You can also chain it continuously as long as its the order is key->value.
+     *   «writable.k.("k1").put.("v1").k.("k2").put.("v2")».
+     * </pre>
+     */
+    public final FakeMap setkey = new FakeMap("setkey")
     {
-        public Object get(Object key)
+        public Object get(Object newKey)
         {
-            if (currentKey != null)
-            {
-                if (currentKey != K_INIT)
-                    throw new RuntimeException("Misuse of chain.");
-                
-                // sets the key
-                currentKey = String.valueOf(key);
-                return Writable.this;
-            }
+            if (key != null)
+                throw new RuntimeException("Misuse of chain.");
+            if (newKey == null)
+                throw new RuntimeException("Null key.");
             
-            list.add(key);
+            key = newKey;
             return Writable.this;
         }
     };
     
-    final FakeMap addall = new FakeMap("addall")
-    {
-        @SuppressWarnings("unchecked")
-        public Object get(Object key)
-        {
-            list.addAll((Collection<Object>)key);
-            return Writable.this;
-        }
-    };
-    
-    final FakeMap addput = new FakeMap("addput")
+    /**
+     * Adds to the list.
+     * <pre>
+     *   «writable.add.(field)»
+     * </pre>
+     */
+    public final FakeMap add = new FakeMap("add")
     {
         public Object get(Object entry)
         {
-            if (currentKey != null)
+            list.add(entry);
+            return Writable.this;
+        }
+    };
+    
+    /**
+     * Adds all the elements to the list.
+     * 
+     * Called from stringtemplate via «(writable.addall.(field))»
+     */
+    public final FakeMap addall = new FakeMap("addall")
+    {
+        @SuppressWarnings("unchecked")
+        public Object get(Object entry)
+        {
+            list.addAll((Collection<Object>)entry);
+            return Writable.this;
+        }
+    };
+    
+    /**
+     * Adds to the list and puts to the map.
+     * <pre>
+     *   «writable.k.(field.name).add_and_put.(field)»
+     * </pre>
+     */
+    public final FakeMap add_and_put = new FakeMap("add_and_put")
+    {
+        public Object get(Object entry)
+        {
+            if (key != null)
             {
-                if (currentKey == K_INIT)
-                    throw new RuntimeException("Misuse of chain.");
-                
-                addput(currentKey, entry);
-                currentKey = null;
+                $add_and_put(key, entry);
+                key = null;
                 return Writable.this;
             }
             
             HasName hn = (HasName)entry;
-            addput(hn.getName(), hn);
+            $add_and_put(hn.getName(), hn);
             return Writable.this;
         }
     };
     
-    void addput(Object key, Object value)
+    void $add_and_put(Object key, Object value)
     {
         list.add(value);
         map.put(key, value);
     }
     
-    final FakeMap adduput = new FakeMap("adduput")
+    /**
+     * Adds to the list and puts only the unique entry to the map.
+     * <pre>
+     *   «writable.k.(field.name).add_and_uput.(field)»
+     * </pre>
+     */
+    public final FakeMap add_and_uput = new FakeMap("add_and_uput")
     {
         public Object get(Object entry)
         {
-            if (currentKey != null)
+            if (key != null)
             {
-                if (currentKey == K_INIT)
-                    throw new RuntimeException("Misuse of chain.");
-                
-                adduput(currentKey, entry);
-                currentKey = null;
+                $add_and_uput(key, entry);
+                key = null;
                 return Writable.this;
             }
             
             HasName hn = (HasName)entry;
-            adduput(hn.getName(), hn);
+            $add_and_uput(hn.getName(), hn);
             return Writable.this;
         }
     };
     
-    void adduput(Object key, Object value)
+    void $add_and_uput(Object key, Object value)
     {
         list.add(value);
         
@@ -421,17 +582,20 @@ public final class Writable
         }
     }
     
-    final FakeMap put = new FakeMap("put")
+    /**
+     * Puts the entry into the map.
+     * <pre>
+     *   «(writable.k.("foo").put.(field))»
+     * </pre>
+     */
+    public final FakeMap put = new FakeMap("put")
     {
         public Object get(Object entry)
         {
-            if (currentKey != null)
+            if (key != null)
             {
-                if (currentKey == K_INIT)
-                    throw new RuntimeException("Misuse of chain.");
-                
-                map.put(currentKey, entry);
-                currentKey = null;
+                map.put(key, entry);
+                key = null;
                 return Writable.this;
             }
             
@@ -441,27 +605,30 @@ public final class Writable
         }
     };
     
-    final FakeMap uput = new FakeMap("uput")
+    /**
+     * Puts only unique entries into the map.
+     * <pre>
+     *   «(writable.k.(field.name).uput.(field))»
+     * </pre>
+     */
+    public final FakeMap uput = new FakeMap("uput")
     {
         public Object get(Object entry)
         {
-            if (currentKey != null)
+            if (key != null)
             {
-                if (currentKey == K_INIT)
-                    throw new RuntimeException("Misuse of chain.");
-                
-                uput(currentKey, entry);
-                currentKey = null;
+                $uput(key, entry);
+                key = null;
                 return Writable.this;
             }
             
             HasName hn = (HasName)entry;
-            uput(hn.getName(), hn);
+            $uput(hn.getName(), hn);
             return Writable.this;
         }
     };
     
-    void uput(Object key, Object value)
+    void $uput(Object key, Object value)
     {
         if (!map.containsKey(key))
         {
@@ -470,58 +637,64 @@ public final class Writable
         }
     }
     
-    final FakeMap uputadd = new FakeMap("uputadd")
+    /**
+     * Puts only unique entries into the map and added to list.
+     * <pre>
+     *   «(writable.k.(field.name).uput_and_add.(field))»
+     * </pre>
+     */
+    public final FakeMap uput_and_add = new FakeMap("uput_and_add")
     {
         public Object get(Object entry)
         {
-            if (currentKey != null)
+            if (key != null)
             {
-                if (currentKey == K_INIT)
-                    throw new RuntimeException("Misuse of chain.");
-                
-                uputadd(currentKey, entry);
-                currentKey = null;
+                $uput_and_add(key, entry);
+                key = null;
                 return Writable.this;
             }
             
             HasName hn = (HasName)entry;
-            uputadd(hn.getName(), hn);
+            $uput_and_add(hn.getName(), hn);
             return Writable.this;
         }
     };
     
-    void uputadd(Object key, Object value)
+    void $uput_and_add(Object key, Object value)
     {
         if (!map.containsKey(key))
         {
-            // unique, 
+            // unique
             map.put(key, value);
             list.add(value);
         }
     }
     
-    final FakeMap putlist = new FakeMap("putlist")
+    /**
+     * The entry will be a list that contains the values that are mapped to the same key.
+     * <pre>
+     *   «(writable.k.(field.name).putlist.(field))»
+     * </pre>
+     */
+    public final FakeMap putlist = new FakeMap("putlist")
     {
         public Object get(Object entry)
         {
-            if (currentKey != null)
+            if (key != null)
             {
-                if (currentKey == K_INIT)
-                    throw new RuntimeException("Misuse of chain.");
-                
-                putlist(currentKey, entry);
-                currentKey = null;
+                $putlist(key, entry);
+                key = null;
                 return Writable.this;
             }
             
             HasName hn = (HasName)entry;
-            putlist(hn.getName(), hn);
+            $putlist(hn.getName(), hn);
             return Writable.this;
         }
     };
     
     @SuppressWarnings("unchecked")
-    void putlist(Object key, Object value)
+    void $putlist(Object key, Object value)
     {
         ArrayList<Object> existing = (ArrayList<Object>)map.get(key);
         if (existing == null)
@@ -533,7 +706,13 @@ public final class Writable
         existing.add(value);
     }
     
-    final FakeMap sublist = new FakeMap("sublist")
+    /**
+     * Returns a sublist based on the arg.
+     * <pre>
+     *   «(writable.sublist.("2"))»
+     * </pre>
+     */
+    public final FakeMap sublist = new FakeMap("sublist")
     {
         public Object get(Object entry)
         {
@@ -544,13 +723,19 @@ public final class Writable
                         l.subList(number, l.size() - number);
             }
             
-            int start = ((Integer)entry).intValue();
+            int start = $int(entry);
             return start == list.size() ? Collections.EMPTY_LIST : 
                     list.subList(start, list.size() - start);
         }
     };
     
-    final FakeMap pfxlist = new FakeMap("pfxlist")
+    /**
+     * Returns a sublist based on the arg.
+     * <pre>
+     *   «(writable.pfxlist.("2"))»
+     * </pre>
+     */
+    public final FakeMap pfxlist = new FakeMap("pfxlist")
     {
         public Object get(Object entry)
         {
@@ -561,54 +746,72 @@ public final class Writable
                         l.subList(0, number + 1);
             }
             
-            int inclusiveEnd = ((Integer)entry).intValue();
+            int inclusiveEnd = $int(entry);
             return inclusiveEnd == list.size() - 1 ? list : 
                     list.subList(0, inclusiveEnd + 1);
         }
     };
     
-    final FakeMap substr = new FakeMap("substr")
+    /**
+     * Returns a substring based on the arg.
+     * <pre>
+     *   «writable.k.("foo").substr.("1")» // returns oo
+     * </pre>
+     */
+    public final FakeMap substr = new FakeMap("substr")
     {
         public Object get(Object entry)
         {
-            if (currentKey == null || currentKey == K_INIT)
+            if (key == null)
                 throw new RuntimeException("Misuse of chain.");
             
-            String str = currentKey.toString();
-            currentKey = null;
+            String str = key.toString();
+            key = null;
             
-            int start = ((Integer)entry).intValue();
+            int start = $int(entry);
             return start == 0 ? str : str.substring(start);
         }
     };
     
-    final FakeMap pfxstr = new FakeMap("pfxstr")
+    /**
+     * Returns a substring based on the arg.
+     * <pre>
+     *   «writable.k.("foo").pfxstr.(1)» // returns fo
+     * </pre> 
+     */
+    public final FakeMap pfxstr = new FakeMap("pfxstr")
     {
         public Object get(Object entry)
         {
-            if (currentKey == null || currentKey == K_INIT)
+            if (key == null)
                 throw new RuntimeException("Misuse of chain.");
             
-            String str = currentKey.toString();
-            currentKey = null;
+            String str = key.toString();
+            key = null;
             
-            int inclusiveEnd = ((Integer)entry).intValue();
+            int inclusiveEnd = $int(entry);
             return inclusiveEnd == str.length() - 1 ? str : 
                     str.substring(0, inclusiveEnd + 1);
         }
     };
     
-    final FakeMap pfxstr__ = new FakeMap("pfxstr__")
+    /**
+     * Returns a substring (counting the delimiter) based on the arg.
+     * <pre>
+     *   «writable.k.("foo__bar__baz").pfxstr.("1")» // returns foo__bar
+     * </pre>
+     */
+    public final FakeMap pfxstr__ = new FakeMap("pfxstr__")
     {
         public Object get(Object entry)
         {
-            if (currentKey == null || currentKey == K_INIT)
+            if (key == null)
                 throw new RuntimeException("Misuse of chain.");
             
-            String str = currentKey.toString();
-            currentKey = null;
+            String str = key.toString();
+            key = null;
             
-            int count = 1 + ((Integer)entry).intValue(), start = 0;
+            int count = 1 + $int(entry), start = 0;
             for (int i = 0; i < count; i++)
             {
                 int idx = str.indexOf("__", start);
@@ -623,28 +826,28 @@ public final class Writable
     };
     
     /**
-     * Atomic query and put.  Returns null if not unique.
+     * Returns the {@link Writable} if the entry is unique.
+     * <pre>
+     *   «writable.k.(field.name).unique.(field).add.(field)» // adds the field if unique
+     * </pre>
      */
-    final FakeMap unique = new FakeMap("unique")
+    public final FakeMap unique = new FakeMap("unique")
     {
         public Object get(Object entry)
         {
-            if (currentKey != null)
+            if (key != null)
             {
-                if (currentKey == K_INIT)
-                    throw new RuntimeException("Misuse of chain.");
-                
-                Object ret = unique(currentKey, entry);
-                currentKey = null;
+                Object ret = $unique(key, entry);
+                key = null;
                 return ret;
             }
             
             HasName hn = (HasName)entry;
-            return unique(hn.getName(), hn);
+            return $unique(hn.getName(), hn);
         }
     };
     
-    Object unique(Object key, Object value)
+    Object $unique(Object key, Object value)
     {
         if (!map.containsKey(key))
         {
@@ -653,33 +856,52 @@ public final class Writable
             return this;
         }
         
-        return null;
+        return EMPTY;
     }
     
     /**
-     * Fill objects.
+     * Fill the contents based on the key.
+     * <pre>
+     *   «writable.k.("@Annotation.fK").fill.(message)»
+     *   
+     *   Example:
+     *   &#64;Annotation (f0 = "foo", f1 = "bar", f2 = "baz")
+     *   message Foo {
+     *     required string name = 1;
+     *   }
+     * 
+     *   With the example above it is equivalent to:
+     *     map.put("f", ["f0", "f1", "f2"])
+     *   
+     *   If the key is "@Annotation.fV", then it is equivalent to:
+     *     map.put("f", ["foo", "bar", "baz"])
+     *   
+     *   If the key is "@Annotation.fI", then it is equivalent to:
+     *     map.put("f", ["foo", "bar", "baz"])
+     *     map.put("foo", 0)
+     *     map.put("bar", 1)
+     *     map.put("baz", 2)
+     *   
+     * </pre>
      */
-    final FakeMap fill = new FakeMap("fill")
+    public final FakeMap fill = new FakeMap("fill")
     {
         public Object get(Object entry)
         {
-            if (currentKey != null)
+            if (key != null)
             {
-                if (currentKey == K_INIT)
-                    throw new RuntimeException("Misuse of chain.");
-                
-                Object ret = fill((String)currentKey, entry);
-                currentKey = null;
+                Object ret = $fill(key.toString(), entry);
+                key = null;
                 return ret;
             }
             
             // the entry is the key and the target to fill will be the map/list 
             // of this instance.
-            return fill(String.valueOf(entry), null);
+            return $fill(entry.toString(), null);
         }
     };
     
-    Object fill(String key, Object value)
+    Object $fill(String key, Object value)
     {
         switch(key.charAt(0))
         {
@@ -747,15 +969,10 @@ public final class Writable
     
     /* ================================================== */
     
-    public ArrayList<Object> getList()
-    {
-        return list;
-    }
-    
     /**
      * Compares the last two elements in the list.
      * 
-     * Called from stringtemplate via "&lt;writable.add.(obj1).add.(obj2).same&gt;"
+     * Called from stringtemplate via «writable.add.(obj1).add.(obj2).same»
      */
     public boolean getSame()
     {
@@ -766,17 +983,12 @@ public final class Writable
     /**
      * Compares the last two elements in the list (and removes them at the same time).
      * 
-     * Called from stringtemplate via "&lt;writable.add.(obj1).add.(obj2).popsame&gt;"
+     * Called from stringtemplate via «writable.add.(obj1).add.(obj2).popsame»
      */
     public boolean getPopsame()
     {
         int size = list.size();
         return list.remove(size-1) == list.remove(size-2);
-    }
-    
-    public int getNumber()
-    {
-        return number;
     }
     
     public int getGetandinc()
@@ -802,196 +1014,49 @@ public final class Writable
     }
     
     /**
-     * Allias to {@link #getNumber()}.
+     * Shorthand to {@link #number}.
      */
     public int getNum()
     {
-        return getNumber();
+        return number;
     }
     
     /**
-     * Alias to {@link #getSetnumber()}.
+     * Shorthand to {@link #setnumber}.
      */
     public FakeMap getN()
     {
-        return getSetnumber();
+        return setnumber;
     }
     
+    /**
+     * Gets the list's first element (counterpart to {@link #set0}).
+     */
     public Object getGet0()
     {
         return list.get(0);
     }
     
-    public FakeMap getSet0()
-    {
-        return set0;
-    }
-    
     /**
-     * Formats the currentKey with the arg.
-     * 
-     * Called from stringtemplate via "&lt;writable.k.(message.name).fmt.("UC")&gt;"
+     * Shorthand to {@link #arg}.
      */
-    public FakeMap getFmt()
-    {
-        return fmt;
-    }
-    
-    /**
-     * Compares the number against the arg.
-     * 
-     * Called from stringtemplate via "&lt;writable.n.(0).eq.(0)&gt;"
-     */
-    public FakeMap getEq()
-    {
-        return eq;
-    }
-    
-    /**
-     * Compares the number against the arg.
-     * 
-     * Called from stringtemplate via "&lt;writable.n.(0).gt.(0)&gt;"
-     */
-    public FakeMap getGt()
-    {
-        return gt;
-    }
-    
-    /**
-     * Compares the number against the arg.
-     * 
-     * Called from stringtemplate via "&lt;writable.n.(0).gte.(0)&gt;"
-     */
-    public FakeMap getGte()
-    {
-        return gte;
-    }
-    
-    /**
-     * Compares the number against the arg.
-     * 
-     * Called from stringtemplate via "&lt;writable.n.(0).lt.(0)&gt;"
-     */
-    public FakeMap getLt()
-    {
-        return lt;
-    }
-    
-    /**
-     * Compares the number against the arg.
-     * 
-     * Called from stringtemplate via "&lt;writable.n.(0).lte.(0)&gt;"
-     */
-    public FakeMap getLte()
-    {
-        return lte;
-    }
-    
-    /**
-     * Compares the key against the arg.
-     * 
-     * Called from stringtemplate via "&lt;writable.k.("foo").keq.("foo")&gt;"
-     */
-    public FakeMap getKeq()
-    {
-        return keq;
-    }
-    
-    public FakeMap getIntersect()
-    {
-        return intersect;
-    }
-    
-    /**
-     * Merges the number against the arg.
-     * 
-     * Called from stringtemplate via "&lt;writable.n.(0).and.(0)&gt;"
-     */
-    public FakeMap getAnd()
-    {
-        return and;
-    }
-    
-    /**
-     * Merges the number against the arg.
-     * 
-     * Called from stringtemplate via "&lt;writable.n.(0).or.(0)&gt;"
-     */
-    public FakeMap getOr()
-    {
-        return or;
-    }
-    
-    /**
-     * Merges the number against the arg.
-     * 
-     * Called from stringtemplate via "&lt;writable.n.(0).xor.(0)&gt;"
-     */
-    public FakeMap getXor()
-    {
-        return xor;
-    }
-    
-    /**
-     * Checks the arg if it exists.
-     * 
-     * Called from stringtemplate via "&lt;if (writable.arg.(""+field.o.("foo")).andArgs)&gt;"
-     */
-    public FakeMap getArg()
+    public FakeMap getA()
     {
         return arg;
     }
     
     /**
-     * Alias to {@link #getArg()}.
+     * Shorthand to {@link #notarg}.
      */
-    public FakeMap getA()
-    {
-        return getArg();
-    }
-    
-    /**
-     * Checks the arg if it does not exist.
-     * 
-     * Called from stringtemplate via "&lt;if (writable.notarg.(""+field.o.("foo")).andArgs)&gt;"
-     */
-    public FakeMap getNotarg()
+    public FakeMap getNa()
     {
         return notarg;
     }
     
     /**
-     * Alias to {@link #getNotarg()}.
-     */
-    public FakeMap getNa()
-    {
-        return getNotarg();
-    }
-    
-    /**
-     * Checks if the key is inside the arg.
-     * 
-     * Called from stringtemplate via "&lt;if (writable.k.("foo").in.(options).andArgs)&gt;"
-     */
-    public FakeMap getIn()
-    {
-        return in;
-    }
-    
-    /**
-     * Checks if the key is not inside the arg.
-     * 
-     * Called from stringtemplate via "&lt;if (writable.k.("foo").notin.(options).andArgs)&gt;"
-     */
-    public FakeMap getNotin()
-    {
-        return notin;
-    }
-    
-    /**
      * Evaluates the args (added to {@link #list}).
      * 
-     * Called from stringtemplate via "&lt;if (writable.a.(""+field.o.("1")).a.(""+field.o.("2")).andArgs)&gt;"
+     * Called from stringtemplate via «if(writable.a.(""+field.o.("1")).a.(""+field.o.("2")).andArgs)»
      */
     public boolean getAndArgs()
     {
@@ -1006,7 +1071,7 @@ public final class Writable
     /**
      * Evaluates the args (added to {@link #list}).
      * 
-     * Called from stringtemplate via "&lt;if (writable.a.(""+field.o.("1")).a.(""+field.o.("2")).orArgs)&gt;"
+     * Called from stringtemplate via «if(writable.a.(""+field.o.("1")).a.(""+field.o.("2")).orArgs)»
      */
     public boolean getOrArgs()
     {
@@ -1017,249 +1082,15 @@ public final class Writable
         
         return ret;
     }
-    
-    /**
-     * Get the element at index from list if k was set.  Otherwise, the arg will 
-     * be read as 'key.0' where 'key' is used to retrieve the list from the map 
-     * and '0' is the index.
-     * 
-     * Called from stringtemplate via:
-     * <pre>
-     * &lt;writable.k.("0").get.(message.fields)&gt;
-     * &lt;writable.k.(1).get.(message.fields)&gt;
-     * &lt;(writable.get.("key.0"))&gt;
-     * </pre>
-     */
-    public FakeMap getGet()
-    {
-        return get;
-    }
-    
-    /**
-     * Sets the number.
-     * 
-     * Called from stringtemplate via "&lt;(writable.setnumber.(2))&gt;"
-     */
-    public FakeMap getSetnumber()
-    {
-        return setnumber;
-    }
-    
-    /**
-     * Increments the number.
-     * 
-     * Called from stringtemplate via "&lt;(writable.incby.(2))&gt;"
-     */
-    public FakeMap getIncby()
-    {
-        return incby;
-    }
-    
-    /**
-     * Decrements the number.
-     * 
-     * Called from stringtemplate via "&lt;(writable.decby.(2)&gt;"
-     */
-    public FakeMap getDecby()
-    {
-        return decby;
-    }
-    
-    /**
-     * Returns a sublist based on the arg.
-     * 
-     * Called from stringtemplate via "&lt;(writable.sublist.(2))&gt;"
-     */
-    public FakeMap getSublist()
-    {
-        return sublist;
-    }
-    
-    /**
-     * Returns a sublist based on the arg.
-     * 
-     * Called from stringtemplate via "&lt;(writable.pfxlist.(2))&gt;"
-     */
-    public FakeMap getPfxlist()
-    {
-        return pfxlist;
-    }
-    
-    /**
-     * Returns a substring based on the arg.
-     * 
-     * Called from stringtemplate via "&lt;writable.k.("foo").substr.(1)&gt;" - which
-     * returns "oo".
-     */
-    public FakeMap getSubstr()
-    {
-        return substr;
-    }
-    
-    /**
-     * Returns a substring based on the arg.
-     * 
-     * Called from stringtemplate via "&lt;writable.k.("foo").pfxstr.(1)&gt;" - which
-     * returns "fo".
-     */
-    public FakeMap getPfxstr()
-    {
-        return pfxstr;
-    }
-    
-    /**
-     * Returns a substring (counting the delimiter) based on the arg.
-     * 
-     * Called from stringtemplate via "&lt;writable.k.("foo__bar__baz").pfxstr.(1)&gt;" - which
-     * returns "foo__bar".
-     */
-    public FakeMap getPfxstr__()
-    {
-        return pfxstr__;
-    }
-    
-    /**
-     * Removes an item from the map.
-     * 
-     * Called from stringtemplate via "&lt;(writable.mremove.("1"))&gt;"
-     */
-    public FakeMap getMremove()
-    {
-        return mremove;
-    }
-    
-    /**
-     * Removes an item from the list.
-     * 
-     * Called from stringtemplate via "&lt;(writable.lremove.(1))&gt;"
-     */
-    public FakeMap getLremove()
-    {
-        return lremove;
-    }
-    
-    /**
-     * Adds to the list.
-     * 
-     * Called from stringtemplate via "&lt;(writable.add.(field))&gt;"
-     */
-    public FakeMap getAdd()
-    {
-        return add;
-    }
-    
-    /**
-     * Adds all the elements to the list.
-     * 
-     * Called from stringtemplate via "&lt;(writable.addall.(field))&gt;"
-     */
-    public FakeMap getAddall()
-    {
-        return addall;
-    }
-    
-    /**
-     * Adds to the list and puts to the map.
-     * 
-     * Called from stringtemplate via "&lt;(writable.addput.(field))&gt;"
-     */
-    public FakeMap getAddput()
-    {
-        return addput;
-    }
-    
-    /**
-     * Adds to the list and puts only the unique entry to the map.
-     * 
-     * Called from stringtemplate via "&lt;(writable.addput.(field))&gt;"
-     */
-    public FakeMap getAdduput()
-    {
-        return adduput;
-    }
-    
+
     /* ================================================== */
     
-    public Map<Object,Object> getMap()
-    {
-        return map;
-    }
-    
     /**
-     * Puts into the map.
-     * 
-     * Called from stringtemplate via "&lt;(writable.put.(field))&gt;"
-     */
-    public FakeMap getPut()
-    {
-        return put;
-    }
-    
-    /**
-     * Puts only unique entries into the map.
-     * 
-     * Called from stringtemplate via "&lt;(writable.uput.(field))&gt;"
-     */
-    public FakeMap getUput()
-    {
-        return uput;
-    }
-    
-    /**
-     * Puts only unique entries into the map and added to list.
-     * 
-     * Called from stringtemplate via "&lt;(writable.uput.(field))&gt;"
-     */
-    public FakeMap getUputadd()
-    {
-        return uputadd;
-    }
-    
-    /**
-     * The entry will be a list that contains the values that are mapped to the same key.
-     * 
-     * Called from stringtemplate via "&lt;(writable.putlist.(field))&gt;"
-     */
-    public FakeMap getPutlist()
-    {
-        return putlist;
-    }
-    
-    /**
-     * Returns true if the entry is unique;
-     * 
-     * Called from stringtemplate via "&lt;(writable.unique.(field))&gt;"
-     */
-    public FakeMap getUnique()
-    {
-        return unique;
-    }
-    
-    /**
-     * Fill the contents based on the parameter.
-     */
-    public FakeMap getFill()
-    {
-        return fill;
-    }
-    
-    /**
-     * Returns a map that the caller should use to set the key and then chain.
-     * <pre>
-     * E.g "&lt;writable.k.("key").put.("value")&gt;".
-     * 
-     * You can also chain it continuously as long as its the order is key->value.
-     * E.g "&lt;writable.k.("k1").put.("v1").k.("k2").put.("v2")&gt;".
-     * </pre>
+     * Shorthand to {@link #setkey}.
      */
     public FakeMap getK()
     {
-        if (currentKey != null)
-            throw new RuntimeException("Misuse of chain.");
-        
-        currentKey = K_INIT;
-        
-        return add;
+        return setkey;
     }
     
     public boolean isEmptyList()
@@ -1290,22 +1121,25 @@ public final class Writable
         return this;
     }
     
+    /**
+     * Sets the number to zero and clears the list and map.
+     */
     public Writable getClearAll()
     {
+        number = 0;
         list.clear();
         map.clear();
-        number = 0;
         return this;
     }
     
     @SuppressWarnings("rawtypes")
     public boolean isListAndKeySameSize()
     {
-        if (currentKey == null || currentKey == K_INIT)
+        if (key == null)
             throw new RuntimeException("Misuse of chain.");
         
-        Object existing = map.get(currentKey);
-        currentKey = null;
+        Object existing = map.get(key);
+        key = null;
         if (existing instanceof Map)
             return list.size() == ((Map)existing).size();
         
