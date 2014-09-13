@@ -34,18 +34,12 @@ public final class FakeMapUtil
     
     static
     {
-        // fields
-        CountMap.addAllTo(LIST);
-        FilterMap.addAllTo(LIST);
+        // message
+        CountMap.addAllTo(LIST); // returns field count
+        FilterMap.addAllTo(LIST); // returns field list
         
         // field
         IsFieldMap.addAllTo(LIST);
-        
-        // any annotation container:
-        // EnumGroup, EnumGroup.Value, 
-        // Service, Service.RpcMethod,
-        // Message, Field
-        AnnotationMap.addAllTo(LIST);
         
         // string
         SplitMap.addAllTo(LIST);

@@ -14,7 +14,6 @@
 
 package io.protostuff.fbsgen.compiler;
 
-import io.protostuff.fbsgen.compiler.map.AnnotationMap;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.AnnotationContainer;
 import io.protostuff.fbsgen.parser.HasName;
@@ -713,28 +712,28 @@ public final class Writable
                         case 'K':
                         {
                             String entry = key.substring(dot+1, last);
-                            map.put("$" + entry, AnnotationMap.fillKeys(
+                            map.put("$" + entry, AnnotationUtil.fillKeys(
                                     new ArrayList<String>(), a, entry));
                             break;
                         }
                         case 'V':
                         {
                             String entry = key.substring(dot+1, last);
-                            map.put("$" + entry, AnnotationMap.fillList(
+                            map.put("$" + entry, AnnotationUtil.fillList(
                                     new ArrayList<Object>(), a, entry));
                             break;
                         }
                         case 'I':
                         {
                             String entry = key.substring(dot+1, last);
-                            map.put("#" + entry, AnnotationMap.fillList(
+                            map.put("#" + entry, AnnotationUtil.fillList(
                                     new ArrayList<Object>(), a, entry, map));
                             break;
                         }
                             
                         default:
                             String entry = key.substring(dot+1);
-                            map.put("$" + entry, AnnotationMap.fillMap(
+                            map.put("$" + entry, AnnotationUtil.fillMap(
                                     new LinkedHashMap<String,Object>(), a, entry));
                     }
                 }
