@@ -1,4 +1,4 @@
-package hello.world;
+package test;
 
 @int8
 enum Size {
