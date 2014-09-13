@@ -1126,6 +1126,7 @@ public final class Writable
      */
     public Writable getClearAll()
     {
+        key = null;
         number = 0;
         list.clear();
         map.clear();

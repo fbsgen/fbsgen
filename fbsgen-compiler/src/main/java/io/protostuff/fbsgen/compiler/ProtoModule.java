@@ -41,6 +41,8 @@ public class ProtoModule implements Serializable
     private CachingProtoLoader protoLoader;
 
     private HashMap<String, Object> attributes = new HashMap<String, Object>();
+    
+    private Writable writable;
 
     public ProtoModule()
     {
@@ -62,77 +64,46 @@ public class ProtoModule implements Serializable
         this.outputDir = outputDir;
     }
 
-    /**
-     * @return the source
-     */
     public File getSource()
     {
         return source;
     }
 
-    /**
-     * @param source
-     *            the source to set
-     */
     public void setSource(File source)
     {
         this.source = source;
     }
 
-    /**
-     * @return the output
-     */
     public String getOutput()
     {
         return output;
     }
 
-    /**
-     * @param output
-     *            the output to set
-     */
     public void setOutput(String output)
     {
         this.output = output;
     }
 
-    /**
-     * @return the encoding
-     */
     public String getEncoding()
     {
         return encoding;
     }
 
-    /**
-     * @param encoding
-     *            the encoding to set
-     */
     public void setEncoding(String encoding)
     {
         this.encoding = encoding;
     }
 
-    /**
-     * @return the outputDir
-     */
     public File getOutputDir()
     {
         return outputDir;
     }
 
-    /**
-     * @param outputDir
-     *            the outputDir to set
-     */
     public void setOutputDir(File outputDir)
     {
         this.outputDir = outputDir;
     }
 
-    /**
-     * @return the options
-     */
     public Properties getOptions()
     {
         return options;
@@ -146,9 +117,6 @@ public class ProtoModule implements Serializable
         return getOptions();
     }
 
-    /**
-     * @param options
-     */
     public void setOptions(Properties options)
     {
         this.options.putAll(options);
@@ -203,5 +171,38 @@ public class ProtoModule implements Serializable
     public HashMap<String, Object> getA()
     {
         return getAttributes();
+    }
+    
+    /**
+     * Lazily creates a {@link Writable}.
+     */
+    public Writable getWritable()
+    {
+        if (writable == null)
+            writable = new Writable();
+        
+        return writable;
+    }
+    
+    /**
+     * Alias to {@link #getWritable()}.
+     */
+    public Writable getW()
+    {
+        return getWritable();
+    }
+    
+    public void clear()
+    {
+        clear(false);
+    }
+    
+    public void clear(boolean clearAttrs)
+    {
+        if (writable != null)
+            writable.getClearAll();
+        
+        if (clearAttrs)
+            attributes.clear();
     }
 }

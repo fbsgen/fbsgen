@@ -2,10 +2,6 @@ import "fbsgen/base"
 import "fbsgen/dict"
 
 proto_block(proto, module) ::= <<
-«main_proto_block(proto, module, new_writable.(true))»
->>
-
-main_proto_block(proto, module, writable) ::= <<
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,15 +70,15 @@ main_proto_block(proto, module, writable) ::= <<
   <div>
     <b>«if(module.o.("raw"))»package«else»namespace«endif»</b> «proto.declaredPackageName»;
   </div>
-  «proto.messages:message_block(module, writable); separator="\n"»
-  «proto.enumGroups:enum_block(module, writable); separator="\n"»
+  «proto.messages:message_block(module); separator="\n"»
+  «proto.enumGroups:enum_block(module); separator="\n"»
 </body>
 >>
 
-enum_block(eg, module, writable, nested=false) ::= <<
+enum_block(eg, module, nested=false) ::= <<
 <div class="enum«if(nested)» nested«endif»">
   <h2>
-    «enum_top(eg, module, writable)»
+    «enum_top(eg, module)»
     <span>enum</span>
     <a href="#«eg.relativeName; format="\.==-"»" id="«eg.relativeName; format="\.==-"»">
       «if(module.o.("raw"))»
@@ -94,29 +90,29 @@ enum_block(eg, module, writable, nested=false) ::= <<
     «if(!module.o.("raw"))»
     <span class="attr">: <b>«get_fbs_int_type.(eg.ta.name)»</b>«if(!eg.ta.emptyP)» («eg.ta.p:{k|«k»: «eg.ta.p.(k)»}; separator=", "»)«endif»</span>
     «endif»
-    «eg.declaredValues:v_decl(module, writable); separator="\n"»
+    «eg.declaredValues:v_decl(module); separator="\n"»
   </h2>
 </div>
 >>
 
-enum_top(eg, module, writable) ::= <%
+enum_top(eg, module) ::= <%
 «if(module.o.("raw"))»
 «eg.comments:{c|<div class="comment">/// «c»</div>}; separator="\n"»
 «eg.a.values:{a|<div>@«a.name»«if(!a.emptyP)»(«a.p:{k|«k» = «a.p.(k)»}; separator=", "»)«endif»</div>}; separator="\n"»
 «endif»
 %>
 
-v_decl(v, module, writable) ::= <<
+v_decl(v, module) ::= <<
 <div class="field">
   <span>«v.name»</span> = «v.number»;
 </div>
 >>
 
-message_block(message, module, writable, nested=false) ::= <<
+message_block(message, module, nested=false) ::= <<
 <div class="message«if(nested)» nested«endif»">
   <h2>
-    «message_top(message, module, writable)»
-    <span>«message_kind(message, module, writable)»</span>
+    «message_top(message, module)»
+    <span>«message_kind(message, module)»</span>
     <a href="#«message.relativeName; format="\.==-"»" id="«message.relativeName; format="\.==-"»">
       «if(module.o.("raw"))»
       «message.name»
@@ -131,27 +127,27 @@ message_block(message, module, writable, nested=false) ::= <<
     «endif»
   </h2>
   «if(module.o.("raw"))»
-  «message.declaredFields:raw_field_decl(module, writable); separator="\n"»
-  «message.nestedMessages:message_block(module, writable, true); separator="\n"»
-  «message.nestedEnumGroups:enum_block(module, writable, true); separator="\n"»
+  «message.declaredFields:raw_field_decl(module); separator="\n"»
+  «message.nestedMessages:message_block(module, true); separator="\n"»
+  «message.nestedEnumGroups:enum_block(module, true); separator="\n"»
   «else»
-  «message.declaredFields:fbs_field_decl(module, writable); separator="\n"»
+  «message.declaredFields:fbs_field_decl(module); separator="\n"»
   «endif»
 </div>
 «if(!module.o.("raw"))»
-«message.nestedMessages:message_block(module, writable); separator="\n"»
-«message.nestedEnumGroups:enum_block(module, writable); separator="\n"»
+«message.nestedMessages:message_block(module); separator="\n"»
+«message.nestedEnumGroups:enum_block(module); separator="\n"»
 «endif»
 >>
 
-message_top(message, module, writable) ::= <%
+message_top(message, module) ::= <%
 «if(module.o.("raw"))»
 «message.comments:{c|<div class="comment">/// «c»</div>}; separator="\n"»
 «message.a.values:{a|<div>@«a.name»«if(!a.emptyP)»(«a.p:{k|«k» = «a.p.(k)»}; separator=", "»)«endif»</div>}; separator="\n"»
 «endif»
 %>
 
-message_kind(message, module, writable) ::= <%
+message_kind(message, module) ::= <%
 «if(module.o.("raw"))»
 message
 «elseif(message.a.("struct"))»
@@ -161,14 +157,14 @@ table
 «endif»
 %>
 
-fbs_field_decl(field, module, writable) ::= <<
+fbs_field_decl(field, module) ::= <<
 <div class="field«if(field.enumField)» e«endif»">
-  <span>«field.name»</span>: «if(field.repeated)»[«endif»<b>«fbs_field_type(field, module, writable)»</b>«if(field.repeated)»]«endif»
-  (id: «writable.n.(field.number).dec.num»«if(field.o.("deprecated"))», deprecated«endif»);
+  <span>«field.name»</span>: «if(field.repeated)»[«endif»<b>«fbs_field_type(field, module)»</b>«if(field.repeated)»]«endif»
+  (id: «module.w.n.(field.number).dec.num»«if(field.o.("deprecated"))», deprecated«endif»);
 </div>
 >>
 
-fbs_field_type(field, module, writable) ::= <%
+fbs_field_type(field, module) ::= <%
 «if(field.userDefinedType)»
 <a href="#«field.userDefinedType.relativeName; format="\.==-"»"><i>«field.fbsType»</i></a>
 «else»
@@ -176,14 +172,14 @@ fbs_field_type(field, module, writable) ::= <%
 «endif»
 %>
 
-raw_field_decl(field, module, writable) ::= <<
+raw_field_decl(field, module) ::= <<
 <div class="field«if(field.enumField)» e«endif»">
   «field.comments:{c|<div class="comment">/// «c»</div>}; separator="\n"»
-  <i>«field.modifier; format="LOWER"»</i> <b>«raw_field_type(field, module, writable)»</b> <span>«field.name»</span> = «field.number»;
+  <i>«field.modifier; format="LOWER"»</i> <b>«raw_field_type(field, module)»</b> <span>«field.name»</span> = «field.number»;
 </div>
 >>
 
-raw_field_type(field, module, writable) ::= <%
+raw_field_type(field, module) ::= <%
 «if(field.userDefinedType)»
 <a href="#«field.userDefinedType.relativeName; format="\.==-"»"><i>«field.javaType»</i></a>
 «else»
