@@ -155,9 +155,9 @@ public final class CompilerMain
         if (output == null)
             throw err(name + " must have an output");
 
-        String outputDir = props.getProperty(name + ".outputDir");
+        String outputDir = props.getProperty(name + ".output_dir");
         if (outputDir == null)
-            throw err(name + " must have an outputDir");
+            throw err(name + " must have an output_dir");
 
         String encoding = props.getProperty(name + ".encoding");
 
@@ -258,38 +258,34 @@ public final class CompilerMain
         System.err.println("\nThe properties file would look like:");
         System.err.println("modules = foo");
         System.err.println("foo.source = path/to/your/proto/file/or/dir");
-        System.err.println("foo.output = java_bean");
-        System.err.println("foo.outputDir = src/main/java");
-        System.err.println("foo.encoding = UTF-8");
+        System.err.println("foo.output = output");
+        System.err.println("foo.output_dir = path/to/dir");
         System.err.println("foo.options = key1:value1,key2:value2");
     }
 
     static void usage()
     {
         System.err.println("\nTo generate code for multiple modules:");
-        System.err.println("  java -cp -jar protostuff-compiler.jar modules.properties");
+        System.err.println("  java -jar fbsgen.jar codegen.properties");
 
         System.err.println("\nThe properties file would look like:\n");
         System.err.println("modules = foo,bar");
         System.err.println("foo.source = path/to/your/proto/file/or/dir");
-        System.err.println("foo.output = java_bean");
-        System.err.println("foo.outputDir = src/main/java");
-        System.err.println("foo.encoding = UTF-8");
+        System.err.println("foo.output = output1");
+        System.err.println("foo.output_dir = path/to/dir");
         System.err.println("foo.options = key1:value1,key2:value2");
 
         System.err.println("bar.source = path/to/your/proto/file/or/dir");
-        System.err.println("bar.output = java_bean");
-        System.err.println("bar.outputDir = target/generated");
-        System.err.println("bar.encoding = UTF-8");
-        System.err.println("bar.options = separate_schema,generate_field_map");
+        System.err.println("bar.output = output2");
+        System.err.println("bar.output_dir = path/to/dir");
+        System.err.println("bar.options = foo:bar");
 
         System.err.println("\n===================================================\n");
 
-        System.err.println("\nTo generate code for a single module, execute the jar without args and specify:");
+        System.err.println("\nTo generate code for a single module, you can also execute the jar without args and specify:");
         System.err.println("  -Dsource=path/to/your/proto/file/or/dir");
-        System.err.println("  -Doutput=java_bean");
-        System.err.println("  -DoutputDir=src/main/java");
-        System.err.println("  -Dencoding=UTF-8");
+        System.err.println("  -Doutput=output");
+        System.err.println("  -Doutput_dir=path/to/dir");
         System.err.println("  -Doptions=key1:value1,key2:value2");
     }
 
@@ -389,7 +385,7 @@ public final class CompilerMain
 
         String source = props.getProperty("source");
         String output = props.getProperty("output");
-        String outputDir = props.getProperty("outputDir");
+        String outputDir = props.getProperty("output_dir");
         String encoding = props.getProperty("encoding");
         String options = props.getProperty("options");
 
