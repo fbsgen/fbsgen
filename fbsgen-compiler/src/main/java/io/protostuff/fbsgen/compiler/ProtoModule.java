@@ -192,17 +192,19 @@ public class ProtoModule implements Serializable
         return getWritable();
     }
     
-    public void clear()
+    public ProtoModule clear()
     {
-        clear(false);
+        return clear(false);
     }
     
-    public void clear(boolean clearAttrs)
+    public ProtoModule clear(boolean clearAttrs)
     {
         if (writable != null)
             writable.getClearAll();
         
         if (clearAttrs)
             attributes.clear();
+        
+        return this;
     }
 }

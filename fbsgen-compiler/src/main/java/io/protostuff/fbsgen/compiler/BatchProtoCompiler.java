@@ -74,7 +74,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
         final String activeStgsOption = module.getOption("active_stgs");
         
         if (stgsOption == null && activeStgsOption == null)
-            throw err("Required option: stgs or active_stgs");
+            throw err("A batch output requires at least one of these options: stgs, active_stgs");
         
         final String[] stgs = stgsOption == null ? new String[0] : 
             SEMI_COLON.split(stgsOption);
@@ -183,7 +183,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
                 overrideAndAddTo(overridden, module, proto, registry, foreignProtoPathMap);
             
             if (registryBlockTemplate != null)
-                compileToSingleFile(module, registry, stg, registryBlockTemplate);
+                compileToSingleFile(module.clear(), registry, stg, registryBlockTemplate);
             else if (active)
                 compileActive(module, registry, stg);
             else
@@ -252,7 +252,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
         // hack
         module.setOutput(stg);
         
-        final TemplatedProtoCompiler compiler = new TemplatedProtoCompiler(module);
+        final TemplatedProtoCompiler compiler = new TemplatedProtoCompiler(stg);
         
         final String outputDir = getRequiredStgConfigFrom(module, stg + ".output_dir");
         
@@ -269,7 +269,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
     {
         if (compiler.protoBlockTemplate != null)
         {
-            compiler.compileProtoBlock(module, proto, 
+            compiler.compileProtoBlock(module.clear(), proto, 
                     getPackageName(proto, compiler), 
                     compiler.protoBlockTemplate);
             
@@ -286,7 +286,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
                 if (!message.getA().isEmpty() && message.getA().containsKey("Exclude"))
                     continue;
                 
-                TemplatedProtoCompiler.compileMessageBlock(module, message, 
+                TemplatedProtoCompiler.compileMessageBlock(module.clear(), message, 
                         getPackageName(message.getProto(), compiler), 
                         compiler.resolveFileName(message.getRelativeName().replaceAll("\\.", "")), 
                         compiler.messageBlockTemplate);
@@ -302,7 +302,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
                 if (!eg.getA().isEmpty() && eg.getA().containsKey("Exclude"))
                     continue;
                 
-                TemplatedProtoCompiler.compileEnumBlock(module, eg, 
+                TemplatedProtoCompiler.compileEnumBlock(module.clear(), eg, 
                         getPackageName(eg.getProto(), compiler), 
                         compiler.resolveFileName(eg.getRelativeName().replaceAll("\\.", "")), 
                         compiler.enumBlockTemplate);
@@ -319,7 +319,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
         // hack
         module.setOutput(stg);
         
-        final TemplatedProtoCompiler compiler = new TemplatedProtoCompiler(module);
+        final TemplatedProtoCompiler compiler = new TemplatedProtoCompiler(stg);
         
         final String outputDir = getRequiredStgConfigFrom(module, stg + ".output_dir");
         
@@ -330,11 +330,11 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
         if (protos != null)
         {
             if (compiler.protoBlockTemplate == null)
-                throw err("Registry requires proto_block for " + stg);
+                throw err(stg + " was mapped but does not define a proto_block.");
             
             for (Proto proto : protos)
             {
-                compiler.compileProtoBlock(module, proto, 
+                compiler.compileProtoBlock(module.clear(), proto, 
                         getPackageName(proto, compiler), 
                         compiler.protoBlockTemplate);
             }
@@ -344,14 +344,14 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
         if (messages != null)
         {
             if (compiler.messageBlockTemplate == null)
-                throw err("Registry requires message_block for " + stg);
+                throw err(stg + " was mapped but does not define a message_block.");
             
             for (Message message : messages)
             {
                 if (!message.getA().isEmpty() && message.getA().containsKey("Exclude"))
                     continue;
                 
-                TemplatedProtoCompiler.compileMessageBlock(module, message, 
+                TemplatedProtoCompiler.compileMessageBlock(module.clear(), message, 
                         getPackageName(message.getProto(), compiler), 
                         compiler.resolveFileName(message.getRelativeName().replaceAll("\\.", "")), 
                         compiler.messageBlockTemplate);
@@ -362,14 +362,14 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
         if (enumGroups != null)
         {
             if (compiler.enumBlockTemplate == null)
-                throw err("Registry requires enum_block for " + stg);
+                throw err(stg + " was mapped but does not define an enum_block.");
             
             for (EnumGroup eg : enumGroups)
             {
                 if (!eg.getA().isEmpty() && eg.getA().containsKey("Exclude"))
                     continue;
                 
-                TemplatedProtoCompiler.compileEnumBlock(module, eg, 
+                TemplatedProtoCompiler.compileEnumBlock(module.clear(), eg, 
                         getPackageName(eg.getProto(), compiler), 
                         compiler.resolveFileName(eg.getRelativeName().replaceAll("\\.", "")), 
                         compiler.enumBlockTemplate);

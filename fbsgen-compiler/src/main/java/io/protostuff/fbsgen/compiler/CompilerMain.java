@@ -301,7 +301,7 @@ public final class CompilerMain
             output = output.trim();
             ProtoCompiler compiler = __compilers.get(output);
             if (compiler == null)
-                compiler = new TemplatedProtoCompiler(module);
+                compiler = new TemplatedProtoCompiler(module.getOutput());
 
             compiler.compile(module);
 

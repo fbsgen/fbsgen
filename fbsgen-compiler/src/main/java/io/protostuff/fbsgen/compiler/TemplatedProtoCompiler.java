@@ -39,24 +39,20 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
     protected static final boolean CHECK_PLACEHOLDER = Boolean.parseBoolean(
             System.getProperty("fbsgen.check_placeholder", "true"));
     
-    public final ProtoModule module;
     public final TemplateGroup group;
     public final Template enumBlockTemplate, messageBlockTemplate, protoBlockTemplate;
     public final boolean javaOutput;
     public final String fileExtension, outputName, outputPrefix, outputSuffix;
 
-    public TemplatedProtoCompiler(ProtoModule module)
+    public TemplatedProtoCompiler(String output)
     {
-        this(module, CHECK_PLACEHOLDER);
+        this(output, CHECK_PLACEHOLDER);
     }
 
-    public TemplatedProtoCompiler(ProtoModule module, boolean checkPlaceHolder)
+    public TemplatedProtoCompiler(String output, boolean checkPlaceHolder)
     {
-        super(module.getOutput());
+        super(output);
 
-        this.module = module;
-        
-        String output = module.getOutput();
         fileExtension = TemplateUtil.getFileExtension(output);
         javaOutput = ".java".equalsIgnoreCase(fileExtension);
 
@@ -65,24 +61,8 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
         group = TemplateUtil.resolveGroup(output, outputName, fileExtension);
 
         protoBlockTemplate = group.getTemplate("proto_block");
-        if (protoBlockTemplate == null)
-        {
-            // validate that at least enum_block or message_block is present.
-            enumBlockTemplate = group.getTemplate("enum_block");
-            messageBlockTemplate = group.getTemplate("message_block");
-
-            if (enumBlockTemplate == null && messageBlockTemplate == null)
-            {
-                throw err("At least one of these templates " +
-                        "(proto_block|message_block|enum_block) " +
-                        "need to be declared in " + module.getOutput());
-            }
-        }
-        else
-        {
-            enumBlockTemplate = null;
-            messageBlockTemplate = null;
-        }
+        enumBlockTemplate = group.getTemplate("enum_block");
+        messageBlockTemplate = group.getTemplate("message_block");
         
         final int placeHolder = checkPlaceHolder ? outputName.indexOf('$') : -1;
         if (placeHolder == -1)
@@ -119,12 +99,6 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
 
     public void compile(ProtoModule module, Proto proto) throws IOException
     {
-        if (!this.module.getOutput().startsWith(module.getOutput()))
-        {
-            throw err("Wrong module: " +
-                    this.module.getOutput() + " != " + module.getOutput());
-        }
-
         final String packageName = javaOutput ? proto.getJavaPackageName() :
                 proto.getPackageName();
 
@@ -132,6 +106,13 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
         {
             compileProtoBlock(module, proto, packageName, protoBlockTemplate);
             return;
+        }
+        
+        if (enumBlockTemplate == null && messageBlockTemplate == null)
+        {
+            throw err("At least one of these templates " +
+                    "(proto_block|message_block|enum_block) " +
+                    "need to be defined in " + module.getOutput());
         }
 
         if (enumBlockTemplate != null)
