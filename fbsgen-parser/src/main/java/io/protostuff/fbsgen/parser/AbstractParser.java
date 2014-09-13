@@ -199,7 +199,7 @@ public abstract class AbstractParser extends Parser
     
     static Long validate(Proto proto, Field<?> field, long defaultValue)
     {
-        if (field.name.charAt(0) == 'U' && defaultValue < 0)
+        if (field.getClass().getSimpleName().charAt(0) == 'U' && defaultValue < 0 && defaultValue != 0xFFFFFFFFFFFFFFFFl)
             throw err(proto, field.name + " cannot have a negative default value: " + defaultValue);
         
         return Long.valueOf(defaultValue);
@@ -207,7 +207,7 @@ public abstract class AbstractParser extends Parser
     
     static Integer validate(Proto proto, Field<?> field, int defaultValue)
     {
-        if (field.name.charAt(0) == 'U' && defaultValue < 0)
+        if (field.getClass().getSimpleName().charAt(0) == 'U' && defaultValue < 0 && defaultValue != 0xFFFFFFFF)
             throw err(proto, field.name + " cannot have a negative default value: " + defaultValue);
         
         return Integer.valueOf(defaultValue);
