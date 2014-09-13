@@ -255,6 +255,14 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         return null;
     }
     
+    /**
+     * Alias to {@link #getUserDefinedType()}.
+     */
+    public HasName getUdt()
+    {
+        return getUserDefinedType();
+    }
+    
     public abstract java.lang.String getJavaType();
     
     public abstract java.lang.String getFbsType();
