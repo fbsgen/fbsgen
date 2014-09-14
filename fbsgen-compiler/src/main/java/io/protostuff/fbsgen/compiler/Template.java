@@ -14,9 +14,8 @@
 
 package io.protostuff.fbsgen.compiler;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.Map;
+import java.io.Writer;
 
 /**
  * Renders to a writer.
@@ -27,6 +26,7 @@ import java.util.Map;
 public interface Template
 {
     
-    void renderTo(BufferedWriter writer, Map<String,Object> args) throws IOException;
+    void renderTo(Writer writer, String argName, Object argValue, 
+            ProtoModule module) throws IOException;
     
 }

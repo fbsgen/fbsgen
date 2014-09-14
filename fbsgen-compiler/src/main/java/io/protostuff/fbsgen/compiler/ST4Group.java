@@ -19,12 +19,11 @@ import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.FORMAT_DELIM;
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.chainedFormat;
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.errorCount;
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.format;
-
 import io.protostuff.fbsgen.compiler.map.FakeMapUtil;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.Writer;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Locale;
@@ -349,11 +348,13 @@ public final class ST4Group extends STGroup implements TemplateGroup
         }
         
         @Override
-        public void renderTo(BufferedWriter writer, Map<String, Object> args) throws IOException
+        public void renderTo(Writer writer, String argName, 
+                Object argValue, ProtoModule module) throws IOException
         {
             ST template = group.createStringTemplate(st);
-            for (Map.Entry<String, Object> entry : args.entrySet())
-                template.add(entry.getKey(), entry.getValue());
+
+            template.add(argName, argValue);
+            template.add("module", module);
             
             AutoIndentWriter w = new AutoIndentWriter(writer);
             /*int n = */template.write(w, Locale.getDefault(), ERROR_LISTENER);

@@ -23,7 +23,6 @@ import io.protostuff.fbsgen.parser.ProtoUtil;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.HashMap;
 
 
 /**
@@ -199,11 +198,7 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
             ProtoModule module, EnumGroup eg,
             Template enumBlockTemplate) throws IOException
     {
-        HashMap<String,Object> args = new HashMap<String, Object>();
-        args.put("eg", eg);
-        args.put("module", module);
-        
-        enumBlockTemplate.renderTo(writer, args);
+        enumBlockTemplate.renderTo(writer, "eg", eg, module);
     }
 
     public static void compileMessageBlock(ProtoModule module, Message message,
@@ -221,11 +216,7 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
             ProtoModule module, Message message,
             Template messageBlockTemplate) throws IOException
     {
-        HashMap<String,Object> args = new HashMap<String,Object>();
-        args.put("message", message);
-        args.put("module", module);
-        
-        messageBlockTemplate.renderTo(writer, args);
+        messageBlockTemplate.renderTo(writer, "message", message, module);
     }
 
     public void compileProtoBlock(ProtoModule module, Proto proto,
@@ -262,12 +253,8 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
         }
 
         BufferedWriter writer = CompilerUtil.newWriter(module, packageName, fileName);
-
-        HashMap<String,Object> args = new HashMap<String, Object>();
-        args.put("proto", proto);
-        args.put("module", module);
         
-        protoBlockTemplate.renderTo(writer, args);
+        protoBlockTemplate.renderTo(writer, "proto", proto, module);
 
         writer.close();
     }

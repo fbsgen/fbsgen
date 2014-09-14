@@ -391,11 +391,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
         
         final BufferedWriter writer = CompilerUtil.newWriter(module, packageName, stg);
         
-        HashMap<String,Object> args = new HashMap<String, Object>();
-        args.put("registry", registry);
-        args.put("module", module);
-        
-        registryBlockTemplate.renderTo(writer, args);
+        registryBlockTemplate.renderTo(writer, "registry", registry, module);
         
         writer.close();
     }

@@ -27,7 +27,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 /**
@@ -212,14 +211,10 @@ public final class AnonTemplateUtil
         
         final Template template = group.getTemplate("anon_block");
         
-        HashMap<String,Object> args = new HashMap<String, Object>();
-        args.put("params", params);
-        args.put("module", module);
-        
         final BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(out, "UTF-8"));
         
-        template.renderTo(writer, args);
+        template.renderTo(writer, "params", params, module);
         
         writer.close();
     }
