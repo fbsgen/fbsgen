@@ -19,6 +19,7 @@ import io.protostuff.fbsgen.compiler.ProtoModule;
 import io.protostuff.fbsgen.compiler.Writable;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * A map that simply creates objects.
@@ -57,12 +58,17 @@ public final class NewMap extends FakeMap
     {
         WRITABLE
         {
+            @SuppressWarnings("unchecked")
             public Object create(Object data)
             {
-                Writable w = new Writable();
+                final Writable w = new Writable();
                 
                 if (data instanceof ProtoModule)
                     ((ProtoModule)data).setAttribute("w", w);
+                else if (data instanceof Map)
+                    ((Map<Object,Object>)data).put("w", w);
+                else if (data instanceof List)
+                    ((List<Object>)data).add(w);
                     
                 return w;
             }
