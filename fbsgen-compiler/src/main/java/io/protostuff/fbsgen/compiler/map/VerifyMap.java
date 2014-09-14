@@ -14,7 +14,7 @@
 
 package io.protostuff.fbsgen.compiler.map;
 
-import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
+import static io.protostuff.fbsgen.parser.AnnotationContainer.err;
 import io.protostuff.fbsgen.compiler.FakeMap;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Field;
@@ -75,8 +75,7 @@ public final class VerifyMap extends FakeMap
                         if (num > 0 && 0 == (num & (num-1)))
                             continue;
                         
-                        throw err("The message " + message.getName() + 
-                                " has field numbers that are not a power of two:" + f.getName(), 
+                        throw err(f, " is not a power of two: " + f.getNumber(), 
                                 message.getProto());
                     }
                 }
@@ -90,8 +89,7 @@ public final class VerifyMap extends FakeMap
                         if (num > 0 && 0 == (num & (num-1)))
                             continue;
                         
-                        throw err("The enum " + eg.getName() + 
-                                " has values that are not a power of two:" + v.getName(), 
+                        throw err(v, " is not a power of two: " + v.getNumber(), 
                                 eg.getProto());
                     }
                 }
