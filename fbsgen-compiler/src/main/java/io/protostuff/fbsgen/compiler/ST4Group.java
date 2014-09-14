@@ -95,28 +95,28 @@ public final class ST4Group extends STGroup implements TemplateGroup
         @Override
         public void compileTimeError(STMessage msg)
         {
-            errorCount += 1;
+            errorCount++;
             System.err.println("compile-time error: " + msg);
         }
 
         @Override
         public void runTimeError(STMessage msg)
         {
-            errorCount += 1;
+            errorCount++;
             System.err.println("runtime error: " + msg);
         }
 
         @Override
         public void IOError(STMessage msg)
         {
-            errorCount += 1;
+            errorCount++;
             System.err.println("io error: " + msg);
         }
 
         @Override
         public void internalError(STMessage msg)
         {
-            errorCount += 1;
+            errorCount++;
             System.err.println("internal error: " + msg);
         }
     };
