@@ -35,7 +35,7 @@ public class ProtoModule implements Serializable
     private String encoding;
     private File outputDir;
 
-    private Properties options;
+    Properties options;
     Properties config;
 
     private CachingProtoLoader protoLoader;
