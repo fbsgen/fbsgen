@@ -221,12 +221,12 @@ message_field [Proto proto, HasFields message]
                 fieldHolder.field.modifier = modifier;
                 fieldHolder.field.name = $var.text;
                 fieldHolder.field.number = Integer.parseInt($NUMINT.text);
+                message.addField(fieldHolder.field);
             }
         } 
         (field_options[proto, message, fieldHolder.field])? {
             if (fieldHolder.field != null) {
                 proto.addAnnotationsTo(fieldHolder.field, message.getEnclosingNamespace());
-                message.addField(fieldHolder.field);
             }
         }
         (SEMICOLON! | ignore_block)
@@ -275,14 +275,14 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
     |   STRING_LITERAL {
             if (checkDefault && "default".equals($key.text)) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-                    throw err(proto, "a field can only have a single default value");
+                    throw err(field, " can only have a single default value", proto);
                 
                 if (field instanceof Field.String)
                     field.defaultValue = getStringFromStringLiteral($STRING_LITERAL.text);
                 else if (field instanceof Field.Bytes)
                     field.defaultValue = getBytesFromStringLiteral($STRING_LITERAL.text);
                 else
-                    throw err(proto, "Invalid string default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+                    throw err(field, " has an invalid string default value", proto);
                 
                 field.putExtraOption($key.text, field.defaultValue);
             } else {
@@ -292,14 +292,14 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
     |   NUMFLOAT {
             if (checkDefault && "default".equals($key.text)) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-                    throw err(proto, "a field can only have a single default value");
+                    throw err(field, " can only have a single default value", proto);
                 
                 if (field instanceof Field.Float)
                     field.defaultValue = Float.valueOf($NUMFLOAT.text);
                 else if (field instanceof Field.Double) 
                     field.defaultValue = Double.valueOf($NUMFLOAT.text);
                 else
-                    throw err(proto, "Invalid float default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+                    throw err(field, " has an invalid float default value", proto);
                 
                 field.putExtraOption($key.text, field.defaultValue);
             } else {
@@ -309,7 +309,7 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
     |   NUMINT {
             if (checkDefault && "default".equals($key.text)) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-                    throw err(proto, "a field can only have a single default value");
+                    throw err(field, " can only have a single default value", proto);
                 
                 if (field instanceof Field.Number) {
                     if (field instanceof Field.Float)
@@ -322,7 +322,7 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                         field.defaultValue = validate(proto, field, Integer.parseInt($NUMINT.text));
                 }
                 else
-                    throw err(proto, "Invalid numeric default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+                    throw err(field, " has an invalid numeric default value", proto);
                 
                 field.putExtraOption($key.text, field.defaultValue);
             } else {
@@ -332,14 +332,14 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
     |   NUMDOUBLE {
             if (checkDefault && "default".equals($key.text)) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-                    throw err(proto, "a field can only have a single default value");
+                    throw err(field, " can only have a single default value", proto);
 
                 if (field instanceof Field.Float)
                     field.defaultValue = Float.valueOf($NUMDOUBLE.text);
                 else if (field instanceof Field.Double) 
                     field.defaultValue = Double.valueOf($NUMDOUBLE.text);
                 else
-                    throw err(proto, "Invalid numeric default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+                    throw err(field, " has an invalid double default value", proto);
                 
                 field.putExtraOption($key.text, field.defaultValue);
             } else {
@@ -349,7 +349,7 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
     |   HEX {
             if (checkDefault && "default".equals($key.text)) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-                    throw err(proto, "a field can only have a single default value");
+                    throw err(field, " can only have a single default value", proto);
                 
                 if (field instanceof Field.Number) {
                     if (field instanceof Field.Float)
@@ -368,7 +368,7 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                     field.defaultValue = getBytesFromHexString(proto, $HEX.text);
                 }
                 else
-                    throw err(proto, "Invalid numeric default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+                    throw err(field, " has an invalid numeric default value", proto);
                 
                 field.putExtraOption($key.text, field.defaultValue);
             } else {
@@ -378,7 +378,7 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
     |   OCTAL {
             if (checkDefault && "default".equals($key.text)) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-                    throw err(proto, "a field can only have a single default value");
+                    throw err(field, " can only have a single default value", proto);
                 
                 if (field instanceof Field.Number) {
                     if (field instanceof Field.Float)
@@ -394,7 +394,7 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                     }
                 }
                 else
-                    throw err(proto, "Invalid numeric default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+                    throw err(field, " has an invalid numeric default value", proto);
                 
                 field.putExtraOption($key.text, field.defaultValue);
             } else {
@@ -404,12 +404,12 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
     |   TRUE {
             if (checkDefault && "default".equals($key.text)) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-                    throw err(proto, "a field can only have a single default value");
+                    throw err(field, " can only have a single default value", proto);
                 
                 if (field instanceof Field.Bool)
                     field.defaultValue = Boolean.TRUE;
                 else
-                    throw err(proto, "invalid boolean default value for the non-boolean field: " + field.getClass().getSimpleName() + " " + field.name);
+                    throw err(field, " has an invalid bool default value", proto);
             }
             
             field.putExtraOption($key.text, Boolean.TRUE);
@@ -417,12 +417,12 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
     |   FALSE {
             if (checkDefault && "default".equals($key.text)) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-                    throw err(proto, "a field can only have a single default value");
+                    throw err(field, " can only have a single default value", proto);
                 
                 if (field instanceof Field.Bool)
                     field.defaultValue = Boolean.FALSE;
                 else
-                    throw err(proto, "invalid boolean default value for the non-boolean field: " + field.getClass().getSimpleName() + " " + field.name);
+                    throw err(field, " has an invalid bool default value", proto);
             }
             
             field.putExtraOption($key.text, Boolean.FALSE);
@@ -431,7 +431,7 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
             boolean refOption = false;
             if (checkDefault && "default".equals($key.text)) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-                    throw err(proto, "a field can only have a single default value");
+                    throw err(field, " can only have a single default value", proto);
                 
                 String refName = $val.text;
                 if (field instanceof Field.Reference)
@@ -446,7 +446,7 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                         field.defaultValueConstant = "Float.NaN";
                     }
                     else
-                        throw err(proto, "Invalid float default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+                        throw err(field, " has an invalid default value", proto);
                 }
                 else if (field instanceof Field.Double) {
                     if ("inf".equals(refName)) {
@@ -458,11 +458,11 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                         field.defaultValueConstant = "Double.NaN";
                     }
                     else
-                        throw err(proto, "Invalid double default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+                        throw err(field, " has an invalid default value", proto);
                 }   
                 else {
                     refOption = true;
-                    //throw err(proto, "invalid field value '" + refName + "' for the field: " + field.getClass().getSimpleName() + " " + field.name);
+                    //throw err(field, " has an invalid default value", proto);
                 }
             }
             else {
@@ -480,14 +480,14 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
     |   EXP {
             if (checkDefault && "default".equals($key.text)) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-                    throw err(proto, "a field can only have a single default value");
+                    throw err(field, " can only have a single default value", proto);
                 
                 if (field instanceof Field.Float)
                     field.defaultValue = Float.valueOf($EXP.text);
                 else if (field instanceof Field.Double) 
                     field.defaultValue = Double.valueOf($EXP.text);
                 else
-                    throw err(proto, "Invalid float default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+                    throw err(field, " has an invalid float default value", proto);
             }
             
             field.putExtraOption($key.text, $EXP.text);
@@ -502,7 +502,7 @@ signed_constant [Proto proto, HasFields message, Field field, String key, boolea
     :   MINUS ID {
             if (checkDefault && "default".equals(key)) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-                    throw err(proto, "a field can only have a single default value");
+                    throw err(field, " can only have a single default value", proto);
                 
                 String refName = $ID.text;
                 if (field instanceof Field.Float) {
@@ -511,7 +511,7 @@ signed_constant [Proto proto, HasFields message, Field field, String key, boolea
                         field.defaultValueConstant = "Float.NEGATIVE_INFINITY";
                     }
                     else
-                        throw err(proto, "Invalid float default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+                        throw err(field, " has an invalid float default value", proto);
                 }
                 else if (field instanceof Field.Double) {
                     if ("inf".equals(refName)) {
@@ -519,10 +519,10 @@ signed_constant [Proto proto, HasFields message, Field field, String key, boolea
                         field.defaultValueConstant = "Double.NEGATIVE_INFINITY";
                     }
                     else
-                        throw err(proto, "Invalid double default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+                        throw err(field, " has an invalid double default value", proto);
                 }   
                 else
-                    throw err(proto, "invalid field value '" + refName + "' for the field: " + field.getClass().getSimpleName() + " " + field.name);
+                    throw err(field, " has an invalid default value: " + refName, proto);
             }
         }
     ;
@@ -572,7 +572,7 @@ service_block [Proto proto, Message message]
         } LEFTCURLY
         (service_body[proto, service])+ RIGHTCURLY (SEMICOLON?)! {
             if (service.rpcMethods.isEmpty())
-                throw err(proto, "Empty Service block: " + service.getName());
+                throw err(service, " must declare at least one rpc", proto);
                 
             proto.checkAnnotations();
         }

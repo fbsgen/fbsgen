@@ -189,18 +189,28 @@ public abstract class AbstractParser extends Parser
     
     static ParseException err(Proto proto, String msg)
     {
-        throw new ParseException(msg + " [" + proto.getSourcePath() + "]");
+        return AnnotationContainer.err(msg, proto);
     }
     
     static ParseException err(Proto proto, String msg, Throwable cause)
     {
-        throw new ParseException(msg + " [" + proto.getSourcePath() + "]", cause);
+        return AnnotationContainer.err(msg, proto, cause);
+    }
+    
+    static ParseException err(Field<?> field, String msg, Proto proto)
+    {
+        return AnnotationContainer.err(field, msg, proto);
+    }
+    
+    static ParseException err(Service service, String msg, Proto proto)
+    {
+        return AnnotationContainer.err(service, msg, proto);
     }
     
     static Long validate(Proto proto, Field<?> field, long defaultValue)
     {
         if (field.getClass().getSimpleName().charAt(0) == 'U' && defaultValue < 0 && defaultValue != 0xFFFFFFFFFFFFFFFFl)
-            throw err(proto, field.name + " cannot have a negative default value: " + defaultValue);
+            throw AnnotationContainer.err(field, " cannot have a negative default value: " + defaultValue, proto);
         
         return Long.valueOf(defaultValue);
     }
@@ -208,7 +218,7 @@ public abstract class AbstractParser extends Parser
     static Integer validate(Proto proto, Field<?> field, int defaultValue)
     {
         if (field.getClass().getSimpleName().charAt(0) == 'U' && defaultValue < 0 && defaultValue != 0xFFFFFFFF)
-            throw err(proto, field.name + " cannot have a negative default value: " + defaultValue);
+            throw AnnotationContainer.err(field, " cannot have a negative default value: " + defaultValue, proto);
         
         return Integer.valueOf(defaultValue);
     }

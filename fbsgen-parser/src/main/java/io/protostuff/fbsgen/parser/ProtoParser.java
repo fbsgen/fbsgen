@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 io/protostuff/fbsgen/parser/ProtoParser.g 2014-09-10 11:28:27
+// $ANTLR 3.5.2 io/protostuff/fbsgen/parser/ProtoParser.g 2014-09-17 17:45:36
 
     package io.protostuff.fbsgen.parser;
 
@@ -2184,9 +2184,10 @@ public class ProtoParser extends AbstractParser {
 			                fieldHolder.field.modifier = modifier;
 			                fieldHolder.field.name = (var71!=null?input.toString(var71.start,var71.stop):null);
 			                fieldHolder.field.number = Integer.parseInt((NUMINT73!=null?NUMINT73.getText():null));
+			                message.addField(fieldHolder.field);
 			            }
 			        }
-			// io/protostuff/fbsgen/parser/ProtoParser.g:226:9: ( field_options[proto, message, fieldHolder.field] )?
+			// io/protostuff/fbsgen/parser/ProtoParser.g:227:9: ( field_options[proto, message, fieldHolder.field] )?
 			int alt15=2;
 			int LA15_0 = input.LA(1);
 			if ( (LA15_0==LEFTSQUARE) ) {
@@ -2194,7 +2195,7 @@ public class ProtoParser extends AbstractParser {
 			}
 			switch (alt15) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:226:10: field_options[proto, message, fieldHolder.field]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:227:10: field_options[proto, message, fieldHolder.field]
 					{
 					pushFollow(FOLLOW_field_options_in_message_field1487);
 					field_options74=field_options(proto, message, fieldHolder.field);
@@ -2210,7 +2211,6 @@ public class ProtoParser extends AbstractParser {
 			if ( state.backtracking==0 ) {
 			            if (fieldHolder.field != null) {
 			                proto.addAnnotationsTo(fieldHolder.field, message.getEnclosingNamespace());
-			                message.addField(fieldHolder.field);
 			            }
 			        }
 			// io/protostuff/fbsgen/parser/ProtoParser.g:232:9: ( SEMICOLON !| ignore_block )
@@ -2959,14 +2959,14 @@ public class ProtoParser extends AbstractParser {
 					if ( state.backtracking==0 ) {
 					            if (checkDefault && "default".equals((key!=null?input.toString(key.start,key.stop):null))) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-					                    throw err(proto, "a field can only have a single default value");
+					                    throw err(field, " can only have a single default value", proto);
 					                
 					                if (field instanceof Field.String)
 					                    field.defaultValue = getStringFromStringLiteral((STRING_LITERAL98!=null?STRING_LITERAL98.getText():null));
 					                else if (field instanceof Field.Bytes)
 					                    field.defaultValue = getBytesFromStringLiteral((STRING_LITERAL98!=null?STRING_LITERAL98.getText():null));
 					                else
-					                    throw err(proto, "Invalid string default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+					                    throw err(field, " has an invalid string default value", proto);
 					                
 					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), field.defaultValue);
 					            } else {
@@ -2987,14 +2987,14 @@ public class ProtoParser extends AbstractParser {
 					if ( state.backtracking==0 ) {
 					            if (checkDefault && "default".equals((key!=null?input.toString(key.start,key.stop):null))) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-					                    throw err(proto, "a field can only have a single default value");
+					                    throw err(field, " can only have a single default value", proto);
 					                
 					                if (field instanceof Field.Float)
 					                    field.defaultValue = Float.valueOf((NUMFLOAT99!=null?NUMFLOAT99.getText():null));
 					                else if (field instanceof Field.Double) 
 					                    field.defaultValue = Double.valueOf((NUMFLOAT99!=null?NUMFLOAT99.getText():null));
 					                else
-					                    throw err(proto, "Invalid float default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+					                    throw err(field, " has an invalid float default value", proto);
 					                
 					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), field.defaultValue);
 					            } else {
@@ -3015,7 +3015,7 @@ public class ProtoParser extends AbstractParser {
 					if ( state.backtracking==0 ) {
 					            if (checkDefault && "default".equals((key!=null?input.toString(key.start,key.stop):null))) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-					                    throw err(proto, "a field can only have a single default value");
+					                    throw err(field, " can only have a single default value", proto);
 					                
 					                if (field instanceof Field.Number) {
 					                    if (field instanceof Field.Float)
@@ -3028,7 +3028,7 @@ public class ProtoParser extends AbstractParser {
 					                        field.defaultValue = validate(proto, field, Integer.parseInt((NUMINT100!=null?NUMINT100.getText():null)));
 					                }
 					                else
-					                    throw err(proto, "Invalid numeric default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+					                    throw err(field, " has an invalid numeric default value", proto);
 					                
 					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), field.defaultValue);
 					            } else {
@@ -3049,14 +3049,14 @@ public class ProtoParser extends AbstractParser {
 					if ( state.backtracking==0 ) {
 					            if (checkDefault && "default".equals((key!=null?input.toString(key.start,key.stop):null))) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-					                    throw err(proto, "a field can only have a single default value");
+					                    throw err(field, " can only have a single default value", proto);
 
 					                if (field instanceof Field.Float)
 					                    field.defaultValue = Float.valueOf((NUMDOUBLE101!=null?NUMDOUBLE101.getText():null));
 					                else if (field instanceof Field.Double) 
 					                    field.defaultValue = Double.valueOf((NUMDOUBLE101!=null?NUMDOUBLE101.getText():null));
 					                else
-					                    throw err(proto, "Invalid numeric default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+					                    throw err(field, " has an invalid double default value", proto);
 					                
 					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), field.defaultValue);
 					            } else {
@@ -3077,7 +3077,7 @@ public class ProtoParser extends AbstractParser {
 					if ( state.backtracking==0 ) {
 					            if (checkDefault && "default".equals((key!=null?input.toString(key.start,key.stop):null))) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-					                    throw err(proto, "a field can only have a single default value");
+					                    throw err(field, " can only have a single default value", proto);
 					                
 					                if (field instanceof Field.Number) {
 					                    if (field instanceof Field.Float)
@@ -3096,7 +3096,7 @@ public class ProtoParser extends AbstractParser {
 					                    field.defaultValue = getBytesFromHexString(proto, (HEX102!=null?HEX102.getText():null));
 					                }
 					                else
-					                    throw err(proto, "Invalid numeric default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+					                    throw err(field, " has an invalid numeric default value", proto);
 					                
 					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), field.defaultValue);
 					            } else {
@@ -3117,7 +3117,7 @@ public class ProtoParser extends AbstractParser {
 					if ( state.backtracking==0 ) {
 					            if (checkDefault && "default".equals((key!=null?input.toString(key.start,key.stop):null))) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-					                    throw err(proto, "a field can only have a single default value");
+					                    throw err(field, " can only have a single default value", proto);
 					                
 					                if (field instanceof Field.Number) {
 					                    if (field instanceof Field.Float)
@@ -3133,7 +3133,7 @@ public class ProtoParser extends AbstractParser {
 					                    }
 					                }
 					                else
-					                    throw err(proto, "Invalid numeric default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+					                    throw err(field, " has an invalid numeric default value", proto);
 					                
 					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), field.defaultValue);
 					            } else {
@@ -3154,12 +3154,12 @@ public class ProtoParser extends AbstractParser {
 					if ( state.backtracking==0 ) {
 					            if (checkDefault && "default".equals((key!=null?input.toString(key.start,key.stop):null))) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-					                    throw err(proto, "a field can only have a single default value");
+					                    throw err(field, " can only have a single default value", proto);
 					                
 					                if (field instanceof Field.Bool)
 					                    field.defaultValue = Boolean.TRUE;
 					                else
-					                    throw err(proto, "invalid boolean default value for the non-boolean field: " + field.getClass().getSimpleName() + " " + field.name);
+					                    throw err(field, " has an invalid bool default value", proto);
 					            }
 					            
 					            field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), Boolean.TRUE);
@@ -3178,12 +3178,12 @@ public class ProtoParser extends AbstractParser {
 					if ( state.backtracking==0 ) {
 					            if (checkDefault && "default".equals((key!=null?input.toString(key.start,key.stop):null))) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-					                    throw err(proto, "a field can only have a single default value");
+					                    throw err(field, " can only have a single default value", proto);
 					                
 					                if (field instanceof Field.Bool)
 					                    field.defaultValue = Boolean.FALSE;
 					                else
-					                    throw err(proto, "invalid boolean default value for the non-boolean field: " + field.getClass().getSimpleName() + " " + field.name);
+					                    throw err(field, " has an invalid bool default value", proto);
 					            }
 					            
 					            field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), Boolean.FALSE);
@@ -3203,7 +3203,7 @@ public class ProtoParser extends AbstractParser {
 					            boolean refOption = false;
 					            if (checkDefault && "default".equals((key!=null?input.toString(key.start,key.stop):null))) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-					                    throw err(proto, "a field can only have a single default value");
+					                    throw err(field, " can only have a single default value", proto);
 					                
 					                String refName = (val!=null?val.getText():null);
 					                if (field instanceof Field.Reference)
@@ -3218,7 +3218,7 @@ public class ProtoParser extends AbstractParser {
 					                        field.defaultValueConstant = "Float.NaN";
 					                    }
 					                    else
-					                        throw err(proto, "Invalid float default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+					                        throw err(field, " has an invalid default value", proto);
 					                }
 					                else if (field instanceof Field.Double) {
 					                    if ("inf".equals(refName)) {
@@ -3230,11 +3230,11 @@ public class ProtoParser extends AbstractParser {
 					                        field.defaultValueConstant = "Double.NaN";
 					                    }
 					                    else
-					                        throw err(proto, "Invalid double default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+					                        throw err(field, " has an invalid default value", proto);
 					                }   
 					                else {
 					                    refOption = true;
-					                    //throw err(proto, "invalid field value '" + refName + "' for the field: " + field.getClass().getSimpleName() + " " + field.name);
+					                    //throw err(field, " has an invalid default value", proto);
 					                }
 					            }
 					            else {
@@ -3274,14 +3274,14 @@ public class ProtoParser extends AbstractParser {
 					if ( state.backtracking==0 ) {
 					            if (checkDefault && "default".equals((key!=null?input.toString(key.start,key.stop):null))) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-					                    throw err(proto, "a field can only have a single default value");
+					                    throw err(field, " can only have a single default value", proto);
 					                
 					                if (field instanceof Field.Float)
 					                    field.defaultValue = Float.valueOf((EXP107!=null?EXP107.getText():null));
 					                else if (field instanceof Field.Double) 
 					                    field.defaultValue = Double.valueOf((EXP107!=null?EXP107.getText():null));
 					                else
-					                    throw err(proto, "Invalid float default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+					                    throw err(field, " has an invalid float default value", proto);
 					            }
 					            
 					            field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), (EXP107!=null?EXP107.getText():null));
@@ -3370,7 +3370,7 @@ public class ProtoParser extends AbstractParser {
 			if ( state.backtracking==0 ) {
 			            if (checkDefault && "default".equals(key)) {
 			                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
-			                    throw err(proto, "a field can only have a single default value");
+			                    throw err(field, " can only have a single default value", proto);
 			                
 			                String refName = (ID110!=null?ID110.getText():null);
 			                if (field instanceof Field.Float) {
@@ -3379,7 +3379,7 @@ public class ProtoParser extends AbstractParser {
 			                        field.defaultValueConstant = "Float.NEGATIVE_INFINITY";
 			                    }
 			                    else
-			                        throw err(proto, "Invalid float default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+			                        throw err(field, " has an invalid float default value", proto);
 			                }
 			                else if (field instanceof Field.Double) {
 			                    if ("inf".equals(refName)) {
@@ -3387,10 +3387,10 @@ public class ProtoParser extends AbstractParser {
 			                        field.defaultValueConstant = "Double.NEGATIVE_INFINITY";
 			                    }
 			                    else
-			                        throw err(proto, "Invalid double default value for the field: " + field.getClass().getSimpleName() + " " + field.name);
+			                        throw err(field, " has an invalid double default value", proto);
 			                }   
 			                else
-			                    throw err(proto, "invalid field value '" + refName + "' for the field: " + field.getClass().getSimpleName() + " " + field.name);
+			                    throw err(field, " has an invalid default value: " + refName, proto);
 			            }
 			        }
 			}
@@ -4022,7 +4022,7 @@ public class ProtoParser extends AbstractParser {
 
 			if ( state.backtracking==0 ) {
 			            if (service.rpcMethods.isEmpty())
-			                throw err(proto, "Empty Service block: " + service.getName());
+			                throw err(service, " must declare at least one rpc", proto);
 			                
 			            proto.checkAnnotations();
 			        }

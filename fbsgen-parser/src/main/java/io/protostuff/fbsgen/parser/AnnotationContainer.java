@@ -172,6 +172,14 @@ public abstract class AnnotationContainer implements HasAnnotations, HasName
         
         return new ParseException(msg + " [" + proto.getSourcePath() + "]");
     }
+    
+    public static ParseException err(String msg, Proto proto, Throwable cause)
+    {
+        if (proto == null)
+            return new ParseException(msg, cause);
+        
+        return new ParseException(msg + " [" + proto.getSourcePath() + "]", cause);
+    }
 
     @Override
     public boolean equals(Object obj)
