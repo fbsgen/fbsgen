@@ -44,7 +44,7 @@ public final class CompilerUtil
         if (encoding == null || encoding.isEmpty())
             encoding = "UTF-8";
         
-        final File outputDir = module.getOutput().endsWith(".java") || 
+        final File outputDir = fileName.endsWith(".java") || 
                 module.getO().containsKey("with_package_dir") ? 
                 new File(module.getOutputDir(), packageName.replace('.', '/')) : 
                     module.getOutputDir();
