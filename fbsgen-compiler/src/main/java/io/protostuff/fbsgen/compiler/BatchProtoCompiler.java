@@ -385,11 +385,13 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             throw err("Missing option: " + stg + ".package_name");
         
         final String outputDir = getRequiredStgConfigFrom(module, stg + ".output_dir");
+        final int slash = stg.lastIndexOf('/');
+        final String fileName = slash == -1 ? stg : stg.substring(slash + 1);
 
         // hack
         module.setOutputDir(new File(outputDir.trim()));
         
-        final BufferedWriter writer = CompilerUtil.newWriter(module, packageName, stg);
+        final BufferedWriter writer = CompilerUtil.newWriter(module, packageName, fileName);
         
         registryBlockTemplate.renderTo(writer, "registry", registry, module);
         
