@@ -121,6 +121,81 @@ public final class ST4Group extends STGroup implements TemplateGroup
         }
     };
     
+    static ST4GroupFile importGroup(String fileName)
+    {
+        final char[] delim = new char[5];
+        boolean checkFile = true;
+        
+        if (fileName.charAt(fileName.length()-2) == '_')
+        {
+            // extracts foo from "foo_"
+            fileName = fileName.substring(1, fileName.length() - 2) + ".stg";
+            
+            // check cache
+            ST4GroupFile existing = FROM_CP_CACHE.get(fileName);
+            if (existing != null)
+            {
+                // cached
+                return existing;
+            }
+            
+            checkFile = false;
+        }
+        else
+        {
+            // removes the quotes, extracts foo from "foo"
+            fileName = fileName.substring(1, fileName.length() - 1) + ".stg";
+            
+            ST4GroupFile existing = FROM_FILE_CACHE.get(fileName);
+            if (existing != null || (existing = FROM_CP_CACHE.get(fileName)) != null)
+            {
+                // cached
+                return existing;
+            }
+        }
+        
+        final URL url = TemplateUtil.getUrl(fileName, delim, checkFile);
+        if (url == null)
+            throw err(null, "Import not found: " + fileName);
+        
+        if (delim[2] != 0)
+            throw err(null, "This delimiter: " + new String(delim) + " is not supported");
+        
+        char delimiterStartChar = '«',
+                delimiterStopChar = '»';
+        
+        if (delim[0] != 0)
+        {
+            delimiterStartChar = delim[0];
+            delimiterStopChar = delim[1];
+        }
+        
+        final ST4GroupFile stgf = new ST4GroupFile(url, "UTF-8", 
+                delimiterStartChar, delimiterStopChar);
+        
+        switch ((int)delim[4])
+        {
+            case 1:
+                // from file
+                FROM_FILE_CACHE.put(fileName, stgf);
+                
+                if (fileName.equals("fbsgen/dict.stg"))
+                    FakeMapUtil.addMapsTo(stgf);
+                
+                break;
+            case 2:
+                // from classpath
+                FROM_CP_CACHE.put(fileName, stgf);
+                
+                if (fileName.equals("fbsgen/dict.stg"))
+                    FakeMapUtil.addMapsTo(stgf);
+                
+                break;
+        }
+        
+        return stgf;
+    }
+    
     /**
      * Returns true if there was no previous attribute renderer with the same class.
      */
@@ -175,87 +250,14 @@ public final class ST4Group extends STGroup implements TemplateGroup
         }
     }
     
-    public void importTemplates(Token fileNameToken)
-    {
-        final char[] delim = new char[5];
-        String fileName = fileNameToken.getText();
-        boolean checkFile = true;
-        
-        if (fileName.charAt(fileName.length()-2) == '_')
-        {
-            // extracts foo from "foo_"
-            fileName = fileName.substring(1, fileName.length() - 2) + ".stg";
-            
-            // check cache
-            STGroupFile existing = FROM_CP_CACHE.get(fileName);
-            if (existing != null)
-            {
-                // cached
-                importTemplates(existing, false);
-                return;
-            }
-            
-            checkFile = false;
-        }
-        else
-        {
-            // removes the quotes, extracts foo from "foo"
-            fileName = fileName.substring(1, fileName.length() - 1) + ".stg";
-            
-            STGroupFile existing = FROM_FILE_CACHE.get(fileName);
-            if (existing != null || (existing = FROM_CP_CACHE.get(fileName)) != null)
-            {
-                // cached
-                importTemplates(existing, false);
-                return;
-            }
-        }
-        
-        final URL url = TemplateUtil.getUrl(fileName, delim, checkFile);
-        if (url == null)
-            throw err(null, "Import not found: " + fileName);
-        
-        if (delim[2] != 0)
-            throw err(null, "This delimiter: " + new String(delim) + " is not supported");
-        
-        char delimiterStartChar = '«',
-                delimiterStopChar = '»';
-        
-        if (delim[0] != 0)
-        {
-            delimiterStartChar = delim[0];
-            delimiterStopChar = delim[1];
-        }
-        
-        final ST4GroupFile stgf = new ST4GroupFile(url, "UTF-8", 
-                delimiterStartChar, delimiterStopChar);
-        
-        switch ((int)delim[4])
-        {
-            case 1:
-                // from file
-                FROM_FILE_CACHE.put(fileName, stgf);
-                
-                if (fileName.equals("fbsgen/dict.stg"))
-                    FakeMapUtil.addMapsTo(stgf);
-                
-                break;
-            case 2:
-                // from classpath
-                FROM_CP_CACHE.put(fileName, stgf);
-                
-                if (fileName.equals("fbsgen/dict.stg"))
-                    FakeMapUtil.addMapsTo(stgf);
-                
-                break;
-        }
-        
-        importTemplates(stgf, false);
-    }
-    
     protected CompiledST load(String name)
     {
         return templates.get(name.substring(1));
+    }
+    
+    public void importTemplates(Token fileNameToken)
+    {
+        importTemplates(importGroup(fileNameToken.getText()), false);
     }
     
     @Override
@@ -300,6 +302,11 @@ public final class ST4Group extends STGroup implements TemplateGroup
                 char delimiterStopChar)
         {
             super(url, encoding, delimiterStartChar, delimiterStopChar);
+        }
+        
+        public void importTemplates(Token fileNameToken)
+        {
+            importTemplates(importGroup(fileNameToken.getText()), false);
         }
 
         @Override
