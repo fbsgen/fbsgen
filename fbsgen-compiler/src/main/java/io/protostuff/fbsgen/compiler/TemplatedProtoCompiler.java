@@ -51,11 +51,12 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
     public TemplatedProtoCompiler(String output, boolean checkPlaceHolder)
     {
         super(output);
+        
+        String[] fragments = TemplateUtil.getOutputFragments(output);
+        outputName = fragments[0];
+        fileExtension = fragments[1];
 
-        fileExtension = TemplateUtil.getFileExtension(output);
         javaOutput = ".java".equalsIgnoreCase(fileExtension);
-
-        outputName = TemplateUtil.getOutputName(output);
         
         group = TemplateUtil.resolveGroup(output, outputName, fileExtension);
 

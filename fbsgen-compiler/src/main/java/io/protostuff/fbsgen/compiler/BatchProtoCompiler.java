@@ -131,8 +131,9 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             return;
         }
         
-        String name = TemplateUtil.getOutputName(stg),
-                fileExtension = TemplateUtil.getFileExtension(stg);
+        final String[] fragments = TemplateUtil.getOutputFragments(stg);
+        final String name = fragments[0],
+                fileExtension = fragments[1];
         
         final TemplateGroup group = TemplateUtil.resolveGroup(stg, name, fileExtension);
         if (group == null)

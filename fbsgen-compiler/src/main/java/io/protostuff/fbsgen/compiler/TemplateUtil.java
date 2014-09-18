@@ -155,31 +155,15 @@ public final class TemplateUtil
         return null;
     }
     
-    /**
-     * Returns "foo" from "path/to/foo.java.stg".
-     */
-    public static String getOutputName(String resource)
+    public static String[] getOutputFragments(String resource)
     {
-        final int secondToTheLastDot = resource.lastIndexOf('.', resource.length() - 5), 
-                slash = resource.lastIndexOf('/', secondToTheLastDot);
-
-        return resource.substring(slash + 1, secondToTheLastDot);
-    }
-    
-    /**
-     * Get the file extension of the provided stg resource.
-     */
-    public static String getFileExtension(String resource)
-    {
-        // E.g uf foo.bar.java.stg, it is the . before "java"
-        int lastDot = resource.lastIndexOf('.');
-        if (lastDot == -1)
-        {
-            throw err(null, "The resource: " + resource + " must be named like: 'foo.ext' " +
-                    "where '.ext' will be the file extension of the output files.");
-        }
+        final int lastDot = resource.lastIndexOf('.'), 
+                lastSlash = resource.lastIndexOf('/', lastDot);
         
-        return resource.substring(lastDot);
+        return new String[]{
+                resource.substring(lastSlash + 1, lastDot),
+                resource.substring(lastDot)
+        };
     }
     
     static Reader newReader(InputStream in, char[] delim) throws IOException

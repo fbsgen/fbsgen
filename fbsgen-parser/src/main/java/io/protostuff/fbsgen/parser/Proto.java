@@ -39,6 +39,7 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
     final Proto importer;
     Mutable<String> packageName, javaPackageName;
     final LinkedHashMap<String, Proto> importedProtos = new LinkedHashMap<String, Proto>();
+    final ArrayList<String> importPaths = new ArrayList<String>();
     final LinkedHashMap<String,Object> standardOptions = new LinkedHashMap<String,Object>();
     final LinkedHashMap<String,Object> extraOptions = new LinkedHashMap<String,Object>();
     final LinkedHashMap<String, Message> messages = new LinkedHashMap<String, Message>();
@@ -304,6 +305,11 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
         return extensions;
     }*/
 
+    public ArrayList<String> getImportPaths()
+    {
+        return importPaths;
+    }
+    
     public Collection<Proto> getImportedProtos()
     {
         return importedProtos.values();
@@ -334,6 +340,7 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
         {
             throw err("Failed to import " + path, this);
         }
+        importPaths.add(path);
     }
     
     void addImportedProto(Proto proto)
