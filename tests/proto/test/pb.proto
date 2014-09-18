@@ -1,0 +1,11 @@
+package pb;
+
+message Compat {
+  
+  optional int32 sint32 = 1 [signed = true];
+  optional int32 sfixed32 = 2 [fixed = true];
+  optional uint32 fixed32 = 3 [fixed = true];
+  optional int64 sint64 = 4 [signed = true];
+  optional int64 sfixed64 = 5 [fixed = true];
+  optional uint64 fixed64 = 6 [fixed = true];
+}

@@ -1,0 +1,8 @@
+package import;
+
+import "test/pb.proto";
+
+message Importer {
+
+  optional Compat compat = 1;
+}

@@ -9,11 +9,11 @@ enum Size {
 }
 
 @uint8(bit_flags = true)
-enum SizeBF {
-  SMALL = 1;
-  MEDIUM = 2;
-  LARGE = 4;
-  EXTRA_LARGE = 8;
+enum Priority {
+  NORMAL = 1;
+  IMPORTANT = 2;
+  URGENT = 4;
+  CRITICAL = 8;
 }
 
 message Foo {
