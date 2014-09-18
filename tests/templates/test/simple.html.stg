@@ -105,7 +105,7 @@ enum_top(eg, module) ::= <%
 
 v_decl(v, module) ::= <<
 <div class="field">
-  <span>«v.name»</span> = «v.number»;
+  <span>«v.name»</span> = «v.number»«if(module.o.("raw"))»;«else»,«endif»
 </div>
 >>
 
