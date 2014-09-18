@@ -16,22 +16,25 @@ fi
 JAR_FILE=$SCRIPT_DIR/fbsgen-compiler/target/fbsgen.jar
 #[ -e $SCRIPT_DIR/templates/fbsgen.jar ] && JAR_FILE=$SCRIPT_DIR/templates/fbsgen.jar
 
-if [ -z $TEMPLATE_PATH ]; then
+if [ ! -n "$TEMPLATE_PATH" ]; then
     TEMPLATE_PATH=.,$SCRIPT_DIR/templates
     [ -d $CURRENT_DIR/templates ] && TEMPLATE_PATH=templates,$SCRIPT_DIR/templates
 fi
 
-if [ -z $PROTO_PATH ]; then
+if [ ! -n "$PROTO_PATH" ]; then
     PROTO_PATH=.
     [ -d $CURRENT_DIR/proto ] && PROTO_PATH=proto
 fi
 
-# -Dproto_search_strategy=2 means search from classpath if the file is not found.
-# The search strategy for templates is the same as above (except it cannot be changed).
+# proto search strategy
+# setting it to 4 will search in this order: proto_path, relative_path, classpath
+[ -n "$PROTO_SS" ] || PROTO_SS=4
+
+# The search strategy for templates is in this order: template_path, classpath 
 
 java -Dtemplate_path=$TEMPLATE_PATH \
     -Dproto_path=$PROTO_PATH \
-    -Dproto_search_strategy=2 \
+    -Dproto_search_strategy=4 \
     -Dfbsgen.print_stack_trace=false \
     -Dfbsgen.sequential_field_numbers=true \
     -jar $JAR_FILE codegen.properties $@
