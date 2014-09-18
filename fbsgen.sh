@@ -14,7 +14,7 @@ if [ ! -d $SCRIPT_DIR/fbsgen-compiler ]; then
 fi
 
 JAR_FILE=$SCRIPT_DIR/fbsgen-compiler/target/fbsgen.jar
-[ -e $SCRIPT_DIR/templates/fbsgen.jar ] && JAR_FILE=$SCRIPT_DIR/templates/fbsgen.jar
+#[ -e $SCRIPT_DIR/templates/fbsgen.jar ] && JAR_FILE=$SCRIPT_DIR/templates/fbsgen.jar
 
 if [ -z $TEMPLATE_PATH ]; then
     TEMPLATE_PATH=.,$SCRIPT_DIR/templates
