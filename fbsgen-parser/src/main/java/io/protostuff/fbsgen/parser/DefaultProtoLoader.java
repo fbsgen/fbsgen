@@ -33,7 +33,9 @@ public class DefaultProtoLoader implements Proto.Loader
     
     protected static final int ALL = 0, 
             PROTO_PATH_ONLY = 1, 
-            PROTO_PATH_AND_CLASSPATH = 2;
+            PROTO_PATH_AND_CLASSPATH = 2, 
+            PROTO_PATH_AND_RELATIVE_PATH = 3,
+            PROTO_PATH_AND_RELATIVE_PATH_AND_CLASSPATH = 4;
     
     /**
      * The default proto search strategy to use.
@@ -82,89 +84,64 @@ public class DefaultProtoLoader implements Proto.Loader
     
     public Proto load(String path, Proto importer) throws IOException
     {
+        Proto proto = null;
         switch (protoSearchStrategy)
         {
-            case ALL:
-                return searchFromAll(path, importer);
-            
             case PROTO_PATH_ONLY:
-                return searchFromProtoPathOnly(path, importer);
+                proto = searchFromProtoPath(path, importer);
+                break;
             
             case PROTO_PATH_AND_CLASSPATH:
-                return searchFromProtoPathAndClasspath(path, importer);
+                if (null == (proto = searchFromProtoPath(path, importer)))
+                    proto = loadFromClasspath(path, importer);
+                break;
+                
+            case PROTO_PATH_AND_RELATIVE_PATH:
+                if (null == (proto = searchFromProtoPath(path, importer)))
+                    proto = searchFromRelativePath(path, importer);
+                break;
+                
+            case PROTO_PATH_AND_RELATIVE_PATH_AND_CLASSPATH:
+                if (null == (proto = searchFromProtoPath(path, importer)) && 
+                        null == (proto = searchFromRelativePath(path, importer)))
+                {
+                    proto = loadFromClasspath(path, importer);
+                }
+                break;
             
             default:
-                return searchFromAll(path, importer);
-        }
-    }
-    
-    /**
-     * Search from proto_path only.  For full protoc compatibility, use this.
-     * 
-     * <pre>
-     * Enable via:
-     * -Dproto_path=$path -Dproto_search_strategy=1
-     * </pre>
-     */
-    protected Proto searchFromProtoPathOnly(String path, Proto importer) throws IOException
-    {
-        // proto_path
-        File protoFile;
-        for (File dir : __protoLoadDirs)
-        {
-            if ((protoFile=new File(dir, path)).exists())
-                return loadFrom(protoFile, importer);
+                // relative path, proto path, http, classpath
+                if (null == (proto = searchFromRelativePath(path, importer)) && 
+                        null == (proto = searchFromProtoPath(path, importer)))
+                {
+                    proto = path.startsWith("http://") ? 
+                            loadFrom(new URL(path), importer) : 
+                                loadFromClasspath(path, importer);
+                }
         }
         
-        throw err(importer, "The imported proto " + path + " could not be found.");
-    }
-    
-    /**
-     * Search from proto_path and classpath (in that order).
-     * 
-     * <pre>
-     * Enable via:
-     * -Dproto_path=$path -Dproto_search_strategy=2
-     * </pre>
-     */
-    protected Proto searchFromProtoPathAndClasspath(String path, Proto importer) 
-            throws IOException
-    {
-        // proto_path
-        File protoFile;
-        for (File dir : __protoLoadDirs)
-        {
-            if ((protoFile=new File(dir, path)).exists())
-                return loadFrom(protoFile, importer);
-        }
-        
-        // classpath
-        Proto proto = loadFromClasspath(path, importer);
         if (proto == null)
             throw err(importer, "The imported proto " + path + " could not be found.");
         
         return proto;
     }
     
-    /**
-     * Search from every possible resource.
-     * Also loads from a remote url (if path starts with http://).
-     * 
-     * <pre>
-     * Search order is: 
-     * 1. relative path
-     * 2. proto_path
-     * 3. classpath
-     * </pre>
-     */
-    protected Proto searchFromAll(String path, Proto importer) throws IOException
+    protected Proto searchFromProtoPath(String path, Proto importer) throws IOException
     {
-        if (path.startsWith("http://"))
+        // proto_path
+        File protoFile;
+        for (File dir : __protoLoadDirs)
         {
-            URL url = new URL(path);
-            return loadFrom(url, importer);
+            if ((protoFile=new File(dir, path)).exists())
+                return loadFrom(protoFile, importer);
         }
         
+        return null;
+    }
+    
+    protected Proto searchFromRelativePath(String path, Proto importer)
+            throws IOException
+    {
         File protoFile, importerFile = importer.getFile();
         if (importerFile == null)
             protoFile = new File(path);
@@ -179,30 +156,9 @@ public class DefaultProtoLoader implements Proto.Loader
                 if (baseDir != null)
                     protoFile = new File(baseDir, path);
             }
-            
-            if (!protoFile.exists() && !__protoLoadDirs.isEmpty())
-            {
-                // check from the "proto_path" provided as a system property
-                for (File dir : __protoLoadDirs)
-                {
-                    if ((protoFile=new File(dir, path)).exists())
-                    {
-                        // found
-                        break;
-                    }
-                }
-            }
         }
         
-        if (protoFile.exists())
-            return loadFrom(protoFile, importer);
-        
-        // last resort (defaults to classpath lookup).
-        Proto protoFromOtherResource = loadFromClasspath(path, importer);
-        if (protoFromOtherResource == null)
-            throw err(importer, "The imported proto " + path + " could not be found.");
-        
-        return protoFromOtherResource;
+        return protoFile.exists() ? loadFrom(protoFile, importer) : null;
     }
     
     static File getBaseDirFromPackagePath(String path, Proto importer)

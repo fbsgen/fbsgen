@@ -1,6 +1,6 @@
 package import;
 
-import "test/pb.proto";
+import "pb.proto"; // relative path
 
 message Importer {
 
