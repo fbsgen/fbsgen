@@ -33,6 +33,12 @@ import java.util.regex.Pattern;
 public final class CompilerUtil
 {
     
+    public static final boolean SILENT_MODE = Boolean.parseBoolean(
+            System.getProperty("fbsgen.silent_mode", "true"));
+
+    static final boolean PRINT_STACK_TRACE = Boolean.parseBoolean(
+            System.getProperty("fbsgen.print_stack_trace", "false"));
+    
     public static final Pattern COMMA = Pattern.compile(",");
     public static final Pattern SEMI_COLON = Pattern.compile(";");
     public static final Pattern DOUBLE_UNDERSCORE = Pattern.compile("__");

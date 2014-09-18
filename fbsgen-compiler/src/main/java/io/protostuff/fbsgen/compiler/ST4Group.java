@@ -23,9 +23,12 @@ import io.protostuff.fbsgen.compiler.map.FakeMapUtil;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -35,15 +38,22 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.stringtemplate.v4.AttributeRenderer;
 import org.stringtemplate.v4.AutoIndentWriter;
+import org.stringtemplate.v4.InstanceScope;
 import org.stringtemplate.v4.Interpreter;
 import org.stringtemplate.v4.ModelAdaptor;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STErrorListener;
 import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.STGroupFile;
+import org.stringtemplate.v4.STWriter;
 import org.stringtemplate.v4.compiler.CompiledST;
 import org.stringtemplate.v4.compiler.GroupLexer;
 import org.stringtemplate.v4.compiler.GroupParser;
+import org.stringtemplate.v4.debug.EvalTemplateEvent;
+import org.stringtemplate.v4.debug.InterpEvent;
+import org.stringtemplate.v4.gui.STViz;
+import org.stringtemplate.v4.misc.ErrorBuffer;
+import org.stringtemplate.v4.misc.ErrorManager;
 import org.stringtemplate.v4.misc.STMessage;
 import org.stringtemplate.v4.misc.STNoSuchPropertyException;
 
@@ -96,28 +106,28 @@ public final class ST4Group extends STGroup implements TemplateGroup
         public void compileTimeError(STMessage msg)
         {
             if (0 == errorCount++)
-                System.err.println("compile-time error: " + msg);
+                System.err.println(msg);
         }
 
         @Override
         public void runTimeError(STMessage msg)
         {
             if (0 == errorCount++)
-                System.err.println("runtime error: " + msg);
+                System.err.println(msg);
         }
 
         @Override
         public void IOError(STMessage msg)
         {
             if (0 == errorCount++)
-                System.err.println("io error: " + msg);
+                System.err.println(msg);
         }
 
         @Override
         public void internalError(STMessage msg)
         {
             if (0 == errorCount++)
-                System.err.println("internal error: " + msg);
+                System.err.println(msg);
         }
     };
     
@@ -255,6 +265,16 @@ public final class ST4Group extends STGroup implements TemplateGroup
         return templates.get(name.substring(1));
     }
     
+    public ST createStringTemplate(CompiledST impl)
+    {
+        return new CustomST(this, impl);
+    }
+    
+    public ST createStringTemplateInternally(ST proto)
+    {
+        return new CustomST(proto);
+    }
+    
     public void importTemplates(Token fileNameToken)
     {
         importTemplates(importGroup(fileNameToken.getText()), false);
@@ -295,13 +315,23 @@ public final class ST4Group extends STGroup implements TemplateGroup
         dictionaries.put(name, (Map<String, Object>)m);
     }
     
-    public static final class ST4GroupFile extends STGroupFile implements TemplateGroup
+    static final class ST4GroupFile extends STGroupFile implements TemplateGroup
     {
 
         public ST4GroupFile(URL url, String encoding, char delimiterStartChar,
                 char delimiterStopChar)
         {
             super(url, encoding, delimiterStartChar, delimiterStopChar);
+        }
+        
+        public ST createStringTemplate(CompiledST impl)
+        {
+            return new CustomST(this, impl);
+        }
+        
+        public ST createStringTemplateInternally(ST proto)
+        {
+            return new CustomST(proto);
         }
         
         public void importTemplates(Token fileNameToken)
@@ -343,7 +373,7 @@ public final class ST4Group extends STGroup implements TemplateGroup
         }
     }
     
-    public static final class ST4Template implements Template
+    static final class ST4Template implements Template
     {
         final ST4Group group;
         final CompiledST st;
@@ -368,4 +398,111 @@ public final class ST4Group extends STGroup implements TemplateGroup
         }
     }
     
+    static final class CustomST extends ST
+    {
+        CustomST(STGroup group, CompiledST impl)
+        {
+            super();
+            
+            this.impl = impl;
+            this.groupThatCreatedThisInstance = group;
+            
+            if (impl.formalArguments != null)
+            {
+                locals = new Object[impl.formalArguments.size()];
+                Arrays.fill(locals, ST.EMPTY_ATTR);
+            }
+        }
+        
+        CustomST(ST proto)
+        {
+            super(proto);
+        }
+        
+        public int write(STWriter out) throws IOException
+        {
+            Interpreter interp = new CustomInterpreter(groupThatCreatedThisInstance,
+                    impl.nativeGroup.errMgr, false);
+            InstanceScope scope = new InstanceScope(null, this);
+            return interp.exec(out, scope);
+        }
+
+        public int write(STWriter out, Locale locale)
+        {
+            Interpreter interp = new CustomInterpreter(groupThatCreatedThisInstance, 
+                    locale, impl.nativeGroup.errMgr, false);
+            InstanceScope scope = new InstanceScope(null, this);
+            return interp.exec(out, scope);
+        }
+
+        public int write(STWriter out, STErrorListener listener)
+        {
+            Interpreter interp = new CustomInterpreter(groupThatCreatedThisInstance,
+                    new ErrorManager(listener), false);
+            InstanceScope scope = new InstanceScope(null, this);
+            return interp.exec(out, scope);
+        }
+
+        public int write(STWriter out, Locale locale, STErrorListener listener)
+        {
+            Interpreter interp = new CustomInterpreter(groupThatCreatedThisInstance, 
+                    locale, new ErrorManager(listener), false);
+            InstanceScope scope = new InstanceScope(null, this);
+            return interp.exec(out, scope);
+        }
+        
+        public STViz inspect(ErrorManager errMgr, Locale locale, int lineWidth)
+        {
+            ErrorBuffer errors = new ErrorBuffer();
+            impl.nativeGroup.setListener(errors);
+            StringWriter out = new StringWriter();
+            STWriter wr = new AutoIndentWriter(out);
+            wr.setLineWidth(lineWidth);
+            Interpreter interp = new CustomInterpreter(groupThatCreatedThisInstance, 
+                    locale, true);
+            InstanceScope scope = new InstanceScope(null, this);
+            interp.exec(wr, scope); // render and track events
+            List<InterpEvent> events = interp.getEvents();
+            EvalTemplateEvent overallTemplateEval = (EvalTemplateEvent)events
+                    .get(events.size() - 1);
+            STViz viz = new STViz(errMgr, overallTemplateEval, out.toString(), interp,
+                    interp.getExecutionTrace(), errors.errors);
+            viz.open();
+            return viz;
+        }
+    }
+    
+    static final class CustomInterpreter extends Interpreter
+    {
+
+        public CustomInterpreter(STGroup group, boolean debug)
+        {
+            super(group, debug);
+        }
+
+        public CustomInterpreter(STGroup group, ErrorManager errMgr, boolean debug)
+        {
+            super(group, errMgr, debug);
+        }
+
+        public CustomInterpreter(STGroup group, Locale locale, boolean debug)
+        {
+            super(group, locale, debug);
+        }
+
+        public CustomInterpreter(STGroup group, Locale locale, ErrorManager errMgr, boolean debug)
+        {
+            super(group, locale, errMgr, debug);
+        }
+
+        /**
+         * Does not catch exceptions (fail fast).
+         */
+        @Override
+        public int exec(STWriter out, InstanceScope scope)
+        {
+            setDefaultArguments(out, scope);
+            return _exec(out, scope);
+        }
+    }
 }

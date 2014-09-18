@@ -15,6 +15,8 @@
 package io.protostuff.fbsgen.compiler;
 
 import static io.protostuff.fbsgen.compiler.CompilerUtil.COMMA;
+import static io.protostuff.fbsgen.compiler.CompilerUtil.PRINT_STACK_TRACE;
+import static io.protostuff.fbsgen.compiler.CompilerUtil.SILENT_MODE;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
 
 import java.io.File;
@@ -34,12 +36,6 @@ import java.util.Properties;
  */
 public final class CompilerMain
 {
-
-    public static final boolean SILENT_MODE = Boolean.parseBoolean(
-            System.getProperty("fbsgen.silent_mode", "true"));
-
-    static final boolean PRINT_STACK_TRACE = Boolean.parseBoolean(
-            System.getProperty("fbsgen.print_stack_trace", "false"));
 
     static final HashMap<String, ProtoCompiler> __compilers =
             new HashMap<String, ProtoCompiler>();

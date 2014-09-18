@@ -14,9 +14,12 @@
 
 package io.protostuff.fbsgen.compiler.map;
 
+import static io.protostuff.fbsgen.parser.AnnotationContainer.err;
 import io.protostuff.fbsgen.compiler.FakeMap;
 import io.protostuff.fbsgen.parser.Annotation;
+import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Field;
+import io.protostuff.fbsgen.parser.HasName;
 import io.protostuff.fbsgen.parser.Message;
 
 import java.util.ArrayList;
@@ -60,6 +63,64 @@ public final class GetMap extends FakeMap
     
     public enum Functions implements Function
     {
+        PB_FIELD_TYPE
+        {
+            public Object get(Object data)
+            {
+                Field<?> field = (Field<?>)data;
+                String type = field.getClass().getSimpleName();
+                switch(type.charAt(type.length()-1))
+                {
+                    case '8': // int8
+                        return type.toLowerCase().substring(0, type.length()-1) + "32";
+                    
+                    case '6': // int16
+                        return type.toLowerCase().substring(0, type.length()-2) + "32";
+                    
+                    case '2': // int32
+                        if (Boolean.TRUE.equals(field.getO().get("fixed")))
+                            return type.charAt(0) == 'U' ? "fixed32" : "sfixed32";
+                        
+                        if (Boolean.TRUE.equals(field.getO().get("signed")))
+                        {
+                            if (type.charAt(0) == 'U')
+                                throw err(field, " cannot be a signed int type", field.getProto());
+                            
+                            return "sint32";
+                        }
+                        
+                        return type.toLowerCase();
+                    
+                    case '4': // int64
+                        if (Boolean.TRUE.equals(field.getO().get("fixed")))
+                            return type.charAt(0) == 'U' ? "fixed64" : "sfixed64";
+                        
+                        if (Boolean.TRUE.equals(field.getO().get("signed")))
+                        {
+                            if (type.charAt(0) == 'U')
+                                throw err(field, " cannot be a signed int type", field.getProto());
+                            
+                            return "sint64";
+                        }
+                        
+                        return type.toLowerCase();
+                    
+                    default:
+                        HasName udt = field.getUdt();
+                        if (udt == null)
+                            return type.toLowerCase();
+                        
+                        if (udt instanceof Message)
+                            return ((Message)udt).getFullName();
+                        
+                        if (udt instanceof EnumGroup)
+                            return ((EnumGroup)udt).getFullName();
+                        
+                        return udt.getName();
+                }
+            }
+        },
+        
         FBS_INT_TYPE
         {
             public Object get(Object data)

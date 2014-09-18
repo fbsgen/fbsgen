@@ -39,7 +39,6 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         }
     }
     
-    
     static final HashMap<java.lang.String,java.lang.String> INT_TYPES = 
             new HashMap<java.lang.String, java.lang.String>();
     static
@@ -63,7 +62,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     {
         return INT_TYPES.get(fieldType);
     }
-   
+    
     
     java.lang.String name, defaultValueConstant;
     int number;
