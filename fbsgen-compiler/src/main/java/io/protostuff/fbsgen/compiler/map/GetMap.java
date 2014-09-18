@@ -15,7 +15,9 @@
 package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
+import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.Field;
+import io.protostuff.fbsgen.parser.Message;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -63,6 +65,16 @@ public final class GetMap extends FakeMap
             public Object get(Object data)
             {
                 return Field.fbsIntType((String)data);
+            }
+        },
+        
+        FBS_MESSAGE_TYPE
+        {
+            public Object get(Object data)
+            {
+                Message m = (Message)data;
+                Annotation ta = m.getTa();
+                return ta != null && ta.getName().equals("struct") ? "struct" : "table";
             }
         },
         
