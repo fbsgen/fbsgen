@@ -278,9 +278,12 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     static abstract class Number<T> extends Field<T>
     {
-        public Number()
+        public final int bits;
+        
+        Number(int bits)
         {
             super(true);
+            this.bits = bits;
         }
         
         public boolean isFloatingPointType()
@@ -295,10 +298,35 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return isFloatingPointType();
         }
+        
+        public final boolean isBit64()
+        {
+            return 64 == bits;
+        }
+        
+        public final boolean isBit32()
+        {
+            return 32 == bits;
+        }
+        
+        public final boolean isBit16()
+        {
+            return 16 == bits;
+        }
+        
+        public final boolean isBit8()
+        {
+            return 8 == bits;
+        }
     }
     
     public static class Int8 extends Number<Integer>
     {
+        public Int8()
+        {
+            super(8);
+        }
+        
         public java.lang.String getJavaType()
         {
             return "byte";
@@ -312,6 +340,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public static class UInt8 extends Number<Integer>
     {
+        public UInt8()
+        {
+            super(8);
+        }
+        
         public java.lang.String getJavaType()
         {
             return "byte";
@@ -325,6 +358,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public static class Int16 extends Number<Integer>
     {
+        public Int16()
+        {
+            super(16);
+        }
+        
         public java.lang.String getJavaType()
         {
             return "int";
@@ -338,6 +376,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public static class UInt16 extends Number<Integer>
     {
+        public UInt16()
+        {
+            super(16);
+        }
+        
         public java.lang.String getJavaType()
         {
             return "int";
@@ -351,6 +394,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public static class Int32 extends Number<Integer>
     {
+        public Int32()
+        {
+            super(32);
+        }
+        
         public java.lang.String getJavaType()
         {
             return "int";
@@ -364,6 +412,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public static class UInt32 extends Number<Integer>
     {
+        public UInt32()
+        {
+            super(32);
+        }
+        
         public java.lang.String getJavaType()
         {
             return "int";
@@ -377,6 +430,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public static class Int64 extends Number<Long>
     {
+        public Int64()
+        {
+            super(64);
+        }
+        
         public java.lang.String getJavaType()
         {
             return "long";
@@ -390,6 +448,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public static class UInt64 extends Number<Long>
     {
+        public UInt64()
+        {
+            super(64);
+        }
+        
         public java.lang.String getJavaType()
         {
             return "long";
@@ -403,6 +466,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public static class Float extends Number<java.lang.Float>
     {
+        public Float()
+        {
+            super(32);
+        }
+        
         public java.lang.String getJavaType()
         {
             return "float";
@@ -421,6 +489,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public static class Double extends Number<java.lang.Double>
     {
+        public Double()
+        {
+            super(64);
+        }
+        
         public java.lang.String getJavaType()
         {
             return "double";

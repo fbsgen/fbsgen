@@ -48,6 +48,7 @@ public final class FakeMapUtil
         IsMap.addAllTo(LIST);
         GetMap.addAllTo(LIST);
         NewMap.addAllTo(LIST);
+        SortMap.addAllTo(LIST);
         VerifyMap.addAllTo(LIST);
         FormatMap.addAllTo(LIST);
     }
