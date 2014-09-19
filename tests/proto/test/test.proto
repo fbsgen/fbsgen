@@ -30,10 +30,11 @@ message Foo {
   repeated double rep_double = 11;
   repeated string rep_string = 12;
   repeated bytes rep_bytes = 13;
-  repeated Size rep_size = 14;
-  repeated Bar rep_bar = 15;
-  repeated Hello.Feedback rep_hello_feedback = 16;
-  repeated Hello.World rep_hello_world = 17;
+  repeated Bar rep_bar = 14;
+  repeated Size rep_size = 15;
+  repeated Hello rep_hello = 16;
+  repeated Hello.Feedback rep_hello_feedback = 17;
+  repeated Hello.World rep_hello_world = 18;
 }
 
 message Bar {
@@ -50,15 +51,28 @@ message Bar {
   optional double some_double = 11;
   optional string some_string = 12;
   optional bytes some_bytes = 13;
-  optional Size some_size = 14;
-  optional Baz some_baz = 15;
-  optional Hello.Feedback some_hello_feedback = 16;
-  optional Hello.World some_hello_world = 17;
+  optional Baz some_baz = 14;
+  optional Size some_size = 15;
+  optional Hello some_hello = 16;
+  optional Hello.Feedback some_hello_feedback = 17;
+  optional Hello.World some_hello_world = 18;
 }
 
 @struct
 message Baz {
-  required uint64 id = 1;
+  required bool some_bool = 1;
+  required int8 some_byte = 2;
+  required uint8 some_ubyte = 3;
+  required int16 some_short = 4;
+  required uint16 some_ushort = 5;
+  required int32 some_int = 6;
+  required uint32 some_uint = 7;
+  required int64 some_long = 8;
+  required uint64 some_ulong = 9;
+  required float some_float = 10;
+  required double some_double = 11;
+  required Size some_size = 12;
+  required Hello.Feedback some_hello_feedback = 13;
 }
 
 @table(original_order = true)
