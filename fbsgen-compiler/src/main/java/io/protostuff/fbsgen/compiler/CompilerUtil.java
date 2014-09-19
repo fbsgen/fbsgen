@@ -102,5 +102,11 @@ public final class CompilerUtil
             }
         }
     }
+    
+    public static int $int(Object arg)
+    {
+        return arg instanceof Integer ? 
+                ((Integer)arg).intValue() : Integer.parseInt(arg.toString());
+    }
 
 }

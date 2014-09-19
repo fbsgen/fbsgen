@@ -15,6 +15,7 @@
 package io.protostuff.fbsgen.compiler.map;
 
 import static io.protostuff.fbsgen.parser.AnnotationContainer.err;
+import io.protostuff.fbsgen.compiler.CompilerUtil;
 import io.protostuff.fbsgen.compiler.FakeMap;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.EnumGroup;
@@ -61,8 +62,35 @@ public final class GetMap extends FakeMap
             list.add(c.map);
     }
     
+    /*public static void main(String[] args)
+    {
+        int x = 8;
+        System.err.println(Functions.BIT_POT_INDEX.get(x));
+        // 3
+    }*/
+    
     public enum Functions implements Function
     {
+        /**
+         * bit power-of-two shift number.
+         */
+        BIT_POT_SHIFTNUM
+        {
+            public Object get(Object data)
+            {
+                int num = CompilerUtil.$int(data), 
+                        count = 0;
+                
+                while (num != 0)
+                {
+                    num = num >>> 1;
+                    count++;
+                }
+                    
+                return count - 1;
+            }
+        },
+        
         PB_FIELD_TYPE
         {
             public Object get(Object data)

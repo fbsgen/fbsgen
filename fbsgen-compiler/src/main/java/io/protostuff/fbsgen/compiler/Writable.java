@@ -14,6 +14,7 @@
 
 package io.protostuff.fbsgen.compiler;
 
+import static io.protostuff.fbsgen.compiler.CompilerUtil.$int;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.AnnotationContainer;
 import io.protostuff.fbsgen.parser.HasName;
@@ -222,6 +223,34 @@ public final class Writable
     };
     
     /**
+     * The operator "<<" applied to the number with the arg.
+     * <pre>
+     *   «writable.n.("1").lshift.("2")»
+     * </pre>
+     */
+    public final FakeMap lshift = new FakeMap("lshift")
+    {
+        public Object get(Object arg)
+        {
+            return number << $int(arg);
+        }
+    };
+    
+    /**
+     * The operator "<<" applied to the number with the arg.
+     * <pre>
+     *   «writable.n.("2").rshift.("1")»
+     * </pre>
+     */
+    public final FakeMap rshift = new FakeMap("rshift")
+    {
+        public Object get(Object arg)
+        {
+            return number >>> $int(arg);
+        }
+    };
+    
+    /**
      * Compares the number against the arg.
      * <pre>
      *   «writable.n.(0).gt.(0)»
@@ -295,12 +324,6 @@ public final class Writable
             return ret;
         }
     };
-    
-    static int $int(Object arg)
-    {
-        return arg instanceof Integer ? 
-                ((Integer)arg).intValue() : Integer.parseInt(arg.toString());
-    }
     
     /**
      * Returns true if {@link #number} & arg is not zero.
