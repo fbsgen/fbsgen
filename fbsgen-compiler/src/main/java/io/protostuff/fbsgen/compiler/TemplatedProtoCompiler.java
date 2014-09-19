@@ -104,7 +104,7 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
 
         if (protoBlockTemplate != null)
         {
-            compileProtoBlock(module, proto, packageName, protoBlockTemplate);
+            compileProtoBlock(module.clear(), proto, packageName, protoBlockTemplate);
             return;
         }
         
@@ -144,7 +144,7 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
                     }
                 }
                 
-                compileEnumBlock(module, eg, packageName,
+                compileEnumBlock(module.clear(), eg, packageName,
                         resolveFileName(eg.getName()), enumBlockTemplate);
             }
         }
@@ -178,7 +178,7 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
                     }
                 }
                 
-                compileMessageBlock(module, message, packageName,
+                compileMessageBlock(module.clear(), message, packageName,
                         resolveFileName(message.getName()), messageBlockTemplate);
             }
         }
