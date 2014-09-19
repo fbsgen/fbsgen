@@ -95,6 +95,36 @@ public final class Writable
         }
     };
     
+    /**
+     * Get the element at index from list.
+     * <pre>
+     *   «writable.n.(1).get_from.(message.fields)»
+     * </pre>
+     */
+    public final FakeMap get_from = new FakeMap("at")
+    {
+        @SuppressWarnings("unchecked")
+        public Object get(Object entry)
+        {
+            return $get(number, (List<Object>)entry);
+        }
+    };
+    
+    /**
+     * Get the element at index (one-based, so we deduct 1) from list.
+     * <pre>
+     *   «writable.n.(1).get_from1.(message.fields)»
+     * </pre>
+     */
+    public final FakeMap get_from1 = new FakeMap("get_from1")
+    {
+        @SuppressWarnings("unchecked")
+        public Object get(Object entry)
+        {
+            return $get(number - 1, (List<Object>)entry);
+        }
+    };
+    
     static Object $get(int index, List<Object> list)
     {
         if (index < 0 && (index = list.size() + index) < 0)
@@ -164,6 +194,34 @@ public final class Writable
     };
     
     /**
+     * Adds the number with the arg.
+     * <pre>
+     *   «writable.n.(0).plus.(1)»
+     * </pre>
+     */
+    public final FakeMap plus = new FakeMap("plus")
+    {
+        public Object get(Object entry)
+        {
+            return number + $int(entry);
+        }
+    };
+    
+    /**
+     * Subtracts the number with the arg.
+     * <pre>
+     *   «writable.n.(0).minus.(1)»
+     * </pre>
+     */
+    public final FakeMap minus = new FakeMap("minus")
+    {
+        public Object get(Object entry)
+        {
+            return number - $int(entry);
+        }
+    };
+    
+    /**
      * Compares the number against the arg.
      * <pre>
      *   «writable.n.(0).gt.(0)»
@@ -173,7 +231,7 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            return number > ((Integer)entry).intValue();
+            return number > $int(entry);
         }
     };
     
@@ -187,7 +245,7 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            return number >= ((Integer)entry).intValue();
+            return number >= $int(entry);
         }
     };
     
@@ -201,7 +259,7 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            return number < ((Integer)entry).intValue();
+            return number < $int(entry);
         }
     };
     
@@ -215,7 +273,7 @@ public final class Writable
     {
         public Object get(Object entry)
         {
-            return number <= ((Integer)entry).intValue();
+            return number <= $int(entry);
         }
     };
     
