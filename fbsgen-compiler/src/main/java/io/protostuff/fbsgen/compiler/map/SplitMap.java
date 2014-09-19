@@ -60,6 +60,18 @@ public final class SplitMap extends FakeMap
     
     public enum Functions implements Function
     {
+        DOT_AFTER_SLASH
+        {
+            @Override
+            public Object split(String str)
+            {
+                if (str == null || str.isEmpty())
+                    return Collections.EMPTY_LIST;
+                
+                int slash = str.lastIndexOf('/');
+                return CompilerUtil.DOT.split(slash == -1 ? str : str.substring(slash + 1));
+            }
+        },
         DOT
         {
             @Override
