@@ -60,6 +60,15 @@ public final class SplitMap extends FakeMap
     
     public enum Functions implements Function
     {
+        DOT
+        {
+            @Override
+            public Object split(String str)
+            {
+                return str == null || str.isEmpty() ? Collections.EMPTY_LIST : 
+                        Arrays.asList(CompilerUtil.DOT.split(str));
+            }
+        },
         COMMA
         {
             @Override

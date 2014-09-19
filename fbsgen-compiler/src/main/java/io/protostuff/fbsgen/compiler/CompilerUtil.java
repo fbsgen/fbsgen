@@ -39,6 +39,7 @@ public final class CompilerUtil
     static final boolean PRINT_STACK_TRACE = Boolean.parseBoolean(
             System.getProperty("fbsgen.print_stack_trace", "false"));
     
+    public static final Pattern DOT = Pattern.compile("\\.");
     public static final Pattern COMMA = Pattern.compile(",");
     public static final Pattern SEMI_COLON = Pattern.compile(";");
     public static final Pattern DOUBLE_UNDERSCORE = Pattern.compile("__");
