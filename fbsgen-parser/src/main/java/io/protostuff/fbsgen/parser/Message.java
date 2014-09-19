@@ -624,18 +624,8 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
         final Proto proto = getProto();
         final String fullName = getFullName();
         
-        if (!fields.isEmpty())
-        {
-            sortedFields.addAll(fields.values());
-            
-            if (fields.size() > 1)
-                Collections.sort(sortedFields);
-            
-            if (SEQUENTIAL_FIELD_NUMBERS && !isSequentialFieldNumbers())
-                throw err(this, " must have sequential field numbers (starts at 1, no gaps in-between)", proto);
-        }
-        
-        for (Field<?> f : sortedFields)
+        final Collection<Field<?>> declaredFields = fields.values();
+        for (Field<?> f : declaredFields)
         {
             if (f.isRepeated())
             {
@@ -749,12 +739,23 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
                     continue;
                 }
                 
-                throw err(this, " contains an unknown field: " + fullRefName, proto);
+                throw err(this, " contains an unknown field type: " + fullRefName, proto);
             }
             
             // references inside options
             if (!f.standardOptions.isEmpty())
                 proto.references.add(new ConfiguredReference(f.standardOptions, f.extraOptions, fullName));
+        }
+        
+        if (!fields.isEmpty())
+        {
+            sortedFields.addAll(declaredFields);
+            
+            if (fields.size() > 1)
+                Collections.sort(sortedFields);
+            
+            if (SEQUENTIAL_FIELD_NUMBERS && !isSequentialFieldNumbers())
+                throw err(this, " must have sequential field numbers (starts at 1, no gaps in-between)", proto);
         }
         
         //for (Extension extension : this.nestedExtensions)

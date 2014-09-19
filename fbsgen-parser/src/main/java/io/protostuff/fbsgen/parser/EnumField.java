@@ -63,6 +63,14 @@ public final class EnumField extends Field<EnumGroup.Value>
         return enumGroup;
     }
     
+    /**
+     * Alias to {@link #getEnumGroup()}.
+     */
+    public final EnumGroup getEg()
+    {
+        return getEnumGroup();
+    }
+    
     public HasName getUserDefinedType()
     {
         return enumGroup;

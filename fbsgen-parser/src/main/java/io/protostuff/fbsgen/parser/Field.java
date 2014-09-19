@@ -282,6 +282,19 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             super(true);
         }
+        
+        public boolean isFloatingPointType()
+        {
+            return false;
+        }
+        
+        /**
+         * Alias to {@link #isFloatingPointType()}.
+         */
+        public final boolean isFpt()
+        {
+            return isFloatingPointType();
+        }
     }
     
     public static class Int8 extends Number<Integer>
@@ -399,6 +412,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "float";
         }
+
+        public boolean isFloatingPointType()
+        {
+            return true;
+        }
     }
     
     public static class Double extends Number<java.lang.Double>
@@ -411,6 +429,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         public java.lang.String getFbsType()
         {
             return "double";
+        }
+        
+        public boolean isFloatingPointType()
+        {
+            return true;
         }
     }
     
