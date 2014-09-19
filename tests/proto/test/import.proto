@@ -1,8 +1,19 @@
-package test;
+package test.gg;
 
 import "pb.proto"; // relative path
+import "test.proto";
 
-message Importer {
+message Sample {
 
   optional Compat compat = 1;
+  optional Foo foo = 2;
+  optional Size size = 3;
+  optional Priority priority = 4;
+}
+
+message AnotherSample {
+  optional Sample sample = 1;
+  optional Bar bar = 2;
+  optional Hello.World hello_world = 3;
+  optional Hello.Feedback hello_feedback = 4;
 }
