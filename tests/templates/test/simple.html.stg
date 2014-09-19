@@ -89,7 +89,7 @@ enum_block(eg, module, nested=false) ::= <<
       «endif»
     </a>
     «if(!module.o.("raw"))»
-    <span class="attr">: <b>«get_fbs_int_type.(eg.ta.name)»</b>«if(!eg.ta.emptyP)» («eg.ta.p:{k|«k»: «eg.ta.p.(k)»}; separator=", "»)«endif»</span>
+    <span class="attr">: <b>«get_fbs_int_type.(eg.ta.name)»</b>«ta_params(eg.ta, module)»</span>
     «endif»
     «eg.declaredValues:v_decl(module); separator="\n"»
   </h2>
@@ -127,7 +127,7 @@ message_block(message, module, nested=false) ::= <<
     </a>
     «if(!module.o.("raw") && message.ta)»
     «if(!message.ta.emptyP)»
-    <span class="attr">: («message.ta.p:{k|«k»: «message.ta.p.(k)»}; separator=", "»)</span>
+    <span class="attr">«ta_params(message.ta, module)»</span>
     «endif»
     «endif»
   </h2>
