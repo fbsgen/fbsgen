@@ -264,13 +264,18 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
         return (T)fields.get(name);
     }
     
+    public boolean isStruct()
+    {
+        return typeAnnotation != null && "struct".equals(typeAnnotation.name);
+    }
+    
     public void addField(Field<?> field)
     {
-        if (field.number < 1)
-            throw err(field, " has an invalid field number: " + field.number, getProto());
-        
         // if it errors, the err msg (below) will include the field's owner.
         field.owner = this;
+        
+        if (field.number < 1)
+            throw err(field, " has an invalid field number: " + field.number, getProto());
         
         if (fields.put(field.name, field) != null)
             throw err(field, " cannot be defined more than once.", getProto());
@@ -653,6 +658,9 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
             
             if (f instanceof Field.Bytes)
             {
+                if (isStruct())
+                    throw err(f, " is neither a scalar nor struct field", proto);
+                
                 if (f.isRepeated())
                     repeatedBytesFieldCount++;
                 else
@@ -670,6 +678,9 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
             }
             else if (f instanceof Field.String)
             {
+                if (isStruct())
+                    throw err(f, " is neither a scalar nor struct field", proto);
+                
                 if (f.isRepeated())
                     repeatedStringFieldCount++;
                 else
@@ -693,6 +704,9 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
                 HasName refObj = proto.findReference(fullRefName, fullName);
                 if (refObj instanceof Message)
                 {
+                    if (isStruct() && !((Message)refObj).isStruct())
+                        throw err(f, " is neither a scalar nor struct field", proto);
+                    
                     MessageField mf = newMessageField((Message) refObj, fr, this);
                     fields.put(mf.name, mf);
                     
