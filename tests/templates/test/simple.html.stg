@@ -105,7 +105,11 @@ enum_top(eg, module) ::= <%
 
 v_decl(v, module) ::= <<
 <div class="field">
-  <span>«v.name»</span> = «v.number»«if(module.o.("raw"))»;«else»,«endif»
+  «if(module.o.("raw"))»
+  <span>«v.name»</span> = «v.number»;
+  «else»
+  <span>«v.name»</span> = «if(v.eg.ta.p.("bit_flags"))»«get_bit_pot_shiftnum.(v.number)»«else»«v.number»«endif»,
+  «endif»
 </div>
 >>
 
