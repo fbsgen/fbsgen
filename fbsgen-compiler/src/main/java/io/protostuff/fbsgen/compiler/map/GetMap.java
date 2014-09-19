@@ -91,6 +91,38 @@ public final class GetMap extends FakeMap
             }
         },
         
+        SPARSE_ENUM_VALUE_NAMES
+        {
+            public Object get(Object data)
+            {
+                final EnumGroup eg = (EnumGroup)data;
+                final ArrayList<String> list = new ArrayList<String>();
+                
+                final ArrayList<EnumGroup.Value> values = eg.getValues();
+                int j = 0;
+                EnumGroup.Value v = values.get(j++);
+                list.add(v.getName());
+                
+                for (int i = v.getNumber(), 
+                        len = values.get(values.size() - 1).getNumber(); 
+                        i < len; i++)
+                {
+                    v = values.get(j);
+                    if (i == (v.getNumber() - 1))
+                    {
+                        list.add(v.getName());
+                        j++;
+                    }
+                    else
+                    {
+                        list.add("");
+                    }
+                }
+                
+                return list;
+            }
+        },
+        
         PB_FIELD_TYPE
         {
             public Object get(Object data)
