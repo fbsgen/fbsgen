@@ -14,6 +14,7 @@
 
 package io.protostuff.fbsgen.compiler.map;
 
+import static io.protostuff.fbsgen.compiler.CompilerUtil.$int;
 import static io.protostuff.fbsgen.parser.AnnotationContainer.err;
 import io.protostuff.fbsgen.compiler.CompilerUtil;
 import io.protostuff.fbsgen.compiler.FakeMap;
@@ -178,6 +179,14 @@ public final class GetMap extends FakeMap
                         
                         return udt.getName();
                 }
+            }
+        },
+        
+        FBS_FIELD_OFFSET
+        {
+            public Object get(Object data)
+            {
+                return 4 + (($int(data) - 1) << 1);
             }
         },
         
