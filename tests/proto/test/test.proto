@@ -58,6 +58,50 @@ message Bar {
   optional Hello.World some_hello_world = 18;
 }
 
+message FooBar {
+  repeated bool rep_bool = 1;
+  repeated int8 rep_byte = 2;
+  repeated uint8 rep_ubyte = 3;
+  repeated int16 rep_short = 4;
+  repeated uint16 rep_ushort = 5;
+  repeated int32 rep_int = 6;
+  repeated uint32 rep_uint = 7;
+  repeated int64 rep_long = 8;
+  repeated uint64 rep_ulong = 9;
+  repeated float rep_float = 10;
+  repeated double rep_double = 11;
+  repeated string rep_string = 12;
+  repeated bytes rep_bytes = 13;
+  repeated Bar rep_bar = 14;
+  repeated Size rep_size = 15;
+  repeated Hello rep_hello = 16;
+  repeated Hello.Feedback rep_hello_feedback = 17;
+  repeated Hello.World rep_hello_world = 18;
+  repeated Baz rep_baz = 19;
+  repeated Foo rep_foo = 20;
+  
+  optional bool some_bool = 21;
+  optional int8 some_byte = 22;
+  optional uint8 some_ubyte = 23;
+  optional int16 some_short = 24;
+  optional uint16 some_ushort = 25;
+  optional int32 some_int = 26;
+  optional uint32 some_uint = 27;
+  optional int64 some_long = 28;
+  optional uint64 some_ulong = 29;
+  optional float some_float = 30;
+  optional double some_double = 31;
+  optional string some_string = 32;
+  optional bytes some_bytes = 33;
+  optional Baz some_baz = 34;
+  optional Size some_size = 35;
+  optional Hello some_hello = 36;
+  optional Hello.Feedback some_hello_feedback = 37;
+  optional Hello.World some_hello_world = 38;
+  optional Bar some_bar = 39;
+  optional Foo some_foo = 40;
+}
+
 @struct
 message Baz {
   required bool some_bool = 1;
