@@ -232,8 +232,13 @@ public final class EnumGroup extends AnnotationContainer implements HasName, Has
     
     void cacheFullyQualifiedName()
     {
-        if (Message.SEQUENTIAL_FIELD_NUMBERS && typeAnnotation == null)
-            throw err(this, " requires a type annotation (int) ... something like @uint8", getProto());
+        if (Message.SEQUENTIAL_FIELD_NUMBERS && 
+                (typeAnnotation == null || Field.fbsIntType(typeAnnotation.name) == null))
+        {
+            throw err(this, 
+                    " requires a valid (int) type annotation  ... something like @uint8", 
+                    getProto());
+        }
         
         // no alias allowed if field numbers should have no holes.
         final Boolean allowAlias = Message.SEQUENTIAL_FIELD_NUMBERS ? 
@@ -250,13 +255,42 @@ public final class EnumGroup extends AnnotationContainer implements HasName, Has
         else
             Collections.sort(sortedValues, Value.NO_ALIAS_COMPARATOR);
         
-        if (Boolean.TRUE.equals(getO().get("bit_flags")) || (typeAnnotation != null && 
-                Boolean.TRUE.equals(typeAnnotation.getP().get("bit_flags"))))
+        if (typeAnnotation != null && 
+                Boolean.TRUE.equals(typeAnnotation.getP().get("bit_flags")))
         {
             for(Value v : sortedValues)
             {
                 if (v.number <= 0 || 0 != (v.number & v.number-1))
                     throw err(v, " is not a valid bit flag (not a power-of-two): " + v.number, getProto());
+            }
+            
+            String typeName = typeAnnotation.name;
+            Value vLast = sortedValues.get(sortedValues.size() - 1);
+            int lastNumber = vLast.number;
+            switch (typeName.charAt(typeName.length() - 1))
+            {
+                case '8':
+                    if (typeName.charAt(0) == 'U')
+                    {
+                        if (lastNumber > 0xFF)
+                            throw err(vLast, " is out of range with its underlying integral type: " + typeName, getProto());
+                    }
+                    else if (lastNumber < -128 || lastNumber > 127)
+                        throw err(vLast, " is out of range with its underlying integral type: " + typeName, getProto());
+                    break;
+                case '6':
+                    if (typeName.charAt(0) == 'U')
+                    {
+                        if (lastNumber > 0xFFFF)
+                            throw err(vLast, " is out of range with its underlying integral type: " + typeName, getProto());
+                    }
+                    else if (lastNumber < -32768 || lastNumber > 32767)
+                        throw err(vLast, " is out of range with its underlying integral type:" + typeName, getProto());
+                    break;
+                
+                // TODO only validate int8 and int16?
+                //case '2':
+                //case '4':
             }
         }
         
