@@ -206,7 +206,8 @@ public final class SortMap extends FakeMap
             public Object sort(Object arg)
             {
                 Message message = (Message)arg;
-                final ArrayList<Field<?>> list = new ArrayList<Field<?>>(message.getFields());
+                final ArrayList<Field<?>> list = new ArrayList<Field<?>>(
+                        message.getNonDeprecatedFields());
                 
                 Annotation ta = message.getTa();
                 if (ta != null && Boolean.TRUE.equals(ta.getP().get("original_order")))

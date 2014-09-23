@@ -44,6 +44,8 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
     //final ArrayList<Extension> nestedExtensions = new ArrayList<Extension>();
     final ArrayList<Field<?>> sortedFields = new ArrayList<Field<?>>();
     
+    private ArrayList<Field<?>> nonDeprecatedFields;
+    
     //final ArrayList<int[]> extensionRanges = new ArrayList<int[]>();
     //final LinkedHashMap<Integer, Field<?>> extensions = new LinkedHashMap<Integer,Field<?>>();
     final LinkedHashMap<String,Object> standardOptions = new LinkedHashMap<String,Object>();
@@ -226,6 +228,23 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
     public LinkedHashMap<String,Field<?>> getF()
     {
         return getFieldMap();
+    }
+    
+    public List<Field<?>> getNonDeprecatedFields()
+    {
+        if (nonDeprecatedFields == null)
+        {
+            nonDeprecatedFields = new ArrayList<Field<?>>();
+            for (Field<?> f : sortedFields)
+            {
+                if (Boolean.TRUE.equals(f.getO().get("deprecated")))
+                    continue;
+                
+                nonDeprecatedFields.add(f);
+            }
+        }
+        
+        return nonDeprecatedFields;
     }
     
     public List<Field<?>> getFields()
