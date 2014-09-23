@@ -642,12 +642,19 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
     {
         final Proto proto = getProto();
         final String fullName = getFullName();
+        final boolean struct = isStruct();
         
         final Collection<Field<?>> declaredFields = fields.values();
         for (Field<?> f : declaredFields)
         {
+            if (struct && Boolean.TRUE.equals(f.getO().get("deprecated")))
+                throw err(f, " cannot be deprecated in a struct", proto);
+            
             if (f.isRepeated())
             {
+                if (struct)
+                    throw err(f, " cannot be repeated in a struct", proto);
+                
                 repeatedFieldCount++;
                 root.repeatedFieldPresent = true;
             }
@@ -667,7 +674,7 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
             
             if (f instanceof Field.Bytes)
             {
-                if (isStruct())
+                if (struct)
                     throw err(f, " is neither a scalar nor struct field", proto);
                 
                 if (f.isRepeated())
@@ -687,7 +694,7 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
             }
             else if (f instanceof Field.String)
             {
-                if (isStruct())
+                if (struct)
                     throw err(f, " is neither a scalar nor struct field", proto);
                 
                 if (f.isRepeated())
@@ -713,7 +720,7 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
                 HasName refObj = proto.findReference(fullRefName, fullName);
                 if (refObj instanceof Message)
                 {
-                    if (isStruct() && !((Message)refObj).isStruct())
+                    if (struct && !((Message)refObj).isStruct())
                         throw err(f, " is neither a scalar nor struct field", proto);
                     
                     MessageField mf = newMessageField((Message) refObj, fr, this);
