@@ -276,7 +276,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         return owner;
     }
     
-    static abstract class Number<T> extends Field<T>
+    public static abstract class Number<T> extends Field<T>
     {
         public final int bits;
         
