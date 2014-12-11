@@ -207,4 +207,14 @@ public class ProtoModule implements Serializable
         
         return this;
     }
+    
+    public String getLc()
+    {
+        return "{";
+    }
+    
+    public String getRc()
+    {
+        return "}";
+    }
 }

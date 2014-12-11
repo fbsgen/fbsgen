@@ -41,21 +41,29 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     static final HashMap<java.lang.String,java.lang.String> INT_TYPES = 
             new HashMap<java.lang.String, java.lang.String>();
+    
+    static final HashMap<java.lang.String,Integer> FBS_NUM_SIZEOF_MAP = 
+            new HashMap<java.lang.String, Integer>();
+    
     static
     {
-        putIntType(Int8.class, "byte");
-        putIntType(UInt8.class, "ubyte");
-        putIntType(Int16.class, "short");
-        putIntType(UInt16.class, "ushort");
-        putIntType(Int32.class, "int");
-        putIntType(UInt32.class, "uint");
-        putIntType(Int64.class, "long");
-        putIntType(UInt64.class, "ulong");
+        putIntType(Int8.class, "byte", 1);
+        putIntType(UInt8.class, "ubyte", 1);
+        putIntType(Int16.class, "short", 2);
+        putIntType(UInt16.class, "ushort", 2);
+        putIntType(Int32.class, "int", 4);
+        putIntType(UInt32.class, "uint",4);
+        putIntType(Int64.class, "long", 8);
+        putIntType(UInt64.class, "ulong", 8);
+        
+        FBS_NUM_SIZEOF_MAP.put("float", 4);
+        FBS_NUM_SIZEOF_MAP.put("double", 8);
     }
     
-    private static void putIntType(Class<?> c, java.lang.String fbsType)
+    private static void putIntType(Class<?> c, java.lang.String fbsType, int sizeOf)
     {
         INT_TYPES.put(c.getSimpleName().toLowerCase(), fbsType);
+        FBS_NUM_SIZEOF_MAP.put(fbsType, sizeOf);
     }
     
     public static java.lang.String fbsIntType(java.lang.String fieldType)
@@ -63,17 +71,23 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         return INT_TYPES.get(fieldType);
     }
     
+    public static int numSizeOf(java.lang.String fbsType)
+    {
+        Integer size = FBS_NUM_SIZEOF_MAP.get(fbsType);
+        return size == null ? 0 : size.intValue();
+    }
     
-    java.lang.String name, defaultValueConstant;
-    int number;
-    Modifier modifier;
-    boolean packable;
-    T defaultValue;
-    Message owner;
-    final LinkedHashMap<java.lang.String,Object> standardOptions = 
+    
+    protected java.lang.String name, defaultValueConstant;
+    protected int number;
+    protected Modifier modifier;
+    protected boolean packable;
+    protected T defaultValue;
+    protected Message owner;
+    protected final LinkedHashMap<java.lang.String,Object> standardOptions = 
         new LinkedHashMap<java.lang.String,Object>();
     
-    final LinkedHashMap<java.lang.String,Object> extraOptions = 
+    protected final LinkedHashMap<java.lang.String,Object> extraOptions = 
             new LinkedHashMap<java.lang.String,Object>();
     
     public Field()

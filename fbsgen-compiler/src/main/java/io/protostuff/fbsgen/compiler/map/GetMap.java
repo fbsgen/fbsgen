@@ -23,6 +23,7 @@ import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Field;
 import io.protostuff.fbsgen.parser.HasName;
 import io.protostuff.fbsgen.parser.Message;
+import io.protostuff.fbsgen.parser.MessageField;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -69,6 +70,249 @@ public final class GetMap extends FakeMap
         System.err.println(Functions.BIT_POT_INDEX.get(x));
         // 3
     }*/
+    
+    // struct padding fields that can be checked via "field.repeated"
+    static final class Int8 extends Field.Int8
+    {
+        Int8(int id)
+        {
+            this.name = "padding" + id;
+        }
+        @Override
+        public boolean isRepeated()
+        {
+            return true;
+        }
+    }
+    static final class Int16 extends Field.Int16
+    {
+        Int16(int id)
+        {
+            this.name = "padding" + id;
+        }
+        @Override
+        public boolean isRepeated()
+        {
+            return true;
+        }
+    }
+    static final class Int32 extends Field.Int32
+    {
+        Int32(int id)
+        {
+            this.name = "padding" + id;
+        }
+        @Override
+        public boolean isRepeated()
+        {
+            return true;
+        }
+    }
+    
+    static final class StructMetadata
+    {
+        final int minAlign, sizeOf;
+        final ArrayList<Field<?>> fields, paddedFields;
+        
+        public StructMetadata(int minAlign, int sizeOf, 
+                ArrayList<Field<?>> fields, ArrayList<Field<?>> paddedFields)
+        {
+            this.minAlign = minAlign;
+            this.sizeOf = sizeOf;
+            this.fields = fields;
+            this.paddedFields = paddedFields;
+        }
+        
+        public int getMinAlign()
+        {
+            return minAlign;
+        }
+        
+        public int getSizeOf()
+        {
+            return sizeOf;
+        }
+        
+        public ArrayList<Field<?>> getFields()
+        {
+            return fields;
+        }
+        
+        public ArrayList<Field<?>> getPaddedFields()
+        {
+            return paddedFields;
+        }
+    }
+    
+    static final class FakeField extends Field<Object>
+    {
+        final java.lang.String fbsType;
+
+        FakeField(java.lang.String fbsType)
+        {
+            this.fbsType = fbsType;
+        }
+        
+        @Override
+        public java.lang.String getJavaType()
+        {
+            return "fake";
+        }
+
+        @Override
+        public java.lang.String getFbsType()
+        {
+            return fbsType;
+        }
+        
+    }
+    
+    static void addTo(ArrayList<Field<?>> fl, ArrayList<Field<?>> pfl, Field<?> f)
+    {
+        fl.add(f);
+        pfl.add(f);
+    }
+    
+    static int padIfNecessary(int sizeOf, int alignment, 
+            int current, ArrayList<Field<?>> fl, ArrayList<Field<?>> pfl)
+    {
+        int plusPO2 = current + alignment, 
+                boundary = plusPO2 - (plusPO2 % alignment), 
+                remaining = boundary - current;
+        
+        switch (remaining)
+        {
+            case 1: // 1
+                addTo(fl, pfl, new Int8(pfl.size()));
+                break;
+            case 2: 
+                if (sizeOf == 0 || sizeOf > remaining) // 2
+                    addTo(fl, pfl, new Int16(pfl.size()));
+                else
+                    remaining = 0;
+                
+                break;
+            case 3: 
+                if (sizeOf == 0 || sizeOf > remaining) // 1, 2
+                {
+                    addTo(fl, pfl, new Int8(pfl.size()));
+                    addTo(fl, pfl, new Int16(pfl.size()));
+                }
+                else if (sizeOf != 1)
+                {
+                    addTo(fl, pfl, new Int8(pfl.size()));
+                    remaining = 1;
+                }
+                else
+                {
+                    remaining = 0;
+                }
+                break;
+            case 4: 
+                if (sizeOf == 0 || sizeOf > remaining) // 4
+                    addTo(fl, pfl, new Int32(pfl.size()));
+                else
+                    remaining = 0;
+                break;
+            case 5: 
+                if (sizeOf == 0 || sizeOf > remaining) // 1, 4
+                {
+                    addTo(fl, pfl, new Int8(pfl.size()));
+                    addTo(fl, pfl, new Int32(pfl.size()));
+                }
+                else if (sizeOf != 1)
+                {
+                    addTo(fl, pfl, new Int8(pfl.size()));
+                    remaining = 1;
+                }
+                else
+                {
+                    remaining = 0;
+                }
+                break;
+            case 6: 
+                if (sizeOf == 0 || sizeOf > remaining) // 2, 4
+                {
+                    addTo(fl, pfl, new Int16(pfl.size()));
+                    addTo(fl, pfl, new Int32(pfl.size()));
+                }
+                else if (sizeOf == 4)
+                {
+                    addTo(fl, pfl, new Int16(pfl.size()));
+                    remaining = 2;
+                }
+                else
+                {
+                    remaining = 0;
+                }
+                break;
+            case 7: 
+                if (sizeOf == 0 || sizeOf > remaining) // 1, 2, 4
+                {
+                    addTo(fl, pfl, new Int8(pfl.size()));
+                    addTo(fl, pfl, new Int16(pfl.size()));
+                    addTo(fl, pfl, new Int32(pfl.size()));
+                }
+                else if (sizeOf == 4)
+                {
+                    addTo(fl, pfl, new Int8(pfl.size()));
+                    addTo(fl, pfl, new Int16(pfl.size()));
+                    remaining = 3;
+                }
+                else if (sizeOf == 2)
+                {
+                    addTo(fl, pfl, new Int8(pfl.size()));
+                    remaining = 1;
+                }
+                else
+                {
+                    remaining = 0;
+                }
+                break;
+            default:
+                throw new RuntimeException("Should not happen.");
+        }
+        
+        return remaining + sizeOf;
+    }
+    
+    static StructMetadata getStructMetadata(Message message)
+    {
+        final ArrayList<Field<?>> fl = new ArrayList<Field<?>>();
+        final ArrayList<Field<?>> pfl = new ArrayList<Field<?>>();
+        int minAlign = message.getMinAlign();
+        int current = 0;
+        for (int i = 0, sizeOf = 0, sizeOfCount = 0, 
+                fieldCount = message.getFieldCount(); i < fieldCount; i++)
+        {
+            final Field<?> field = message.getFields().get(i);
+            if (field.isMessageField())
+            {
+                StructMetadata md = getStructMetadata(((MessageField)field).getMessage());
+                minAlign = Math.max(minAlign, md.minAlign);
+                sizeOf = md.getSizeOf();
+            }
+            else
+            {
+                sizeOf = message.getSizeofValues().get(sizeOfCount++);
+            }
+            
+            if (current % 8 == 0 || (current + sizeOf) % 8 == 0)
+                current += sizeOf;
+            else
+                current += padIfNecessary(sizeOf, 8, current, fl, pfl);
+            
+            fl.add(field);
+        }
+        
+        if (current % minAlign != 0)
+            current += padIfNecessary(0, minAlign, current, fl, pfl);
+        
+        if (message.getForceAlign() > minAlign)
+            minAlign = message.getForceAlign();
+        
+        return new StructMetadata(minAlign, current, fl, pfl);
+    }
     
     public enum Functions implements Function
     {
@@ -252,7 +496,16 @@ public final class GetMap extends FakeMap
                 Collections.sort(list, FilterMap.DISPLAY_ORDER_COMPARATOR);
                 return list;
             }
+        },
+        
+        STRUCT_MD
+        {
+            public Object get(Object data)
+            {
+                return getStructMetadata((Message)data);
+            }
         }
+        
         ;
         public final GetMap map;
 

@@ -52,6 +52,11 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
     final LinkedHashMap<String,Object> extraOptions = new LinkedHashMap<String,Object>();
     boolean extensible;
     
+    // struct specific
+    int minAlign = 1;
+    int forceAlign;
+    final ArrayList<Integer> sizeofValues = new ArrayList<Integer>();
+    
     // code generator helpers
     
     // for root message only
@@ -636,6 +641,21 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
         return isSequentialFieldNumbers();
     }
     
+    public int getMinAlign()
+    {
+        return minAlign;
+    }
+    
+    public int getForceAlign()
+    {
+        return forceAlign;
+    }
+    
+    public ArrayList<Integer> getSizeofValues()
+    {
+        return sizeofValues;
+    }
+    
     // post parse
     
     void resolveReferences(Message root)
@@ -643,6 +663,17 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
         final Proto proto = getProto();
         final String fullName = getFullName();
         final boolean struct = isStruct();
+        
+        if (struct && typeAnnotation.getP().containsKey("force_align"))
+        {
+            Object value = typeAnnotation.getValue("force_align");
+            if (!(value instanceof Integer))
+                throw err(this, " contains the attribute: force_align which must be a power of two integer ranging from the struct's natural alignment to 256", proto);
+            
+            forceAlign = ((Integer)value).intValue();
+            if (forceAlign < 1 || 0 != (forceAlign & forceAlign-1))
+                throw err(this, " contains the attribute: force_align which must be a power of two integer ranging from the struct's natural alignment to 256", proto);
+        }
         
         final Collection<Field<?>> declaredFields = fields.values();
         for (Field<?> f : declaredFields)
@@ -720,11 +751,11 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
                 HasName refObj = proto.findReference(fullRefName, fullName);
                 if (refObj instanceof Message)
                 {
-                    if (struct && !((Message)refObj).isStruct())
-                        throw err(f, " is neither a scalar nor struct field", proto);
-                    
                     MessageField mf = newMessageField((Message) refObj, fr, this);
                     fields.put(mf.name, mf);
+                    
+                    if (struct && !mf.message.isStruct())
+                        throw err(f, " is neither a scalar nor struct field", proto);
                     
                     if (mf.isRepeated())
                         repeatedMessageFieldCount++;
@@ -748,6 +779,14 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
                     EnumField ef = newEnumField((EnumGroup) refObj, fr, this);
                     fields.put(ef.name, ef);
                     
+                    if (struct && ef.enumGroup.typeAnnotation != null)
+                    {
+                        int sizeOf = Field.numSizeOf(Field.fbsIntType(
+                                ef.enumGroup.typeAnnotation.getName()));
+                        sizeofValues.add(sizeOf);
+                        minAlign = Math.max(minAlign, sizeOf);
+                    }
+                    
                     if (ef.isRepeated())
                         repeatedEnumFieldCount++;
                     else
@@ -767,6 +806,19 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
                 
                 throw err(this, " contains an unknown field type: " + fullRefName, proto);
             }
+            else if (struct)
+            {
+                if (f.isBoolField())
+                {
+                    sizeofValues.add(1);
+                }
+                else
+                {
+                    int sizeOf = Field.numSizeOf(f.getFbsType());
+                    sizeofValues.add(sizeOf);
+                    minAlign = Math.max(minAlign, sizeOf);
+                }
+            }
             
             // references inside options
             if (!f.standardOptions.isEmpty())
@@ -782,6 +834,9 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
             
             if (SEQUENTIAL_FIELD_NUMBERS && !isSequentialFieldNumbers())
                 throw err(this, " must have sequential field numbers (starts at 1, no gaps in-between)", proto);
+            
+            if (struct && forceAlign != 0 && forceAlign < minAlign)
+                throw err(this, " contains the attribute: force_align which must be a power of two integer ranging from the struct's natural alignment to 256", proto);
         }
         
         //for (Extension extension : this.nestedExtensions)
