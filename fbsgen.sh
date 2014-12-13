@@ -22,8 +22,13 @@ if [ ! -n "$TEMPLATE_PATH" ]; then
 fi
 
 if [ ! -n "$PROTO_PATH" ]; then
-    PROTO_PATH=.
-    [ -d $CURRENT_DIR/proto ] && PROTO_PATH=proto
+    if [ -d ../proto/base ]; then
+        PROTO_PATH=../proto/base,proto/shared,proto/server
+    elif [ -d proto ]; then
+        PROTO_PATH=proto
+    else
+        PROTO_PATH=.
+    fi
 fi
 
 # proto search strategy
