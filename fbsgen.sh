@@ -30,8 +30,10 @@ if [ ! -n "$PROTO_PATH" ]; then
     if [ -d ../proto/base ]; then
         PROTO_PATH=../proto/base,proto/shared,proto/server
     elif [ -d p ]; then
+        # raw dirs
         PROTO_PATH=..
     elif [ -d ../p ]; then
+        # symlinked dirs
         PROTO_PATH=../p
     elif [ -d proto ]; then
         PROTO_PATH=proto
