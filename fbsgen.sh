@@ -2,7 +2,12 @@
 
 CURRENT_DIR=$PWD
 
-[ ! -e $CURRENT_DIR/codegen.properties ] && echo "codegen.properties not found on current dir." && exit 0
+PROPS_FILE=_.properties
+
+if [ ! -e $CURRENT_DIR/$PROPS_FILE ]; then
+    PROPS_FILE=codegen.properties
+    [ ! -e $CURRENT_DIR/$PROPS_FILE ] && echo "$PROPS_FILE not found on current dir." && exit 0
+fi
 
 SCRIPT_DIR=$CURRENT_DIR
 
@@ -24,6 +29,8 @@ fi
 if [ ! -n "$PROTO_PATH" ]; then
     if [ -d ../proto/base ]; then
         PROTO_PATH=../proto/base,proto/shared,proto/server
+    elif [ -d ../p ]; then
+        PROTO_PATH=../p
     elif [ -d proto ]; then
         PROTO_PATH=proto
     else
@@ -42,4 +49,4 @@ java -Dtemplate_path=$TEMPLATE_PATH \
     -Dproto_search_strategy=4 \
     -Dfbsgen.print_stack_trace=false \
     -Dfbsgen.sequential_field_numbers=true \
-    -jar $JAR_FILE codegen.properties $@
+    -jar $JAR_FILE $PROPS_FILE $@
