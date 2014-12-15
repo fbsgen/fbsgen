@@ -72,13 +72,23 @@ public final class EnumGroup extends AnnotationContainer implements HasName, Has
     
     private String fullName(String packageName)
     {
+        return fullName(packageName, '.');
+    }
+    
+    private String fullName(String packageName, char separator)
+    {
         StringBuilder buffer = new StringBuilder();
         if (isNested())
-            Message.resolveFullName(parentMessage, buffer, packageName);
+            Message.resolveFullName(parentMessage, buffer, packageName, separator);
+        else if (separator == '_')
+        {
+            buffer.setCharAt(0, ':');
+            buffer.insert(0, ':').insert(0, packageName);
+        }
         else
             buffer.append(packageName);
         
-        return buffer.append('.').append(name).toString();
+        return buffer.append(separator).append(name).toString();
     }
     
     public String getFullName()
@@ -109,6 +119,11 @@ public final class EnumGroup extends AnnotationContainer implements HasName, Has
     public String getCppRelativeName()
     {
         return isNested() ? parentMessage.getRelativeName() + "_" + name : name;
+    }
+    
+    public String getCppFullName()
+    {
+        return fullName(getProto().getPackageName().replaceAll("\\.", "::"), '_');
     }
     
     /* ================================================== */

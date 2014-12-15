@@ -102,9 +102,30 @@ public final class EnumField extends Field<EnumGroup.Value>
         
     }
     
+    public java.lang.String getCppType()
+    {
+        StringBuilder buffer = new StringBuilder();
+        if (enumGroup.isNested())
+        {
+            if (enumGroup.parentMessage==owner)
+                buffer.append(enumGroup.name);
+            else
+            {
+                Message.computeCppName(enumGroup.parentMessage, owner, buffer);
+                buffer.append('_').append(enumGroup.name);
+            }
+        }
+        else if (enumGroup.getProto().getPackageName().equals(owner.getProto().getPackageName()))
+            buffer.append(enumGroup.name);
+        else
+            buffer.append(enumGroup.getProto().getPackageName().replaceAll("\\.", "::")).append("::").append(enumGroup.getName());
+        
+        return buffer.toString();
+    }
+    
     public java.lang.String getFbsType()
     {
-        return getJavaType().replace('.', '_');
+        return getCppType();
     }
     
     public java.lang.String getRegularType()

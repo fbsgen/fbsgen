@@ -405,8 +405,13 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
     
     private String fullName(String packageName)
     {
+        return fullName(packageName, '.');
+    }
+    
+    private String fullName(String packageName, char separator)
+    {
         StringBuilder buffer = new StringBuilder();
-        resolveFullName(this, buffer, packageName);
+        resolveFullName(this, buffer, packageName, separator);
         return buffer.toString();
     }
     
@@ -442,6 +447,11 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
         StringBuilder buffer = new StringBuilder();
         resolveRelativeName(this, buffer, null, '_');
         return buffer.toString();
+    }
+    
+    public String getCppFullName()
+    {
+        return fullName(getProto().getPackageName().replaceAll("\\.", "::"), '_');
     }
     
     public boolean isExtensible()
@@ -903,11 +913,17 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
         to.extraOptions.putAll(from.extraOptions);
     }
     
-    static void resolveFullName(Message message, StringBuilder buffer, String packageName)
+    static void resolveFullName(Message message, StringBuilder buffer, String packageName, 
+            char separator)
     {
-        buffer.insert(0, message.name).insert(0, '.');
+        buffer.insert(0, message.name).insert(0, separator);
         if (message.isNested())
-            resolveFullName(message.parentMessage, buffer, packageName);
+            resolveFullName(message.parentMessage, buffer, packageName, separator);
+        else if (separator == '_')
+        {
+            buffer.setCharAt(0, ':');
+            buffer.insert(0, ':').insert(0, packageName);
+        }
         else
             buffer.insert(0, packageName);
     }
@@ -936,6 +952,18 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
             buffer.append(message.getRelativeName());
         else
             buffer.append(message.getJavaFullName());
+    }
+    
+    static void computeCppName(Message message, Message owner, StringBuilder buffer)
+    {
+        if (owner==message || message.parentMessage==owner || owner.isDescendant(message))
+            buffer.append(message.name);
+        else if (message.isDescendant(owner))
+            Message.resolveRelativeName(message, buffer, owner, '_');
+        else if (message.getProto().getPackageName().equals(owner.getProto().getPackageName()))
+            buffer.append(message.getCppRelativeName());
+        else
+            buffer.append(message.getCppFullName());
     }
     
     static Message getRoot(Message parent)
