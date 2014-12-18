@@ -960,7 +960,7 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
             buffer.append(message.name);
         else if (message.isDescendant(owner))
             Message.resolveRelativeName(message, buffer, owner, '_');
-        else if (message.getProto().getPackageName().equals(owner.getProto().getPackageName()))
+        else if (message.getProto() == owner.getProto())
             buffer.append(message.getCppRelativeName());
         else
             buffer.append(message.getCppFullName());

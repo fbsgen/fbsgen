@@ -115,7 +115,7 @@ public final class EnumField extends Field<EnumGroup.Value>
                 buffer.append('_').append(enumGroup.name);
             }
         }
-        else if (enumGroup.getProto().getPackageName().equals(owner.getProto().getPackageName()))
+        else if (enumGroup.getProto() == owner.getProto())
             buffer.append(enumGroup.name);
         else
             buffer.append(enumGroup.getProto().getPackageName().replaceAll("\\.", "::")).append("::").append(enumGroup.getName());
