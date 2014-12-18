@@ -79,16 +79,16 @@ public final class EnumGroup extends AnnotationContainer implements HasName, Has
     {
         StringBuilder buffer = new StringBuilder();
         if (isNested())
-            Message.resolveFullName(parentMessage, buffer, packageName, separator);
-        else if (separator == '_')
         {
-            buffer.setCharAt(0, ':');
-            buffer.insert(0, ':').insert(0, packageName);
+            Message.resolveFullName(parentMessage, buffer, packageName, separator);
+            buffer.append(separator);
         }
+        else if (separator == '_')
+            buffer.append(packageName).append("::");
         else
-            buffer.append(packageName);
+            buffer.append(packageName).append(separator);
         
-        return buffer.append(separator).append(name).toString();
+        return buffer.append(name).toString();
     }
     
     public String getFullName()
