@@ -109,6 +109,37 @@ public final class GetMap extends FakeMap
         }
     }
     
+    enum PadType
+    {
+        I8
+        {
+            @Override
+            Field<?> create(int id)
+            {
+                return new Int8(id);
+            }
+        },
+        I16
+        {
+            @Override
+            Field<?> create(int id)
+            {
+                return new Int16(id);
+            }
+        },
+        I32
+        {
+            @Override
+            Field<?> create(int id)
+            {
+                return new Int32(id);
+            }
+        }
+        ;
+        
+        abstract Field<?> create(int id);
+    }
+    
     static final class StructMetadata
     {
         final int minAlign, sizeOf;
@@ -167,10 +198,14 @@ public final class GetMap extends FakeMap
         
     }
     
-    static void addTo(ArrayList<Field<?>> fl, ArrayList<Field<?>> pfl, Field<?> f)
+    static void addTo(ArrayList<Field<?>> fl, ArrayList<Field<?>> pfl, PadType type)
     {
-        fl.add(f);
-        pfl.add(f);
+        if (fl != null)
+        {
+            Field<?> f = type.create(pfl.size());
+            fl.add(f);
+            pfl.add(f);
+        }
     }
     
     static int padIfNecessary(int sizeOf, int alignment, 
@@ -183,11 +218,11 @@ public final class GetMap extends FakeMap
         switch (remaining)
         {
             case 1: // 1
-                addTo(fl, pfl, new Int8(pfl.size()));
+                addTo(fl, pfl, PadType.I8);
                 break;
             case 2: 
                 if (sizeOf == 0 || sizeOf > remaining) // 2
-                    addTo(fl, pfl, new Int16(pfl.size()));
+                    addTo(fl, pfl, PadType.I16);
                 else
                     remaining = 0;
                 
@@ -195,12 +230,12 @@ public final class GetMap extends FakeMap
             case 3: 
                 if (sizeOf == 0 || sizeOf > remaining) // 1, 2
                 {
-                    addTo(fl, pfl, new Int8(pfl.size()));
-                    addTo(fl, pfl, new Int16(pfl.size()));
+                    addTo(fl, pfl, PadType.I8);
+                    addTo(fl, pfl, PadType.I16);
                 }
                 else if (sizeOf != 1)
                 {
-                    addTo(fl, pfl, new Int8(pfl.size()));
+                    addTo(fl, pfl, PadType.I8);
                     remaining = 1;
                 }
                 else
@@ -210,19 +245,19 @@ public final class GetMap extends FakeMap
                 break;
             case 4: 
                 if (sizeOf == 0 || sizeOf > remaining) // 4
-                    addTo(fl, pfl, new Int32(pfl.size()));
+                    addTo(fl, pfl, PadType.I32);
                 else
                     remaining = 0;
                 break;
             case 5: 
                 if (sizeOf == 0 || sizeOf > remaining) // 1, 4
                 {
-                    addTo(fl, pfl, new Int8(pfl.size()));
-                    addTo(fl, pfl, new Int32(pfl.size()));
+                    addTo(fl, pfl, PadType.I8);
+                    addTo(fl, pfl, PadType.I32);
                 }
                 else if (sizeOf != 1)
                 {
-                    addTo(fl, pfl, new Int8(pfl.size()));
+                    addTo(fl, pfl, PadType.I8);
                     remaining = 1;
                 }
                 else
@@ -233,12 +268,12 @@ public final class GetMap extends FakeMap
             case 6: 
                 if (sizeOf == 0 || sizeOf > remaining) // 2, 4
                 {
-                    addTo(fl, pfl, new Int16(pfl.size()));
-                    addTo(fl, pfl, new Int32(pfl.size()));
+                    addTo(fl, pfl, PadType.I16);
+                    addTo(fl, pfl, PadType.I32);
                 }
                 else if (sizeOf == 4)
                 {
-                    addTo(fl, pfl, new Int16(pfl.size()));
+                    addTo(fl, pfl, PadType.I16);
                     remaining = 2;
                 }
                 else
@@ -249,19 +284,19 @@ public final class GetMap extends FakeMap
             case 7: 
                 if (sizeOf == 0 || sizeOf > remaining) // 1, 2, 4
                 {
-                    addTo(fl, pfl, new Int8(pfl.size()));
-                    addTo(fl, pfl, new Int16(pfl.size()));
-                    addTo(fl, pfl, new Int32(pfl.size()));
+                    addTo(fl, pfl, PadType.I8);
+                    addTo(fl, pfl, PadType.I16);
+                    addTo(fl, pfl, PadType.I32);
                 }
                 else if (sizeOf == 4)
                 {
-                    addTo(fl, pfl, new Int8(pfl.size()));
-                    addTo(fl, pfl, new Int16(pfl.size()));
+                    addTo(fl, pfl, PadType.I8);
+                    addTo(fl, pfl, PadType.I16);
                     remaining = 3;
                 }
                 else if (sizeOf == 2)
                 {
-                    addTo(fl, pfl, new Int8(pfl.size()));
+                    addTo(fl, pfl, PadType.I8);
                     remaining = 1;
                 }
                 else
@@ -276,10 +311,9 @@ public final class GetMap extends FakeMap
         return remaining + sizeOf;
     }
     
-    static StructMetadata getStructMetadata(Message message)
+    static StructMetadata getStructMetadata(Message message, 
+            ArrayList<Field<?>> fl, ArrayList<Field<?>> pfl)
     {
-        final ArrayList<Field<?>> fl = new ArrayList<Field<?>>();
-        final ArrayList<Field<?>> pfl = new ArrayList<Field<?>>();
         int minAlign = message.getMinAlign();
         int current = 0;
         for (int i = 0, sizeOf = 0, sizeOfCount = 0, 
@@ -288,7 +322,8 @@ public final class GetMap extends FakeMap
             final Field<?> field = message.getFields().get(i);
             if (field.isMessageField())
             {
-                StructMetadata md = getStructMetadata(((MessageField)field).getMessage());
+                StructMetadata md = getStructMetadata(
+                        ((MessageField)field).getMessage(), null, null);
                 minAlign = Math.max(minAlign, md.minAlign);
                 sizeOf = md.getSizeOf();
             }
@@ -302,7 +337,8 @@ public final class GetMap extends FakeMap
             else
                 current += padIfNecessary(sizeOf, 8, current, fl, pfl);
             
-            fl.add(field);
+            if (fl != null)
+                fl.add(field);
         }
         
         if (current % minAlign != 0)
@@ -502,7 +538,8 @@ public final class GetMap extends FakeMap
         {
             public Object get(Object data)
             {
-                return getStructMetadata((Message)data);
+                return getStructMetadata((Message)data, new ArrayList<Field<?>>(), 
+                        new ArrayList<Field<?>>());
             }
         }
         
