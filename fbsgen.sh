@@ -50,7 +50,7 @@ fi
 
 java -Dtemplate_path=$TEMPLATE_PATH \
     -Dproto_path=$PROTO_PATH \
-    -Dproto_search_strategy=4 \
+    -Dproto_search_strategy=$PROTO_SS \
     -Dfbsgen.print_stack_trace=false \
     -Dfbsgen.sequential_field_numbers=true \
     -jar $JAR_FILE $PROPS_FILE $@
