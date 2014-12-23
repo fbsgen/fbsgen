@@ -14,6 +14,8 @@
 
 package io.protostuff.fbsgen.parser;
 
+import java.io.IOException;
+
 
 
 
@@ -145,14 +147,26 @@ public final class EnumField extends Field<EnumGroup.Value>
         return getJavaType() + "." + getDefaultValue().getName();
     }
     
-    public boolean isSamePackage()
+    public boolean isSameProto()
     {
         return getOwner().getProto() == getEnumGroup().getProto();
     }
     
+    public boolean isSameDir() throws IOException
+    {
+        return getOwner().getProto().getFile().getParentFile().getCanonicalPath().equals(
+                getEnumGroup().getProto().getFile().getParentFile().getCanonicalPath());
+    }
+    
+    public boolean isSamePackage()
+    {
+        return getOwner().getProto().getPackageName().equals(
+                getEnumGroup().getProto().getPackageName());
+    }
+    
     public java.lang.String getRelativePath()
     {
-        if (isSamePackage())
+        if (isSameProto())
             return "";
         
         java.lang.String currentPackage = getOwner().getProto().getPackageName();

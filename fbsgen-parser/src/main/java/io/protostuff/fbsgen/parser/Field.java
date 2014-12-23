@@ -332,6 +332,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return 8 == bits;
         }
+        
+        public int getBits()
+        {
+            return bits;
+        }
     }
     
     public static class Int8 extends Number<Integer>

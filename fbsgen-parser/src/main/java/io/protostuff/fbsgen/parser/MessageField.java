@@ -14,6 +14,8 @@
 
 package io.protostuff.fbsgen.parser;
 
+import java.io.IOException;
+
 
 /**
  * Represents a message field defined in a {@code Proto}.
@@ -95,14 +97,26 @@ public class MessageField extends Field<Message>
         return true;
     }
     
-    public boolean isSamePackage()
+    public boolean isSameProto()
     {
         return getOwner().getProto() == getMessage().getProto();
     }
     
+    public boolean isSameDir() throws IOException
+    {
+        return getOwner().getProto().getFile().getParentFile().getCanonicalPath().equals(
+                getMessage().getProto().getFile().getParentFile().getCanonicalPath());
+    }
+    
+    public boolean isSamePackage()
+    {
+        return getOwner().getProto().getPackageName().equals(
+                getMessage().getProto().getPackageName());
+    }
+    
     public java.lang.String getRelativePath()
     {
-        if (isSamePackage())
+        if (isSameProto())
             return "";
         
         java.lang.String currentPackage = getOwner().getProto().getPackageName();
