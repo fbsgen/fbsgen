@@ -126,6 +126,11 @@ public final class EnumGroup extends AnnotationContainer implements HasName, Has
         return fullName(getProto().getPackageName().replaceAll("\\.", "::"), '_');
     }
     
+    public int getSizeof()
+    {
+        return Field.numSizeOf(Field.fbsIntType(typeAnnotation.getName()));
+    }
+    
     /* ================================================== */
     
     public Message getParentMessage()

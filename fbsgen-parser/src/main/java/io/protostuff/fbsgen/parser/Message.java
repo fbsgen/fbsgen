@@ -791,8 +791,7 @@ public final class Message extends AnnotationContainer implements HasName, HasFi
                     
                     if (struct && ef.enumGroup.typeAnnotation != null)
                     {
-                        int sizeOf = Field.numSizeOf(Field.fbsIntType(
-                                ef.enumGroup.typeAnnotation.getName()));
+                        int sizeOf = ef.enumGroup.getSizeof();
                         sizeofValues.add(sizeOf);
                         minAlign = Math.max(minAlign, sizeOf);
                     }

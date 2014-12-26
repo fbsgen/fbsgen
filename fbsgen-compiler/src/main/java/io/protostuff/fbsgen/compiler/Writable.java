@@ -223,6 +223,34 @@ public final class Writable
     };
     
     /**
+     * Divides the number with the arg.
+     * <pre>
+     *   «writable.n.(4).div.(2)»
+     * </pre>
+     */
+    public final FakeMap div = new FakeMap("div")
+    {
+        public Object get(Object entry)
+        {
+            return number / $int(entry);
+        }
+    };
+    
+    /**
+     * Multiplies the number with the arg.
+     * <pre>
+     *   «writable.n.(4).mul.(2)»
+     * </pre>
+     */
+    public final FakeMap mul = new FakeMap("mul")
+    {
+        public Object get(Object entry)
+        {
+            return number * $int(entry);
+        }
+    };
+    
+    /**
      * The operator "<<" applied to the number with the arg.
      * <pre>
      *   «writable.n.("1").lshift.("2")»
