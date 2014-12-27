@@ -247,6 +247,20 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
         return value;
     }
     
+    private static String getOptionalStgConfigFrom(ProtoModule module, String name, 
+            String defaultValue)
+    {
+        // allow override from options
+        String value = module.getOption(name);
+        if (value == null && 
+                null == (value = module.getConfig().getProperty(name)))
+        {
+            return defaultValue;
+        }
+        
+        return value;
+    }
+    
     static void compileActive(final ProtoModule module, final Registry registry, 
             final String stg) throws IOException
     {
@@ -378,19 +392,57 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
         }
     }
     
+    private static String resolveFileName(String fileName, int dollar, File dir)
+    {
+        int dollarEnd = fileName.length();
+        StringBuilder sb = new StringBuilder();
+        do
+        {
+            sb.insert(0, fileName.subSequence(dollar+1, dollarEnd));
+            sb.insert(0, dir.getName());
+            dir = dir.getParentFile();
+            dollarEnd = dollar;
+        }
+        while (dollar != 0 && (dollar = fileName.lastIndexOf('$', dollar-1)) != -1);
+        
+        if (dollarEnd != 0)
+            sb.insert(0, fileName.substring(0, dollarEnd));
+        
+        return sb.toString();
+    }
+    
     static void compileToSingleFile(final ProtoModule module, final Registry registry, 
             final String stg, Template registryBlockTemplate) throws IOException
     {
-        final String packageName = module.getOption(stg + ".package_name");
-        if (packageName == null || packageName.isEmpty())
-            throw err("Missing option: " + stg + ".package_name");
+        final File outputDir = new File(getRequiredStgConfigFrom(
+                module, stg + ".output_dir").trim()).getCanonicalFile();
         
-        final String outputDir = getRequiredStgConfigFrom(module, stg + ".output_dir");
-        final int slash = stg.lastIndexOf('/');
-        final String fileName = slash == -1 ? stg : stg.substring(slash + 1);
-
+        final String packageName = getOptionalStgConfigFrom(module, 
+                stg + ".package_name", null);
+        
+        String fileName = getOptionalStgConfigFrom(module, stg + ".filename", null);
+        if (fileName != null)
+        {
+            final int dollar = fileName.lastIndexOf('$');
+            if (dollar != -1)
+                fileName = resolveFileName(fileName, dollar, outputDir);
+            else if (packageName == null || packageName.isEmpty())
+                throw err("Missing option: " + stg + ".package_name");
+        }
+        else
+        {
+            final int slash = stg.lastIndexOf('/');
+            fileName = slash == -1 ? stg : stg.substring(slash + 1);
+            
+            final int dollar = fileName.lastIndexOf('$');
+            if (dollar != -1)
+                fileName = resolveFileName(fileName, dollar, outputDir);
+            else if (packageName == null || packageName.isEmpty())
+                throw err("Missing option: " + stg + ".package_name");
+        }
+        
         // hack
-        module.setOutputDir(new File(outputDir.trim()));
+        module.setOutputDir(outputDir);
         
         final BufferedWriter writer = CompilerUtil.newWriter(module, packageName, fileName);
         
