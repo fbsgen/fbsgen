@@ -354,6 +354,46 @@ public final class Writable
     };
     
     /**
+     * Returns true if the key starts with the arg.
+     * <pre>
+     *   «writable.k.("foo").ksw.("foo")»
+     * </pre>
+     */
+    public final FakeMap ksw = new FakeMap("ksw")
+    {
+        public Object get(Object entry)
+        {
+            if (key == null)
+                throw new RuntimeException("Misuse of chain.");
+            
+            Boolean ret = entry != null && key.toString().startsWith(entry.toString()) ? 
+                    Boolean.TRUE : Boolean.FALSE;
+            key = null;
+            return ret;
+        }
+    };
+    
+    /**
+     * Returns true if the key ends with the arg.
+     * <pre>
+     *   «writable.k.("foo").kew.("foo")»
+     * </pre>
+     */
+    public final FakeMap kew = new FakeMap("kew")
+    {
+        public Object get(Object entry)
+        {
+            if (key == null)
+                throw new RuntimeException("Misuse of chain.");
+            
+            Boolean ret = entry != null && key.toString().endsWith(entry.toString()) ? 
+                    Boolean.TRUE : Boolean.FALSE;
+            key = null;
+            return ret;
+        }
+    };
+    
+    /**
      * Returns true if {@link #number} & arg is not zero.
      * <pre>
      *   «writable.n.("5").intersect.("1")»
