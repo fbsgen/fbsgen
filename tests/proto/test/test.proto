@@ -2,6 +2,7 @@ package test;
 
 @int8
 enum Size {
+  XS = 0;
   SMALL = 1;
   MEDIUM = 2;
   LARGE = 3;
@@ -14,6 +15,68 @@ enum Priority {
   IMPORTANT = 2;
   URGENT = 4;
   CRITICAL = 8;
+}
+
+/*@struct
+message R1 {
+    required int32 f1 = 1;
+    required int16 f2 = 2;
+    required int8 f3 = 3;
+    required int64 f4 = 4;
+}
+
+@struct
+message R2 {
+    required int32 f1 = 1;
+    required int16 f2 = 2;
+    required int64 f3 = 3;
+}
+
+@struct
+message R3 {
+    required int32 f1 = 1;
+    required int8 f2 = 2;
+    required int64 f3 = 3;
+}
+
+@struct
+message R4 {
+    required int32 f1 = 1;
+    required int64 f2 = 2;
+}
+
+@struct
+message R5 {
+    required int16 f1 = 1;
+    required int8 f2 = 2;
+    required int64 f3 = 3;
+}
+
+@struct
+message R6 {
+    required int16 f1 = 1;
+    required int64 f2 = 2;
+}
+
+@struct
+message R7 {
+    required int8 f1 = 1;
+    required int64 f2 = 2;
+}*/
+
+@struct
+message Ago {
+    required int16 f1 = 1;
+    required int16 f2 = 2;
+    required int16 f3 = 3;
+    required int64 f4 = 4;
+}
+
+@struct
+message Boo {
+    required int32 x = 1;
+    required int16 y = 2;
+    required Ago z = 3;
 }
 
 message Foo {
@@ -117,6 +180,49 @@ message Baz {
   required double some_double = 11;
   required Size some_size = 12;
   required Hello.Feedback some_hello_feedback = 13;
+  required Boo boo = 14;
+}
+
+@struct
+message AlignedBaz {
+  required int64 some_long = 1;
+  required uint64 some_ulong = 2;
+  required double some_double = 3;
+  
+  required int32 some_int = 4;
+  required uint32 some_uint = 5;
+  required float some_float = 6;
+
+  required int16 some_short = 7;
+  required uint16 some_ushort = 8;
+  required Hello.Feedback some_hello_feedback = 9;
+  
+  required bool some_bool = 10;
+  required int8 some_byte = 11;
+  required uint8 some_ubyte = 12;
+  required Size some_size = 13;
+}
+
+@struct
+message UnalignedBaz {
+  required int64 some_long = 1;
+  required bool some_bool = 2;
+  
+  required uint64 some_ulong = 3;
+  required int8 some_byte = 4;
+  
+  required double some_double = 5;
+  
+  required int32 some_int = 6;
+  required uint8 some_ubyte = 7;
+  
+  required uint32 some_uint = 8;
+  required Size some_size = 9;
+  
+  required float some_float = 10;
+  required int16 some_short = 11;
+  required uint16 some_ushort = 12;
+  required Hello.Feedback some_hello_feedback = 13;
 }
 
 @table(original_order = true)
@@ -134,6 +240,7 @@ message Hello {
   /// a nested enum
   @uint16
   enum Feedback {
+    NONE = 0;
     BAD = 1;
     NEEDS_IMPROVEMENT = 2;
     GOOD = 3;
