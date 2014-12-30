@@ -96,6 +96,16 @@ public class DefaultRegistry implements Registry
             addTo(stgProtoMapping, proto, module, COMMA.split(stgs), proto);
     }
 
+    public List<Message> getMessages()
+    {
+        return messages;
+    }
+    
+    public List<EnumGroup> getEnumGroups()
+    {
+        return enumGroups;
+    }
+    
     @Override
     public List<Proto> getProtos()
     {

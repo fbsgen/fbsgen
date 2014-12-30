@@ -354,6 +354,26 @@ public final class Writable
     };
     
     /**
+     * Returns true if the key is found in the arg.
+     * <pre>
+     *   «writable.k.("foo").keq.("hellofooworld")»
+     * </pre>
+     */
+    public final FakeMap kin = new FakeMap("kin")
+    {
+        public Object get(Object entry)
+        {
+            if (key == null)
+                throw new RuntimeException("Misuse of chain.");
+            
+            Boolean ret = entry != null && -1 != entry.toString().indexOf(key.toString()) ? 
+                    Boolean.TRUE : Boolean.FALSE;
+            key = null;
+            return ret;
+        }
+    };
+    
+    /**
      * Returns true if the key starts with the arg.
      * <pre>
      *   «writable.k.("foo").ksw.("foo")»
