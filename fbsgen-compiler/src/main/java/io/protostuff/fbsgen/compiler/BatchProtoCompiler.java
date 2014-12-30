@@ -454,6 +454,30 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
     static void collect(ProtoModule module, Registry target) throws IOException
     {
         File source = module.getSource();
+        if (source.exists())
+            collect(module, target, source);
+        else
+        {
+            String path = source.getPath();
+            String[] paths = COMMA.split(path);
+            if (paths.length == 0)
+                throw err(module.getOutput() + " comes with a source that does not exist: " + path);
+            for (String p : paths)
+            {
+                p = p.trim();
+                source = new File(p);
+                if (!source.exists())
+                    throw err(module.getOutput() + " comes with a source that does not exist: " + p);
+                
+                collect(module, target, source);
+            }
+        }
+        
+        module.setAttribute("registry", target.complete(module));
+    }
+    
+    static void collect(ProtoModule module, Registry target, File source) throws IOException
+    {
         if (source.isDirectory())
         {
             for (File f : CompilerUtil.getProtoFiles(source))
@@ -461,8 +485,6 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
         }
         else
             collect(parseProto(source, module), module, target);
-        
-        module.setAttribute("registry", target.complete(module));
     }
     
     static void collect(Proto proto, ProtoModule module, Registry target)
