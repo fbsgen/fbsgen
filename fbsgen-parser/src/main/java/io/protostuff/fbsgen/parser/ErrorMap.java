@@ -42,7 +42,7 @@ import java.util.Set;
 public final class ErrorMap implements Map<String,Object>
 {
     
-    static final ErrorMap INSTANCE = new ErrorMap();
+    public static final ErrorMap INSTANCE = new ErrorMap();
     
     private ErrorMap(){}
 

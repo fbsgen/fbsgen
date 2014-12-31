@@ -14,6 +14,8 @@
 
 package io.protostuff.fbsgen.compiler;
 
+import io.protostuff.fbsgen.parser.ErrorMap;
+
 import java.io.File;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -216,5 +218,13 @@ public class ProtoModule implements Serializable
     public String getRc()
     {
         return "}";
+    }
+    
+    /**
+     * Used by the templates to print/throw an error msg.
+     */
+    public ErrorMap getErr()
+    {
+        return ErrorMap.INSTANCE;
     }
 }
