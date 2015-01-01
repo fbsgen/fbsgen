@@ -335,32 +335,6 @@ public final class Writable
     };
     
     /**
-     * Returns true if the arg is null or empty.
-     * <pre>
-     *   «writable.null_or_empty.("")»
-     * </pre>
-     */
-    public final FakeMap null_or_empty = new FakeMap("null_or_empty")
-    {
-        public Object get(Object arg)
-        {
-            if (key != null)
-                throw new RuntimeException("Misuse of chain.");
-            
-            if (arg == null)
-                return true;
-            
-            if (arg instanceof String)
-                return ((String)arg).isEmpty();
-            
-            if (arg instanceof Map)
-                return ((Map<?,?>)arg).isEmpty();
-            
-            return ((Collection<?>)arg).isEmpty();
-        }
-    };
-    
-    /**
      * Compares the key against the arg.
      * <pre>
      *   «writable.k.("foo").keq.("foo")»
