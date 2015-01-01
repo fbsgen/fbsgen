@@ -54,6 +54,7 @@ import java.util.Properties;
 public final class BatchProtoCompiler extends TemplatedCodeGenerator
 {
     
+    private static String[] EMPTY_STR_ARRAY = new String[0];
     private static Class<? extends Registry> registryClass = DefaultRegistry.class;
     
     public static void setRegistryClass(Class<? extends Registry> clazz)
@@ -76,10 +77,10 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
         if (stgsOption == null && activeStgsOption == null)
             throw err("A batch output requires at least one of these options: stgs, active_stgs");
         
-        final String[] stgs = stgsOption == null ? new String[0] : 
+        final String[] stgs = stgsOption == null ? EMPTY_STR_ARRAY : 
             SEMI_COLON.split(stgsOption);
         
-        final String[] activeStgs = activeStgsOption == null ? new String[0] : 
+        final String[] activeStgs = activeStgsOption == null ? EMPTY_STR_ARRAY : 
             SEMI_COLON.split(activeStgsOption);
         
         final boolean provideLoader = module.getCachingProtoLoader() == null;

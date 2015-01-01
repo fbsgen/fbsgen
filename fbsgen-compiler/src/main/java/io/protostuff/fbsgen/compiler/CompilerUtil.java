@@ -43,18 +43,58 @@ public final class CompilerUtil
     public static final Pattern COMMA = Pattern.compile(",");
     public static final Pattern SEMI_COLON = Pattern.compile(";");
     public static final Pattern DOUBLE_UNDERSCORE = Pattern.compile("__");
-
-    public static BufferedWriter newWriter(ProtoModule module, String packageName, String fileName)
-            throws IOException
+    
+    static final File BASE_DIR;
+    static
+    {
+        try
+        {
+            BASE_DIR = new File(".").getCanonicalFile();
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public static BufferedWriter newWriter(ProtoModule module, 
+            String packageName, String fileName) throws IOException
+    {
+        return newWriter(module, packageName, fileName, null);
+    }
+    
+    public static BufferedWriter newWriter(ProtoModule module, 
+            String packageName, String fileName, File sourceFile) throws IOException
     {
         String encoding = module.getEncoding();
         if (encoding == null || encoding.isEmpty())
             encoding = "UTF-8";
         
+        File dir = module.getOutputDir();
+        if (sourceFile != null)
+        {
+            String path = dir.getPath();
+            final String prefix = module.getOption("output_dir_prefix");
+            if (prefix != null)
+            {
+                path = prefix + path;
+                dir = resolveOutputDir(path, prefix.lastIndexOf('$'), 
+                        sourceFile, null);
+                
+                // new dir with the prefix
+                if (dir == null)
+                    dir = new File(path);
+            }
+            else
+            {
+                dir = resolveOutputDir(path, path.lastIndexOf('$'), 
+                        sourceFile, dir);
+            }
+        }
+        
         final File outputDir = fileName.endsWith(".java") || 
                 module.getO().containsKey("with_package_dir") ? 
-                new File(module.getOutputDir(), packageName.replace('.', '/')) : 
-                    module.getOutputDir();
+                new File(dir, packageName.replace('.', '/')) : dir;
         
         if (!outputDir.exists())
             outputDir.mkdirs();
@@ -62,6 +102,36 @@ public final class CompilerUtil
         File outputFile = new File(outputDir, fileName);
         FileOutputStream out = new FileOutputStream(outputFile);
         return new BufferedWriter(new OutputStreamWriter(out, encoding));
+    }
+    
+    /**
+     * Replace the token '$' with the module name.
+     */
+    private static File resolveOutputDir(String path, int dollar, 
+            File sourceFile, File toReturnIfNotResolved) throws IOException
+    {
+        if (dollar == -1)
+            return toReturnIfNotResolved;
+        
+        final File sourceFileDir = sourceFile.getParentFile().getCanonicalFile();
+        final ArrayList<String> dirNames = new ArrayList<String>();
+        
+        File d = sourceFileDir;
+        String dirName;
+        while (!BASE_DIR.getName().equals((dirName = d.getName())))
+        {
+            dirNames.add(dirName);
+            d = d.getParentFile();
+        }
+        
+        if (dirNames.isEmpty())
+            return toReturnIfNotResolved;
+        
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0, offset = dirNames.size(), len = dollar + 1; i < len; i++)
+            sb.append(dirNames.get(--offset)).append('/');
+        
+        return new File(sb.append(path.substring(dollar + 1)).toString());
     }
 
     public static List<File> getProtoFiles(File dir)

@@ -253,7 +253,8 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
             fileName = resolveFileName(name);
         }
 
-        BufferedWriter writer = CompilerUtil.newWriter(module, packageName, fileName);
+        BufferedWriter writer = CompilerUtil.newWriter(module, packageName, fileName, 
+                proto.getFile());
         
         protoBlockTemplate.renderTo(writer, "proto", proto, module);
 
