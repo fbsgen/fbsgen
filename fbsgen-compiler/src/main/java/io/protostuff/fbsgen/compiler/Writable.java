@@ -354,6 +354,33 @@ public final class Writable
     };
     
     /**
+     * Removes a prefix of the key based on the arg.
+     * <pre>
+     *   «writable.k.("foo").ksubstr.("fo")»
+     * </pre>
+     */
+    public final FakeMap ksubstr = new FakeMap("ksubstr")
+    {
+        public Object get(Object arg)
+        {
+            if (key == null)
+                throw new RuntimeException("Misuse of chain.");
+            
+            final String k = key.toString();
+            key = null;
+            
+            if (arg == null)
+                return k;
+            
+            if (arg instanceof Integer)
+                return k.substring(((Integer)arg).intValue());
+            
+            final String sub = arg.toString();
+            return k.startsWith(sub) ? k.substring(sub.length()) : k;
+        }
+    };
+    
+    /**
      * Returns true if the key is found in the arg.
      * <pre>
      *   «writable.k.("foo").keq.("hellofooworld")»

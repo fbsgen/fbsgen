@@ -227,4 +227,37 @@ public class ProtoModule implements Serializable
     {
         return ErrorMap.INSTANCE;
     }
+    
+    public Env getEnv()
+    {
+        return Env.INSTANCE;
+    }
+    
+    public static final class Env
+    {
+        static final Env INSTANCE = new Env();
+        
+        final String basePath, basePrefix;
+        
+        private Env()
+        {
+            basePath = CompilerUtil.BASE_DIR.toString();
+            basePrefix = basePath + "/";
+        }
+        
+        public File getBaseDir()
+        {
+            return CompilerUtil.BASE_DIR;
+        }
+        
+        public String getBasePath()
+        {
+            return basePath;
+        }
+        
+        public String getBasePrefix()
+        {
+            return basePrefix;
+        }
+    }
 }
