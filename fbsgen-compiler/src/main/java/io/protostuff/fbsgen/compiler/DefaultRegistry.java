@@ -106,6 +106,11 @@ public class DefaultRegistry implements Registry
         return enumGroups;
     }
     
+    public List<Service> getServices()
+    {
+        return services;
+    }
+    
     @Override
     public List<Proto> getProtos()
     {

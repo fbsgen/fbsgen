@@ -38,6 +38,9 @@ public interface Registry
     void add(Proto proto, ProtoModule module);
     
     List<Proto> getProtos();
+    List<Message> getMessages();
+    List<EnumGroup> getEnumGroups();
+    List<Service> getServices();
     
     Map<String,Proto> getProtoPathMap();
     Map<String,ArrayList<Proto>>  getStgProtoMapping();
