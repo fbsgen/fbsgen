@@ -22,6 +22,7 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -55,6 +56,21 @@ public final class CompilerUtil
         {
             throw new RuntimeException(e);
         }
+    }
+    
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public static Map fill(Map map, String csvOptions)
+    {
+        for (String o : COMMA.split(csvOptions))
+        {
+            int idx = o.indexOf(':');
+            if (idx == -1)
+                map.put(o.trim(), "");
+            else
+                map.put(o.substring(0, idx).trim(), o.substring(idx + 1).trim());
+        }
+        
+        return map;
     }
     
     public static BufferedWriter newWriter(ProtoModule module, 

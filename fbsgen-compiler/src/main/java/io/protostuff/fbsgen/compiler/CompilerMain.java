@@ -395,16 +395,7 @@ public final class CompilerMain
                 encoding, new File(outputDir));
 
         if (options != null)
-        {
-            for (String o : COMMA.split(options))
-            {
-                int idx = o.indexOf(':');
-                if (idx == -1)
-                    module.setOption(o.trim(), "");
-                else
-                    module.setOption(o.substring(0, idx).trim(), o.substring(idx + 1).trim());
-            }
-        }
+            CompilerUtil.fill(module.getOptions(), options);
 
         compile(module);
     }

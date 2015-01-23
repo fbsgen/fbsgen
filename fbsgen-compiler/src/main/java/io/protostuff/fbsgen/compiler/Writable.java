@@ -778,6 +778,25 @@ public final class Writable
         }
     }
     
+    /**
+     * Returns a new map filled with the csv arg.
+     * <pre>
+     *   «(writable.k.("foo").inc_map_value.(field))»
+     * </pre>
+     */
+    public final FakeMap new_map_from_csv = new FakeMap("new_map_from_csv")
+    {
+        public Object get(Object arg)
+        {
+            if (key != null)
+                throw new RuntimeException("Misuse of chain.");
+            
+            if (arg == null)
+                return Collections.EMPTY_MAP;
+            
+            return CompilerUtil.fill(new LinkedHashMap<String,String>(), arg.toString());
+        }
+    };
     
     /**
      * Increments the value with the arg.
