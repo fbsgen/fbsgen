@@ -778,6 +778,33 @@ public final class Writable
         }
     }
     
+    
+    /**
+     * Increments the value with the arg.
+     * <pre>
+     *   «(writable.k.("foo").inc_map_value.(field))»
+     * </pre>
+     */
+    public final FakeMap inc_map_value = new FakeMap("inc_map_value")
+    {
+        public Object get(Object arg)
+        {
+            final Object k = key;
+            if (k == null)
+                throw new RuntimeException("Misuse of chain.");
+            
+            key = null;
+            
+            Object value = map.get(k);
+            if (value == null)
+                map.put(k, arg);
+            else
+                map.put(k, ((Integer)value).intValue() + $int(arg));
+            
+            return Writable.this;
+        }
+    };
+    
     /**
      * Puts the entry into the map.
      * <pre>
