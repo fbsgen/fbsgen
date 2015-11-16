@@ -127,6 +127,7 @@
   </profiles>
   
   <modules>
+    <module>fbsgen-template</module>
     <module>fbsgen-parser</module>
     <module>fbsgen-compiler</module>
   </modules>
