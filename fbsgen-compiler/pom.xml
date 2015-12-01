@@ -47,6 +47,11 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>com.github.subchen</groupId>
+      <artifactId>jetbrick-template</artifactId>
+      <version>${jetg-version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.antlr</groupId>
       <artifactId>ST4</artifactId>
     </dependency>
