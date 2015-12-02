@@ -51,6 +51,12 @@
       <artifactId>jetbrick-template</artifactId>
       <version>${jetg-version}</version>
     </dependency>
+    <!-- jetbrick dependency -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.5</version>
+    </dependency>
     <dependency>
       <groupId>org.antlr</groupId>
       <artifactId>ST4</artifactId>
@@ -68,6 +74,7 @@
         <plugins>
           <plugin>
             <artifactId>maven-assembly-plugin</artifactId>
+            <version>2.4</version>
             <configuration>
               <descriptorRefs>
                 <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -79,7 +86,9 @@
                 <manifestEntries>
                   <implementation-version>${project.version}</implementation-version>
                 </manifestEntries>
-              </archive> 
+              </archive>
+              <finalName>fbsgen</finalName>
+              <appendAssemblyId>false</appendAssemblyId> 
             </configuration>
             <executions>
               <execution>
@@ -108,6 +117,31 @@
                   </tasks>
                 </configuration>
               </execution>
+              <!--<execution>
+                <id>jarjar</id>
+                <phase>${jwd}</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <tasks>
+                    <taskdef resource="proguard/ant/task.properties"/>
+                    <proguard>
+                      -libraryjars ${env.JAVA_HOME}/jre/lib/rt.jar
+                      -injars      target/${project.build.finalName}-jar-with-dependencies.jar
+                      -outjars     target/fbsgen.jar
+
+                      -dontoptimize
+                      -dontobfuscate
+                      -dontwarn **
+                      -dontnote
+
+                      -keep class io.protostuff.fbsgen.compiler.** { *; }
+                      -keep class jetbrick.compiler.** { *; }
+                    </proguard>
+                  </tasks>
+                </configuration>
+              </execution>
               <execution>
                 <id>jarjar</id>
                 <phase>${jwd}</phase>
@@ -124,12 +158,18 @@
                       </manifest>
                       <zipfileset src="target/${project.build.finalName}-jar-with-dependencies.jar" />
                       <keep pattern="io.protostuff.fbsgen.compiler.**" />
+                      <keep pattern="jetbrick.**" />
                     </jarjar>
                   </tasks>
                 </configuration>
-              </execution>
+              </execution>-->
             </executions>
-            <dependencies>
+            <!--<dependencies>
+              <dependency>
+                <groupId>net.sf.proguard</groupId>
+                <artifactId>proguard-anttask</artifactId>
+                <version>4.9</version>
+              </dependency>
               <dependency>
                 <groupId>com.tonicsystems.jarjar</groupId>
                 <artifactId>jarjar</artifactId>
@@ -137,7 +177,7 @@
                 <scope>system</scope>
                 <systemPath>../lib/jarjar-1.4.jar</systemPath>
               </dependency>
-            </dependencies>
+            </dependencies>-->
           </plugin>
         </plugins>
       </build>

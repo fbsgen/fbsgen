@@ -66,6 +66,11 @@ public final class TemplateUtil
     
     public static TemplateGroup resolveGroup(String output, String name, String fileExtension)
     {
+        String path = output + ".jetg";
+        File file = lookupFile(path);
+        if (file != null)
+            return new JetGroup(path, file);
+        
         final char[] delim = new char[4];
         
         String resource = output + ".stg";
@@ -89,6 +94,19 @@ public final class TemplateUtil
             boolean parseDelim) throws IOException
     {
         return new ST4Group(name, newReader(in, parseDelim ? delim : null), delim);
+    }
+    
+    static File lookupFile(String resource)
+    {
+        File file;
+        for (File dir : __templateLoadDirs)
+        {
+            file = new File(dir, resource);
+            if (file.exists())
+                return file;
+        }
+        
+        return null;
     }
     
     static Reader getReader(String resource, char[] delim, boolean checkFile)
