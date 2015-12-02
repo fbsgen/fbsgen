@@ -17,6 +17,8 @@ package io.protostuff.fbsgen.compiler;
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.FORMAT_DELIM;
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.chainedFormat;
 
+import io.protostuff.fbsgen.compiler.map.FakeMapUtil;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
@@ -28,6 +30,7 @@ import java.util.Properties;
 import jetbrick.template.JetConfig;
 import jetbrick.template.JetContext;
 import jetbrick.template.JetEngine;
+import jetbrick.template.JetGlobalVariables;
 import jetbrick.template.JetTemplate;
 import jetbrick.template.resource.FileSystemResource;
 import jetbrick.template.resource.Resource;
@@ -57,6 +60,23 @@ public final class JetGroup implements TemplateGroup, Template
         FileSystemResource fsr = new FileSystemResource(name, file, ENCODING);
         CACHE.put(name, fsr);
         return fsr;
+    }
+    
+    public static final class GlobalVars implements JetGlobalVariables
+    {
+        final HashMap<String,Object> map = new HashMap<String, Object>();
+        
+        public GlobalVars()
+        {
+            for (FakeMap fm : FakeMapUtil.LIST)
+                map.put(fm.name, fm);
+        }
+
+        @Override
+        public Object get(JetContext context, String name)
+        {
+            return map.get(name);
+        }
     }
     
     public static final class Loader implements ResourceLoader
@@ -98,6 +118,8 @@ public final class JetGroup implements TemplateGroup, Template
         
         config.put(JetConfig.TRIM_DIRECTIVE_COMMENTS, "false");
         
+        config.put(JetConfig.GLOBAL_VARIABLES, GlobalVars.class.getName());
+        
         config.put(JetConfig.IMPORT_PACKAGES, 
                 "io.protostuff.fbsgen.compiler.*, io.protostuff.fbsgen.parser.*");
         
@@ -136,7 +158,7 @@ public final class JetGroup implements TemplateGroup, Template
     @Override
     public void put(String name, FakeMap map)
     {
-        // TODO Auto-generated method stub
+        // noop
     }
 
     @Override
