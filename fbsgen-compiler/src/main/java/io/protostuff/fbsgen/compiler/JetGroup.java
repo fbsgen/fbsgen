@@ -17,8 +17,6 @@ package io.protostuff.fbsgen.compiler;
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.FORMAT_DELIM;
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.chainedFormat;
 
-import io.protostuff.fbsgen.compiler.map.FakeMapUtil;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
@@ -45,18 +43,60 @@ import jetbrick.template.runtime.JetUtils;
  */
 public final class JetGroup implements TemplateGroup, Template
 {
+    private static final String ENCODING = "utf-8";
+    
+    private static final HashMap<String,FileSystemResource> CACHE = 
+            new HashMap<String,FileSystemResource>();
+    
+    private static final HashMap<String,Object> VAR_MAP = new HashMap<String, Object>();
+    
+    static final JetEngine ENGINE;
+    
     static
     {
         // set logging to warn
         System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "warn");
         // empty string evaluates to true
         JetUtils.STR_TRUE = "";
+        
+        /*StringBuilder buffer = new StringBuilder();
+        int i = 0;
+        for (FakeMap fm : FakeMapUtil.LIST)
+        {
+            if (1 != ++i)
+                buffer.append(", ");
+            
+            buffer.append("Map<Object,Object> ").append(fm.name);
+            VAR_MAP.put(fm.name, fm);
+        }*/
+        
+        ENGINE = JetEngine.create(newConfig(/*buffer.toString()*/));
     }
     
-    static final String ENCODING = "utf-8";
-    
-    static final HashMap<String,FileSystemResource> CACHE = 
-            new HashMap<String,FileSystemResource>();
+    private static Properties newConfig(/*String importVars*/)
+    {
+        Properties config = new Properties();
+        
+        config.put(JetConfig.INPUT_ENCODING, ENCODING);
+        config.put(JetConfig.OUTPUT_ENCODING, ENCODING);
+        
+        config.put(JetConfig.TRIM_DIRECTIVE_COMMENTS, "false");
+        
+        //config.put(JetConfig.IMPORT_VARIABLES, importVars);
+        //config.put(JetConfig.GLOBAL_VARIABLES, GlobalVars.class.getName());
+        
+        config.put(JetConfig.IMPORT_PACKAGES, 
+                "io.protostuff.fbsgen.compiler.*, io.protostuff.fbsgen.parser.*");
+        
+        config.put(JetConfig.TEMPLATE_LOADER, Loader.class.getName());
+        config.put(JetConfig.TEMPLATE_PATH, new File(".").getAbsolutePath()); // dummy
+        config.put(JetConfig.TEMPLATE_SUFFIX, ".jetg");
+        
+        config.put(JetConfig.COMPILE_STRATEGY, "auto");
+        config.put(JetConfig.COMPILE_PATH, "target/jetg");
+        
+        return config;
+    }
     
     static FileSystemResource put(String name, File file)
     {
@@ -67,18 +107,10 @@ public final class JetGroup implements TemplateGroup, Template
     
     public static final class GlobalVars implements JetGlobalVariables
     {
-        final HashMap<String,Object> map = new HashMap<String, Object>();
-        
-        public GlobalVars()
-        {
-            for (FakeMap fm : FakeMapUtil.LIST)
-                map.put(fm.name, fm);
-        }
-
         @Override
         public Object get(JetContext context, String name)
         {
-            return map.get(name);
+            return VAR_MAP.get(name);
         }
     }
     
@@ -112,31 +144,6 @@ public final class JetGroup implements TemplateGroup, Template
             return Collections.emptyList();
         }
     }
-    
-    static JetEngine createEngine()
-    {
-        Properties config = new Properties();
-        config.put(JetConfig.INPUT_ENCODING, ENCODING);
-        config.put(JetConfig.OUTPUT_ENCODING, ENCODING);
-        
-        config.put(JetConfig.TRIM_DIRECTIVE_COMMENTS, "false");
-        
-        config.put(JetConfig.GLOBAL_VARIABLES, GlobalVars.class.getName());
-        
-        config.put(JetConfig.IMPORT_PACKAGES, 
-                "io.protostuff.fbsgen.compiler.*, io.protostuff.fbsgen.parser.*");
-        
-        config.put(JetConfig.TEMPLATE_LOADER, Loader.class.getName());
-        config.put(JetConfig.TEMPLATE_PATH, new File(".").getAbsolutePath()); // dummy
-        config.put(JetConfig.TEMPLATE_SUFFIX, ".jetg");
-        
-        config.put(JetConfig.COMPILE_STRATEGY, "auto");
-        config.put(JetConfig.COMPILE_PATH, "target/jetg");
-        
-        return JetEngine.create(config);
-    }
-    
-    static final JetEngine ENGINE = createEngine();
     
     final String path;
     final File file;
