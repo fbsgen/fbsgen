@@ -35,6 +35,7 @@ import jetbrick.template.JetTemplate;
 import jetbrick.template.resource.FileSystemResource;
 import jetbrick.template.resource.Resource;
 import jetbrick.template.resource.loader.ResourceLoader;
+import jetbrick.template.runtime.JetUtils;
 
 /**
  * TODO
@@ -48,6 +49,8 @@ public final class JetGroup implements TemplateGroup, Template
     {
         // set logging to warn
         System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "warn");
+        // empty string evaluates to true
+        JetUtils.STR_TRUE = "";
     }
     
     static final String ENCODING = "utf-8";
