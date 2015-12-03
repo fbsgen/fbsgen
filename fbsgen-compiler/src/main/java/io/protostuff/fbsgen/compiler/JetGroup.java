@@ -15,7 +15,6 @@
 package io.protostuff.fbsgen.compiler;
 
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.FORMAT_DELIM;
-import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.chainedFormat;
 
 import java.io.File;
 import java.io.IOException;
@@ -185,8 +184,8 @@ public final class JetGroup implements TemplateGroup, Template
     {
         String[] formats = FORMAT_DELIM.split(formatName);
 
-        return formats.length == 0 ? format(str, formatName) :
-                chainedFormat(str, formats);
+        return formats.length == 0 ? TemplatedCodeGenerator.format(str, formatName) :
+            TemplatedCodeGenerator.chainedFormat(str, formats);
     }
 
 }

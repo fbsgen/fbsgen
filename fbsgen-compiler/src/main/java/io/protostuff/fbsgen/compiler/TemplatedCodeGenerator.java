@@ -98,13 +98,11 @@ public abstract class TemplatedCodeGenerator implements ProtoCompiler
         int eq = formatName.indexOf("==");
         if (eq > 0)
         {
-            String toReplace = formatName.substring(0, eq);
-            String replacement = formatName.substring(eq + 2);
-
-            if (toReplace.length() == 1 && replacement.length() == 1)
-                return str.replace(toReplace.charAt(0), replacement.charAt(0));
-
-            return str.replaceAll(toReplace, replacement);
+            return formatName.length() == 4 ?
+                    // single char replacement
+                    str.replace(formatName.charAt(0), formatName.charAt(3)) :
+                    // regex replace
+                    str.replaceAll(formatName.substring(0, eq), formatName.substring(eq + 2));
         }
 
         return str + formatName;
