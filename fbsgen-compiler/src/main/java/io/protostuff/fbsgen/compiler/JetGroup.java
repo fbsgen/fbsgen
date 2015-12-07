@@ -16,6 +16,9 @@ package io.protostuff.fbsgen.compiler;
 
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.FORMAT_DELIM;
 
+import io.protostuff.fbsgen.parser.ParseException;
+import io.protostuff.fbsgen.parser.Proto;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
@@ -32,7 +35,9 @@ import jetbrick.template.JetTemplate;
 import jetbrick.template.resource.FileSystemResource;
 import jetbrick.template.resource.Resource;
 import jetbrick.template.resource.loader.ResourceLoader;
+import jetbrick.template.runtime.JetPage;
 import jetbrick.template.runtime.JetUtils;
+import jetbrick.template.runtime.JetWriter;
 
 /**
  * TODO
@@ -180,12 +185,35 @@ public final class JetGroup implements TemplateGroup, Template
         template.render(context, writer);
     }
     
-    public static String format(String str, String formatName)
+    public static abstract class Base extends JetPage
     {
-        String[] formats = FORMAT_DELIM.split(formatName);
+        public static String format(Object it, String formatName)
+        {
+            if (it == null)
+                return "";
+            
+            String str = it.toString();
+            String[] formats = FORMAT_DELIM.split(formatName);
 
-        return formats.length == 0 ? TemplatedCodeGenerator.format(str, formatName) :
-            TemplatedCodeGenerator.chainedFormat(str, formats);
+            return formats.length == 0 ? TemplatedCodeGenerator.format(str, formatName) :
+                TemplatedCodeGenerator.chainedFormat(str, formats);
+        }
+        
+        public static void separator(JetWriter $out, Object it, String param, int i) 
+                throws IOException
+        {
+            if (i != 0)
+                $out.print(param);
+        }
+        
+        /*public static void error(JetWriter $out, Proto proto, String msg)
+        {
+            err($out, proto, msg);
+        }*/
+        
+        public static void err(JetWriter $out, Proto proto, String msg)
+        {
+            throw new ParseException(msg + " [ " + proto.getSourcePath() + " ] ");
+        }
     }
-
 }
