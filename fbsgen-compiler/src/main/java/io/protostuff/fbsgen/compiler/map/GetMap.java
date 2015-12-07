@@ -16,7 +16,6 @@ package io.protostuff.fbsgen.compiler.map;
 
 import static io.protostuff.fbsgen.compiler.CompilerUtil.$int;
 import static io.protostuff.fbsgen.parser.AnnotationContainer.err;
-import io.protostuff.fbsgen.compiler.CompilerUtil;
 import io.protostuff.fbsgen.compiler.FakeMap;
 import io.protostuff.fbsgen.compiler.JetGroup;
 import io.protostuff.fbsgen.parser.Annotation;
