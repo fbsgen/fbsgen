@@ -16,15 +16,18 @@ package io.protostuff.fbsgen.compiler;
 
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.FORMAT_DELIM;
 
+import io.protostuff.fbsgen.parser.Field;
 import io.protostuff.fbsgen.parser.ParseException;
 import io.protostuff.fbsgen.parser.Proto;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import jetbrick.template.JetConfig;
@@ -214,6 +217,47 @@ public final class JetGroup implements TemplateGroup, Template
         public static void err(JetWriter $out, Proto proto, String msg)
         {
             throw new ParseException(msg + " [ " + proto.getSourcePath() + " ] ");
+        }
+        
+        /* ================================================== */
+        // is_* methods
+        
+        public static boolean is_null_or_empty(Object data)
+        {
+            if (data == null)
+                return true;
+            
+            if (data instanceof String)
+                return ((String)data).isEmpty();
+            
+            return data instanceof Map ? ((Map<?,?>)data).isEmpty() : 
+                ((Collection<?>)data).isEmpty();
+        }
+        
+        public static boolean is_power_of_two(int num)
+        {
+            return num > 0 && 0 == (num & (num-1));
+        }
+        
+        /* ================================================== */
+        // get_* methods
+        
+        public static int get_bit_pot_shiftnum(int num)
+        {
+            int count = 0;
+            
+            while (num != 0)
+            {
+                num = num >>> 1;
+                count++;
+            }
+                
+            return count - 1;
+        }
+        
+        public static String get_fbs_int_type(String data)
+        {
+            return Field.fbsIntType(data);
         }
     }
 }

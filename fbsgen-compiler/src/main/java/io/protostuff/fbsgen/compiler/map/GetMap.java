@@ -18,6 +18,7 @@ import static io.protostuff.fbsgen.compiler.CompilerUtil.$int;
 import static io.protostuff.fbsgen.parser.AnnotationContainer.err;
 import io.protostuff.fbsgen.compiler.CompilerUtil;
 import io.protostuff.fbsgen.compiler.FakeMap;
+import io.protostuff.fbsgen.compiler.JetGroup;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Field;
@@ -359,16 +360,7 @@ public final class GetMap extends FakeMap
         {
             public Object get(Object data)
             {
-                int num = CompilerUtil.$int(data), 
-                        count = 0;
-                
-                while (num != 0)
-                {
-                    num = num >>> 1;
-                    count++;
-                }
-                    
-                return count - 1;
+                return JetGroup.Base.get_bit_pot_shiftnum($int(data));
             }
         },
         

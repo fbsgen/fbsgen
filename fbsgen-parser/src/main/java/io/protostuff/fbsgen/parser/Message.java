@@ -26,7 +26,7 @@ import java.util.List;
  * @author David Yu
  * @created Dec 19, 2009
  */
-public final class Message extends AnnotationContainer implements HasName, HasFields
+public final class Message extends AnnotationContainer implements HasRelativeName, HasFields
 {
     
     static final boolean SEQUENTIAL_FIELD_NUMBERS = Boolean.parseBoolean(

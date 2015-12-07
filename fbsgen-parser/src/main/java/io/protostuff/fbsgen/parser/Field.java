@@ -263,7 +263,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     /**
      * Returns null by default.
      */
-    public HasName getUserDefinedType()
+    public HasRelativeName getUserDefinedType()
     {
         return null;
     }

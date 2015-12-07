@@ -14,7 +14,9 @@
 
 package io.protostuff.fbsgen.compiler.map;
 
+import static io.protostuff.fbsgen.compiler.CompilerUtil.$int;
 import io.protostuff.fbsgen.compiler.FakeMap;
+import io.protostuff.fbsgen.compiler.JetGroup;
 
 import java.util.Collection;
 import java.util.List;
@@ -72,14 +74,7 @@ public final class IsMap extends FakeMap
         {
             public boolean is(Object data)
             {
-                if (data == null)
-                    return true;
-                
-                if (data instanceof String)
-                    return ((String)data).isEmpty();
-                
-                return data instanceof Map ? ((Map<?,?>)data).isEmpty() : 
-                    ((Collection<?>)data).isEmpty();
+                return JetGroup.Base.is_null_or_empty(data);
             }
         },
         
@@ -114,8 +109,7 @@ public final class IsMap extends FakeMap
         {
             public boolean is(Object data)
             {
-                int num = ((Integer)data).intValue();
-                return num > 0 && 0 == (num & (num-1));
+                return JetGroup.Base.is_power_of_two($int(data));
             }
         },
         

@@ -45,7 +45,7 @@ public class MessageField extends Field<Message>
         return message;
     }
     
-    public HasName getUserDefinedType()
+    public HasRelativeName getUserDefinedType()
     {
         return message;
     }

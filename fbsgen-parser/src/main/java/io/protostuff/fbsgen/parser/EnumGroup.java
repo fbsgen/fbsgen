@@ -26,7 +26,7 @@ import java.util.LinkedHashMap;
  * @author David Yu
  * @created Dec 21, 2009
  */
-public final class EnumGroup extends AnnotationContainer implements HasName, HasOptions
+public final class EnumGroup extends AnnotationContainer implements HasRelativeName, HasOptions
 {
     
     /**
