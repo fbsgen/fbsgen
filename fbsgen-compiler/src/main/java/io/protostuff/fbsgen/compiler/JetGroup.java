@@ -15,7 +15,6 @@
 package io.protostuff.fbsgen.compiler;
 
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.FORMAT_DELIM;
-
 import io.protostuff.fbsgen.parser.Field;
 import io.protostuff.fbsgen.parser.ParseException;
 import io.protostuff.fbsgen.parser.Proto;
@@ -33,7 +32,6 @@ import java.util.Properties;
 import jetbrick.template.JetConfig;
 import jetbrick.template.JetContext;
 import jetbrick.template.JetEngine;
-import jetbrick.template.JetGlobalVariables;
 import jetbrick.template.JetTemplate;
 import jetbrick.template.resource.FileSystemResource;
 import jetbrick.template.resource.Resource;
@@ -55,7 +53,7 @@ public final class JetGroup implements TemplateGroup, Template
     private static final HashMap<String,FileSystemResource> CACHE = 
             new HashMap<String,FileSystemResource>();
     
-    private static final HashMap<String,Object> VAR_MAP = new HashMap<String, Object>();
+    //private static final HashMap<String,Object> VAR_MAP = new HashMap<String, Object>();
     
     static final JetEngine ENGINE;
     
@@ -112,14 +110,14 @@ public final class JetGroup implements TemplateGroup, Template
         return fsr;
     }
     
-    public static final class GlobalVars implements JetGlobalVariables
+    /*public static final class GlobalVars implements JetGlobalVariables
     {
         @Override
         public Object get(JetContext context, String name)
         {
             return VAR_MAP.get(name);
         }
-    }
+    }*/
     
     public static final class Loader implements ResourceLoader
     {
