@@ -73,7 +73,7 @@ public final class EnumField extends Field<EnumGroup.Value>
         return getEnumGroup();
     }
     
-    public HasRelativeName getUserDefinedType()
+    public UserDefinedType getUserDefinedType()
     {
         return enumGroup;
     }
