@@ -271,7 +271,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     /**
      * Alias to {@link #getUserDefinedType()}.
      */
-    public HasName getUdt()
+    public HasRelativeName getUdt()
     {
         return getUserDefinedType();
     }

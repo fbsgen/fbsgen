@@ -16,6 +16,7 @@ package io.protostuff.fbsgen.compiler;
 
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.FORMAT_DELIM;
 import static io.protostuff.fbsgen.parser.AnnotationContainer.err;
+import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Field;
 import io.protostuff.fbsgen.parser.HasName;
@@ -43,6 +44,7 @@ import jetbrick.template.resource.loader.ResourceLoader;
 import jetbrick.template.runtime.JetPage;
 import jetbrick.template.runtime.JetUtils;
 import jetbrick.template.runtime.JetWriter;
+import jetbrick.template.utils.UnsafeCharArrayWriter;
 
 /**
  * TODO
@@ -217,6 +219,19 @@ public final class JetGroup implements TemplateGroup, Template
         }
         
         /* ================================================== */
+        // utils
+        
+        public static UnsafeCharArrayWriter new_writer(int size)
+        {
+            return new UnsafeCharArrayWriter(size);
+        }
+        
+        public static JetWriter new_jet_writer(Writer writer)
+        {
+            return JetWriter.create(writer, ENCODING);
+        }
+        
+        /* ================================================== */
         // is_* methods
         
         public static boolean is_null_or_empty(Object data)
@@ -308,6 +323,12 @@ public final class JetGroup implements TemplateGroup, Template
                 return ((EnumGroup)udt).getFullName();
             
             return udt.getName();
+        }
+        
+        public static String get_fbs_message_type(Message m)
+        {
+            Annotation ta = m.getTa();
+            return ta != null && ta.getName().equals("struct") ? "struct" : "table";
         }
     }
 }
