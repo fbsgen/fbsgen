@@ -20,7 +20,6 @@ import io.protostuff.fbsgen.compiler.JetGroup;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Field;
 import io.protostuff.fbsgen.parser.Message;
-import io.protostuff.fbsgen.parser.MessageField;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -61,117 +60,6 @@ public final class GetMap extends FakeMap
             list.add(c.map);
     }
     
-    /*public static void main(String[] args)
-    {
-        int x = 8;
-        System.err.println(Functions.BIT_POT_INDEX.get(x));
-        // 3
-    }*/
-    
-    // struct padding fields that can be checked via "field.repeated"
-    static final class Int8 extends Field.Int8
-    {
-        Int8(int id)
-        {
-            this.name = "padding" + id;
-        }
-        @Override
-        public boolean isRepeated()
-        {
-            return true;
-        }
-    }
-    static final class Int16 extends Field.Int16
-    {
-        Int16(int id)
-        {
-            this.name = "padding" + id;
-        }
-        @Override
-        public boolean isRepeated()
-        {
-            return true;
-        }
-    }
-    static final class Int32 extends Field.Int32
-    {
-        Int32(int id)
-        {
-            this.name = "padding" + id;
-        }
-        @Override
-        public boolean isRepeated()
-        {
-            return true;
-        }
-    }
-    
-    enum PadType
-    {
-        I8
-        {
-            @Override
-            Field<?> create(int id)
-            {
-                return new Int8(id);
-            }
-        },
-        I16
-        {
-            @Override
-            Field<?> create(int id)
-            {
-                return new Int16(id);
-            }
-        },
-        I32
-        {
-            @Override
-            Field<?> create(int id)
-            {
-                return new Int32(id);
-            }
-        }
-        ;
-        
-        abstract Field<?> create(int id);
-    }
-    
-    static final class StructMetadata
-    {
-        final int minAlign, sizeOf;
-        final ArrayList<Field<?>> fields, paddedFields;
-        
-        public StructMetadata(int minAlign, int sizeOf, 
-                ArrayList<Field<?>> fields, ArrayList<Field<?>> paddedFields)
-        {
-            this.minAlign = minAlign;
-            this.sizeOf = sizeOf;
-            this.fields = fields;
-            this.paddedFields = paddedFields;
-        }
-        
-        public int getMinAlign()
-        {
-            return minAlign;
-        }
-        
-        public int getSizeOf()
-        {
-            return sizeOf;
-        }
-        
-        public ArrayList<Field<?>> getFields()
-        {
-            return fields;
-        }
-        
-        public ArrayList<Field<?>> getPaddedFields()
-        {
-            return paddedFields;
-        }
-    }
-    
     static final class FakeField extends Field<Object>
     {
         final java.lang.String fbsType;
@@ -195,158 +83,6 @@ public final class GetMap extends FakeMap
         
     }
     
-    static void addTo(ArrayList<Field<?>> fl, ArrayList<Field<?>> pfl, PadType type)
-    {
-        if (fl != null)
-        {
-            Field<?> f = type.create(pfl.size());
-            fl.add(f);
-            pfl.add(f);
-        }
-    }
-    
-    static int padIfNecessary(int sizeOf, int alignment, 
-            int current, ArrayList<Field<?>> fl, ArrayList<Field<?>> pfl)
-    {
-        int plusPO2 = current + alignment, 
-                boundary = plusPO2 - (plusPO2 % alignment), 
-                remaining = boundary - current;
-        
-        switch (remaining)
-        {
-            case 1: // 1
-                addTo(fl, pfl, PadType.I8);
-                break;
-            case 2: 
-                if (sizeOf == 0 || sizeOf > remaining) // 2
-                    addTo(fl, pfl, PadType.I16);
-                else
-                    remaining = 0;
-                
-                break;
-            case 3: 
-                if (sizeOf == 0 || sizeOf > remaining) // 1, 2
-                {
-                    addTo(fl, pfl, PadType.I8);
-                    addTo(fl, pfl, PadType.I16);
-                }
-                else if (sizeOf != 1)
-                {
-                    addTo(fl, pfl, PadType.I8);
-                    remaining = 1;
-                }
-                else
-                {
-                    remaining = 0;
-                }
-                break;
-            case 4: 
-                if (sizeOf == 0 || sizeOf > remaining) // 4
-                    addTo(fl, pfl, PadType.I32);
-                else
-                    remaining = 0;
-                break;
-            case 5: 
-                if (sizeOf == 0 || sizeOf > remaining) // 1, 4
-                {
-                    addTo(fl, pfl, PadType.I8);
-                    addTo(fl, pfl, PadType.I32);
-                }
-                else if (sizeOf != 1)
-                {
-                    addTo(fl, pfl, PadType.I8);
-                    remaining = 1;
-                }
-                else
-                {
-                    remaining = 0;
-                }
-                break;
-            case 6: 
-                if (sizeOf == 0 || sizeOf > remaining) // 2, 4
-                {
-                    addTo(fl, pfl, PadType.I16);
-                    addTo(fl, pfl, PadType.I32);
-                }
-                else if (sizeOf == 4)
-                {
-                    addTo(fl, pfl, PadType.I16);
-                    remaining = 2;
-                }
-                else
-                {
-                    remaining = 0;
-                }
-                break;
-            case 7: 
-                if (sizeOf == 0 || sizeOf > remaining) // 1, 2, 4
-                {
-                    addTo(fl, pfl, PadType.I8);
-                    addTo(fl, pfl, PadType.I16);
-                    addTo(fl, pfl, PadType.I32);
-                }
-                else if (sizeOf == 4)
-                {
-                    addTo(fl, pfl, PadType.I8);
-                    addTo(fl, pfl, PadType.I16);
-                    remaining = 3;
-                }
-                else if (sizeOf == 2)
-                {
-                    addTo(fl, pfl, PadType.I8);
-                    remaining = 1;
-                }
-                else
-                {
-                    remaining = 0;
-                }
-                break;
-            default:
-                throw new RuntimeException("Should not happen.");
-        }
-        
-        return remaining + sizeOf;
-    }
-    
-    static StructMetadata getStructMetadata(Message message, 
-            ArrayList<Field<?>> fl, ArrayList<Field<?>> pfl)
-    {
-        int minAlign = message.getMinAlign();
-        int current = 0;
-        for (int i = 0, sizeOf = 0, sizeOfCount = 0, 
-                fieldCount = message.getFieldCount(); i < fieldCount; i++)
-        {
-            final Field<?> field = message.getFields().get(i);
-            if (field.isMessageField())
-            {
-                StructMetadata md = getStructMetadata(
-                        ((MessageField)field).getMessage(), null, null);
-                minAlign = Math.max(minAlign, md.minAlign);
-                sizeOf = md.getSizeOf();
-            }
-            else
-            {
-                sizeOf = message.getSizeofValues().get(sizeOfCount++);
-            }
-            
-            if (current % 8 == 0 || (current + sizeOf) % 8 == 0)
-                current += sizeOf;
-            else
-                current += padIfNecessary(sizeOf, 8, current, fl, pfl);
-            
-            if (fl != null)
-                fl.add(field);
-        }
-        
-        if (current % minAlign != 0)
-            current += padIfNecessary(0, minAlign, current, fl, pfl);
-        
-        if (message.getForceAlign() > minAlign)
-            minAlign = message.getForceAlign();
-        
-        return new StructMetadata(minAlign, current, fl, pfl);
-    }
-    
     public enum Functions implements Function
     {
         /**
@@ -364,31 +100,7 @@ public final class GetMap extends FakeMap
         {
             public Object get(Object data)
             {
-                final EnumGroup eg = (EnumGroup)data;
-                final ArrayList<String> list = new ArrayList<String>();
-                
-                final ArrayList<EnumGroup.Value> values = eg.getValues();
-                int j = 0;
-                EnumGroup.Value v = values.get(j++);
-                list.add(v.getName());
-                
-                for (int i = v.getNumber(), 
-                        len = values.get(values.size() - 1).getNumber(); 
-                        i < len; i++)
-                {
-                    v = values.get(j);
-                    if (i == (v.getNumber() - 1))
-                    {
-                        list.add(v.getName());
-                        j++;
-                    }
-                    else
-                    {
-                        list.add("");
-                    }
-                }
-                
-                return list;
+                return JetGroup.Base.get_sparse_enum_value_names((EnumGroup)data);
             }
         },
         
@@ -404,7 +116,7 @@ public final class GetMap extends FakeMap
         {
             public Object get(Object data)
             {
-                return 4 + (($int(data) - 1) << 1);
+                return JetGroup.Base.get_fbs_field_offset($int(data));
             }
         },
         
@@ -474,8 +186,7 @@ public final class GetMap extends FakeMap
         {
             public Object get(Object data)
             {
-                return getStructMetadata((Message)data, new ArrayList<Field<?>>(), 
-                        new ArrayList<Field<?>>());
+                return JetGroup.Base.get_struct_md((Message)data);
             }
         }
         

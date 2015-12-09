@@ -27,6 +27,8 @@ import io.protostuff.fbsgen.parser.Proto;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -69,6 +71,9 @@ public final class JetGroup implements TemplateGroup, Template
         System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "warn");
         // empty string evaluates to true
         JetUtils.STR_TRUE = "";
+        
+        //JetTemplateCodeVisitor.NON_VOID_CALL.put("sort", Boolean.TRUE);
+        //JetTemplateCodeVisitor.NON_VOID_CALL.put("split", Boolean.TRUE);
         
         /*StringBuilder buffer = new StringBuilder();
         int i = 0;
@@ -219,6 +224,31 @@ public final class JetGroup implements TemplateGroup, Template
         }
         
         /* ================================================== */
+        // st built-in functions
+        
+        public static <T> List<T> reverse(List<T> list)
+        {
+            ArrayList<T> reversed = new ArrayList<T>(list);
+            Collections.reverse(reversed);
+            return reversed;
+        }
+        
+        public static <T> List<T> rest(List<T> list)
+        {
+            return list.subList(1, list.size());
+        }
+        
+        public static <T> T last(List<T> list)
+        {
+            return list.get(list.size()-1);
+        }
+        
+        public static <T> T first(List<T> list)
+        {
+            return list.get(0);
+        }
+        
+        /* ================================================== */
         // new utils
         
         public static UnsafeCharArrayWriter new_writer(int size)
@@ -229,6 +259,34 @@ public final class JetGroup implements TemplateGroup, Template
         public static JetWriter new_jet_writer(Writer writer)
         {
             return JetWriter.create(writer, ENCODING);
+        }
+        
+        /* ================================================== */
+        // split utils TODO raw string array?
+        
+        public static List<String> split_dot(String str)
+        {
+            List<String> list = Collections.emptyList();
+            if (str != null && !str.isEmpty())
+                list = Arrays.asList(CompilerUtil.DOT.split(str));
+            return list;
+        }
+        
+        /* ================================================== */
+        // sort utils
+        
+        public static List<Field<?>> sort_fbs_create_fields(Message message)
+        {
+            final ArrayList<Field<?>> list = new ArrayList<Field<?>>(
+                    message.getNonDeprecatedFields());
+            
+            Annotation ta = message.getTa();
+            if (ta != null && Boolean.TRUE.equals(ta.getP().get("original_order")))
+                Collections.reverse(list);
+            else
+                Collections.sort(list, TypeUtil.CMP_CREATE_FIELDS);
+            
+            return list;
         }
         
         /* ================================================== */
@@ -270,6 +328,51 @@ public final class JetGroup implements TemplateGroup, Template
         public static String get_fbs_int_type(String data)
         {
             return Field.fbsIntType(data);
+        }
+        
+        public static int get_fbs_field_offset(int fieldNumber)
+        {
+            return 4 + ((fieldNumber - 1) << 1);
+        }
+        
+        public static String get_fbs_message_type(Message m)
+        {
+            Annotation ta = m.getTa();
+            return ta != null && ta.getName().equals("struct") ? "struct" : "table";
+        }
+        
+        public static StructMetadata get_struct_md(Message message)
+        {
+            return StructMetadata.create(message, new ArrayList<Field<?>>(), 
+                    new ArrayList<Field<?>>());
+        }
+        
+        public static List<String> get_sparse_enum_value_names(EnumGroup eg)
+        {
+            final ArrayList<String> list = new ArrayList<String>();
+            
+            final ArrayList<EnumGroup.Value> values = eg.getValues();
+            int j = 0;
+            EnumGroup.Value v = values.get(j++);
+            list.add(v.getName());
+            
+            for (int i = v.getNumber(), 
+                    len = values.get(values.size() - 1).getNumber(); 
+                    i < len; i++)
+            {
+                v = values.get(j);
+                if (i == (v.getNumber() - 1))
+                {
+                    list.add(v.getName());
+                    j++;
+                }
+                else
+                {
+                    list.add("");
+                }
+            }
+            
+            return list;
         }
         
         public static String get_pb_field_type(Field<?> field)
@@ -323,12 +426,6 @@ public final class JetGroup implements TemplateGroup, Template
                 return ((EnumGroup)udt).getFullName();
             
             return udt.getName();
-        }
-        
-        public static String get_fbs_message_type(Message m)
-        {
-            Annotation ta = m.getTa();
-            return ta != null && ta.getName().equals("struct") ? "struct" : "table";
         }
         
         /* ================================================== */

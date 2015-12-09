@@ -186,6 +186,20 @@ public class ProtoModule implements Serializable
         return writable;
     }
     
+    public Writable wk(String key)
+    {
+        Writable w = getWritable();
+        w.setkey.get(key);
+        return w;
+    }
+    
+    public Writable wn(Integer num)
+    {
+        Writable w = getWritable();
+        w.setnumber.get(num);
+        return w;
+    }
+    
     /**
      * Alias to {@link #getWritable()}.
      */

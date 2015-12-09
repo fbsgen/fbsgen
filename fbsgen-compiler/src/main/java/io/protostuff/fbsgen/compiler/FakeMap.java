@@ -95,4 +95,10 @@ public abstract class FakeMap implements Map<Object,Object>, HasName
     {
         throw new UnsupportedOperationException();
     }
+    
+    public String $(Object obj)
+    {
+        get(obj);
+        return "";
+    }
 }

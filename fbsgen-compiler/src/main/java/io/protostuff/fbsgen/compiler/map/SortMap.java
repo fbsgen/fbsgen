@@ -15,16 +15,9 @@
 package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
-import io.protostuff.fbsgen.parser.Annotation;
-import io.protostuff.fbsgen.parser.EnumField;
-import io.protostuff.fbsgen.parser.EnumGroup;
-import io.protostuff.fbsgen.parser.Field;
+import io.protostuff.fbsgen.compiler.JetGroup;
 import io.protostuff.fbsgen.parser.Message;
-import io.protostuff.fbsgen.parser.MessageField;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -59,145 +52,6 @@ public final class SortMap extends FakeMap
             list.add(c.map);
     }
     
-    static int sizeOf(int fieldNumber)
-    {
-        return fieldNumber > 15 ? 2 : 1;
-    }
-    
-    static int cmpRep(Field<?> f1, Field<?> f2)
-    {
-        if (f2.isRepeated())
-            return f2.getNumber() - f1.getNumber();
-        
-        if (f2.isNumberField())
-            return ((Field.Number<?>)f2).bits >= 32 ? 1 : -1;
-        
-        if (f2.isEnumField())
-        {
-            EnumField ef = (EnumField)f2;
-            EnumGroup eg = ef.getEg();
-            String type = eg.getTa().getName();
-            return type.charAt(type.length() - 1) == '4' ? 1 : -1;
-        }
-        
-        if (f2.isDelimited() || f2.isMessageField())
-            return 1;
-        
-        return -1;
-    }
-    
-    static int cmp64(Field.Number<?> f1, Field<?> f2)
-    {
-        if (f2 instanceof Field.Number<?> && ((Field.Number<?>)f2).isBit64())
-            return f2.getNumber() - f1.getNumber();
-        
-        if (f2.isEnumField())
-        {
-            EnumField ef = (EnumField)f2;
-            EnumGroup eg = ef.getEg();
-            String type = eg.getTa().getName();
-            return type.charAt(type.length() - 1) == '4' ? 
-                    (f2.getNumber() - f1.getNumber()) : -1;
-        }
-        
-        return -1;
-    }
-    
-    static int cmpMessage(MessageField f1, Field<?> f2)
-    {
-        if (f2.isDelimited() || f2 instanceof MessageField)
-            return f2.getNumber() - f1.getNumber();
-        
-        if (f2.isEnumField())
-        {
-            EnumField ef = (EnumField)f2;
-            EnumGroup eg = ef.getEg();
-            String type = eg.getTa().getName();
-            return type.charAt(type.length() - 1) == '4' ? 1 : -1;
-        }
-        
-        return -1;
-    }
-    
-    static int cmp32(Field.Number<?> f1, Field<?> f2)
-    {
-        if (f2 instanceof Field.Number<?> && ((Field.Number<?>)f2).isBit32())
-            return f2.getNumber() - f1.getNumber();
-        
-        if (f2.isEnumField())
-        {
-            EnumField ef = (EnumField)f2;
-            EnumGroup eg = ef.getEg();
-            String type = eg.getTa().getName();
-            return type.charAt(type.length() - 1) == '2' ? 
-                    (f2.getNumber() - f1.getNumber()) : -1;
-        }
-        
-        return -1;
-    }
-    
-    static int cmp16(Field.Number<?> f1, Field<?> f2)
-    {
-        if (f2 instanceof Field.Number<?> && ((Field.Number<?>)f2).isBit16())
-            return f2.getNumber() - f1.getNumber();
-        
-        if (f2.isEnumField())
-        {
-            EnumField ef = (EnumField)f2;
-            EnumGroup eg = ef.getEg();
-            String type = eg.getTa().getName();
-            return type.charAt(type.length() - 1) == '6' ? 
-                    (f2.getNumber() - f1.getNumber()) : -1;
-        }
-        
-        return -1;
-    }
-    
-    static final Comparator<Field<?>> CMP_CREATE_FIELDS = new Comparator<Field<?>>()
-    {
-        @Override
-        public int compare(Field<?> f1, Field<?> f2)
-        {
-            if (f1.isRepeated())
-                return cmpRep(f1, f2);
-            
-            if (f2.isRepeated())
-                return -cmpRep(f2, f1);
-            
-            if (f1 instanceof Field.Number<?> && ((Field.Number<?>)f1).isBit64())
-                return cmp64((Field.Number<?>)f1, f2);
-            
-            if (f2 instanceof Field.Number<?> && ((Field.Number<?>)f2).isBit64())
-                return 1;
-            
-            if (f1 instanceof MessageField)
-                return cmpMessage((MessageField)f1, f2);
-            
-            if (f2 instanceof MessageField)
-                return -cmpMessage((MessageField)f2, f1);
-            
-            if (f1.isDelimited())
-                return f2.isDelimited() ? (f2.getNumber() - f1.getNumber()) : -1;
-            
-            if (f2.isDelimited())
-                return 1;
-            
-            if (f1 instanceof Field.Number<?> && ((Field.Number<?>)f1).isBit32())
-                return cmp32((Field.Number<?>)f1, f2);
-            
-            if (f2 instanceof Field.Number<?> && ((Field.Number<?>)f2).isBit32())
-                return -cmp32((Field.Number<?>)f2, f1);
-            
-            if (f1 instanceof Field.Number<?> && ((Field.Number<?>)f1).isBit16())
-                return cmp16((Field.Number<?>)f1, f2);
-            
-            if (f2 instanceof Field.Number<?> && ((Field.Number<?>)f2).isBit16())
-                return -cmp16((Field.Number<?>)f2, f1);
-            
-            return f2.getNumber() - f1.getNumber();
-        }
-    };
-    
     public enum Functions implements Function
     {
         FBS_CREATE_FIELDS
@@ -205,17 +59,7 @@ public final class SortMap extends FakeMap
             @Override
             public Object sort(Object arg)
             {
-                Message message = (Message)arg;
-                final ArrayList<Field<?>> list = new ArrayList<Field<?>>(
-                        message.getNonDeprecatedFields());
-                
-                Annotation ta = message.getTa();
-                if (ta != null && Boolean.TRUE.equals(ta.getP().get("original_order")))
-                    Collections.reverse(list);
-                else
-                    Collections.sort(list, CMP_CREATE_FIELDS);
-                
-                return list;
+                return JetGroup.Base.sort_fbs_create_fields((Message)arg);
             }
         }
         ;
