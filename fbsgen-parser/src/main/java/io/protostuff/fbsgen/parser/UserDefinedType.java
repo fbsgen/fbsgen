@@ -22,6 +22,13 @@ package io.protostuff.fbsgen.parser;
  */
 public interface UserDefinedType extends HasRelativeName
 {
+    
+    /**
+     * Alias to {@link #getTypeAnnotation()}.
+     */
+    Annotation getTa();
+    Annotation getTypeAnnotation();
+    
     String getDeclaredFullName();
     String getFullName();
     

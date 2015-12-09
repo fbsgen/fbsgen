@@ -219,7 +219,7 @@ public final class JetGroup implements TemplateGroup, Template
         }
         
         /* ================================================== */
-        // utils
+        // new utils
         
         public static UnsafeCharArrayWriter new_writer(int size)
         {
@@ -329,6 +329,14 @@ public final class JetGroup implements TemplateGroup, Template
         {
             Annotation ta = m.getTa();
             return ta != null && ta.getName().equals("struct") ? "struct" : "table";
+        }
+        
+        /* ================================================== */
+        // str utils
+        
+        public static String get_substr(String str, String prefix)
+        {
+            return str.startsWith(prefix) ? str.substring(prefix.length()) : str;
         }
     }
 }

@@ -280,6 +280,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public abstract java.lang.String getFbsType();
     
+    public boolean isFpt()
+    {
+        return false;
+    }
+    
     public java.lang.String getDefaultValueAsString()
     {
         return getDefaultValue().toString();
