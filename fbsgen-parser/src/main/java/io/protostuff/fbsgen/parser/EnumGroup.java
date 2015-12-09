@@ -237,6 +237,14 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         return indexedValues.get(0);
     }
     
+    public Value getLastValue()
+    {
+        if (indexedValues == null)
+            indexedValues = new ArrayList<Value>(values.values());
+        
+        return indexedValues.get(indexedValues.size() - 1);
+    }
+    
     public int getValueCount()
     {
         return values.size();
