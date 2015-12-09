@@ -14,11 +14,15 @@
 
 package io.protostuff.fbsgen.compiler;
 
+import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.ErrorMap;
+import io.protostuff.fbsgen.parser.Message;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -198,6 +202,32 @@ public class ProtoModule implements Serializable
         Writable w = getWritable();
         w.setnumber.get(num);
         return w;
+    }
+    
+    /**
+     * Returns an empty list if the value is null.
+     */
+    @SuppressWarnings("unchecked")
+    public List<Message> wget_mlist(String key)
+    {
+        Writable w = getWritable();
+        List<Message> list = (List<Message>)w.map.get(key);
+        if (list == null)
+            list = Collections.emptyList();
+        return list;
+    }
+    
+    /**
+     * Returns an empty list if the value is null.
+     */
+    @SuppressWarnings("unchecked")
+    public List<EnumGroup> wget_eglist(String key)
+    {
+        Writable w = getWritable();
+        List<EnumGroup> list = (List<EnumGroup>)w.map.get(key);
+        if (list == null)
+            list = Collections.emptyList();
+        return list;
     }
     
     /**

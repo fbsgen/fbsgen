@@ -40,6 +40,7 @@ import jetbrick.template.JetConfig;
 import jetbrick.template.JetContext;
 import jetbrick.template.JetEngine;
 import jetbrick.template.JetTemplate;
+import jetbrick.template.parser.JetTemplateCodeVisitor;
 import jetbrick.template.resource.FileSystemResource;
 import jetbrick.template.resource.Resource;
 import jetbrick.template.resource.loader.ResourceLoader;
@@ -72,8 +73,8 @@ public final class JetGroup implements TemplateGroup, Template
         // empty string evaluates to true
         JetUtils.STR_TRUE = "";
         
-        //JetTemplateCodeVisitor.NON_VOID_CALL.put("sort", Boolean.TRUE);
-        //JetTemplateCodeVisitor.NON_VOID_CALL.put("split", Boolean.TRUE);
+        JetTemplateCodeVisitor.NON_VOID_CALL.put("sort", Boolean.TRUE);
+        JetTemplateCodeVisitor.NON_VOID_CALL.put("split", Boolean.TRUE);
         
         /*StringBuilder buffer = new StringBuilder();
         int i = 0;
