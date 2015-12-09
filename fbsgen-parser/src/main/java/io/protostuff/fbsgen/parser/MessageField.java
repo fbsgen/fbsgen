@@ -62,17 +62,12 @@ public class MessageField extends Field<Message>
         //return (javaType=buffer.toString());
     }
     
-    public java.lang.String getCppType()
+    public java.lang.String getFbsType()
     {
         StringBuilder buffer = new StringBuilder();
         Message.computeCppName(message, owner, buffer);
 
         return buffer.toString();
-    }
-    
-    public java.lang.String getFbsType()
-    {
-        return getCppType();
     }
     
     public java.lang.String getRegularType()

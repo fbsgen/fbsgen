@@ -104,7 +104,7 @@ public final class EnumField extends Field<EnumGroup.Value>
         
     }
     
-    public java.lang.String getCppType()
+    public java.lang.String getFbsType()
     {
         StringBuilder buffer = new StringBuilder();
         if (enumGroup.isNested())
@@ -123,11 +123,6 @@ public final class EnumField extends Field<EnumGroup.Value>
             buffer.append(enumGroup.getProto().getPackageName().replaceAll("\\.", "::")).append("::").append(enumGroup.getName());
         
         return buffer.toString();
-    }
-    
-    public java.lang.String getFbsType()
-    {
-        return getCppType();
     }
     
     public java.lang.String getRegularType()
