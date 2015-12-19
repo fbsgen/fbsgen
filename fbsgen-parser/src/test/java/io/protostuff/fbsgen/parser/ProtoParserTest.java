@@ -177,13 +177,13 @@ public class ProtoParserTest extends TestCase
         EnumGroup testEnumWithDupValue = proto.getEnumGroup("TestEnumWithDupValue");
         assertNotNull(testEnumWithDupValue);
         assertTrue(testEnumWithDupValue.getValues().size() == 5);
-        assertEquals("FOO2", testEnumWithDupValue.getValues().get(0).name);
+        assertEquals("FOO1", testEnumWithDupValue.getValues().get(0).name);
         assertTrue(testEnumWithDupValue.getValues().get(0).number == 1);
-        assertEquals("FOO1", testEnumWithDupValue.getValues().get(1).name);
+        assertEquals("FOO2", testEnumWithDupValue.getValues().get(1).name);
         assertTrue(testEnumWithDupValue.getValues().get(1).number == 1);
-        assertEquals("BAR2", testEnumWithDupValue.getValues().get(2).name);
+        assertEquals("BAR1", testEnumWithDupValue.getValues().get(2).name);
         assertTrue(testEnumWithDupValue.getValues().get(2).number == 2);
-        assertEquals("BAR1", testEnumWithDupValue.getValues().get(3).name);
+        assertEquals("BAR2", testEnumWithDupValue.getValues().get(3).name);
         assertTrue(testEnumWithDupValue.getValues().get(3).number == 2);
         assertEquals("BAZ", testEnumWithDupValue.getValues().get(4).name);
         assertTrue(testEnumWithDupValue.getValues().get(4).number == 3);

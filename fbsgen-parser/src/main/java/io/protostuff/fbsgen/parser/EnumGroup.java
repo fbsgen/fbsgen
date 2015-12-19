@@ -456,7 +456,8 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         public int compareTo(Value o)
         {
             // if equal, sort by order of declaration
-            return o.number < number ? 1 : -1;
+            //return o.number < number ? 1 : -1;
+            return number - o.number;
         }
     }
 
