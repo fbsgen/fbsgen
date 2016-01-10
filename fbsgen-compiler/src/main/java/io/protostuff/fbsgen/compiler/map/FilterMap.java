@@ -123,6 +123,20 @@ public final class FilterMap extends FakeMap
                 return list;
             }
         },
+        REPEATED_FIELDS
+        {
+            public Collection<Field<?>> filter(Message message)
+            {
+                ArrayList<Field<?>> list = new ArrayList<Field<?>>();
+                for (Field<?> f : message.getFields())
+                {
+                    if (f.isRepeated())
+                        list.add(f);
+                }
+                
+                return list;
+            }
+        },
         SINGULAR_FIELDS
         {
             public Collection<Field<?>> filter(Message message)
