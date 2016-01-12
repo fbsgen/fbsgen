@@ -264,6 +264,11 @@ public class ProtoModule implements Serializable
         return "}";
     }
     
+    public String getEmpty()
+    {
+        return "";
+    }
+    
     /**
      * Used by the templates to print/throw an error msg.
      */
