@@ -283,8 +283,20 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         else
             Collections.sort(sortedValues, Value.NO_ALIAS_COMPARATOR);
         
-        if (typeAnnotation != null && 
-                Boolean.TRUE.equals(typeAnnotation.getP().get("bit_flags")))
+        if (typeAnnotation == null)
+        {
+            // no need to validate
+        }
+        else if (!Boolean.TRUE.equals(typeAnnotation.getP().get("bit_flags")))
+        {
+            if (getFirstValue().number != 0)
+            {
+                throw err(//this, 
+                        "enum " + getRelativeName() + " does not have a declaration for this field's default of 0", 
+                        getProto());
+            }
+        }
+        else
         {
             for(Value v : sortedValues)
             {
