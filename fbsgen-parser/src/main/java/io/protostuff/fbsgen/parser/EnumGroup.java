@@ -291,6 +291,12 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         return values.size();
     }
     
+    public boolean isBitFlags()
+    {
+        return typeAnnotation != null && Boolean.TRUE.equals(
+                typeAnnotation.getValue("bit_flags"));
+    }
+    
     void add(Value value)
     {
         if (zero == null)
@@ -299,7 +305,7 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
             {
                 zero = value;
             }
-            else if (!ENUM_EXPLICIT_ZERO)
+            else if (!ENUM_EXPLICIT_ZERO && values.isEmpty() && !isBitFlags())
             {
                 zero = new Value(ZERO_NAME, 0, this);
                 values.put(zero.name, zero);
@@ -338,16 +344,7 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         else
             Collections.sort(sortedValues, Value.NO_ALIAS_COMPARATOR);
         
-        if (typeAnnotation == null || !Boolean.TRUE.equals(typeAnnotation.getP().get("bit_flags")))
-        {
-            if (zero == null)
-            {
-                throw err(//this, 
-                        "enum " + getRelativeName() + " does not have a declaration for this field's default of 0", 
-                        getProto());
-            }
-        }
-        else
+        if (isBitFlags())
         {
             for(Value v : sortedValues)
             {
@@ -383,6 +380,12 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
                 //case '2':
                 //case '4':
             }
+        }
+        else if (zero == null)
+        {
+            throw err(//this, 
+                    "enum " + getRelativeName() + " does not have a declaration for this field's default of 0", 
+                    getProto());
         }
         
         final Proto proto = getProto();
