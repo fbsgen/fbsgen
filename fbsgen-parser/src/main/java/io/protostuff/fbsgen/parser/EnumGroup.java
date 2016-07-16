@@ -41,6 +41,8 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
     public static final boolean ENUM_EXPLICIT_ZERO = Boolean.parseBoolean(
             "fbsgen.enum_explicit_zero");
     
+    static final String ZERO_NAME = "ZERO";
+    
     final String name;
     final Message parentMessage;
     final Proto proto;
@@ -262,7 +264,7 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         if (declaredValueMap == null)
         {
             declaredValueMap = new LinkedHashMap<String, EnumGroup.Value>(values);
-            declaredValueMap.remove("NONE");
+            declaredValueMap.remove(ZERO_NAME);
         }
         
         return declaredValueMap;
@@ -299,7 +301,7 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
             }
             else if (!ENUM_EXPLICIT_ZERO)
             {
-                zero = new Value("NONE", 0, this);
+                zero = new Value(ZERO_NAME, 0, this);
                 values.put(zero.name, zero);
                 firstValueIndex = 1;
             }
