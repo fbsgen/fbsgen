@@ -305,7 +305,8 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
             {
                 zero = value;
             }
-            else if (!ENUM_EXPLICIT_ZERO && values.isEmpty() && !isBitFlags())
+            else if (!ENUM_EXPLICIT_ZERO && values.isEmpty() && !isBitFlags() && 
+                    !getA().containsKey("Config"))
             {
                 zero = new Value(ZERO_NAME, 0, this);
                 values.put(zero.name, zero);
@@ -381,7 +382,7 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
                 //case '4':
             }
         }
-        else if (zero == null)
+        else if (zero == null && !getA().containsKey("Config"))
         {
             throw err(//this, 
                     "enum " + getRelativeName() + " does not have a declaration for this field's default of 0", 
