@@ -65,15 +65,17 @@ public class AnnotationTest extends TestCase
         assertEquals(1, gender.getComments().size());
         assertEquals("DefaultGender", gender.getComments().get(0));
 
-        EnumGroup.Value male = gender.getValue(0);
+        EnumGroup.Value male = gender.getValue("MALE");
         assertNotNull(male);
+        assertEquals(1, male.number);
         Annotation maleA = male.getAnnotation("Alias");
         assertNotNull(maleA);
         assertEquals("m", maleA.getValue("value"));
         assertTrue(person == maleA.getValue("type"));
 
-        EnumGroup.Value female = gender.getValue(1);
+        EnumGroup.Value female = gender.getValue("FEMALE");
         assertNotNull(female);
+        assertEquals(2, female.number);
         Annotation femaleA = female.getAnnotation("Alias");
         assertNotNull(femaleA);
         assertEquals("f", femaleA.getValue("value"));

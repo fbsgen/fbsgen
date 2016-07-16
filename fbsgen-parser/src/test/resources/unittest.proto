@@ -414,12 +414,12 @@ enum TestEnumWithDupValue {
 
 // Test an enum with large, unordered values.
 enum TestSparseEnum {
+  SPARSE_F = 0;
   SPARSE_A = 123;
   SPARSE_B = 62374;
   SPARSE_C = 12589234;
   SPARSE_D = -15;
   SPARSE_E = -53452;
-  SPARSE_F = 0;
   SPARSE_G = 2;
 }
 

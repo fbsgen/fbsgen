@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Represents an enum declared in either the {@link Proto} or nested in a {@link Message}.
@@ -36,6 +37,9 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
     public static final boolean ENUM_ALLOW_ALIAS = Boolean.parseBoolean(
             "fbsgen.enum_allow_alias");
     
+    public static final boolean ENUM_EXPLICIT_ZERO = Boolean.parseBoolean(
+            "fbsgen.enum_explicit_zero");
+    
     final String name;
     final Message parentMessage;
     final Proto proto;
@@ -47,6 +51,12 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
     
     private ArrayList<Value> indexedValues;
     private ArrayList<Value> uniqueSortedValues;
+    
+    private List<Value> declaredValues;
+    private LinkedHashMap<String,Value> declaredValueMap;
+    
+    private Value zero;
+    private int firstValueIndex;
     
     public EnumGroup(String name, Message parentMessage, Proto proto)
     {
@@ -206,11 +216,6 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         return values.get(name);
     }
     
-    public Collection<Value> getDeclaredValues()
-    {
-        return values.values();
-    }
-    
     public LinkedHashMap<String,Value> getValueMap()
     {
         return values;
@@ -229,12 +234,34 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         return sortedValues;
     }
     
+    public List<Value> getDeclaredValues()
+    {
+        if (firstValueIndex == 0)
+            return sortedValues;
+        
+        if (declaredValues == null)
+            declaredValues = sortedValues.subList(1, sortedValues.size());
+        
+        return declaredValues;
+    }
+    
+    public LinkedHashMap<String,Value> getDeclaredValueMap()
+    {
+        if (firstValueIndex == 0)
+            return values;
+        
+        declaredValueMap = new LinkedHashMap<String, EnumGroup.Value>(values);
+        declaredValueMap.remove("NONE");
+        
+        return declaredValueMap;
+    }
+    
     public Value getFirstValue()
     {
         if (indexedValues == null)
             indexedValues = new ArrayList<Value>(values.values());
         
-        return indexedValues.get(0);
+        return indexedValues.get(firstValueIndex);
     }
     
     public Value getLastValue()
@@ -252,6 +279,20 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
     
     void add(Value value)
     {
+        if (zero == null)
+        {
+            if (value.number == 0)
+            {
+                zero = value;
+            }
+            else if (!ENUM_EXPLICIT_ZERO)
+            {
+                zero = new Value("NONE", 0, this);
+                values.put(zero.name, zero);
+                firstValueIndex = 1;
+            }
+        }
+        
         if (values.put(value.name, value) != null)
             throw err(value, " cannot be defined more than once.", getProto());
         
@@ -285,7 +326,7 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         
         if (typeAnnotation == null || !Boolean.TRUE.equals(typeAnnotation.getP().get("bit_flags")))
         {
-            if (getFirstValue().number != 0)
+            if (zero == null)
             {
                 throw err(//this, 
                         "enum " + getRelativeName() + " does not have a declaration for this field's default of 0", 
