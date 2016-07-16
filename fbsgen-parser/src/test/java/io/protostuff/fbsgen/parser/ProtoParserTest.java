@@ -177,16 +177,11 @@ public class ProtoParserTest extends TestCase
         EnumGroup testEnumWithDupValue = proto.getEnumGroup("TestEnumWithDupValue");
         assertNotNull(testEnumWithDupValue);
         assertTrue(testEnumWithDupValue.getDeclaredValues().size() == 5);
-        assertEquals("FOO1", testEnumWithDupValue.getDeclaredValues().get(0).name);
-        assertTrue(testEnumWithDupValue.getDeclaredValues().get(0).number == 1);
-        assertEquals("FOO2", testEnumWithDupValue.getDeclaredValues().get(1).name);
-        assertTrue(testEnumWithDupValue.getDeclaredValues().get(1).number == 1);
-        assertEquals("BAR1", testEnumWithDupValue.getDeclaredValues().get(2).name);
-        assertTrue(testEnumWithDupValue.getDeclaredValues().get(2).number == 2);
-        assertEquals("BAR2", testEnumWithDupValue.getDeclaredValues().get(3).name);
-        assertTrue(testEnumWithDupValue.getDeclaredValues().get(3).number == 2);
-        assertEquals("BAZ", testEnumWithDupValue.getDeclaredValues().get(4).name);
-        assertTrue(testEnumWithDupValue.getDeclaredValues().get(4).number == 3);
+        assertEquals(1, testEnumWithDupValue.getValue("FOO1").number);
+        assertEquals(1, testEnumWithDupValue.getValue("FOO2").number);
+        assertEquals(2, testEnumWithDupValue.getValue("BAR1").number);
+        assertEquals(2, testEnumWithDupValue.getValue("BAR2").number);
+        assertEquals(3, testEnumWithDupValue.getValue("BAZ").number);
 
         EnumGroup testSparseEnum = proto.getEnumGroup("TestSparseEnum");
         assertNotNull(testSparseEnum);

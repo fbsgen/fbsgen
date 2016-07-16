@@ -15,8 +15,10 @@
 package io.protostuff.fbsgen.parser;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -233,13 +235,21 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         return sortedValues;
     }
     
-    public List<Value> getDeclaredValues()
+    public Collection<Value> getDeclaredValues()
     {
         if (firstValueIndex == 0)
-            return sortedValues;
+            return values.values();
         
         if (declaredValues == null)
-            declaredValues = sortedValues.subList(1, sortedValues.size());
+        {
+            ArrayList<Value> list = new ArrayList<Value>();
+            Iterator<Value> iter = values.values().iterator();
+            iter.next(); // skip the first element
+            while (iter.hasNext())
+                list.add(iter.next());
+            
+            declaredValues = list;
+        }
         
         return declaredValues;
     }
