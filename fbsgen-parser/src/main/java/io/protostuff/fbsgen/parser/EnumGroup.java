@@ -249,8 +249,11 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         if (firstValueIndex == 0)
             return values;
         
-        declaredValueMap = new LinkedHashMap<String, EnumGroup.Value>(values);
-        declaredValueMap.remove("NONE");
+        if (declaredValueMap == null)
+        {
+            declaredValueMap = new LinkedHashMap<String, EnumGroup.Value>(values);
+            declaredValueMap.remove("NONE");
+        }
         
         return declaredValueMap;
     }
