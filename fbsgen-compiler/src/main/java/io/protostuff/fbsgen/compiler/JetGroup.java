@@ -17,6 +17,7 @@ package io.protostuff.fbsgen.compiler;
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.FORMAT_DELIM;
 import static io.protostuff.fbsgen.parser.AnnotationContainer.err;
 import io.protostuff.fbsgen.parser.Annotation;
+import io.protostuff.fbsgen.parser.AnnotationContainer;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Field;
 import io.protostuff.fbsgen.parser.HasName;
@@ -292,6 +293,38 @@ public final class JetGroup implements TemplateGroup, Template
         
         /* ================================================== */
         // is_* methods
+        
+        public static boolean is_exclude_client(AnnotationContainer container)
+        {
+            Annotation exclude = container.getAnnotation("Exclude"),
+                    include;
+            
+            if (exclude != null)
+            {
+                return exclude.isEmptyP() || 
+                        exclude.getP().containsKey("unless_output") || 
+                        Boolean.TRUE.equals(exclude.getValue("client"));
+            }
+            
+            return (include = container.getAnnotation("Include")) != null &&
+                    !Boolean.TRUE.equals(include.getValue("client"));
+        }
+        
+        public static boolean is_exclude_server(AnnotationContainer container)
+        {
+            Annotation exclude = container.getAnnotation("Exclude"),
+                    include;
+            
+            if (exclude != null)
+            {
+                return exclude.isEmptyP() || 
+                        exclude.getP().containsKey("unless_output") || 
+                        Boolean.TRUE.equals(exclude.getValue("server"));
+            }
+            
+            return (include = container.getAnnotation("Include")) != null &&
+                    !Boolean.TRUE.equals(include.getValue("server"));
+        }
         
         public static boolean is_null_or_empty(Object data)
         {

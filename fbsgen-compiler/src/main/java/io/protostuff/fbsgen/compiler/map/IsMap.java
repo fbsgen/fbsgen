@@ -17,6 +17,7 @@ package io.protostuff.fbsgen.compiler.map;
 import static io.protostuff.fbsgen.compiler.CompilerUtil.$int;
 import io.protostuff.fbsgen.compiler.FakeMap;
 import io.protostuff.fbsgen.compiler.JetGroup;
+import io.protostuff.fbsgen.parser.AnnotationContainer;
 
 import java.util.Collection;
 import java.util.List;
@@ -67,6 +68,22 @@ public final class IsMap extends FakeMap
             public boolean is(Object data)
             {
                 return 0 != ((Number)data).intValue();
+            }
+        },
+        
+        EXCLUDE_CLIENT
+        {
+            public boolean is(Object data)
+            {
+                return JetGroup.Base.is_exclude_client((AnnotationContainer)data);
+            }
+        },
+        
+        EXCLUDE_SERVER
+        {
+            public boolean is(Object data)
+            {
+                return JetGroup.Base.is_exclude_server((AnnotationContainer)data);
             }
         },
         
