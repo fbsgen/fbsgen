@@ -306,8 +306,13 @@ public final class JetGroup implements TemplateGroup, Template
                         Boolean.TRUE.equals(exclude.getValue("client"));
             }
             
-            return (include = container.getAnnotation("Include")) != null &&
-                    !Boolean.TRUE.equals(include.getValue("client"));
+            if ((include = container.getAnnotation("Include")) == null || 
+                    include.getP().containsKey("unless_output"))
+            {
+                return false;
+            }
+            
+            return !Boolean.TRUE.equals(include.getValue("client"));
         }
         
         public static boolean is_exclude_server(AnnotationContainer container)
@@ -322,8 +327,13 @@ public final class JetGroup implements TemplateGroup, Template
                         Boolean.TRUE.equals(exclude.getValue("server"));
             }
             
-            return (include = container.getAnnotation("Include")) != null &&
-                    !Boolean.TRUE.equals(include.getValue("server"));
+            if ((include = container.getAnnotation("Include")) == null || 
+                    include.getP().containsKey("unless_output"))
+            {
+                return false;
+            }
+            
+            return !Boolean.TRUE.equals(include.getValue("server"));
         }
         
         public static boolean is_null_or_empty(Object data)
