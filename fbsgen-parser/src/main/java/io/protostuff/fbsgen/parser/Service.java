@@ -279,6 +279,11 @@ public final class Service extends AnnotationContainer implements HasName, HasOp
             return returnType;
         }
         
+        public boolean isVoidBoth()
+        {
+            return isVoidArgType() && isVoidReturnType();
+        }
+        
         public boolean isVoidArgType()
         {
             return argType == null;
