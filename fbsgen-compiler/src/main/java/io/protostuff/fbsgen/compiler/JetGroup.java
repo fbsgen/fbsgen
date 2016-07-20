@@ -469,5 +469,11 @@ public final class JetGroup implements TemplateGroup, Template
         {
             return str.startsWith(prefix) ? str.substring(prefix.length()) : str;
         }
+        
+        public static String get_str_last_ns(String str)
+        {
+            int dot = str.lastIndexOf('.');
+            return dot == -1 ? str : str.substring(dot+1);
+        }
     }
 }
