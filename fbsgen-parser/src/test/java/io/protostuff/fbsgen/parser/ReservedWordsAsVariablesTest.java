@@ -113,7 +113,7 @@ public class ReservedWordsAsVariablesTest extends TestCase
     {
         assertEquals(optionOrAnnotationMap.get("optional"), "required");
         assertEquals(optionOrAnnotationMap.get("import"), "package");
-        assertEquals(optionOrAnnotationMap.get("default"), "default");
+        assertEquals(optionOrAnnotationMap.get("package"), "default");
         assertEquals(optionOrAnnotationMap.get("bool"), "bool");
         assertEquals(optionOrAnnotationMap.get("option"), "option");
         assertEquals(optionOrAnnotationMap.get("package.import"), "repeated");

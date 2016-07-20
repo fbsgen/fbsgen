@@ -33,7 +33,7 @@ import org.antlr.runtime.TokenStream;
 public abstract class AbstractParser extends Parser
 {
     
-    static final boolean SUPPRESS_WARNINGS = System.getProperty("parser.suppress_warnings") != null;
+    //static final boolean SUPPRESS_WARNINGS = System.getProperty("parser.suppress_warnings") != null;
 
     protected AbstractParser(TokenStream input)
     {
@@ -176,15 +176,37 @@ public abstract class AbstractParser extends Parser
         }
     }
     
+    static void putExtraOptionTo(HasOptions ho, String key, Object value, Proto proto)
+    {
+        if ("default".equals(key))
+            warn(proto, "default is a reserved keyword for non-repeated scalar fields.");
+        else
+            ho.putExtraOption(key, value);
+    }
+    
+    static void putStandardOptionTo(HasOptions ho, String key, Object value, Proto proto)
+    {
+        if ("default".equals(key))
+            warn(proto, "default is a reserved keyword for non-repeated scalar fields.");
+        else
+            ho.putStandardOption(key, value);
+    }
+    
     static void info(Proto proto, String msg)
     {
-        System.out.println(msg);
+        System.out.println(AnnotationContainer.msg(msg, proto));
     }
     
     static void warn(Proto proto, String msg)
     {
-        if (!SUPPRESS_WARNINGS)
-            System.err.println(msg);
+        System.err.println(AnnotationContainer.msg(msg, proto));
+    }
+    
+    static void warnDefaultKeyword(Field<?> field, Proto proto)
+    {
+        System.err.println(AnnotationContainer.msg(field, 
+                " default is a reserved keyword for non-repeated scalar fields.", 
+                proto));
     }
     
     static ParseException err(Proto proto, String msg)

@@ -211,12 +211,10 @@ public class ProtoParserTest extends TestCase
 
         assertNotNull(defaultStringPiece);
         assertEquals("STRING_PIECE", defaultStringPiece.getOption("ctype"));
-        assertEquals("abc", defaultStringPiece.getOption("default"));
         assertEquals("abc", defaultStringPiece.defaultValue);
 
         assertNotNull(defaultCord);
         assertEquals("CORD", defaultCord.getOption("ctype"));
-        assertEquals("123", defaultCord.getOption("default"));
         assertEquals("123", defaultCord.defaultValue);
 
         Message nestedMessage = testAllTypes.getNestedMessage("NestedMessage");

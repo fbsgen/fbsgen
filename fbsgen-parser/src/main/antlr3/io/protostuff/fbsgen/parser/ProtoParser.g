@@ -154,15 +154,15 @@ header_import [Proto proto]
 
 option_entry [Proto proto, HasOptions ho]
     :   OPTION LEFTPAREN? k=var_full RIGHTPAREN? ASSIGN (
-                vr=var_reserved { ho.putExtraOption($k.text, $vr.text); }
-            |   id=ID { ho.putStandardOption($k.text, $id.text); }
-            |   fid=FULL_ID { ho.putStandardOption($k.text, $fid.text); }
-            |   NUMFLOAT { ho.putExtraOption($k.text, Float.valueOf($NUMFLOAT.text)); }
-            |   NUMINT { ho.putExtraOption($k.text, Integer.valueOf($NUMINT.text)); }
-            |   NUMDOUBLE { ho.putExtraOption($k.text, Double.valueOf($NUMDOUBLE.text)); }
-            |   TRUE { ho.putExtraOption($k.text, Boolean.TRUE); }
-            |   FALSE { ho.putExtraOption($k.text, Boolean.FALSE); }
-            |   STRING_LITERAL { ho.putExtraOption($k.text, getStringFromStringLiteral($STRING_LITERAL.text)); }
+                vr=var_reserved { putExtraOptionTo(ho, $k.text, $vr.text, proto); }
+            |   id=ID { putStandardOptionTo(ho, $k.text, $id.text, proto); }
+            |   fid=FULL_ID { putStandardOptionTo(ho, $k.text, $fid.text, proto); }
+            |   NUMFLOAT { putExtraOptionTo(ho, $k.text, Float.valueOf($NUMFLOAT.text), proto); }
+            |   NUMINT { putExtraOptionTo(ho, $k.text, Integer.valueOf($NUMINT.text), proto); }
+            |   NUMDOUBLE { putExtraOptionTo(ho, $k.text, Double.valueOf($NUMDOUBLE.text), proto); }
+            |   TRUE { putExtraOptionTo(ho, $k.text, Boolean.TRUE, proto); }
+            |   FALSE { putExtraOptionTo(ho, $k.text, Boolean.FALSE, proto); }
+            |   STRING_LITERAL { putExtraOptionTo(ho, $k.text, getStringFromStringLiteral($STRING_LITERAL.text), proto); }
         ) SEMICOLON! {
             proto.checkAnnotations();
         }
@@ -273,7 +273,9 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
             field.putExtraOption($key.text, $vr.text);
         } 
     |   STRING_LITERAL {
-            if (checkDefault && "default".equals($key.text)) {
+            if (!"default".equals($key.text)) {
+                field.putExtraOption($key.text, getStringFromStringLiteral($STRING_LITERAL.text));
+            } else if (checkDefault) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
                     throw err(field, " can only have a single default value", proto);
                 
@@ -284,13 +286,16 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                 else
                     throw err(field, " has an invalid string default value", proto);
                 
-                field.putExtraOption($key.text, field.defaultValue);
+                // not putting the 'default' key in the field options
+                //field.putExtraOption($key.text, field.defaultValue);
             } else {
-                field.putExtraOption($key.text, getStringFromStringLiteral($STRING_LITERAL.text));
+                warnDefaultKeyword(field, proto);
             }
         }
     |   NUMFLOAT {
-            if (checkDefault && "default".equals($key.text)) {
+            if (!"default".equals($key.text)) {
+                field.putExtraOption($key.text, Float.valueOf($NUMFLOAT.text));
+            } else if (checkDefault) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
                     throw err(field, " can only have a single default value", proto);
                 
@@ -301,13 +306,16 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                 else
                     throw err(field, " has an invalid float default value", proto);
                 
-                field.putExtraOption($key.text, field.defaultValue);
+                // not putting the 'default' key in the field options
+                //field.putExtraOption($key.text, field.defaultValue);
             } else {
-                field.putExtraOption($key.text, Float.valueOf($NUMFLOAT.text));
+                warnDefaultKeyword(field, proto);
             }
         } 
     |   NUMINT {
-            if (checkDefault && "default".equals($key.text)) {
+            if (!"default".equals($key.text)) {
+                field.putExtraOption($key.text, Integer.valueOf($NUMINT.text));
+            } else if (checkDefault) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
                     throw err(field, " can only have a single default value", proto);
                 
@@ -324,13 +332,16 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                 else
                     throw err(field, " has an invalid numeric default value", proto);
                 
-                field.putExtraOption($key.text, field.defaultValue);
+                // not putting the 'default' key in the field options
+                //field.putExtraOption($key.text, field.defaultValue);
             } else {
-                field.putExtraOption($key.text, Integer.valueOf($NUMINT.text));
+                warnDefaultKeyword(field, proto);
             }
         }
     |   NUMDOUBLE {
-            if (checkDefault && "default".equals($key.text)) {
+            if (!"default".equals($key.text)) {
+                field.putExtraOption($key.text, Double.valueOf($NUMDOUBLE.text));
+            } else if (checkDefault) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
                     throw err(field, " can only have a single default value", proto);
 
@@ -341,13 +352,16 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                 else
                     throw err(field, " has an invalid double default value", proto);
                 
-                field.putExtraOption($key.text, field.defaultValue);
+                // not putting the 'default' key in the field options
+                //field.putExtraOption($key.text, field.defaultValue);
             } else {
-                field.putExtraOption($key.text, Double.valueOf($NUMDOUBLE.text));
+                warnDefaultKeyword(field, proto);
             }
         }
     |   HEX {
-            if (checkDefault && "default".equals($key.text)) {
+            if (!"default".equals($key.text)) {
+                field.putExtraOption($key.text, Long.valueOf(TextFormat.parseLong(proto, field, $HEX.text, true)));
+            } else if (checkDefault) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
                     throw err(field, " can only have a single default value", proto);
                 
@@ -370,13 +384,16 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                 else
                     throw err(field, " has an invalid numeric default value", proto);
                 
-                field.putExtraOption($key.text, field.defaultValue);
+                // not putting the 'default' key in the field options
+                //field.putExtraOption($key.text, field.defaultValue);
             } else {
-                field.putExtraOption($key.text, Long.valueOf(TextFormat.parseLong(proto, field, $HEX.text, true)));
+                warnDefaultKeyword(field, proto);
             }
         }
     |   OCTAL {
-            if (checkDefault && "default".equals($key.text)) {
+            if (!"default".equals($key.text)) {
+                field.putExtraOption($key.text, Integer.valueOf(TextFormat.parseInt(proto, field, $OCTAL.text, true)));
+            } else if (checkDefault) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
                     throw err(field, " can only have a single default value", proto);
                 
@@ -396,13 +413,16 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                 else
                     throw err(field, " has an invalid numeric default value", proto);
                 
-                field.putExtraOption($key.text, field.defaultValue);
+                // not putting the 'default' key in the field options
+                //field.putExtraOption($key.text, field.defaultValue);
             } else {
-                field.putExtraOption($key.text, Integer.valueOf(TextFormat.parseInt(proto, field, $OCTAL.text, true)));
+                warnDefaultKeyword(field, proto);
             }
         }
     |   TRUE {
-            if (checkDefault && "default".equals($key.text)) {
+            if (!"default".equals($key.text)) {
+                field.putExtraOption($key.text, Boolean.TRUE);
+            } else if (checkDefault) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
                     throw err(field, " can only have a single default value", proto);
                 
@@ -410,12 +430,16 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                     field.defaultValue = Boolean.TRUE;
                 else
                     throw err(field, " has an invalid bool default value", proto);
+                
+                // not putting the 'default' key in the field options
+            } else {
+                warnDefaultKeyword(field, proto);
             }
-            
-            field.putExtraOption($key.text, Boolean.TRUE);
         }    
     |   FALSE {
-            if (checkDefault && "default".equals($key.text)) {
+            if (!"default".equals($key.text)) {
+                field.putExtraOption($key.text, Boolean.FALSE);
+            } else if (checkDefault) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
                     throw err(field, " can only have a single default value", proto);
                 
@@ -423,13 +447,16 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                     field.defaultValue = Boolean.FALSE;
                 else
                     throw err(field, " has an invalid bool default value", proto);
+                
+                // not putting the 'default' key in the field options
+            } else {
+                warnDefaultKeyword(field, proto);
             }
-            
-            field.putExtraOption($key.text, Boolean.FALSE);
         }
     |   val=ID {
-            boolean refOption = false;
-            if (checkDefault && "default".equals($key.text)) {
+            if (!"default".equals($key.text)) {
+                field.putStandardOption($key.text, $val.text);
+            } else if (checkDefault) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
                     throw err(field, " can only have a single default value", proto);
                 
@@ -459,41 +486,47 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                     }
                     else
                         throw err(field, " has an invalid default value", proto);
-                }   
-                else {
-                    refOption = true;
-                    //throw err(field, " has an invalid default value", proto);
                 }
+                
+                // not putting the 'default' key in the field options
             }
             else {
-                refOption = true;
+                warnDefaultKeyword(field, proto);
             }
-            
-            if (refOption)
-                field.putStandardOption($key.text, $val.text);
-            else
-                field.putExtraOption($key.text, $val.text);
         }
     |   FULL_ID {
-            field.putStandardOption($key.text, $FULL_ID.text);
+            if (!"default".equals($key.text)) {
+                field.putStandardOption($key.text, $FULL_ID.text);
+            } else {
+                warnDefaultKeyword(field, proto);
+            }
         }
     |   EXP {
-            if (checkDefault && "default".equals($key.text)) {
+            if (!"default".equals($key.text)) {
+                field.putExtraOption($key.text, $EXP.text);
+            } else if (checkDefault) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
                     throw err(field, " can only have a single default value", proto);
                 
                 if (field instanceof Field.Float)
                     field.defaultValue = Float.valueOf($EXP.text);
-                else if (field instanceof Field.Double) 
+                else if (field instanceof Field.Double)
                     field.defaultValue = Double.valueOf($EXP.text);
                 else
                     throw err(field, " has an invalid float default value", proto);
+                
+                // not putting the 'default' key in the field options
+            } else {
+                warnDefaultKeyword(field, proto);
             }
-            
-            field.putExtraOption($key.text, $EXP.text);
         }
     |   signed_constant[proto, message, field, $key.text, checkDefault] {
-            field.putExtraOption($key.text, $signed_constant.text);
+            // handled by signed_constant
+            if (!"default".equals($key.text)) {
+                field.putExtraOption($key.text, $signed_constant.text);
+            } else if (!checkDefault) {
+                warnDefaultKeyword(field, proto);
+            }
         }
         )
     ;

@@ -15,6 +15,7 @@
 package io.protostuff.fbsgen.parser;
 
 import static io.protostuff.fbsgen.parser.AnnotationContainer.err;
+import static io.protostuff.fbsgen.parser.AnnotationContainer.msg;
 
 import java.util.LinkedHashMap;
 
@@ -62,8 +63,17 @@ public final class Annotation implements HasName
     
     void put(String key, Object value)
     {
-        if (params.put(key, value) != null)
-            throw err("@" + name + "::" + key + " cannot be defined more than once.", proto);
+        if ("default".equals(key))
+        {
+            System.err.println(
+                    msg("default is a reserved keyword for non-repeated scalar fields.", 
+                            proto));
+        }
+        else if (params.put(key, value) != null)
+        {
+            throw err("@" + name + "::" + key + " cannot be defined more than once.", 
+                    proto);
+        }
     }
     
     void putRef(String key, Object value)

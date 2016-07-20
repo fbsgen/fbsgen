@@ -3,7 +3,7 @@ package test_reserved_words_as_variables;
 @Config(
   optional = required, 
   import = package, 
-  default = default, 
+  package = default, 
   bool = bool, 
   option = option, 
   package.import = repeated
@@ -12,7 +12,7 @@ message Test {
 
   option optional = required;
   option import = package;
-  option default = default;
+  option package = default;
   option bool = bool;
   option option = option;
   option package.import = repeated;
@@ -20,7 +20,7 @@ message Test {
   @Config(
     optional = required, 
     import = package, 
-    default = default, 
+    package = default, 
     bool = bool, 
     option = option, 
     package.import = repeated
@@ -28,7 +28,7 @@ message Test {
   enum E {
     option optional = required;
     option import = package;
-    option default = default;
+    option package = default;
     option bool = bool;
     option option = option;
     option package.import = repeated;
@@ -36,7 +36,7 @@ message Test {
     @Config(
       optional = required, 
       import = package, 
-      default = default, 
+      package = default, 
       bool = bool, 
       option = option, 
       package.import = repeated
@@ -44,7 +44,7 @@ message Test {
     FOO = 1 [
       optional = required, 
       import = package, 
-      default = default, 
+      package = default, 
       bool = bool, 
       option = option, 
       package.import = repeated
@@ -54,7 +54,7 @@ message Test {
   @Config(
     optional = required, 
     import = package, 
-    default = default, 
+    package = default, 
     bool = bool, 
     option = option, 
     package.import = repeated
@@ -62,7 +62,7 @@ message Test {
   optional bool optional = 1 [
     optional = required, 
     import = package, 
-    default = default, 
+    package = default, 
     bool = bool, 
     option = option, 
     package.import = repeated

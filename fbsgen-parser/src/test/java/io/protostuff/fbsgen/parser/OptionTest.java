@@ -53,7 +53,6 @@ public class OptionTest extends TestCase
         assertEquals(1, a.getOptions().get("some_int"));
         assertEquals(Boolean.TRUE, a.getOptions().get("some_bool"));
         assertEquals("foo", a.getOptions().get("some_string"));
-        assertEquals("none", a.getOptions().get("default"));
     }
 
 }

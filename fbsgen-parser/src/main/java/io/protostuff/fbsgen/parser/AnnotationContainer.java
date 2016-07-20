@@ -141,13 +141,18 @@ public abstract class AnnotationContainer implements HasAnnotations, HasName
         return err(eg.getRelativeName() + msg, proto);
     }
     
-    public static ParseException err(Field<?> field, String msg, Proto proto)
+    public static String msg(Field<?> field, String msg, Proto proto)
     {
         Message owner = field.getOwner();
         if (owner == null)
-            return err("The field: " + field.name + " " + msg, proto);
+            return msg("The field: " + field.name + msg, proto);
         
-        return err(owner.getRelativeName() + "::" + field.name + msg, proto);
+        return msg(owner.getRelativeName() + "::" + field.name + msg, proto);
+    }
+    
+    public static ParseException err(Field<?> field, String msg, Proto proto)
+    {
+        return new ParseException(msg(field, msg, proto));
     }
     
     public static ParseException err(Message message, String msg, Proto proto)
@@ -165,12 +170,14 @@ public abstract class AnnotationContainer implements HasAnnotations, HasName
         return err(service.getRelativeName() + msg, proto);
     }
     
+    public static String msg(String msg, Proto proto)
+    {
+        return proto == null ? msg : msg + " [" + proto.getSourcePath() + "]";
+    }
+    
     public static ParseException err(String msg, Proto proto)
     {
-        if (proto == null)
-            return new ParseException(msg);
-        
-        return new ParseException(msg + " [" + proto.getSourcePath() + "]");
+        return new ParseException(msg(msg, proto));
     }
     
     public static ParseException err(String msg, Proto proto, Throwable cause)
