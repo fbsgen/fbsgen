@@ -21,9 +21,7 @@ import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Field;
 import io.protostuff.fbsgen.parser.Message;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -169,16 +167,6 @@ public final class GetMap extends FakeMap
                     result |= 4;
                 
                 return result;
-            }
-        },
-        SORTED_DISPLAY_FIELDS
-        {
-            @SuppressWarnings("unchecked")
-            public Object get(Object data)
-            {
-                ArrayList<Field<?>> list = new ArrayList<Field<?>>((List<Field<?>>)data);
-                Collections.sort(list, FilterMap.DISPLAY_ORDER_COMPARATOR);
-                return list;
             }
         },
         

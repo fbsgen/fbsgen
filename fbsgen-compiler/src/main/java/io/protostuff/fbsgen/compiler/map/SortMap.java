@@ -16,8 +16,11 @@ package io.protostuff.fbsgen.compiler.map;
 
 import io.protostuff.fbsgen.compiler.FakeMap;
 import io.protostuff.fbsgen.compiler.JetGroup;
+import io.protostuff.fbsgen.parser.Field;
 import io.protostuff.fbsgen.parser.Message;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -60,6 +63,17 @@ public final class SortMap extends FakeMap
             public Object sort(Object arg)
             {
                 return JetGroup.Base.sort_fbs_create_fields((Message)arg);
+            }
+        },
+        DISPLAY_FIELDS
+        {
+            @SuppressWarnings("unchecked")
+            @Override
+            public Object sort(Object arg)
+            {
+                ArrayList<Field<?>> list = new ArrayList<Field<?>>((List<Field<?>>)arg);
+                Collections.sort(list, FilterMap.DISPLAY_ORDER_COMPARATOR);
+                return list;
             }
         }
         ;

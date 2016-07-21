@@ -338,7 +338,7 @@ public final class JetGroup implements TemplateGroup, Template
         
         public static boolean is_null_or_empty(Object data)
         {
-            if (data == null)
+            if (data == null || Boolean.FALSE.equals(data))
                 return true;
             
             if (data instanceof String)
