@@ -29,9 +29,21 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public enum Modifier
     {
-        OPTIONAL,
-        REQUIRED,
-        REPEATED;
+        OPTIONAL(0),
+        REQUIRED(1),
+        REPEATED(2);
+        
+        public final int number;
+        
+        private Modifier(int number)
+        {
+            this.number = number;
+        }
+        
+        public int getNumber()
+        {
+            return number;
+        }
         
         public java.lang.String getName()
         {
@@ -280,6 +292,8 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public abstract java.lang.String getFbsType();
     
+    public abstract int getDescriptorId();
+    
     /**
      * Alias to {@link #getFbsType()}.
      */
@@ -305,17 +319,24 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public static abstract class Number<T> extends Field<T>
     {
-        public final int bits;
+        public final int bits, descriptorId;
         
-        Number(int bits)
+        Number(int bits, int descriptorId)
         {
             super(true);
             this.bits = bits;
+            this.descriptorId = descriptorId;
         }
         
         public boolean isFloatingPointType()
         {
             return false;
+        }
+        
+        @Override
+        public int getDescriptorId()
+        {
+            return descriptorId;
         }
         
         /**
@@ -356,7 +377,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     {
         public Int8()
         {
-            super(8);
+            super(8, 8);
         }
         
         public java.lang.String getJavaType()
@@ -374,7 +395,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     {
         public UInt8()
         {
-            super(8);
+            super(8, 6);
         }
         
         public java.lang.String getJavaType()
@@ -392,7 +413,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     {
         public Int16()
         {
-            super(16);
+            super(16, 8);
         }
         
         public java.lang.String getJavaType()
@@ -410,7 +431,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     {
         public UInt16()
         {
-            super(16);
+            super(16, 6);
         }
         
         public java.lang.String getJavaType()
@@ -428,7 +449,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     {
         public Int32()
         {
-            super(32);
+            super(32, 10);
         }
         
         public java.lang.String getJavaType()
@@ -446,7 +467,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     {
         public UInt32()
         {
-            super(32);
+            super(32, 10);
         }
         
         public java.lang.String getJavaType()
@@ -464,7 +485,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     {
         public Int64()
         {
-            super(64);
+            super(64, 11);
         }
         
         public java.lang.String getJavaType()
@@ -482,7 +503,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     {
         public UInt64()
         {
-            super(64);
+            super(64, 11);
         }
         
         public java.lang.String getJavaType()
@@ -500,7 +521,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     {
         public Float()
         {
-            super(32);
+            super(32, 4 );
         }
         
         public java.lang.String getJavaType()
@@ -523,7 +544,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     {
         public Double()
         {
-            super(64);
+            super(64, 5);
         }
         
         public java.lang.String getJavaType()
@@ -557,6 +578,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "bool";
         }
+        @Override
+        public int getDescriptorId()
+        {
+            return 1;
+        }
     }
     
     public static class String extends Field<java.lang.String>
@@ -581,6 +607,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return true;
         }
+        @Override
+        public int getDescriptorId()
+        {
+            return 3;
+        }
     }
     
     public static class Bytes extends Field<byte[]>
@@ -604,6 +635,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         public boolean isDelimited()
         {
             return true;
+        }
+        @Override
+        public int getDescriptorId()
+        {
+            return 2;
         }
     }
     
@@ -638,6 +674,12 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         public java.lang.String getFbsType()
         {
             return getJavaType().replace('.', '_');
+        }
+
+        @Override
+        public int getDescriptorId()
+        {
+            return 0;
         }
     }
 

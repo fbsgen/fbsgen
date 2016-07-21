@@ -70,6 +70,11 @@ public class MessageField extends Field<Message>
         return buffer.toString();
     }
     
+    public int getDescriptorId()
+    {
+        return 0;
+    }
+    
     public java.lang.String getRegularType()
     {
         java.lang.String javaType = getJavaType();

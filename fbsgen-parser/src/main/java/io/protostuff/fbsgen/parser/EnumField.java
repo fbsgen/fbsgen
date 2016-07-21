@@ -125,6 +125,11 @@ public final class EnumField extends Field<EnumGroup.Value>
         return buffer.toString();
     }
     
+    public int getDescriptorId()
+    {
+        return 8;
+    }
+    
     public java.lang.String getRegularType()
     {
         java.lang.String javaType = getJavaType();

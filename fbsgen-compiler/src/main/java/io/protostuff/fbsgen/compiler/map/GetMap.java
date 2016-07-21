@@ -78,7 +78,12 @@ public final class GetMap extends FakeMap
         {
             return fbsType;
         }
-        
+
+        @Override
+        public int getDescriptorId()
+        {
+            return 0;
+        }
     }
     
     public enum Functions implements Function
