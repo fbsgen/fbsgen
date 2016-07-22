@@ -44,6 +44,11 @@ public final class Annotation implements HasName
         return params;
     }
     
+    public LinkedHashMap<String,Object> getRefs()
+    {
+        return refs;
+    }
+    
     /**
      * Shorthand for {@link #getParams()}.
      * 
