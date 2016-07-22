@@ -29,9 +29,9 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public enum Modifier
     {
-        OPTIONAL(0),
-        REQUIRED(1),
-        REPEATED(2);
+        REPEATED(0),
+        OPTIONAL(1),
+        REQUIRED(2);
         
         public final int number;
         
