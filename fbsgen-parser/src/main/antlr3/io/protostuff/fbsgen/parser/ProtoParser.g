@@ -221,6 +221,10 @@ message_field [Proto proto, HasFields message]
                 fieldHolder.field.modifier = modifier;
                 fieldHolder.field.name = $var.text;
                 fieldHolder.field.number = Integer.parseInt($NUMINT.text);
+                if (message instanceof Message) {
+                    // for error reporting
+                    fieldHolder.field.owner = (Message)message;
+                }
             }
         } 
         (field_options[proto, message, fieldHolder.field])? {
