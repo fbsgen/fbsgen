@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 io/protostuff/fbsgen/parser/ProtoParser.g 2016-07-21 00:04:49
+// $ANTLR 3.5.2 io/protostuff/fbsgen/parser/ProtoParser.g 2016-07-23 17:42:10
 
     package io.protostuff.fbsgen.parser;
 
@@ -2184,10 +2184,9 @@ public class ProtoParser extends AbstractParser {
 			                fieldHolder.field.modifier = modifier;
 			                fieldHolder.field.name = (var71!=null?input.toString(var71.start,var71.stop):null);
 			                fieldHolder.field.number = Integer.parseInt((NUMINT73!=null?NUMINT73.getText():null));
-			                message.addField(fieldHolder.field);
 			            }
 			        }
-			// io/protostuff/fbsgen/parser/ProtoParser.g:227:9: ( field_options[proto, message, fieldHolder.field] )?
+			// io/protostuff/fbsgen/parser/ProtoParser.g:226:9: ( field_options[proto, message, fieldHolder.field] )?
 			int alt15=2;
 			int LA15_0 = input.LA(1);
 			if ( (LA15_0==LEFTSQUARE) ) {
@@ -2195,7 +2194,7 @@ public class ProtoParser extends AbstractParser {
 			}
 			switch (alt15) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:227:10: field_options[proto, message, fieldHolder.field]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:226:10: field_options[proto, message, fieldHolder.field]
 					{
 					pushFollow(FOLLOW_field_options_in_message_field1487);
 					field_options74=field_options(proto, message, fieldHolder.field);
@@ -2211,6 +2210,7 @@ public class ProtoParser extends AbstractParser {
 			if ( state.backtracking==0 ) {
 			            if (fieldHolder.field != null) {
 			                proto.addAnnotationsTo(fieldHolder.field, message.getEnclosingNamespace());
+			                message.addField(fieldHolder.field);
 			            }
 			        }
 			// io/protostuff/fbsgen/parser/ProtoParser.g:232:9: ( SEMICOLON !| ignore_block )

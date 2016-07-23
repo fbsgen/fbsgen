@@ -221,12 +221,12 @@ message_field [Proto proto, HasFields message]
                 fieldHolder.field.modifier = modifier;
                 fieldHolder.field.name = $var.text;
                 fieldHolder.field.number = Integer.parseInt($NUMINT.text);
-                message.addField(fieldHolder.field);
             }
         } 
         (field_options[proto, message, fieldHolder.field])? {
             if (fieldHolder.field != null) {
                 proto.addAnnotationsTo(fieldHolder.field, message.getEnclosingNamespace());
+                message.addField(fieldHolder.field);
             }
         }
         (SEMICOLON! | ignore_block)
