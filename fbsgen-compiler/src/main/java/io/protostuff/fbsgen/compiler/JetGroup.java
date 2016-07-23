@@ -15,13 +15,13 @@
 package io.protostuff.fbsgen.compiler;
 
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.FORMAT_DELIM;
-import static io.protostuff.fbsgen.parser.AnnotationContainer.err;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.AnnotationContainer;
+import io.protostuff.fbsgen.parser.EnumField;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Field;
-import io.protostuff.fbsgen.parser.HasName;
 import io.protostuff.fbsgen.parser.Message;
+import io.protostuff.fbsgen.parser.MessageField;
 import io.protostuff.fbsgen.parser.ParseException;
 import io.protostuff.fbsgen.parser.Proto;
 
@@ -421,55 +421,15 @@ public final class JetGroup implements TemplateGroup, Template
         
         public static String get_pb_field_type(Field<?> field)
         {
-            String type = field.getClass().getSimpleName();
-            switch(type.charAt(type.length()-1))
+            switch (field.getPbType())
             {
-                case '8': // int8
-                    return type.toLowerCase().substring(0, type.length()-1) + "32";
-                
-                case '6': // int16
-                    return type.toLowerCase().substring(0, type.length()-2) + "32";
-                
-                case '2': // int32
-                    if (Boolean.TRUE.equals(field.getO().get("fixed")))
-                        return type.charAt(0) == 'U' ? "fixed32" : "sfixed32";
-                    
-                    if (Boolean.TRUE.equals(field.getO().get("signed")))
-                    {
-                        if (type.charAt(0) == 'U')
-                            throw err(field, " cannot be a signed int type", field.getProto());
-                        
-                        return "sint32";
-                    }
-                    
-                    return type.toLowerCase();
-                
-                case '4': // int64
-                    if (Boolean.TRUE.equals(field.getO().get("fixed")))
-                        return type.charAt(0) == 'U' ? "fixed64" : "sfixed64";
-                    
-                    if (Boolean.TRUE.equals(field.getO().get("signed")))
-                    {
-                        if (type.charAt(0) == 'U')
-                            throw err(field, " cannot be a signed int type", field.getProto());
-                        
-                        return "sint64";
-                    }
-                    
-                    return type.toLowerCase();
+                case MESSAGE:
+                    return ((MessageField)field).getMessage().getFullName();
+                case ENUM:
+                    return ((EnumField)field).getEg().getFullName();
+                default:
+                    return field.getPbType().getName().toLowerCase();
             }
-            
-            HasName udt = field.getUdt();
-            if (udt == null)
-                return type.toLowerCase();
-            
-            if (udt instanceof Message)
-                return ((Message)udt).getFullName();
-            
-            if (udt instanceof EnumGroup)
-                return ((EnumGroup)udt).getFullName();
-            
-            return udt.getName();
         }
         
         /* ================================================== */

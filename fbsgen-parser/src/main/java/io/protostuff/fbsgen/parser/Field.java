@@ -51,6 +51,44 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         }
     }
     
+    public enum PbType
+    {
+        MESSAGE(0),
+        BOOL(1),
+        BYTES(2),
+        STRING(3),
+        FLOAT(4),
+        DOUBLE(5),
+        UINT32(6),
+        UINT64(7),
+        INT32(8),
+        INT64(9),
+        FIXED32(10),
+        FIXED64(11),
+        SINT32(12),
+        SINT64(13),
+        SFIXED32(14),
+        SFIXED64(15),
+        ENUM(16);
+        
+        public final int number;
+        
+        private PbType(int number)
+        {
+            this.number = number;
+        }
+        
+        public int getNumber()
+        {
+            return number;
+        }
+        
+        public java.lang.String getName()
+        {
+            return name();
+        }
+    }
+    
     static final HashMap<java.lang.String,java.lang.String> INT_TYPES = 
             new HashMap<java.lang.String, java.lang.String>();
     
@@ -93,6 +131,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     protected java.lang.String name, defaultValueConstant;
     protected int number;
     protected Modifier modifier;
+    protected PbType pbType;
     protected boolean packable;
     protected T defaultValue;
     protected Message owner;
@@ -110,6 +149,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     public Field(boolean packable)
     {
         this.packable = packable;
+    }
+    
+    public PbType getPbType()
+    {
+        return pbType;
     }
     
     public Proto getProto()
@@ -292,7 +336,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public abstract java.lang.String getFbsType();
     
-    public abstract int getDescriptorId();
+    protected abstract void resolvePbType();
     
     /**
      * Alias to {@link #getFbsType()}.
@@ -319,24 +363,17 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public static abstract class Number<T> extends Field<T>
     {
-        public final int bits, descriptorId;
+        public final int bits;
         
-        Number(int bits, int descriptorId)
+        Number(int bits)
         {
             super(true);
             this.bits = bits;
-            this.descriptorId = descriptorId;
         }
         
         public boolean isFloatingPointType()
         {
             return false;
-        }
-        
-        @Override
-        public int getDescriptorId()
-        {
-            return descriptorId;
         }
         
         /**
@@ -377,7 +414,8 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     {
         public Int8()
         {
-            super(8, 8);
+            super(8);
+            pbType = PbType.INT32;
         }
         
         public java.lang.String getJavaType()
@@ -389,13 +427,20 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "byte";
         }
+
+        @Override
+        protected void resolvePbType()
+        {
+            
+        }
     }
     
     public static class UInt8 extends Number<Integer>
     {
         public UInt8()
         {
-            super(8, 6);
+            super(8);
+            pbType = PbType.UINT32;
         }
         
         public java.lang.String getJavaType()
@@ -407,13 +452,20 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "ubyte";
         }
+
+        @Override
+        protected void resolvePbType()
+        {
+            
+        }
     }
     
     public static class Int16 extends Number<Integer>
     {
         public Int16()
         {
-            super(16, 8);
+            super(16);
+            pbType = PbType.INT32;
         }
         
         public java.lang.String getJavaType()
@@ -425,13 +477,20 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "short";
         }
+
+        @Override
+        protected void resolvePbType()
+        {
+            
+        }
     }
     
     public static class UInt16 extends Number<Integer>
     {
         public UInt16()
         {
-            super(16, 6);
+            super(16);
+            pbType = PbType.UINT32;
         }
         
         public java.lang.String getJavaType()
@@ -443,13 +502,19 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "ushort";
         }
+        
+        @Override
+        protected void resolvePbType()
+        {
+            
+        }
     }
     
     public static class Int32 extends Number<Integer>
     {
         public Int32()
         {
-            super(32, 10);
+            super(32);
         }
         
         public java.lang.String getJavaType()
@@ -461,13 +526,22 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "int";
         }
+        
+        @Override
+        protected void resolvePbType()
+        {
+            if (Boolean.TRUE.equals(getO().get("varint")))
+                pbType = Boolean.TRUE.equals(getO().get("signed")) ? PbType.SINT32 : PbType.INT32;
+            else
+                pbType = Boolean.TRUE.equals(getO().get("signed")) ? PbType.SFIXED32 : PbType.FIXED32;
+        }
     }
     
     public static class UInt32 extends Number<Integer>
     {
         public UInt32()
         {
-            super(32, 10);
+            super(32);
         }
         
         public java.lang.String getJavaType()
@@ -479,13 +553,20 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "uint";
         }
+        
+        @Override
+        protected void resolvePbType()
+        {
+            pbType = Boolean.TRUE.equals(getO().get("varint")) ? 
+                    PbType.UINT32 : PbType.FIXED32;
+        }
     }
     
     public static class Int64 extends Number<Long>
     {
         public Int64()
         {
-            super(64, 11);
+            super(64);
         }
         
         public java.lang.String getJavaType()
@@ -497,13 +578,22 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "long";
         }
+        
+        @Override
+        protected void resolvePbType()
+        {
+            if (Boolean.TRUE.equals(getO().get("varint")))
+                pbType = Boolean.TRUE.equals(getO().get("signed")) ? PbType.SINT64 : PbType.INT64;
+            else
+                pbType = Boolean.TRUE.equals(getO().get("signed")) ? PbType.SFIXED64 : PbType.FIXED64;
+        }
     }
     
     public static class UInt64 extends Number<Long>
     {
         public UInt64()
         {
-            super(64, 11);
+            super(64);
         }
         
         public java.lang.String getJavaType()
@@ -515,13 +605,21 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return "ulong";
         }
+        
+        @Override
+        protected void resolvePbType()
+        {
+            pbType = Boolean.TRUE.equals(getO().get("varint")) ? 
+                    PbType.UINT64 : PbType.FIXED64;
+        }
     }
     
     public static class Float extends Number<java.lang.Float>
     {
         public Float()
         {
-            super(32, 4 );
+            super(32);
+            pbType = PbType.FLOAT;
         }
         
         public java.lang.String getJavaType()
@@ -538,13 +636,20 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return true;
         }
+        
+        @Override
+        protected void resolvePbType()
+        {
+            
+        }
     }
     
     public static class Double extends Number<java.lang.Double>
     {
         public Double()
         {
-            super(64, 5);
+            super(64);
+            pbType = PbType.DOUBLE;
         }
         
         public java.lang.String getJavaType()
@@ -561,6 +666,12 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             return true;
         }
+        
+        @Override
+        protected void resolvePbType()
+        {
+            
+        }
     }
     
     public static class Bool extends Field<Boolean>
@@ -568,6 +679,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         public Bool()
         {
             super(true);
+            pbType = PbType.BOOL;
         }
         public java.lang.String getJavaType()
         {
@@ -579,9 +691,9 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
             return "bool";
         }
         @Override
-        public int getDescriptorId()
+        protected void resolvePbType()
         {
-            return 1;
+            
         }
     }
     
@@ -590,6 +702,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         public String()
         {
             super(false);
+            pbType = PbType.STRING;
         }
         public java.lang.String getJavaType()
         {
@@ -608,9 +721,9 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
             return true;
         }
         @Override
-        public int getDescriptorId()
+        protected void resolvePbType()
         {
-            return 3;
+            
         }
     }
     
@@ -619,6 +732,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         public Bytes()
         {
             super(false);
+            pbType = PbType.BYTES;
         }
         public java.lang.String getJavaType()
         {
@@ -637,9 +751,9 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
             return true;
         }
         @Override
-        public int getDescriptorId()
+        protected void resolvePbType()
         {
-            return 2;
+            
         }
     }
     
@@ -677,9 +791,9 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         }
 
         @Override
-        public int getDescriptorId()
+        protected void resolvePbType()
         {
-            return 0;
+            // no impl
         }
     }
 

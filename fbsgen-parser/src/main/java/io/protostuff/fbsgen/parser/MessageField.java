@@ -32,6 +32,7 @@ public class MessageField extends Field<Message>
     public MessageField()
     {
         super(false);
+        pbType = PbType.MESSAGE;
     }
 
     public MessageField(Message message)
@@ -70,9 +71,10 @@ public class MessageField extends Field<Message>
         return buffer.toString();
     }
     
-    public int getDescriptorId()
+    @Override
+    protected void resolvePbType()
     {
-        return 0;
+        
     }
     
     public java.lang.String getRegularType()

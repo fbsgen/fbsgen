@@ -48,6 +48,7 @@ public final class EnumField extends Field<EnumGroup.Value>
     {
         super(true);
         this.ev = ev;
+        pbType = PbType.ENUM;
     }
     
     public EnumGroup.Value getEv()
@@ -125,9 +126,10 @@ public final class EnumField extends Field<EnumGroup.Value>
         return buffer.toString();
     }
     
-    public int getDescriptorId()
+    @Override
+    protected void resolvePbType()
     {
-        return 8;
+        
     }
     
     public java.lang.String getRegularType()

@@ -80,9 +80,9 @@ public final class GetMap extends FakeMap
         }
 
         @Override
-        public int getDescriptorId()
+        public void resolvePbType()
         {
-            return 0;
+            
         }
     }
     
