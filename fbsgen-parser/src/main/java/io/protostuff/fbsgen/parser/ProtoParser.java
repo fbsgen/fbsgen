@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 io/protostuff/fbsgen/parser/ProtoParser.g 2016-07-23 22:24:37
+// $ANTLR 3.5.2 io/protostuff/fbsgen/parser/ProtoParser.g 2016-07-24 01:10:50
 
     package io.protostuff.fbsgen.parser;
 
@@ -2964,10 +2964,8 @@ public class ProtoParser extends AbstractParser {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
 					                    throw err(field, " can only have a single default value", proto);
 					                
-					                if (field instanceof Field.String)
+					                if (field instanceof Field.String || field instanceof Field.Bytes)
 					                    field.defaultValue = getStringFromStringLiteral((STRING_LITERAL98!=null?STRING_LITERAL98.getText():null));
-					                else if (field instanceof Field.Bytes)
-					                    field.defaultValue = getBytesFromStringLiteral((STRING_LITERAL98!=null?STRING_LITERAL98.getText():null));
 					                else
 					                    throw err(field, " has an invalid string default value", proto);
 					                
@@ -2980,7 +2978,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 3 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:296:9: NUMFLOAT
+					// io/protostuff/fbsgen/parser/ProtoParser.g:294:9: NUMFLOAT
 					{
 					NUMFLOAT99=(Token)match(input,NUMFLOAT,FOLLOW_NUMFLOAT_in_field_options_keyval1830); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -3011,7 +3009,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 4 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:316:9: NUMINT
+					// io/protostuff/fbsgen/parser/ProtoParser.g:314:9: NUMINT
 					{
 					NUMINT100=(Token)match(input,NUMINT,FOLLOW_NUMINT_in_field_options_keyval1843); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -3048,7 +3046,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 5 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:342:9: NUMDOUBLE
+					// io/protostuff/fbsgen/parser/ProtoParser.g:340:9: NUMDOUBLE
 					{
 					NUMDOUBLE101=(Token)match(input,NUMDOUBLE,FOLLOW_NUMDOUBLE_in_field_options_keyval1855); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -3079,7 +3077,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 6 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:362:9: HEX
+					// io/protostuff/fbsgen/parser/ProtoParser.g:360:9: HEX
 					{
 					HEX102=(Token)match(input,HEX,FOLLOW_HEX_in_field_options_keyval1867); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -3108,7 +3106,7 @@ public class ProtoParser extends AbstractParser {
 					                    }
 					                }
 					                else if (field instanceof Field.Bytes) {
-					                    field.defaultValue = getBytesFromHexString(proto, (HEX102!=null?HEX102.getText():null));
+					                    field.defaultValue = (HEX102!=null?HEX102.getText():null);
 					                }
 					                else
 					                    throw err(field, " has an invalid numeric default value", proto);
@@ -3122,7 +3120,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 7 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:394:9: OCTAL
+					// io/protostuff/fbsgen/parser/ProtoParser.g:392:9: OCTAL
 					{
 					OCTAL103=(Token)match(input,OCTAL,FOLLOW_OCTAL_in_field_options_keyval1879); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -3162,7 +3160,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 8 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:423:9: TRUE
+					// io/protostuff/fbsgen/parser/ProtoParser.g:421:9: TRUE
 					{
 					TRUE104=(Token)match(input,TRUE,FOLLOW_TRUE_in_field_options_keyval1891); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -3190,7 +3188,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 9 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:440:9: FALSE
+					// io/protostuff/fbsgen/parser/ProtoParser.g:438:9: FALSE
 					{
 					FALSE105=(Token)match(input,FALSE,FOLLOW_FALSE_in_field_options_keyval1907); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -3218,7 +3216,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 10 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:457:9: val= ID
+					// io/protostuff/fbsgen/parser/ProtoParser.g:455:9: val= ID
 					{
 					val=(Token)match(input,ID,FOLLOW_ID_in_field_options_keyval1921); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -3270,7 +3268,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 11 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:498:9: FULL_ID
+					// io/protostuff/fbsgen/parser/ProtoParser.g:496:9: FULL_ID
 					{
 					FULL_ID106=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_field_options_keyval1933); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -3288,7 +3286,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 12 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:505:9: EXP
+					// io/protostuff/fbsgen/parser/ProtoParser.g:503:9: EXP
 					{
 					EXP107=(Token)match(input,EXP,FOLLOW_EXP_in_field_options_keyval1945); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -3318,7 +3316,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 13 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:524:9: signed_constant[proto, message, field, $key.text, checkDefault]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:522:9: signed_constant[proto, message, field, $key.text, checkDefault]
 					{
 					pushFollow(FOLLOW_signed_constant_in_field_options_keyval1957);
 					signed_constant108=signed_constant(proto, message, field, (key!=null?input.toString(key.start,key.stop):null), checkDefault);
@@ -3369,7 +3367,7 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "signed_constant"
-	// io/protostuff/fbsgen/parser/ProtoParser.g:535:1: signed_constant[Proto proto, HasFields message, Field field, String key, boolean checkDefault] : MINUS ID ;
+	// io/protostuff/fbsgen/parser/ProtoParser.g:533:1: signed_constant[Proto proto, HasFields message, Field field, String key, boolean checkDefault] : MINUS ID ;
 	public final ProtoParser.signed_constant_return signed_constant(Proto proto, HasFields message, Field field, String key, boolean checkDefault) throws RecognitionException {
 		ProtoParser.signed_constant_return retval = new ProtoParser.signed_constant_return();
 		retval.start = input.LT(1);
@@ -3383,8 +3381,8 @@ public class ProtoParser extends AbstractParser {
 		Object ID110_tree=null;
 
 		try {
-			// io/protostuff/fbsgen/parser/ProtoParser.g:536:5: ( MINUS ID )
-			// io/protostuff/fbsgen/parser/ProtoParser.g:536:9: MINUS ID
+			// io/protostuff/fbsgen/parser/ProtoParser.g:534:5: ( MINUS ID )
+			// io/protostuff/fbsgen/parser/ProtoParser.g:534:9: MINUS ID
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -3457,7 +3455,7 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "enum_block"
-	// io/protostuff/fbsgen/parser/ProtoParser.g:564:1: enum_block[Proto proto, Message message] : ENUM ID LEFTCURLY ( enum_body[proto, message, enumGroup] )* RIGHTCURLY ( ( SEMICOLON )? ) !;
+	// io/protostuff/fbsgen/parser/ProtoParser.g:562:1: enum_block[Proto proto, Message message] : ENUM ID LEFTCURLY ( enum_body[proto, message, enumGroup] )* RIGHTCURLY ( ( SEMICOLON )? ) !;
 	public final ProtoParser.enum_block_return enum_block(Proto proto, Message message) throws RecognitionException {
 		ProtoParser.enum_block_return retval = new ProtoParser.enum_block_return();
 		retval.start = input.LT(1);
@@ -3481,8 +3479,8 @@ public class ProtoParser extends AbstractParser {
 		    EnumGroup enumGroup = null;
 
 		try {
-			// io/protostuff/fbsgen/parser/ProtoParser.g:568:5: ( ENUM ID LEFTCURLY ( enum_body[proto, message, enumGroup] )* RIGHTCURLY ( ( SEMICOLON )? ) !)
-			// io/protostuff/fbsgen/parser/ProtoParser.g:568:9: ENUM ID LEFTCURLY ( enum_body[proto, message, enumGroup] )* RIGHTCURLY ( ( SEMICOLON )? ) !
+			// io/protostuff/fbsgen/parser/ProtoParser.g:566:5: ( ENUM ID LEFTCURLY ( enum_body[proto, message, enumGroup] )* RIGHTCURLY ( ( SEMICOLON )? ) !)
+			// io/protostuff/fbsgen/parser/ProtoParser.g:566:9: ENUM ID LEFTCURLY ( enum_body[proto, message, enumGroup] )* RIGHTCURLY ( ( SEMICOLON )? ) !
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -3509,7 +3507,7 @@ public class ProtoParser extends AbstractParser {
 			adaptor.addChild(root_0, LEFTCURLY113_tree);
 			}
 
-			// io/protostuff/fbsgen/parser/ProtoParser.g:572:19: ( enum_body[proto, message, enumGroup] )*
+			// io/protostuff/fbsgen/parser/ProtoParser.g:570:19: ( enum_body[proto, message, enumGroup] )*
 			loop20:
 			while (true) {
 				int alt20=2;
@@ -3520,7 +3518,7 @@ public class ProtoParser extends AbstractParser {
 
 				switch (alt20) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:572:20: enum_body[proto, message, enumGroup]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:570:20: enum_body[proto, message, enumGroup]
 					{
 					pushFollow(FOLLOW_enum_body_in_enum_block2047);
 					enum_body114=enum_body(proto, message, enumGroup);
@@ -3545,10 +3543,10 @@ public class ProtoParser extends AbstractParser {
 			if ( state.backtracking==0 ) {
 			            proto.checkAnnotations();
 			        }
-			// io/protostuff/fbsgen/parser/ProtoParser.g:574:11: ( ( SEMICOLON )? )
-			// io/protostuff/fbsgen/parser/ProtoParser.g:574:12: ( SEMICOLON )?
+			// io/protostuff/fbsgen/parser/ProtoParser.g:572:11: ( ( SEMICOLON )? )
+			// io/protostuff/fbsgen/parser/ProtoParser.g:572:12: ( SEMICOLON )?
 			{
-			// io/protostuff/fbsgen/parser/ProtoParser.g:574:12: ( SEMICOLON )?
+			// io/protostuff/fbsgen/parser/ProtoParser.g:572:12: ( SEMICOLON )?
 			int alt21=2;
 			int LA21_0 = input.LA(1);
 			if ( (LA21_0==SEMICOLON) ) {
@@ -3556,7 +3554,7 @@ public class ProtoParser extends AbstractParser {
 			}
 			switch (alt21) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:574:12: SEMICOLON
+					// io/protostuff/fbsgen/parser/ProtoParser.g:572:12: SEMICOLON
 					{
 					SEMICOLON116=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_enum_block2057); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -3601,7 +3599,7 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "enum_body"
-	// io/protostuff/fbsgen/parser/ProtoParser.g:577:1: enum_body[Proto proto, Message message, EnumGroup enumGroup] : ( enum_field[proto, message, enumGroup] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, enumGroup] );
+	// io/protostuff/fbsgen/parser/ProtoParser.g:575:1: enum_body[Proto proto, Message message, EnumGroup enumGroup] : ( enum_field[proto, message, enumGroup] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, enumGroup] );
 	public final ProtoParser.enum_body_return enum_body(Proto proto, Message message, EnumGroup enumGroup) throws RecognitionException {
 		ProtoParser.enum_body_return retval = new ProtoParser.enum_body_return();
 		retval.start = input.LT(1);
@@ -3615,7 +3613,7 @@ public class ProtoParser extends AbstractParser {
 
 
 		try {
-			// io/protostuff/fbsgen/parser/ProtoParser.g:578:5: ( enum_field[proto, message, enumGroup] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, enumGroup] )
+			// io/protostuff/fbsgen/parser/ProtoParser.g:576:5: ( enum_field[proto, message, enumGroup] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, enumGroup] )
 			int alt22=4;
 			switch ( input.LA(1) ) {
 			case ID:
@@ -3646,7 +3644,7 @@ public class ProtoParser extends AbstractParser {
 			}
 			switch (alt22) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:578:9: enum_field[proto, message, enumGroup]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:576:9: enum_field[proto, message, enumGroup]
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -3660,7 +3658,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 2 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:579:9: annotation_entry[proto]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:577:9: annotation_entry[proto]
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -3674,7 +3672,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 3 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:580:9: comment_entry[proto]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:578:9: comment_entry[proto]
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -3688,7 +3686,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 4 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:581:9: option_entry[proto, enumGroup]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:579:9: option_entry[proto, enumGroup]
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -3731,7 +3729,7 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "enum_field"
-	// io/protostuff/fbsgen/parser/ProtoParser.g:584:1: enum_field[Proto proto, Message message, EnumGroup enumGroup] : ID ASSIGN NUMINT ( enum_options[proto, enumGroup, v] )? SEMICOLON !;
+	// io/protostuff/fbsgen/parser/ProtoParser.g:582:1: enum_field[Proto proto, Message message, EnumGroup enumGroup] : ID ASSIGN NUMINT ( enum_options[proto, enumGroup, v] )? SEMICOLON !;
 	public final ProtoParser.enum_field_return enum_field(Proto proto, Message message, EnumGroup enumGroup) throws RecognitionException {
 		ProtoParser.enum_field_return retval = new ProtoParser.enum_field_return();
 		retval.start = input.LT(1);
@@ -3753,8 +3751,8 @@ public class ProtoParser extends AbstractParser {
 		    EnumGroup.Value v = null;
 
 		try {
-			// io/protostuff/fbsgen/parser/ProtoParser.g:588:5: ( ID ASSIGN NUMINT ( enum_options[proto, enumGroup, v] )? SEMICOLON !)
-			// io/protostuff/fbsgen/parser/ProtoParser.g:588:9: ID ASSIGN NUMINT ( enum_options[proto, enumGroup, v] )? SEMICOLON !
+			// io/protostuff/fbsgen/parser/ProtoParser.g:586:5: ( ID ASSIGN NUMINT ( enum_options[proto, enumGroup, v] )? SEMICOLON !)
+			// io/protostuff/fbsgen/parser/ProtoParser.g:586:9: ID ASSIGN NUMINT ( enum_options[proto, enumGroup, v] )? SEMICOLON !
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -3781,7 +3779,7 @@ public class ProtoParser extends AbstractParser {
 			            v = new EnumGroup.Value((ID121!=null?ID121.getText():null), Integer.parseInt((NUMINT123!=null?NUMINT123.getText():null)), enumGroup);
 			            proto.addAnnotationsTo(v);
 			        }
-			// io/protostuff/fbsgen/parser/ProtoParser.g:591:11: ( enum_options[proto, enumGroup, v] )?
+			// io/protostuff/fbsgen/parser/ProtoParser.g:589:11: ( enum_options[proto, enumGroup, v] )?
 			int alt23=2;
 			int LA23_0 = input.LA(1);
 			if ( (LA23_0==LEFTSQUARE) ) {
@@ -3789,7 +3787,7 @@ public class ProtoParser extends AbstractParser {
 			}
 			switch (alt23) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:591:12: enum_options[proto, enumGroup, v]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:589:12: enum_options[proto, enumGroup, v]
 					{
 					pushFollow(FOLLOW_enum_options_in_enum_field2154);
 					enum_options124=enum_options(proto, enumGroup, v);
@@ -3833,7 +3831,7 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "enum_options"
-	// io/protostuff/fbsgen/parser/ProtoParser.g:594:1: enum_options[Proto proto, EnumGroup enumGroup, EnumGroup.Value v] : LEFTSQUARE field_options_keyval[proto, null, v.field, false] ( COMMA field_options_keyval[proto, null, v.field, false] )* RIGHTSQUARE ;
+	// io/protostuff/fbsgen/parser/ProtoParser.g:592:1: enum_options[Proto proto, EnumGroup enumGroup, EnumGroup.Value v] : LEFTSQUARE field_options_keyval[proto, null, v.field, false] ( COMMA field_options_keyval[proto, null, v.field, false] )* RIGHTSQUARE ;
 	public final ProtoParser.enum_options_return enum_options(Proto proto, EnumGroup enumGroup, EnumGroup.Value v) throws RecognitionException {
 		ProtoParser.enum_options_return retval = new ProtoParser.enum_options_return();
 		retval.start = input.LT(1);
@@ -3851,8 +3849,8 @@ public class ProtoParser extends AbstractParser {
 		Object RIGHTSQUARE130_tree=null;
 
 		try {
-			// io/protostuff/fbsgen/parser/ProtoParser.g:595:5: ( LEFTSQUARE field_options_keyval[proto, null, v.field, false] ( COMMA field_options_keyval[proto, null, v.field, false] )* RIGHTSQUARE )
-			// io/protostuff/fbsgen/parser/ProtoParser.g:595:9: LEFTSQUARE field_options_keyval[proto, null, v.field, false] ( COMMA field_options_keyval[proto, null, v.field, false] )* RIGHTSQUARE
+			// io/protostuff/fbsgen/parser/ProtoParser.g:593:5: ( LEFTSQUARE field_options_keyval[proto, null, v.field, false] ( COMMA field_options_keyval[proto, null, v.field, false] )* RIGHTSQUARE )
+			// io/protostuff/fbsgen/parser/ProtoParser.g:593:9: LEFTSQUARE field_options_keyval[proto, null, v.field, false] ( COMMA field_options_keyval[proto, null, v.field, false] )* RIGHTSQUARE
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -3869,7 +3867,7 @@ public class ProtoParser extends AbstractParser {
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, field_options_keyval127.getTree());
 
-			// io/protostuff/fbsgen/parser/ProtoParser.g:596:9: ( COMMA field_options_keyval[proto, null, v.field, false] )*
+			// io/protostuff/fbsgen/parser/ProtoParser.g:594:9: ( COMMA field_options_keyval[proto, null, v.field, false] )*
 			loop24:
 			while (true) {
 				int alt24=2;
@@ -3880,7 +3878,7 @@ public class ProtoParser extends AbstractParser {
 
 				switch (alt24) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:596:10: COMMA field_options_keyval[proto, null, v.field, false]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:594:10: COMMA field_options_keyval[proto, null, v.field, false]
 					{
 					COMMA128=(Token)match(input,COMMA,FOLLOW_COMMA_in_enum_options2197); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -3938,7 +3936,7 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "service_block"
-	// io/protostuff/fbsgen/parser/ProtoParser.g:599:1: service_block[Proto proto, Message message] : SERVICE ID LEFTCURLY ( service_body[proto, service] )+ RIGHTCURLY ( ( SEMICOLON )? ) !;
+	// io/protostuff/fbsgen/parser/ProtoParser.g:597:1: service_block[Proto proto, Message message] : SERVICE ID LEFTCURLY ( service_body[proto, service] )+ RIGHTCURLY ( ( SEMICOLON )? ) !;
 	public final ProtoParser.service_block_return service_block(Proto proto, Message message) throws RecognitionException {
 		ProtoParser.service_block_return retval = new ProtoParser.service_block_return();
 		retval.start = input.LT(1);
@@ -3962,8 +3960,8 @@ public class ProtoParser extends AbstractParser {
 		    Service service = null;
 
 		try {
-			// io/protostuff/fbsgen/parser/ProtoParser.g:603:5: ( SERVICE ID LEFTCURLY ( service_body[proto, service] )+ RIGHTCURLY ( ( SEMICOLON )? ) !)
-			// io/protostuff/fbsgen/parser/ProtoParser.g:603:9: SERVICE ID LEFTCURLY ( service_body[proto, service] )+ RIGHTCURLY ( ( SEMICOLON )? ) !
+			// io/protostuff/fbsgen/parser/ProtoParser.g:601:5: ( SERVICE ID LEFTCURLY ( service_body[proto, service] )+ RIGHTCURLY ( ( SEMICOLON )? ) !)
+			// io/protostuff/fbsgen/parser/ProtoParser.g:601:9: SERVICE ID LEFTCURLY ( service_body[proto, service] )+ RIGHTCURLY ( ( SEMICOLON )? ) !
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -3990,7 +3988,7 @@ public class ProtoParser extends AbstractParser {
 			adaptor.addChild(root_0, LEFTCURLY133_tree);
 			}
 
-			// io/protostuff/fbsgen/parser/ProtoParser.g:607:9: ( service_body[proto, service] )+
+			// io/protostuff/fbsgen/parser/ProtoParser.g:605:9: ( service_body[proto, service] )+
 			int cnt25=0;
 			loop25:
 			while (true) {
@@ -4002,7 +4000,7 @@ public class ProtoParser extends AbstractParser {
 
 				switch (alt25) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:607:10: service_body[proto, service]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:605:10: service_body[proto, service]
 					{
 					pushFollow(FOLLOW_service_body_in_service_block2251);
 					service_body134=service_body(proto, service);
@@ -4028,10 +4026,10 @@ public class ProtoParser extends AbstractParser {
 			adaptor.addChild(root_0, RIGHTCURLY135_tree);
 			}
 
-			// io/protostuff/fbsgen/parser/ProtoParser.g:607:52: ( ( SEMICOLON )? )
-			// io/protostuff/fbsgen/parser/ProtoParser.g:607:53: ( SEMICOLON )?
+			// io/protostuff/fbsgen/parser/ProtoParser.g:605:52: ( ( SEMICOLON )? )
+			// io/protostuff/fbsgen/parser/ProtoParser.g:605:53: ( SEMICOLON )?
 			{
-			// io/protostuff/fbsgen/parser/ProtoParser.g:607:53: ( SEMICOLON )?
+			// io/protostuff/fbsgen/parser/ProtoParser.g:605:53: ( SEMICOLON )?
 			int alt26=2;
 			int LA26_0 = input.LA(1);
 			if ( (LA26_0==SEMICOLON) ) {
@@ -4039,7 +4037,7 @@ public class ProtoParser extends AbstractParser {
 			}
 			switch (alt26) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:607:53: SEMICOLON
+					// io/protostuff/fbsgen/parser/ProtoParser.g:605:53: SEMICOLON
 					{
 					SEMICOLON136=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_service_block2259); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -4090,7 +4088,7 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "service_body"
-	// io/protostuff/fbsgen/parser/ProtoParser.g:615:1: service_body[Proto proto, Service service] : ( rpc_block[proto, service] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, service] );
+	// io/protostuff/fbsgen/parser/ProtoParser.g:613:1: service_body[Proto proto, Service service] : ( rpc_block[proto, service] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, service] );
 	public final ProtoParser.service_body_return service_body(Proto proto, Service service) throws RecognitionException {
 		ProtoParser.service_body_return retval = new ProtoParser.service_body_return();
 		retval.start = input.LT(1);
@@ -4104,7 +4102,7 @@ public class ProtoParser extends AbstractParser {
 
 
 		try {
-			// io/protostuff/fbsgen/parser/ProtoParser.g:616:5: ( rpc_block[proto, service] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, service] )
+			// io/protostuff/fbsgen/parser/ProtoParser.g:614:5: ( rpc_block[proto, service] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, service] )
 			int alt27=4;
 			switch ( input.LA(1) ) {
 			case RPC:
@@ -4135,7 +4133,7 @@ public class ProtoParser extends AbstractParser {
 			}
 			switch (alt27) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:616:9: rpc_block[proto, service]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:614:9: rpc_block[proto, service]
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -4149,7 +4147,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 2 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:617:9: annotation_entry[proto]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:615:9: annotation_entry[proto]
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -4163,7 +4161,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 3 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:618:9: comment_entry[proto]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:616:9: comment_entry[proto]
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -4177,7 +4175,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 4 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:619:9: option_entry[proto, service]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:617:9: option_entry[proto, service]
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -4220,7 +4218,7 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "rpc_block"
-	// io/protostuff/fbsgen/parser/ProtoParser.g:622:1: rpc_block[Proto proto, Service service] : RPC n= ID LEFTPAREN (ap= FULL_ID |a= ( VOID | ID ) ) RIGHTPAREN RETURNS LEFTPAREN (rp= FULL_ID |r= ( VOID | ID ) ) RIGHTPAREN ( rpc_body_block[proto, rm] )? SEMICOLON !;
+	// io/protostuff/fbsgen/parser/ProtoParser.g:620:1: rpc_block[Proto proto, Service service] : RPC n= ID LEFTPAREN (ap= FULL_ID |a= ( VOID | ID ) ) RIGHTPAREN RETURNS LEFTPAREN (rp= FULL_ID |r= ( VOID | ID ) ) RIGHTPAREN ( rpc_body_block[proto, rm] )? SEMICOLON !;
 	public final ProtoParser.rpc_block_return rpc_block(Proto proto, Service service) throws RecognitionException {
 		ProtoParser.rpc_block_return retval = new ProtoParser.rpc_block_return();
 		retval.start = input.LT(1);
@@ -4259,8 +4257,8 @@ public class ProtoParser extends AbstractParser {
 		    Service.RpcMethod rm = null;
 
 		try {
-			// io/protostuff/fbsgen/parser/ProtoParser.g:627:5: ( RPC n= ID LEFTPAREN (ap= FULL_ID |a= ( VOID | ID ) ) RIGHTPAREN RETURNS LEFTPAREN (rp= FULL_ID |r= ( VOID | ID ) ) RIGHTPAREN ( rpc_body_block[proto, rm] )? SEMICOLON !)
-			// io/protostuff/fbsgen/parser/ProtoParser.g:627:9: RPC n= ID LEFTPAREN (ap= FULL_ID |a= ( VOID | ID ) ) RIGHTPAREN RETURNS LEFTPAREN (rp= FULL_ID |r= ( VOID | ID ) ) RIGHTPAREN ( rpc_body_block[proto, rm] )? SEMICOLON !
+			// io/protostuff/fbsgen/parser/ProtoParser.g:625:5: ( RPC n= ID LEFTPAREN (ap= FULL_ID |a= ( VOID | ID ) ) RIGHTPAREN RETURNS LEFTPAREN (rp= FULL_ID |r= ( VOID | ID ) ) RIGHTPAREN ( rpc_body_block[proto, rm] )? SEMICOLON !)
+			// io/protostuff/fbsgen/parser/ProtoParser.g:625:9: RPC n= ID LEFTPAREN (ap= FULL_ID |a= ( VOID | ID ) ) RIGHTPAREN RETURNS LEFTPAREN (rp= FULL_ID |r= ( VOID | ID ) ) RIGHTPAREN ( rpc_body_block[proto, rm] )? SEMICOLON !
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -4283,7 +4281,7 @@ public class ProtoParser extends AbstractParser {
 			adaptor.addChild(root_0, LEFTPAREN142_tree);
 			}
 
-			// io/protostuff/fbsgen/parser/ProtoParser.g:627:28: (ap= FULL_ID |a= ( VOID | ID ) )
+			// io/protostuff/fbsgen/parser/ProtoParser.g:625:28: (ap= FULL_ID |a= ( VOID | ID ) )
 			int alt28=2;
 			int LA28_0 = input.LA(1);
 			if ( (LA28_0==FULL_ID) ) {
@@ -4302,7 +4300,7 @@ public class ProtoParser extends AbstractParser {
 
 			switch (alt28) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:627:29: ap= FULL_ID
+					// io/protostuff/fbsgen/parser/ProtoParser.g:625:29: ap= FULL_ID
 					{
 					ap=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_rpc_block2364); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -4319,7 +4317,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 2 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:632:13: a= ( VOID | ID )
+					// io/protostuff/fbsgen/parser/ProtoParser.g:630:13: a= ( VOID | ID )
 					{
 					a=input.LT(1);
 					if ( input.LA(1)==ID||input.LA(1)==VOID ) {
@@ -4357,7 +4355,7 @@ public class ProtoParser extends AbstractParser {
 			adaptor.addChild(root_0, LEFTPAREN145_tree);
 			}
 
-			// io/protostuff/fbsgen/parser/ProtoParser.g:633:27: (rp= FULL_ID |r= ( VOID | ID ) )
+			// io/protostuff/fbsgen/parser/ProtoParser.g:631:27: (rp= FULL_ID |r= ( VOID | ID ) )
 			int alt29=2;
 			int LA29_0 = input.LA(1);
 			if ( (LA29_0==FULL_ID) ) {
@@ -4376,7 +4374,7 @@ public class ProtoParser extends AbstractParser {
 
 			switch (alt29) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:633:28: rp= FULL_ID
+					// io/protostuff/fbsgen/parser/ProtoParser.g:631:28: rp= FULL_ID
 					{
 					rp=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_rpc_block2399); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -4393,7 +4391,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 2 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:638:13: r= ( VOID | ID )
+					// io/protostuff/fbsgen/parser/ProtoParser.g:636:13: r= ( VOID | ID )
 					{
 					r=input.LT(1);
 					if ( input.LA(1)==ID||input.LA(1)==VOID ) {
@@ -4423,7 +4421,7 @@ public class ProtoParser extends AbstractParser {
 			            rm = service.addRpcMethod((n!=null?n.getText():null), argName, argPackage, retName, retPackage);
 			            proto.addAnnotationsTo(rm);
 			        }
-			// io/protostuff/fbsgen/parser/ProtoParser.g:641:11: ( rpc_body_block[proto, rm] )?
+			// io/protostuff/fbsgen/parser/ProtoParser.g:639:11: ( rpc_body_block[proto, rm] )?
 			int alt30=2;
 			int LA30_0 = input.LA(1);
 			if ( (LA30_0==LEFTCURLY) ) {
@@ -4431,7 +4429,7 @@ public class ProtoParser extends AbstractParser {
 			}
 			switch (alt30) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:641:11: rpc_body_block[proto, rm]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:639:11: rpc_body_block[proto, rm]
 					{
 					pushFollow(FOLLOW_rpc_body_block_in_rpc_block2420);
 					rpc_body_block147=rpc_body_block(proto, rm);
@@ -4475,7 +4473,7 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "rpc_body_block"
-	// io/protostuff/fbsgen/parser/ProtoParser.g:644:1: rpc_body_block[Proto proto, Service.RpcMethod rm] : LEFTCURLY ( option_entry[proto, rm] )* RIGHTCURLY ;
+	// io/protostuff/fbsgen/parser/ProtoParser.g:642:1: rpc_body_block[Proto proto, Service.RpcMethod rm] : LEFTCURLY ( option_entry[proto, rm] )* RIGHTCURLY ;
 	public final ProtoParser.rpc_body_block_return rpc_body_block(Proto proto, Service.RpcMethod rm) throws RecognitionException {
 		ProtoParser.rpc_body_block_return retval = new ProtoParser.rpc_body_block_return();
 		retval.start = input.LT(1);
@@ -4490,8 +4488,8 @@ public class ProtoParser extends AbstractParser {
 		Object RIGHTCURLY151_tree=null;
 
 		try {
-			// io/protostuff/fbsgen/parser/ProtoParser.g:645:5: ( LEFTCURLY ( option_entry[proto, rm] )* RIGHTCURLY )
-			// io/protostuff/fbsgen/parser/ProtoParser.g:645:9: LEFTCURLY ( option_entry[proto, rm] )* RIGHTCURLY
+			// io/protostuff/fbsgen/parser/ProtoParser.g:643:5: ( LEFTCURLY ( option_entry[proto, rm] )* RIGHTCURLY )
+			// io/protostuff/fbsgen/parser/ProtoParser.g:643:9: LEFTCURLY ( option_entry[proto, rm] )* RIGHTCURLY
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -4502,7 +4500,7 @@ public class ProtoParser extends AbstractParser {
 			adaptor.addChild(root_0, LEFTCURLY149_tree);
 			}
 
-			// io/protostuff/fbsgen/parser/ProtoParser.g:645:19: ( option_entry[proto, rm] )*
+			// io/protostuff/fbsgen/parser/ProtoParser.g:643:19: ( option_entry[proto, rm] )*
 			loop31:
 			while (true) {
 				int alt31=2;
@@ -4513,7 +4511,7 @@ public class ProtoParser extends AbstractParser {
 
 				switch (alt31) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:645:19: option_entry[proto, rm]
+					// io/protostuff/fbsgen/parser/ProtoParser.g:643:19: option_entry[proto, rm]
 					{
 					pushFollow(FOLLOW_option_entry_in_rpc_body_block2452);
 					option_entry150=option_entry(proto, rm);
@@ -4568,7 +4566,7 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "ignore_block"
-	// io/protostuff/fbsgen/parser/ProtoParser.g:681:1: ignore_block : LEFTCURLY ( ignore_block_body )* RIGHTCURLY ;
+	// io/protostuff/fbsgen/parser/ProtoParser.g:679:1: ignore_block : LEFTCURLY ( ignore_block_body )* RIGHTCURLY ;
 	public final ProtoParser.ignore_block_return ignore_block() throws RecognitionException {
 		ProtoParser.ignore_block_return retval = new ProtoParser.ignore_block_return();
 		retval.start = input.LT(1);
@@ -4583,8 +4581,8 @@ public class ProtoParser extends AbstractParser {
 		Object RIGHTCURLY154_tree=null;
 
 		try {
-			// io/protostuff/fbsgen/parser/ProtoParser.g:682:5: ( LEFTCURLY ( ignore_block_body )* RIGHTCURLY )
-			// io/protostuff/fbsgen/parser/ProtoParser.g:682:9: LEFTCURLY ( ignore_block_body )* RIGHTCURLY
+			// io/protostuff/fbsgen/parser/ProtoParser.g:680:5: ( LEFTCURLY ( ignore_block_body )* RIGHTCURLY )
+			// io/protostuff/fbsgen/parser/ProtoParser.g:680:9: LEFTCURLY ( ignore_block_body )* RIGHTCURLY
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -4595,7 +4593,7 @@ public class ProtoParser extends AbstractParser {
 			adaptor.addChild(root_0, LEFTCURLY152_tree);
 			}
 
-			// io/protostuff/fbsgen/parser/ProtoParser.g:682:19: ( ignore_block_body )*
+			// io/protostuff/fbsgen/parser/ProtoParser.g:680:19: ( ignore_block_body )*
 			loop32:
 			while (true) {
 				int alt32=2;
@@ -4606,7 +4604,7 @@ public class ProtoParser extends AbstractParser {
 
 				switch (alt32) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:682:19: ignore_block_body
+					// io/protostuff/fbsgen/parser/ProtoParser.g:680:19: ignore_block_body
 					{
 					pushFollow(FOLLOW_ignore_block_body_in_ignore_block2522);
 					ignore_block_body153=ignore_block_body();
@@ -4658,7 +4656,7 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "ignore_block_body"
-	// io/protostuff/fbsgen/parser/ProtoParser.g:685:1: ignore_block_body : ( ( LEFTCURLY )=> ignore_block |~ RIGHTCURLY );
+	// io/protostuff/fbsgen/parser/ProtoParser.g:683:1: ignore_block_body : ( ( LEFTCURLY )=> ignore_block |~ RIGHTCURLY );
 	public final ProtoParser.ignore_block_body_return ignore_block_body() throws RecognitionException {
 		ProtoParser.ignore_block_body_return retval = new ProtoParser.ignore_block_body_return();
 		retval.start = input.LT(1);
@@ -4671,7 +4669,7 @@ public class ProtoParser extends AbstractParser {
 		Object set156_tree=null;
 
 		try {
-			// io/protostuff/fbsgen/parser/ProtoParser.g:686:5: ( ( LEFTCURLY )=> ignore_block |~ RIGHTCURLY )
+			// io/protostuff/fbsgen/parser/ProtoParser.g:684:5: ( ( LEFTCURLY )=> ignore_block |~ RIGHTCURLY )
 			int alt33=2;
 			int LA33_0 = input.LA(1);
 			if ( (LA33_0==LEFTCURLY) ) {
@@ -4697,7 +4695,7 @@ public class ProtoParser extends AbstractParser {
 
 			switch (alt33) {
 				case 1 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:686:9: ( LEFTCURLY )=> ignore_block
+					// io/protostuff/fbsgen/parser/ProtoParser.g:684:9: ( LEFTCURLY )=> ignore_block
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -4711,7 +4709,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 2 :
-					// io/protostuff/fbsgen/parser/ProtoParser.g:687:9: ~ RIGHTCURLY
+					// io/protostuff/fbsgen/parser/ProtoParser.g:685:9: ~ RIGHTCURLY
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -4753,8 +4751,8 @@ public class ProtoParser extends AbstractParser {
 
 	// $ANTLR start synpred1_ProtoParser
 	public final void synpred1_ProtoParser_fragment() throws RecognitionException {
-		// io/protostuff/fbsgen/parser/ProtoParser.g:686:9: ( LEFTCURLY )
-		// io/protostuff/fbsgen/parser/ProtoParser.g:686:10: LEFTCURLY
+		// io/protostuff/fbsgen/parser/ProtoParser.g:684:9: ( LEFTCURLY )
+		// io/protostuff/fbsgen/parser/ProtoParser.g:684:10: LEFTCURLY
 		{
 		match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_synpred1_ProtoParser2549); if (state.failed) return;
 

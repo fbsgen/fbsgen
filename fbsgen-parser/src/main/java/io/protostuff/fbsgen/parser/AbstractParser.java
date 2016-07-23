@@ -15,7 +15,6 @@
 package io.protostuff.fbsgen.parser;
 
 import java.io.InputStream;
-import java.nio.ByteBuffer;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -99,20 +98,20 @@ public abstract class AbstractParser extends Parser
         return TextFormat.unescapeText(value);
     }
     
-    static byte[] getBytesFromStringLiteral(/*Proto proto, HasName target, */String literal)
-    {
-        return getBytes(/*proto, target, */literal.substring(1, literal.length()-1));
-    }
+    //static byte[] getBytesFromStringLiteral(/*Proto proto, HasName target, */String literal)
+    //{
+    //    return getBytes(/*proto, target, */literal.substring(1, literal.length()-1));
+    //}
     
-    static byte[] getBytes(/*Proto proto, HasName target, */String value)
-    {
-        ByteBuffer buffer = TextFormat.unescapeBytes(value);
-        byte[] buf = new byte[buffer.limit()];
-        buffer.get(buf);
-        return buf;
-    }
+    //static byte[] getBytes(/*Proto proto, HasName target, */String value)
+    //{
+    //    ByteBuffer buffer = TextFormat.unescapeBytes(value);
+    //    byte[] buf = new byte[buffer.limit()];
+    //    buffer.get(buf);
+    //    return buf;
+    //}
     
-    static byte[] getBytesFromHexString(Proto proto, String value)
+    /*static byte[] getBytesFromHexString(Proto proto, String value)
     {
         int start = value.startsWith("0x") ? 2 : 0;
         int len = value.length()-start;
@@ -127,7 +126,7 @@ public abstract class AbstractParser extends Parser
             out[i++] = (byte)((right & 0x0F) | (left << 4 & 0xF0));
         }
         return out;
-    }
+    }*/
     
     static int decimalFromHex(Proto proto, char c)
     {

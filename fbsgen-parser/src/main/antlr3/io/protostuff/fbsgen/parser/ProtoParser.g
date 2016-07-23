@@ -280,10 +280,8 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
                     throw err(field, " can only have a single default value", proto);
                 
-                if (field instanceof Field.String)
+                if (field instanceof Field.String || field instanceof Field.Bytes)
                     field.defaultValue = getStringFromStringLiteral($STRING_LITERAL.text);
-                else if (field instanceof Field.Bytes)
-                    field.defaultValue = getBytesFromStringLiteral($STRING_LITERAL.text);
                 else
                     throw err(field, " has an invalid string default value", proto);
                 
@@ -380,7 +378,7 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
                     }
                 }
                 else if (field instanceof Field.Bytes) {
-                    field.defaultValue = getBytesFromHexString(proto, $HEX.text);
+                    field.defaultValue = $HEX.text;
                 }
                 else
                     throw err(field, " has an invalid numeric default value", proto);

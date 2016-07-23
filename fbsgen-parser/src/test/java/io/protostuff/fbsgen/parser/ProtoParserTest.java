@@ -125,10 +125,12 @@ public class ProtoParserTest extends TestCase
         assertEquals(new String(bar_some_string.defaultValue.getBytes(TextFormat.ISO_8859_1), "UTF-8"), "\u1234");
         assertEquals(bar_some_float.defaultValue, Float.valueOf(127.0f));
         assertEquals(bar_some_double.defaultValue, Double.valueOf(45.123));
-        byte[] data = baz_data.getDefaultValue();
+        
+        /*byte[] data = baz_data.getDefaultValue();
         assertTrue(data != null && data.length == 2);
         assertTrue((data[0] & 0xFF) == 0xFA);
-        assertTrue((data[1] & 0xFF) == 0xCE);
+        assertTrue((data[1] & 0xFF) == 0xCE);*/
+        assertEquals("0xFACE", baz_data.getDefaultValue());
     }
 
     public void testImport() throws Exception
