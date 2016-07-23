@@ -303,8 +303,6 @@ public final class Message extends AnnotationContainer implements UserDefinedTyp
         
         if (fields.put(field.name, field) != null)
             throw err(field, " cannot be defined more than once.", getProto());
-        
-        field.resolvePbType();
     }
     
     /*public void defineExtensionRange(int first, int last)
