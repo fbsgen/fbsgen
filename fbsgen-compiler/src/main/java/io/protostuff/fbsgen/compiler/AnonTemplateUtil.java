@@ -90,7 +90,7 @@ public final class AnonTemplateUtil
                     sb.append("import \"").append(i).append('"').append('\n');
             }
             
-            templateHeader = sb.append("anon_block(params, module) ::= <<")
+            templateHeader = sb.append("anon_block(p, module) ::= <<")
                     .toString().getBytes();
             
             header = new byte[templateHeader.length + PUSH_BACK_SIZE];
@@ -214,7 +214,7 @@ public final class AnonTemplateUtil
         final BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(out, "UTF-8"));
         
-        template.renderTo(writer, "params", params, module);
+        template.renderTo(writer, "p", params, module);
         
         writer.close();
     }
