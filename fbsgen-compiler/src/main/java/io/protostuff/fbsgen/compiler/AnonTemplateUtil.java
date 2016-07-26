@@ -321,12 +321,20 @@ public final class AnonTemplateUtil
             }
         }
         
-        char separator = getSeparator(args[0]);
+        final String first = args[0];
+        char separator = getSeparator(first);
         if (0 == separator)
         {
-            // using unix pipes
-            compileTemplate(newTemplateParams(args, 0, args.length), module, 
-                    System.in, System.out);
+            if (first.length() == 1)
+            {
+                compileWithSeparator(first.charAt(0), module, args, 1);
+            }
+            else
+            {
+                // using unix pipes
+                compileTemplate(newTemplateParams(args, 0, args.length), module, 
+                        System.in, System.out);
+            }
             return;
         }
         
@@ -393,6 +401,43 @@ public final class AnonTemplateUtil
                         new FileInputStream(new File(ag.in, args[i])), 
                         new FileOutputStream(new File(ag.out, args[i])));
             }
+        }
+    }
+    
+    static void compileWithSeparator(char separator, ProtoModule module, 
+            String[] args, int offset) throws IOException
+    {
+        // minimum
+        // : in out : path
+        if (args.length < 5)
+        {
+            System.err.println("A minimum of 5 args are required:");
+            System.err.println(": in out (k:v)* : path");
+            System.exit(1);
+        }
+        
+        String inDir = args[offset++],
+                outDir = args[offset++];
+        
+        LinkedHashMap<String,String> params = new LinkedHashMap<String, String>();
+        for (int colon; offset < args.length;)
+        {
+            String arg = args[offset++];
+            if (arg.length() == 1 && arg.charAt(0) == separator)
+                break;
+            
+            if (-1 == (colon = arg.indexOf(':')))
+                params.put(arg, "");
+            else
+                params.put(arg.substring(0, colon), arg.substring(colon + 1));
+        }
+        
+        while (offset < args.length)
+        {
+            String arg = args[offset++];
+            compileTemplate(params, module, 
+                    new FileInputStream(new File(inDir, arg)), 
+                    new FileOutputStream(new File(outDir, arg)));
         }
     }
 }
