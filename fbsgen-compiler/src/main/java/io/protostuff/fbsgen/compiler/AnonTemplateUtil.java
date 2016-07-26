@@ -435,6 +435,13 @@ public final class AnonTemplateUtil
         while (offset < args.length)
         {
             String arg = args[offset++];
+            if (arg.startsWith("./"))
+                arg = arg.substring(2);
+            
+            int lastSlash = arg.lastIndexOf('/');
+            if (lastSlash != -1)
+                new File(outDir, arg.substring(0, lastSlash)).mkdirs();
+            
             compileTemplate(params, module, 
                     new FileInputStream(new File(inDir, arg)), 
                     new FileOutputStream(new File(outDir, arg)));
