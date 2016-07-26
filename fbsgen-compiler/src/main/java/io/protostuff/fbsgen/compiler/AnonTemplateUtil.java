@@ -28,6 +28,9 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Codegen via anonymous template.
@@ -46,7 +49,68 @@ public final class AnonTemplateUtil
     
     static final String SRC = "src/",
             MAIN_JAVA = "main/java/",
-            TEST_JAVA = "test/java/";
+            TEST_JAVA = "test/java/",
+            START_INTERPOLATE = "{{";
+    
+    static Pattern PATTERN_INTERPOLATE = Pattern.compile("\\{\\{(.+?)\\}\\}");
+    
+    /*interface Replacer
+    {
+        String replace(Matcher matcher);
+    }
+
+    // This is a generalization of http://stackoverflow.com/a/4742293/860000,
+    // acting as an equivalent to String.prototype(/pattern/g, replacer.replace)
+    static String replaceAll(String input, Pattern pattern, Replacer replacer)
+    {
+        StringBuffer output = new StringBuffer();
+        Matcher matcher = pattern.matcher(input);
+        while (matcher.find())
+            matcher.appendReplacement(output, replacer.replace(matcher));
+        
+        matcher.appendTail(output);
+        return output.toString();
+    }
+
+    // Same as above but without the global flag.
+    static String replaceFirst(String input, Pattern pattern, Replacer replacer)
+    {
+        StringBuffer output = new StringBuffer();
+        Matcher matcher = pattern.matcher(input);
+        if (matcher.find())
+            matcher.appendReplacement(output, replacer.replace(matcher));
+        
+        matcher.appendTail(output);
+        return output.toString();
+    }*/
+    
+    static String interpolate(String str, final Map<String, String> map)
+    {
+        Matcher matcher = PATTERN_INTERPOLATE.matcher(str);
+        // StringBuilder cannot be used here because Matcher expects
+        // StringBuffer
+        int replaceCount = 0;
+        StringBuffer buffer = new StringBuffer();
+        while (matcher.find())
+        {
+            String g1 = matcher.group(1);
+            if (map.containsKey(g1))
+            {
+                String replacement = map.get(g1);
+                // quote to work properly with $ and {,} signs
+                matcher.appendReplacement(buffer, replacement != null ? 
+                        Matcher.quoteReplacement(replacement) : "null");
+                
+                replaceCount++;
+            }
+        }
+        
+        if (replaceCount == 0)
+            return str;
+        
+        matcher.appendTail(buffer);
+        return buffer.toString();
+    }
     
     static char parseSeparator(String arg)
     {
@@ -440,7 +504,7 @@ public final class AnonTemplateUtil
                 packagePath = packageName != null && !packageName.isEmpty() ? 
                         packageName.replace('.', '/') : null;
         
-        int src, lastSlash;
+        int src, idx;
         while (offset < args.length)
         {
             String arg = args[offset++];
@@ -448,18 +512,20 @@ public final class AnonTemplateUtil
                 arg = arg.substring(2);
             
             String argOut = arg;
-            if (packageName != null && (src = arg.indexOf(SRC)) != -1 && 
-                    (arg.startsWith(MAIN_JAVA, src + SRC.length()) || 
-                            arg.startsWith(TEST_JAVA, src + SRC.length())))
+            if ((idx = arg.indexOf(START_INTERPOLATE)) != -1)
+                argOut = interpolate(arg, params);
+            
+            if (packageName != null && (src = argOut.indexOf(SRC)) != -1 && 
+                    (argOut.startsWith(MAIN_JAVA, src + SRC.length()) || 
+                            argOut.startsWith(TEST_JAVA, src + SRC.length())))
             {
                 // main/test has same length
-                lastSlash = src + SRC.length() + MAIN_JAVA.length();
-                argOut = arg.substring(0, lastSlash) + 
-                        packagePath + arg.substring(lastSlash - 1);
+                idx = src + SRC.length() + MAIN_JAVA.length();
+                argOut = argOut.substring(0, idx) + packagePath + argOut.substring(idx - 1);
             }
             
-            if ((lastSlash = argOut.lastIndexOf('/')) != -1)
-                new File(outDir, argOut.substring(0, lastSlash)).mkdirs();
+            if ((idx = argOut.lastIndexOf('/')) != -1)
+                new File(outDir, argOut.substring(0, idx)).mkdirs();
             
             compileTemplate(params, module, 
                     new FileInputStream(new File(inDir, arg)), 
