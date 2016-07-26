@@ -44,6 +44,10 @@ public final class AnonTemplateUtil
     static final char CLI_SEPARATOR = parseSeparator(
             System.getProperty("cli.separator", ""));
     
+    static final String SRC = "src/",
+            MAIN_JAVA = "main/java/",
+            TEST_JAVA = "test/java/";
+    
     static char parseSeparator(String arg)
     {
         return 1 == arg.length() ? arg.charAt(0) : 0;
@@ -416,10 +420,10 @@ public final class AnonTemplateUtil
             System.exit(1);
         }
         
-        String inDir = args[offset++],
+        final String inDir = args[offset++],
                 outDir = args[offset++];
         
-        LinkedHashMap<String,String> params = new LinkedHashMap<String, String>();
+        final LinkedHashMap<String,String> params = new LinkedHashMap<String, String>();
         for (int colon; offset < args.length;)
         {
             String arg = args[offset++];
@@ -432,19 +436,34 @@ public final class AnonTemplateUtil
                 params.put(arg.substring(0, colon), arg.substring(colon + 1));
         }
         
+        final String packageName = params.get("package_name"),
+                packagePath = packageName != null && !packageName.isEmpty() ? 
+                        packageName.replace('.', '/') : null;
+        
+        int src, lastSlash;
         while (offset < args.length)
         {
             String arg = args[offset++];
             if (arg.startsWith("./"))
                 arg = arg.substring(2);
             
-            int lastSlash = arg.lastIndexOf('/');
-            if (lastSlash != -1)
-                new File(outDir, arg.substring(0, lastSlash)).mkdirs();
+            String argOut = arg;
+            if (packageName != null && (src = arg.indexOf(SRC)) != -1 && 
+                    (arg.startsWith(MAIN_JAVA, src + SRC.length()) || 
+                            arg.startsWith(TEST_JAVA, src + SRC.length())))
+            {
+                // main/test has same length
+                lastSlash = src + SRC.length() + MAIN_JAVA.length();
+                argOut = arg.substring(0, lastSlash) + 
+                        packagePath + arg.substring(lastSlash - 1);
+            }
+            
+            if ((lastSlash = argOut.lastIndexOf('/')) != -1)
+                new File(outDir, argOut.substring(0, lastSlash)).mkdirs();
             
             compileTemplate(params, module, 
                     new FileInputStream(new File(inDir, arg)), 
-                    new FileOutputStream(new File(outDir, arg)));
+                    new FileOutputStream(new File(outDir, argOut)));
         }
     }
 }
