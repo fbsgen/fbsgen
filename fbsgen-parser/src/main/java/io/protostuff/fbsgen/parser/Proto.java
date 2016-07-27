@@ -245,6 +245,14 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
         return messages;
     }
     
+    /**
+     * Alias to {@link #getMessageMap()}.
+     */
+    public Map<String,Message> getM()
+    {
+        return getMessageMap();
+    }
+    
     public Collection<Message> getMessages()
     {
         return messages.values();
@@ -266,6 +274,14 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
         return enumGroups;
     }
     
+    /**
+     * Alias to {@link #getEnumGroupMap()}.
+     */
+    public Map<String,EnumGroup> getE()
+    {
+        return getEnumGroupMap();
+    }
+    
     public Collection<EnumGroup> getEnumGroups()
     {
         return enumGroups.values();
@@ -285,6 +301,14 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
     public Map<String,Service> getServiceMap()
     {
         return services;
+    }
+    
+    /**
+     * Alias to {@link #getServiceMap()}.
+     */
+    public Map<String,Service> getS()
+    {
+        return getServiceMap();
     }
     
     public Collection<Service> getServices()
