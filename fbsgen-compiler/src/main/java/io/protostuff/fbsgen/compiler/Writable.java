@@ -381,6 +381,52 @@ public final class Writable
     };
     
     /**
+     * Appends the current key with the arg.
+     * <pre>
+     *   «writable.k.("foo").kappend.("bar")»
+     * </pre>
+     */
+    public final FakeMap kappend = new FakeMap("kappend")
+    {
+        public Object get(Object arg)
+        {
+            if (key == null)
+                throw new RuntimeException("Misuse of chain.");
+            
+            final String k = key.toString();
+            key = null;
+            
+            if (arg == null)
+                return k;
+            
+            return k + arg.toString();
+        }
+    };
+    
+    /**
+     * Prepends the current key with the arg.
+     * <pre>
+     *   «writable.k.("foo").kprepend.("bar")»
+     * </pre>
+     */
+    public final FakeMap kprepend = new FakeMap("kprepend")
+    {
+        public Object get(Object arg)
+        {
+            if (key == null)
+                throw new RuntimeException("Misuse of chain.");
+            
+            final String k = key.toString();
+            key = null;
+            
+            if (arg == null)
+                return k;
+            
+            return arg.toString() + k;
+        }
+    };
+    
+    /**
      * Returns true if the key is found in the arg.
      * <pre>
      *   «writable.k.("foo").keq.("hellofooworld")»
