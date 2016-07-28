@@ -137,9 +137,25 @@ public final class Service extends AnnotationContainer implements HasName, HasOp
         return rpcMethods.values();
     }
     
+    /**
+     * Alias to {@link #getRpcMethods()}.
+     */
+    public Collection<RpcMethod> getRpcs()
+    {
+        return getRpcMethods();
+    }
+    
     public LinkedHashMap<String,RpcMethod> getRpcMethodMap()
     {
         return rpcMethods;
+    }
+    
+    /**
+     * Alias to {@link #getRpcMethodMap()}.
+     */
+    public LinkedHashMap<String,RpcMethod> getRpcMap()
+    {
+        return getRpcMethodMap();
     }
     
     /**
@@ -153,6 +169,14 @@ public final class Service extends AnnotationContainer implements HasName, HasOp
     public RpcMethod getRpcMethod(String name)
     {
         return rpcMethods.get(name);
+    }
+    
+    /**
+     * Alias to {@link #getRpcMethod(String)}.
+     */
+    public RpcMethod getRpc(String name)
+    {
+        return getRpcMethod(name);
     }
     
     RpcMethod addRpcMethod(String name, String argName, String argPackage, 
