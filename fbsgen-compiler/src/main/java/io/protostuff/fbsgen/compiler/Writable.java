@@ -470,7 +470,8 @@ public final class Writable
     /**
      * Returns true if the key is found in the arg.
      * <pre>
-     *   «writable.k.("foo").keq.("hellofooworld")»
+     *   «writable.k.("foo").kin.("hellofooworld")»
+     *   «writable.k.("foo").kin.(map_or_annotation)»
      * </pre>
      */
     public final FakeMap kin = new FakeMap("kin")
@@ -480,10 +481,19 @@ public final class Writable
             if (key == null)
                 throw new RuntimeException("Misuse of chain.");
             
-            Boolean ret = entry != null && -1 != entry.toString().indexOf(key.toString()) ? 
-                    Boolean.TRUE : Boolean.FALSE;
+            final String k = key.toString();
             key = null;
-            return ret;
+            
+            if (entry == null)
+                return Boolean.FALSE;
+            
+            if (entry instanceof Annotation)
+                return ((Annotation)entry).getP().get(k);
+            
+            if (entry instanceof Map<?,?>)
+                return ((Map<?,?>)entry).get(k);
+            
+            return -1 != entry.toString().indexOf(k);
         }
     };
     
