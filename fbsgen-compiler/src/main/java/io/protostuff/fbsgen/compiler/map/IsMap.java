@@ -63,11 +63,11 @@ public final class IsMap extends FakeMap
     
     public enum Functions implements Function
     {
-        NOT_ZERO
+        ZERO
         {
             public boolean is(Object data)
             {
-                return 0 != ((Number)data).intValue();
+                return 0 == ((Number)data).intValue();
             }
         },
         
