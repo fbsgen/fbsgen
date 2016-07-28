@@ -571,6 +571,8 @@ public final class CompilerMain
                 e.printStackTrace();
             else
                 System.err.println(e.getMessage());
+            
+            System.exit(1);
         }
     }
 
