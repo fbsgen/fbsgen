@@ -31,6 +31,7 @@ package io.protostuff.fbsgen.compiler;
 
 import static io.protostuff.fbsgen.compiler.CompilerUtil.COMMA;
 import static io.protostuff.fbsgen.compiler.CompilerUtil.SEMI_COLON;
+import static io.protostuff.fbsgen.compiler.CompilerUtil.isMatch;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.EnumGroup;
@@ -306,7 +307,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
                 if (!message.getA().isEmpty() && 
                         (a=message.getA().get("Exclude")) != null && 
                         ((v=a.getP().get("unless_output")) == null ||
-                        !stg.equals(v)))
+                        !isMatch(stg, v.toString())))
                 {
                     continue;
                 }
@@ -327,7 +328,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
                 if (!eg.getA().isEmpty() && 
                         (a=eg.getA().get("Exclude")) != null && 
                         ((v=a.getP().get("unless_output")) == null ||
-                        !stg.equals(v)))
+                        !isMatch(stg, v.toString())))
                 {
                     continue;
                 }
@@ -384,7 +385,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
                 if (!message.getA().isEmpty() && 
                         (a=message.getA().get("Exclude")) != null && 
                         ((v=a.getP().get("unless_output")) == null ||
-                        !stg.equals(v)))
+                        !isMatch(stg, v.toString())))
                 {
                     continue;
                 }
@@ -407,7 +408,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
                 if (!eg.getA().isEmpty() && 
                         (a=eg.getA().get("Exclude")) != null && 
                         ((v=a.getP().get("unless_output")) == null ||
-                        !stg.equals(v)))
+                        !isMatch(stg, v.toString())))
                 {
                     continue;
                 }

@@ -58,6 +58,13 @@ public final class CompilerUtil
         }
     }
     
+    public static boolean isMatch(String stg, String filter)
+    {
+        return filter.indexOf('/') == -1 && stg.length() > filter.length() ? 
+                (stg.endsWith(filter) && stg.charAt(stg.length() - filter.length() - 1) == '/') : 
+                stg.equals(filter);
+    }
+    
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static Map fill(Map map, String csvOptions)
     {

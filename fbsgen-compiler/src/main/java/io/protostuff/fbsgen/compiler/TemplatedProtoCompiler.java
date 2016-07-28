@@ -14,6 +14,7 @@
 
 package io.protostuff.fbsgen.compiler;
 
+import static io.protostuff.fbsgen.compiler.CompilerUtil.isMatch;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.EnumGroup;
@@ -114,7 +115,8 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
                     "(proto_block|message_block|enum_block) " +
                     "need to be defined in " + module.getOutput());
         }
-
+        
+        Object v;
         if (enumBlockTemplate != null)
         {
             for (EnumGroup eg : proto.getEnumGroups())
@@ -124,23 +126,17 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
                     Annotation a = eg.getAnnotation("Exclude");
                     if (a != null)
                     {
-                        if (!getOutputId().startsWith(String.valueOf(
-                                a.getP().get("unless_output"))))
+                        if ((v = a.getP().get("unless_output")) == null || 
+                                !isMatch(getOutputId(), v.toString()))
                         {
                             continue;
                         }
-                        
-                        //@Exclude(unless_output = "foo.java.stg")
                     }
-                    else if (null != (a = eg.getAnnotation("Include")))
+                    else if (null != (a = eg.getAnnotation("Include")) && 
+                            null != (v = a.getP().get("unless_output")) && 
+                            isMatch(getOutputId(), v.toString()))
                     {
-                        if (getOutputId().startsWith(String.valueOf(
-                                a.getP().get("unless_output"))))
-                        {
-                            continue;
-                        }
-                        
-                        //@Include(unless_output = "bar.java.stg")
+                        continue;
                     }
                 }
                 
@@ -158,23 +154,17 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
                     Annotation a = message.getAnnotation("Exclude");
                     if (a != null)
                     {
-                        if (!getOutputId().startsWith(String.valueOf(
-                                a.getP().get("unless_output"))))
+                        if ((v = a.getP().get("unless_output")) == null || 
+                                !isMatch(getOutputId(), v.toString()))
                         {
                             continue;
                         }
-                        
-                        //@Exclude(unless_output = "foo.java.stg")
                     }
-                    else if (null != (a = message.getAnnotation("Include")))
+                    else if (null != (a = message.getAnnotation("Include")) && 
+                            null != (v = a.getP().get("unless_output")) && 
+                            isMatch(getOutputId(), v.toString()))
                     {
-                        if (getOutputId().startsWith(String.valueOf(
-                                a.getP().get("unless_output"))))
-                        {
-                            continue;
-                        }
-                        
-                        //@Include(unless_output = "bar.java.stg")
+                        continue;
                     }
                 }
                 
