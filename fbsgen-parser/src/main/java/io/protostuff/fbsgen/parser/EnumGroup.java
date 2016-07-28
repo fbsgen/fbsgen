@@ -54,7 +54,7 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
     
     private ArrayList<Value> indexedValues;
     private ArrayList<Value> uniqueSortedValues;
-    private ArrayList<Value> uniqueSortedDeclaredValues;
+    private List<Value> uniqueSortedDeclaredValues;
     
     private List<Value> declaredValues;
     private LinkedHashMap<String,Value> declaredValueMap;
@@ -421,6 +421,12 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         if (uniqueSortedValues != null)
             return uniqueSortedValues;
         
+        if (!ENUM_ALLOW_ALIAS)
+        {
+            uniqueSortedValues = sortedValues;
+            return uniqueSortedValues;
+        }
+        
         uniqueSortedValues = new ArrayList<Value>();
         Value last = null;
         for (Value v : sortedValues)
@@ -432,10 +438,18 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         return uniqueSortedValues;
     }
     
-    public ArrayList<Value> getUniqueSortedDeclaredValues()
+    public List<Value> getUniqueSortedDeclaredValues()
     {
         if (uniqueSortedDeclaredValues != null)
             return uniqueSortedDeclaredValues;
+        
+        if (!ENUM_ALLOW_ALIAS)
+        {
+            uniqueSortedDeclaredValues = firstValueIndex == 0 ? sortedValues : 
+                    sortedValues.subList(1, sortedValues.size());
+            
+            return uniqueSortedDeclaredValues;
+        }
         
         uniqueSortedDeclaredValues = new ArrayList<Value>();
         Value last = null;
