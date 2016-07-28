@@ -54,6 +54,7 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
     
     private ArrayList<Value> indexedValues;
     private ArrayList<Value> uniqueSortedValues;
+    private ArrayList<Value> uniqueSortedDeclaredValues;
     
     private List<Value> declaredValues;
     private LinkedHashMap<String,Value> declaredValueMap;
@@ -429,6 +430,25 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
             last = v;
         }
         return uniqueSortedValues;
+    }
+    
+    public ArrayList<Value> getUniqueSortedDeclaredValues()
+    {
+        if (uniqueSortedDeclaredValues != null)
+            return uniqueSortedDeclaredValues;
+        
+        uniqueSortedDeclaredValues = new ArrayList<Value>();
+        Value last = null;
+        for (Value v : sortedValues)
+        {
+            if (firstValueIndex != 0 && v.number == 0)
+                continue;
+            
+            if (last == null || v.number!=last.number)
+                uniqueSortedDeclaredValues.add(v);
+            last = v;
+        }
+        return uniqueSortedDeclaredValues;
     }
     
     public static class Value extends AnnotationContainer implements Comparable<Value>, HasName
