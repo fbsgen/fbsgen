@@ -99,6 +99,9 @@ public final class IsMap extends FakeMap
         {
             public boolean is(Object data)
             {
+                if (data instanceof String)
+                    return data.toString().length() == 0;
+                
                 return data instanceof Map ? ((Map<?,?>)data).isEmpty() : 
                     ((Collection<?>)data).isEmpty();
             }
@@ -108,6 +111,9 @@ public final class IsMap extends FakeMap
         {
             public boolean is(Object data)
             {
+                if (data instanceof String)
+                    return data.toString().length() == 1;
+                
                 return data instanceof Map ? ((Map<?,?>)data).size() == 1 : 
                     ((Collection<?>)data).size() == 1;
             }
@@ -117,6 +123,9 @@ public final class IsMap extends FakeMap
         {
             public boolean is(Object data)
             {
+                if (data instanceof String)
+                    return data.toString().length() > 1;
+                
                 return data instanceof Map ? ((Map<?,?>)data).size() > 1 : 
                     ((Collection<?>)data).size() > 1;
             }
