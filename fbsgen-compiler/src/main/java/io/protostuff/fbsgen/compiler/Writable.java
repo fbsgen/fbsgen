@@ -54,6 +54,21 @@ public final class Writable
     int argCount = 0, argFalseCount = 0;
     
     /**
+     * Cast the argument as integer.
+     * <pre>
+     *   «writable.as_int.("1")»
+     * </pre>
+     */
+    public final FakeMap as_int = new FakeMap("as_int")
+    {
+        public Object get(Object entry)
+        {
+            return entry instanceof Integer ? entry : 
+                Integer.parseInt(String.valueOf(entry));
+        }
+    };
+    
+    /**
      * Get the element at index from list if k was set.  Otherwise, the arg will 
      * be read as 'key.0' where 'key' is used to retrieve the list from the map 
      * and '0' is the index.
