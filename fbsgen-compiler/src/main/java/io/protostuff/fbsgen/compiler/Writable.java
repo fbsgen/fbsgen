@@ -373,7 +373,10 @@ public final class Writable
                 return k;
             
             if (arg instanceof Integer)
-                return k.substring(((Integer)arg).intValue());
+            {
+                int i = ((Integer)arg).intValue();
+                return i < 0 ? k.substring(0, k.length()+i) : k.substring(i);
+            }
             
             final String sub = arg.toString();
             return k.startsWith(sub) ? k.substring(sub.length()) : k;
