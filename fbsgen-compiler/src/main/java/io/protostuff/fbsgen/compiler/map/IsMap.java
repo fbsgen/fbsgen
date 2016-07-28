@@ -95,15 +95,26 @@ public final class IsMap extends FakeMap
             }
         },
         
-        SIZE_ZERO
+        EMPTY
         {
             public boolean is(Object data)
             {
                 if (data instanceof String)
-                    return data.toString().length() == 0;
+                    return data.toString().isEmpty();
                 
                 return data instanceof Map ? ((Map<?,?>)data).isEmpty() : 
                     ((Collection<?>)data).isEmpty();
+            }
+        },
+        
+        SIZE_ZERO
+        {
+            /**
+             * Alias to {@link Functions#EMPTY}
+             */
+            public boolean is(Object data)
+            {
+                return EMPTY.is(data);
             }
         },
         
