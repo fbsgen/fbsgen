@@ -237,6 +237,14 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         return sortedValues;
     }
     
+    public List<Value> getSortedDeclaredValues()
+    {
+        if (firstValueIndex == 0)
+            return sortedValues;
+        
+        return sortedValues.subList(1, sortedValues.size());
+    }
+    
     public Collection<Value> getDeclaredValues()
     {
         if (firstValueIndex == 0)
