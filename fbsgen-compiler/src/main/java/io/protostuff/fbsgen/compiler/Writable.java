@@ -427,6 +427,29 @@ public final class Writable
     };
     
     /**
+     * Formats the current key with arg as the format.
+     * <pre>
+     *   «writable.k.("foo").kfmt.("bar")»
+     * </pre>
+     */
+    public final FakeMap kfmt = new FakeMap("kfmt")
+    {
+        public Object get(Object arg)
+        {
+            if (key == null)
+                throw new RuntimeException("Misuse of chain.");
+            
+            final String k = key.toString();
+            key = null;
+            
+            if (arg == null)
+                return k;
+            
+            return TemplatedCodeGenerator.format(k, arg.toString());
+        }
+    };
+    
+    /**
      * Returns true if the key is found in the arg.
      * <pre>
      *   «writable.k.("foo").keq.("hellofooworld")»
