@@ -219,10 +219,16 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
     {
         messageBlockTemplate.renderTo(writer, "message", message, module);
     }
-
-    public void compileProtoBlock(ProtoModule module, Proto proto,
-            String packageName, Template protoBlockTemplate) throws IOException
+    
+    private String resolveFileName(Proto proto, ProtoModule module)
     {
+        if (!outputPrefix.isEmpty() || !outputSuffix.isEmpty())
+            return resolveFileName(proto.getFile().getName().replace(".proto", ""));
+        
+        Object link = proto.getO().get("link");
+        if (link != null)
+            return link.toString() + fileExtension;
+        
         String name = proto.getFile().getName().replace(".proto", "");
         if (javaOutput)
         {
@@ -233,26 +239,23 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
                 name = ProtoUtil.toPascalCase(name).toString();
         }
         
-        final String fileName;
-        if (outputPrefix.isEmpty() && outputSuffix.isEmpty())
-        {
-            // resolve the prefix/suffix from module option
-            String outerFilePrefix = module.getOption("outer_file_prefix");
-            if (outerFilePrefix != null)
-                name = outerFilePrefix + name;
+        // resolve the prefix/suffix from module option
+        String outerFilePrefix = module.getOption("outer_file_prefix");
+        if (outerFilePrefix != null)
+            name = outerFilePrefix + name;
 
-            String outerFileSuffix = module.getOption("outer_file_suffix");
-            if (outerFileSuffix != null)
-                name += outerFileSuffix;
+        String outerFileSuffix = module.getOption("outer_file_suffix");
+        if (outerFileSuffix != null)
+            name += outerFileSuffix;
 
-            fileName = name + fileExtension;
-        }
-        else
-        {
-            // use the placeholder in the output name
-            fileName = resolveFileName(name);
-        }
+        return name + fileExtension;
+    }
 
+    public void compileProtoBlock(ProtoModule module, Proto proto,
+            String packageName, Template protoBlockTemplate) throws IOException
+    {
+        String fileName = resolveFileName(proto, module);
+        
         BufferedWriter writer = CompilerUtil.newWriter(module, packageName, fileName, 
                 proto.getFile());
         
