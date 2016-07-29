@@ -606,7 +606,12 @@ public final class Writable
     {
         public Object get(Object arg)
         {
-            number = $int(arg);
+            if (arg instanceof Map<?,?>)
+                number = ((Map<?,?>)arg).size();
+            else if (arg instanceof Collection<?>)
+                number = ((Collection<?>)arg).size();
+            else
+                number = $int(arg);
             return Writable.this;
         }
     };
