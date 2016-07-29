@@ -53,34 +53,41 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public enum PbType
     {
-        MESSAGE(0),
-        BOOL(1),
-        BYTES(2),
-        STRING(3),
-        FLOAT(4),
-        DOUBLE(5),
-        UINT32(6),
-        UINT64(7),
-        INT32(8),
-        INT64(9),
-        FIXED32(10),
-        FIXED64(11),
-        SINT32(12),
-        SINT64(13),
-        SFIXED32(14),
-        SFIXED64(15),
-        ENUM(16);
+        MESSAGE(0, "Message"),
+        BOOL(1, "Bool"),
+        BYTES(2, "Bytes"),
+        STRING(3, "String"),
+        FLOAT(4, "Float"),
+        DOUBLE(5, "Double"),
+        UINT32(6, "UInt32"),
+        UINT64(7, "UInt64"),
+        INT32(8, "Int32"),
+        INT64(9, "Int64"),
+        FIXED32(10, "Fixed32"),
+        FIXED64(11, "Fixed64"),
+        SINT32(12, "SInt32"),
+        SINT64(13, "SInt64"),
+        SFIXED32(14, "SFixed32"),
+        SFIXED64(15, "SFixed64"),
+        ENUM(16, "Enum");
         
         public final int number;
+        public final java.lang.String namePC;
         
-        private PbType(int number)
+        private PbType(int number, java.lang.String namePC)
         {
             this.number = number;
+            this.namePC = namePC;
         }
         
         public int getNumber()
         {
             return number;
+        }
+        
+        public java.lang.String getNamePC()
+        {
+            return namePC;
         }
         
         public java.lang.String getName()
