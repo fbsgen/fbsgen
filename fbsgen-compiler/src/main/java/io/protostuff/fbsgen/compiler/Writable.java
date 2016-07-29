@@ -117,7 +117,7 @@ public final class Writable
      *   «writable.n.(1).get_from.(message.fields)»
      * </pre>
      */
-    public final FakeMap get_from = new FakeMap("at")
+    public final FakeMap get_from = new FakeMap("get_from")
     {
         @SuppressWarnings("unchecked")
         public Object get(Object entry)
