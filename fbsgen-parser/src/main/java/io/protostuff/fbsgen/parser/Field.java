@@ -282,6 +282,16 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         return Number.class.isAssignableFrom(getClass());
     }
     
+    public boolean isFloatField()
+    {
+        return Float.class.isAssignableFrom(getClass());
+    }
+    
+    public boolean isDoubleField()
+    {
+        return Double.class.isAssignableFrom(getClass());
+    }
+    
     public boolean isEnumField()
     {
         return EnumField.class.isAssignableFrom(getClass());
