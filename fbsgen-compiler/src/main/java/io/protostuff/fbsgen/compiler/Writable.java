@@ -168,28 +168,19 @@ public final class Writable
     };
     
     /**
-     * Formats the key with the arg.
+     * Formats the val with the arg.
      * <pre>
-     *   «writable.k.(message.name).fmt.("UC")»
-     *   or
-     *   «writable.v.(message.name).fmt.("UC")»
+     *   «writable.v.(message.name).vfmt.("UC")»
      * </pre>
      */
-    public final FakeMap fmt = new FakeMap("fmt")
+    public final FakeMap vfmt = new FakeMap("vfmt")
     {
         public Object get(Object entry)
         {
-            if (key == null)
-            {
-                if (val == null)
-                    throw new RuntimeException("Misuse of chain (key or val must not be null).");
-                
-                return TemplatedCodeGenerator.format(val.toString(), entry.toString());
-            }
+            if (val == null)
+                throw new RuntimeException("Misuse of chain (val must not be null).");
             
-            final String str = key.toString();
-            key = null;
-            return TemplatedCodeGenerator.format(str, entry.toString());
+            return TemplatedCodeGenerator.format(val.toString(), entry.toString());
         }
     };
     
