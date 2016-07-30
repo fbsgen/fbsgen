@@ -44,6 +44,12 @@ public final class ErrorMap implements Map<String,Object>
     
     public static final ErrorMap INSTANCE = new ErrorMap(null);
     
+    public static ParseException newEx(String msg, Proto proto)
+    {
+        return new ParseException(proto == null ? msg : 
+            (msg + " [" + proto.getSourcePath() + "]"));
+    }
+    
     final Proto proto;
     
     ErrorMap(Proto proto)
@@ -59,10 +65,7 @@ public final class ErrorMap implements Map<String,Object>
     public boolean containsKey(Object arg0)
     {
         // error mechanism called by stringtemplate
-        String str = String.valueOf(arg0);
-        
-        throw new ParseException(proto == null ? str : 
-                (str + " [" + proto.getSourcePath() + "]"));
+        throw newEx(String.valueOf(arg0), proto);
     }
 
     public Object get(Object arg0)
