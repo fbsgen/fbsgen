@@ -171,6 +171,8 @@ public final class Writable
      * Formats the key with the arg.
      * <pre>
      *   «writable.k.(message.name).fmt.("UC")»
+     *   or
+     *   «writable.v.(message.name).fmt.("UC")»
      * </pre>
      */
     public final FakeMap fmt = new FakeMap("fmt")
@@ -178,7 +180,12 @@ public final class Writable
         public Object get(Object entry)
         {
             if (key == null)
-                throw new RuntimeException("Misuse of chain.");
+            {
+                if (val == null)
+                    throw new RuntimeException("Misuse of chain (key or val must not be null).");
+                
+                return TemplatedCodeGenerator.format(val.toString(), entry.toString());
+            }
             
             final String str = key.toString();
             key = null;
