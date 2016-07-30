@@ -17,7 +17,6 @@ package io.protostuff.fbsgen.compiler;
 import static io.protostuff.fbsgen.compiler.CompilerUtil.$int;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.AnnotationContainer;
-import io.protostuff.fbsgen.parser.HasName;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -831,11 +830,10 @@ public final class Writable
             {
                 $add_and_put(key, entry);
                 key = null;
-                return Writable.this;
             }
+            else if (entry != null)
+                $add_and_put(entry.toString(), entry);
             
-            HasName hn = (HasName)entry;
-            $add_and_put(hn.getName(), hn);
             return Writable.this;
         }
     };
@@ -860,11 +858,10 @@ public final class Writable
             {
                 $add_and_uput(key, entry);
                 key = null;
-                return Writable.this;
             }
+            else if (entry != null)
+                $add_and_uput(entry.toString(), entry);
             
-            HasName hn = (HasName)entry;
-            $add_and_uput(hn.getName(), hn);
             return Writable.this;
         }
     };
@@ -940,11 +937,10 @@ public final class Writable
             {
                 map.put(key, entry);
                 key = null;
-                return Writable.this;
             }
+            else if (entry != null)
+                map.put(entry.toString(), entry);
             
-            HasName hn = (HasName)entry;
-            map.put(hn.getName(), hn);
             return Writable.this;
         }
     };
@@ -963,11 +959,10 @@ public final class Writable
             {
                 $uput(key, entry);
                 key = null;
-                return Writable.this;
             }
+            else if (entry != null)
+                $uput(entry.toString(), entry);
             
-            HasName hn = (HasName)entry;
-            $uput(hn.getName(), hn);
             return Writable.this;
         }
     };
@@ -995,11 +990,10 @@ public final class Writable
             {
                 $uput_and_add(key, entry);
                 key = null;
-                return Writable.this;
             }
+            else if (entry != null)
+                $uput_and_add(entry.toString(), entry);
             
-            HasName hn = (HasName)entry;
-            $uput_and_add(hn.getName(), hn);
             return Writable.this;
         }
     };
@@ -1028,11 +1022,10 @@ public final class Writable
             {
                 $putlist(key, entry);
                 key = null;
-                return Writable.this;
             }
+            else if (entry != null)
+                $putlist(entry.toString(), entry);
             
-            HasName hn = (HasName)entry;
-            $putlist(hn.getName(), hn);
             return Writable.this;
         }
     };
@@ -1186,8 +1179,7 @@ public final class Writable
                 return ret;
             }
             
-            HasName hn = (HasName)entry;
-            return $unique(hn.getName(), hn);
+            return entry == null ? null : $unique(entry.toString(), entry);
         }
     };
     
@@ -1494,6 +1486,18 @@ public final class Writable
     public boolean isListAndMapSameSize()
     {
         return list.size() == map.size();
+    }
+    
+    @SuppressWarnings("unchecked")
+    public <T> T $get(Class<T> clazz)
+    {
+        return (T)map.get(clazz.getSimpleName());
+    }
+    
+    @SuppressWarnings("unchecked")
+    public <T> T $remove(Class<T> clazz)
+    {
+        return (T)map.remove(clazz.getSimpleName());
     }
     
     /**
