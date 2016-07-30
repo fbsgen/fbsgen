@@ -42,7 +42,7 @@ public final class Writable
         }
     };
     
-    public Object key = null;
+    public Object key = null, val = null;
     
     public int number = 0;
     
@@ -764,7 +764,7 @@ public final class Writable
     };
     
     /**
-     * Returns a map that the caller should use to set the key and then chain.
+     * Sets the key.
      * <pre>
      *   «writable.setkey.("key").put.("value")».
      * 
@@ -782,6 +782,23 @@ public final class Writable
                 throw new RuntimeException("Null key.");
             
             key = newKey;
+            return Writable.this;
+        }
+    };
+    
+    /**
+     * Sets the value.
+     * <pre>
+     *   «writable.setval.("foo")»
+     *   or
+     *   «writable.v.("foo")».
+     * </pre>
+     */
+    public final FakeMap setval = new FakeMap("setval")
+    {
+        public Object get(Object arg)
+        {
+            val = arg;
             return Writable.this;
         }
     };
@@ -1429,6 +1446,14 @@ public final class Writable
         return setkey;
     }
     
+    /**
+     * Shorthand to {@link #setval}.
+     */
+    public FakeMap getV()
+    {
+        return setval;
+    }
+    
     public boolean isEmptyList()
     {
         return list.isEmpty();
@@ -1486,6 +1511,12 @@ public final class Writable
     public boolean isListAndMapSameSize()
     {
         return list.size() == map.size();
+    }
+    
+    @SuppressWarnings("unchecked")
+    public <T> T $val(Class<T> clazz)
+    {
+        return val != null && clazz.isAssignableFrom(val.getClass()) ? (T)val : null;
     }
     
     @SuppressWarnings("unchecked")
