@@ -341,8 +341,8 @@ public final class JetGroup implements TemplateGroup, Template
             if (data == null || Boolean.FALSE.equals(data))
                 return true;
             
-            if (data instanceof String)
-                return ((String)data).isEmpty();
+            if (data instanceof CharSequence)
+                return ((CharSequence)data).length() == 0;
             
             return data instanceof Map ? ((Map<?,?>)data).isEmpty() : 
                 ((Collection<?>)data).isEmpty();
