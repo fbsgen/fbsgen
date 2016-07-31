@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -43,9 +42,6 @@ public final class AnonTemplateUtil
     
     static final String IMPORTS = System.getProperty("cli.imports", ""),
             OPTIONS = System.getProperty("cli.options", "");
-    
-    static final char CLI_SEPARATOR = parseSeparator(
-            System.getProperty("cli.separator", ""));
     
     static final String SRC = "src/",
             MAIN_JAVA = "main/java/",
@@ -117,11 +113,6 @@ public final class AnonTemplateUtil
         return 1 == arg.length() ? arg.charAt(0) : 0;
     }
     
-    static char getSeparator(String arg)
-    {
-        return 1 == arg.length() && CLI_SEPARATOR == arg.charAt(0) ? CLI_SEPARATOR : 0;
-    }
-    
     static boolean isSeparator(String arg, char separator)
     {
         return 1 == arg.length() && separator == arg.charAt(0);
@@ -158,7 +149,7 @@ public final class AnonTemplateUtil
                     sb.append("import \"").append(i).append('"').append('\n');
             }
             
-            templateHeader = sb.append("anon_block(p, module) ::= <<")
+            templateHeader = sb.append("anon_block(p, module) ::= <<\n")
                     .toString().getBytes();
             
             header = new byte[templateHeader.length + PUSH_BACK_SIZE];
@@ -287,93 +278,6 @@ public final class AnonTemplateUtil
         writer.close();
     }
     
-    static final class ArgGroup
-    {
-        static final int TEMPLATE_OPTION_OFFSET = 5;
-        
-        final File in, out;
-        final int offset, paramOffset, pathOffset, limit;
-        
-        ArgGroup(File in, File out, 
-                int offset, int paramOffset, int pathOffset, int limit)
-        {
-            this.in = in;
-            this.out = out;
-            
-            this.offset = offset;
-            this.paramOffset = paramOffset;
-            this.pathOffset = pathOffset;
-            this.limit = limit;
-        }
-    }
-    
-    static ArgGroup parse(final String[] args, final int offset, final int len, 
-            boolean hasGlobalParams, int group)
-    {
-        if (hasGlobalParams)
-        {
-            if (len < 5 || !"-i".equals(args[offset]) || !"-o".equals(args[offset+2]))
-            {
-                throw err("The required params must be in this order: " +
-                        "-i in_dir -o out_dir [-p params --] <paths>");
-            }
-        }
-        else if (len < 8 || !"-i".equals(args[offset]) || !"-o".equals(args[offset+2]) || 
-                !"-p".equals(args[offset+4]))
-        {
-            throw err("The required params must be in this order: " +
-            		"-i in_dir -o out_dir -p params -- <paths>");
-        }
-        
-        final File in = new File(args[offset+1]), 
-                out = new File(args[offset+3]);
-        
-        if (!in.exists() || !in.isDirectory())
-            throw err("The in_dir " + in + " is not a directory");
-        
-        if (!out.exists() || !out.isDirectory())
-            throw err("The out_dir " + out + " is not a directory");
-        
-        final int limit = offset + len;
-        
-        final int paramOffset = "-p".equals(args[offset+4]) ? offset + 5 : -1;
-        
-        final int pathOffset;
-        if (paramOffset == -1)
-        {
-            // all global params
-            pathOffset = offset + 4;
-        }
-        else
-        {
-            int doubleHyphenOffset = -1, start = offset + 4, i = start;
-            
-            for (; i < limit; i++)
-            {
-                String str = args[i];
-                if (str.length() == 2 && '-' == str.charAt(0) && '-' == str.charAt(1))
-                {
-                    // the separator
-                    doubleHyphenOffset = i;
-                    break;
-                }
-            }
-            
-            if (doubleHyphenOffset == -1)
-                throw err("The -- separator is missing at group: " + group);
-            
-            if (i == start)
-                throw err("Empty params (-p --) at group: " + group);
-            
-            if (doubleHyphenOffset == limit)
-                throw err("No path(s) specified at group: " + group);
-            
-            pathOffset = doubleHyphenOffset + 1;
-        }
-        
-        return new ArgGroup(in, out, offset, paramOffset, pathOffset, limit);
-    }
-    
     static void compileTemplates(String[] args) throws IOException
     {
         final ProtoModule module = new ProtoModule();
@@ -390,85 +294,15 @@ public final class AnonTemplateUtil
         }
         
         final String first = args[0];
-        char separator = getSeparator(first);
-        if (0 == separator)
+        if (first.length() == 1)
         {
-            if (first.length() == 1)
-            {
-                compileWithSeparator(first.charAt(0), module, args, 1);
-            }
-            else
-            {
-                // using unix pipes
-                compileTemplate(newTemplateParams(args, 0, args.length), module, 
-                        System.in, System.out);
-            }
-            return;
-        }
-        
-        int start = 1;
-        
-        final LinkedHashMap<String,String> globalParams;
-        if (args.length > 1 && "-gp".equals(args[1]))
-        {
-            globalParams = newGlobalParams(args, ++start, args.length, separator);
-            if (globalParams.isEmpty())
-                throw err("The global params must have at least one entry");
-            
-            // move to the offset after the separator
-            start += (1 + globalParams.size());
-            
-            if (start == args.length)
-                throw err("No entries after global params");
+            compileWithSeparator(first.charAt(0), module, args, 1);
         }
         else
         {
-            globalParams = null;
-        }
-        
-        final ArrayList<ArgGroup> list = new ArrayList<ArgGroup>();
-        
-        int count = 0;
-        for (int offset = start, limit = args.length; offset < limit; offset++)
-        {
-            if (isSeparator(args[offset], separator))
-            {
-                list.add(parse(args, start, offset - start, globalParams != null, count++));
-                start = offset + 1;
-            }
-        }
-        
-        if (!isSeparator(args[args.length - 1], separator))
-        {
-            // append the last entry
-            list.add(parse(args, start, args.length - start, globalParams != null, count++));
-        }
-        
-        for (ArgGroup ag : list)
-        {
-            final LinkedHashMap<String, String> params;
-            if (ag.paramOffset == -1)
-            {
-                params = globalParams;
-            }
-            else
-            {
-                params = new LinkedHashMap<String,String>();
-                
-                if (globalParams != null)
-                    params.putAll(globalParams);
-                
-                putTemplateParamsTo(params, args, ag.paramOffset, 
-                        // the offset of the delimiter "--" as limit
-                        ag.pathOffset - 1);
-            }
-            
-            for (int i = ag.pathOffset, limit = ag.limit; i < limit; i++)
-            {
-                compileTemplate(params, module, 
-                        new FileInputStream(new File(ag.in, args[i])), 
-                        new FileOutputStream(new File(ag.out, args[i])));
-            }
+            // using unix pipes
+            compileTemplate(newTemplateParams(args, 0, args.length), module, 
+                    System.in, System.out);
         }
     }
     
