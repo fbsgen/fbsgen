@@ -156,6 +156,14 @@ public final class IsMap extends FakeMap
             {
                 return data instanceof String;
             }
+        },
+        
+        INSTANCEOF_MESSAGE
+        {
+            public boolean is(Object data)
+            {
+                return data instanceof Message;
+            }
         }
         ;
         
