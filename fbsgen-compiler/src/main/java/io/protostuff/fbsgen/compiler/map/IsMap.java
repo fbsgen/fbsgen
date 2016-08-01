@@ -18,6 +18,7 @@ import static io.protostuff.fbsgen.compiler.CompilerUtil.$int;
 import io.protostuff.fbsgen.compiler.FakeMap;
 import io.protostuff.fbsgen.compiler.JetGroup;
 import io.protostuff.fbsgen.parser.AnnotationContainer;
+import io.protostuff.fbsgen.parser.Message;
 
 import java.util.Collection;
 import java.util.List;
