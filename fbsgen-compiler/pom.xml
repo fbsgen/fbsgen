@@ -47,8 +47,8 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.github.subchen</groupId>
-      <artifactId>jetbrick-template</artifactId>
+      <groupId>io.protostuff.jetg</groupId>
+      <artifactId>jetg</artifactId>
       <version>${jetg-version}</version>
     </dependency>
     <!-- jetbrick dependency -->
