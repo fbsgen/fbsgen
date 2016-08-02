@@ -79,7 +79,8 @@ public final class Writable
     {
         public Object get(Object arg)
         {
-            builder.append(arg.toString());
+            if (arg != null)
+                builder.append(arg.toString());
             
             return Writable.this;
         }
@@ -95,7 +96,7 @@ public final class Writable
     {
         public Object get(Object arg)
         {
-            if (val != null && !Boolean.FALSE.equals(val))
+            if (arg != null && val != null && !Boolean.FALSE.equals(val))
                 builder.append(arg.toString());
             
             return Writable.this;
