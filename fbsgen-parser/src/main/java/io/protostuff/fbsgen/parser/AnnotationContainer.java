@@ -195,7 +195,7 @@ public abstract class AnnotationContainer implements HasAnnotations, HasName
     }
 
     @Override
-    public int hashCode()
+    public final int hashCode()
     {
         return getName().hashCode();
     }
