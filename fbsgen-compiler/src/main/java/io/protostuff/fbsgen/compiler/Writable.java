@@ -1586,6 +1586,7 @@ public final class Writable
         number = 0;
         list.clear();
         map.clear();
+        builder.setLength(0);
         return this;
     }
     
