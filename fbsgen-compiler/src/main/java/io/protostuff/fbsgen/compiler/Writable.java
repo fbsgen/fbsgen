@@ -434,7 +434,10 @@ public final class Writable
             final String k = key.toString();
             key = null;
             
-            return Boolean.TRUE.equals(arg) ? k + val.toString() : k;
+            if (arg == null || Boolean.FALSE.equals(arg))
+                return k;
+            
+            return k + val.toString();
         }
     };
     
@@ -477,7 +480,10 @@ public final class Writable
             final String k = key.toString();
             key = null;
             
-            return Boolean.TRUE.equals(arg) ? val.toString() + k : k;
+            if (arg == null || Boolean.FALSE.equals(arg))
+                return k;
+            
+            return val.toString() + k;
         }
     };
     
