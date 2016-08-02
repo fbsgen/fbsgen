@@ -62,6 +62,9 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
     private Value zero;
     private int firstValueIndex;
     
+    // cache
+    private String relativeName, cppRelativeName;
+    
     public EnumGroup(String name, Message parentMessage, Proto proto)
     {
         this.name = name;
@@ -127,12 +130,22 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
     
     public String getRelativeName()
     {
-        return isNested() ? parentMessage.getRelativeName() + "." + name : name;
+        if (relativeName != null)
+            return relativeName;
+        
+        relativeName = isNested() ? parentMessage.getRelativeName() + "." + name : name;
+        
+        return relativeName;
     }
     
     public String getCppRelativeName()
     {
-        return isNested() ? parentMessage.getRelativeName() + "_" + name : name;
+        if (cppRelativeName != null)
+            return cppRelativeName;
+        
+        cppRelativeName = isNested() ? parentMessage.getRelativeName() + "_" + name : name;
+        
+        return cppRelativeName;
     }
     
     public String getCppFullName()

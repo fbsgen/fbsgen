@@ -57,6 +57,10 @@ public final class Message extends AnnotationContainer implements UserDefinedTyp
     int forceAlign;
     final ArrayList<Integer> sizeofValues = new ArrayList<Integer>();
     
+    // cache
+    private String relativeName, cppRelativeName;
+    
+    // =====================================
     // code generator helpers
     
     // for root message only
@@ -437,16 +441,22 @@ public final class Message extends AnnotationContainer implements UserDefinedTyp
     
     public String getRelativeName()
     {
+        if (relativeName != null)
+            return relativeName;
+        
         StringBuilder buffer = new StringBuilder();
         resolveRelativeName(this, buffer, null, '.');
-        return buffer.toString();
+        return (relativeName = buffer.toString());
     }
     
     public String getCppRelativeName()
     {
+        if (cppRelativeName != null)
+            return cppRelativeName;
+        
         StringBuilder buffer = new StringBuilder();
         resolveRelativeName(this, buffer, null, '_');
-        return buffer.toString();
+        return (cppRelativeName = buffer.toString());
     }
     
     public String getCppFullName()

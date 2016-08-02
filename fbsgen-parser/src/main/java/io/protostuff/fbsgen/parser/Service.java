@@ -35,6 +35,9 @@ public final class Service extends AnnotationContainer implements HasName, HasOp
     final LinkedHashMap<String,Object> standardOptions = new LinkedHashMap<String,Object>();
     final LinkedHashMap<String,Object> extraOptions = new LinkedHashMap<String,Object>();
     
+    // cache
+    private String relativeName, cppRelativeName;
+    
     public Service(String name, Message parentMessage, Proto proto)
     {
         this.name = name;
@@ -100,12 +103,22 @@ public final class Service extends AnnotationContainer implements HasName, HasOp
     
     public String getRelativeName()
     {
-        return isNested() ? parentMessage.getRelativeName() + "." + name : name;
+        if (relativeName != null)
+            return relativeName;
+        
+        relativeName = isNested() ? parentMessage.getRelativeName() + "." + name : name;
+        
+        return relativeName;
     }
     
     public String getCppRelativeName()
     {
-        return isNested() ? parentMessage.getRelativeName() + "_" + name : name;
+        if (cppRelativeName != null)
+            return cppRelativeName;
+        
+        cppRelativeName = isNested() ? parentMessage.getRelativeName() + "_" + name : name;
+        
+        return cppRelativeName;
     }
     
     public String getCppFullName()
