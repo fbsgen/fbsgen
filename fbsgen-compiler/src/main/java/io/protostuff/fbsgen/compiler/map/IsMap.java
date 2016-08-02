@@ -152,6 +152,14 @@ public final class IsMap extends FakeMap
             }
         },
         
+        TRUE
+        {
+            public boolean is(Object data)
+            {
+                return Boolean.TRUE.equals(data);
+            }
+        },
+        
         INSTANCEOF_STRING
         {
             public boolean is(Object data)
