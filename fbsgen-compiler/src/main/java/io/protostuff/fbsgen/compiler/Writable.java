@@ -419,6 +419,26 @@ public final class Writable
     };
     
     /**
+     * Appends the current key with val if arg is true.
+     * <pre>
+     *   «writable.k.("foo").v.(".bar").kappendv.(true)»
+     * </pre>
+     */
+    public final FakeMap kappendv = new FakeMap("kappendv")
+    {
+        public Object get(Object arg)
+        {
+            if (key == null)
+                throw new RuntimeException("Misuse of chain.");
+            
+            final String k = key.toString();
+            key = null;
+            
+            return Boolean.TRUE.equals(arg) ? k + val.toString() : k;
+        }
+    };
+    
+    /**
      * Prepends the current key with the arg.
      * <pre>
      *   «writable.k.("foo").kprepend.("bar")»
@@ -438,6 +458,26 @@ public final class Writable
                 return k;
             
             return arg.toString() + k;
+        }
+    };
+    
+    /**
+     * Prepends the current key with val if arg is true.
+     * <pre>
+     *   «writable.v.("foo.").k.("bar").kprependv.(true)»
+     * </pre>
+     */
+    public final FakeMap kprependv = new FakeMap("kprependv")
+    {
+        public Object get(Object arg)
+        {
+            if (key == null)
+                throw new RuntimeException("Misuse of chain.");
+            
+            final String k = key.toString();
+            key = null;
+            
+            return Boolean.TRUE.equals(arg) ? val.toString() + k : k;
         }
     };
     
