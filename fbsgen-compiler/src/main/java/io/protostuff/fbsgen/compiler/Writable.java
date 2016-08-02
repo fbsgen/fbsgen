@@ -46,6 +46,8 @@ public final class Writable
     
     public int number = 0;
     
+    public final StringBuilder builder = new StringBuilder();
+    
     public final ArrayList<Object> list = new ArrayList<Object>();
     
     public final LinkedHashMap<Object,Object> map = new LinkedHashMap<Object,Object>();
@@ -64,6 +66,39 @@ public final class Writable
         {
             return entry instanceof Integer ? entry : 
                 Integer.parseInt(String.valueOf(entry));
+        }
+    };
+    
+    /**
+     * Appends the arg to the string builder.
+     * <pre>
+     *   «writable.b.("a").b.("b").»
+     * </pre>
+     */
+    public final FakeMap b = new FakeMap("b")
+    {
+        public Object get(Object arg)
+        {
+            builder.append(arg.toString());
+            
+            return Writable.this;
+        }
+    };
+    
+    /**
+     * Appends the arg to the string builder if val is truthy.
+     * <pre>
+     *   «writable.b.("a").v.(true).vb.("b").»
+     * </pre>
+     */
+    public final FakeMap vb = new FakeMap("vb")
+    {
+        public Object get(Object arg)
+        {
+            if (val != null && !Boolean.FALSE.equals(val))
+                builder.append(arg.toString());
+            
+            return Writable.this;
         }
     };
     
@@ -1496,6 +1531,18 @@ public final class Writable
     public FakeMap getV()
     {
         return setval;
+    }
+    
+    public String getSbstr()
+    {
+        String str = builder.toString();
+        builder.setLength(0);
+        return str;
+    }
+    
+    public StringBuilder getSb()
+    {
+        return builder;
     }
     
     public boolean isEmptyList()
