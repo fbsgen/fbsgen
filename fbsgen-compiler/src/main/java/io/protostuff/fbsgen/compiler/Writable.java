@@ -1534,7 +1534,10 @@ public final class Writable
         return setval;
     }
     
-    public String getSbstr()
+    /**
+     * Returns {@link #builder}'s toString();
+     */
+    public String getStr()
     {
         String str = builder.toString();
         builder.setLength(0);
