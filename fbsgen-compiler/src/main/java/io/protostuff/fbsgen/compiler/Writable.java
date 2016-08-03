@@ -407,12 +407,31 @@ public final class Writable
      */
     public final FakeMap keq = new FakeMap("keq")
     {
-        public Object get(Object entry)
+        public Object get(Object arg)
         {
             if (key == null)
                 throw new RuntimeException("Misuse of chain.");
             
-            Boolean ret = key.equals(entry) ? Boolean.TRUE : Boolean.FALSE;
+            Boolean ret = key.equals(arg) ? Boolean.TRUE : Boolean.FALSE;
+            key = null;
+            return ret;
+        }
+    };
+    
+    /**
+     * Compares the key against the arg via identify.
+     * <pre>
+     *   «writable.k.(foo).ksame.(bar)»
+     * </pre>
+     */
+    public final FakeMap ksame = new FakeMap("ksame")
+    {
+        public Object get(Object arg)
+        {
+            if (key == null)
+                throw new RuntimeException("Misuse of chain.");
+            
+            Boolean ret = key == arg ? Boolean.TRUE : Boolean.FALSE;
             key = null;
             return ret;
         }
