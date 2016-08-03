@@ -89,14 +89,31 @@ public final class Writable
     /**
      * Appends the arg to the string builder if val is truthy.
      * <pre>
-     *   «writable.b.("a").v.(true).vb.("b").»
+     *   «writable.v.(true).b.("a").bvt.("b").»
      * </pre>
      */
-    public final FakeMap vb = new FakeMap("vb")
+    public final FakeMap bvt = new FakeMap("bvt")
     {
         public Object get(Object arg)
         {
             if (arg != null && val != null && !Boolean.FALSE.equals(val))
+                builder.append(arg.toString());
+            
+            return Writable.this;
+        }
+    };
+    
+    /**
+     * Appends the arg to the string builder if val is not truthy.
+     * <pre>
+     *   «writable.v.(false).b.("a").bvf.("b").»
+     * </pre>
+     */
+    public final FakeMap bvf = new FakeMap("bvf")
+    {
+        public Object get(Object arg)
+        {
+            if (arg != null && (val == null || Boolean.FALSE.equals(val)))
                 builder.append(arg.toString());
             
             return Writable.this;
