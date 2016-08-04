@@ -221,6 +221,20 @@ public final class Writable
     };
     
     /**
+     * Returns the arg if val is null.
+     * <pre>
+     *   «writable.v.(message).velse.(foo)»
+     * </pre>
+     */
+    public final FakeMap velse = new FakeMap("velse")
+    {
+        public Object get(Object arg)
+        {
+            return val == null ? arg : val;
+        }
+    };
+    
+    /**
      * Formats the val with the arg.
      * <pre>
      *   «writable.v.(message.name).vfmt.("UC")»
