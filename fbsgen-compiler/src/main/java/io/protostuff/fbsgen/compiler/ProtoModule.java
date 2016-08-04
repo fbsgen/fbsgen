@@ -48,7 +48,7 @@ public class ProtoModule implements Serializable
 
     private HashMap<String, Object> attributes = new HashMap<String, Object>();
     
-    private Writable writable;
+    final Writable writable = new Writable();
 
     public ProtoModule()
     {
@@ -184,24 +184,37 @@ public class ProtoModule implements Serializable
      */
     public Writable getWritable()
     {
-        if (writable == null)
-            writable = new Writable();
-        
         return writable;
     }
     
     public Writable wk(String key)
     {
-        Writable w = getWritable();
+        Writable w = writable;
         w.setkey.get(key);
         return w;
     }
     
     public Writable wn(Integer num)
     {
-        Writable w = getWritable();
+        Writable w = writable;
         w.setnumber.get(num);
         return w;
+    }
+    
+    /**
+     * Alias to {@link Writable#getNum()}.
+     */
+    public int getNum()
+    {
+        return writable.getNum();
+    }
+    
+    /**
+     * Alias to {@link Writable#val}.
+     */
+    public Object getVal()
+    {
+        return writable.val;
     }
     
     /**
@@ -245,8 +258,7 @@ public class ProtoModule implements Serializable
     
     public ProtoModule clear(boolean clearAttrs)
     {
-        if (writable != null)
-            writable.getClearAll();
+        writable.getClearAll();
         
         if (clearAttrs)
             attributes.clear();
