@@ -73,6 +73,14 @@ public final class IsMap extends FakeMap
             }
         },
         
+        ONE
+        {
+            public boolean is(Object data)
+            {
+                return 1 == ((Number)data).intValue();
+            }
+        },
+        
         EXCLUDE_CLIENT
         {
             public boolean is(Object data)
