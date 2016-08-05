@@ -31,9 +31,7 @@ package io.protostuff.fbsgen.compiler;
 
 import static io.protostuff.fbsgen.compiler.CompilerUtil.COMMA;
 import static io.protostuff.fbsgen.compiler.CompilerUtil.SEMI_COLON;
-import static io.protostuff.fbsgen.compiler.CompilerUtil.isMatch;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
-import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Message;
 import io.protostuff.fbsgen.parser.Proto;
@@ -294,9 +292,6 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             return;
         }
         
-        Annotation a;
-        Object v;
-        
         int templates = 0;
         if (compiler.messageBlockTemplate != null)
         {
@@ -304,13 +299,8 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             
             for (Message message : proto.getMessages())
             {
-                if (!message.getA().isEmpty() && 
-                        (a=message.getA().get("Exclude")) != null && 
-                        ((v=a.getP().get("unless_output")) == null ||
-                        !isMatch(stg, v.toString())))
-                {
+                if (CompilerUtil.isSkip(stg, message))
                     continue;
-                }
                 
                 TemplatedProtoCompiler.compileMessageBlock(module.clear(), message, 
                         getPackageName(message.getProto(), compiler), 
@@ -325,13 +315,8 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             
             for (EnumGroup eg : proto.getEnumGroups())
             {
-                if (!eg.getA().isEmpty() && 
-                        (a=eg.getA().get("Exclude")) != null && 
-                        ((v=a.getP().get("unless_output")) == null ||
-                        !isMatch(stg, v.toString())))
-                {
+                if (CompilerUtil.isSkip(stg, eg))
                     continue;
-                }
                 
                 TemplatedProtoCompiler.compileEnumBlock(module.clear(), eg, 
                         getPackageName(eg.getProto(), compiler), 
@@ -371,9 +356,6 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             }
         }
         
-        Annotation a;
-        Object v;
-        
         final ArrayList<Message> messages = registry.getStgMessageMapping().get(stg);
         if (messages != null)
         {
@@ -382,13 +364,8 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             
             for (Message message : messages)
             {
-                if (!message.getA().isEmpty() && 
-                        (a=message.getA().get("Exclude")) != null && 
-                        ((v=a.getP().get("unless_output")) == null ||
-                        !isMatch(stg, v.toString())))
-                {
+                if (CompilerUtil.isSkip(stg, message))
                     continue;
-                }
                 
                 TemplatedProtoCompiler.compileMessageBlock(module.clear(), message, 
                         getPackageName(message.getProto(), compiler), 
@@ -405,13 +382,8 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             
             for (EnumGroup eg : enumGroups)
             {
-                if (!eg.getA().isEmpty() && 
-                        (a=eg.getA().get("Exclude")) != null && 
-                        ((v=a.getP().get("unless_output")) == null ||
-                        !isMatch(stg, v.toString())))
-                {
+                if (CompilerUtil.isSkip(stg, eg))
                     continue;
-                }
                 
                 TemplatedProtoCompiler.compileEnumBlock(module.clear(), eg, 
                         getPackageName(eg.getProto(), compiler), 

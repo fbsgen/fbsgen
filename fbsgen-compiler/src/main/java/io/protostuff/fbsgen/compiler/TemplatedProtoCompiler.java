@@ -14,9 +14,7 @@
 
 package io.protostuff.fbsgen.compiler;
 
-import static io.protostuff.fbsgen.compiler.CompilerUtil.isMatch;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
-import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.EnumGroup;
 import io.protostuff.fbsgen.parser.Message;
 import io.protostuff.fbsgen.parser.Proto;
@@ -102,7 +100,7 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
     {
         final String packageName = javaOutput ? proto.getJavaPackageName() :
                 proto.getPackageName();
-
+        
         if (protoBlockTemplate != null)
         {
             compileProtoBlock(module.clear(), proto, packageName, protoBlockTemplate);
@@ -116,29 +114,13 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
                     "need to be defined in " + module.getOutput());
         }
         
-        Object v;
+        final String outputId = getOutputId();
         if (enumBlockTemplate != null)
         {
             for (EnumGroup eg : proto.getEnumGroups())
             {
-                if (!eg.getA().isEmpty())
-                {
-                    Annotation a = eg.getAnnotation("Exclude");
-                    if (a != null)
-                    {
-                        if ((v = a.getP().get("unless_output")) == null || 
-                                !isMatch(getOutputId(), v.toString()))
-                        {
-                            continue;
-                        }
-                    }
-                    else if (null != (a = eg.getAnnotation("Include")) && 
-                            null != (v = a.getP().get("unless_output")) && 
-                            isMatch(getOutputId(), v.toString()))
-                    {
-                        continue;
-                    }
-                }
+                if (CompilerUtil.isSkip(outputId, eg))
+                    continue;
                 
                 compileEnumBlock(module.clear(), eg, packageName,
                         resolveFileName(eg.getName()), enumBlockTemplate);
@@ -149,24 +131,8 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
         {
             for (Message message : proto.getMessages())
             {
-                if (!message.getA().isEmpty())
-                {
-                    Annotation a = message.getAnnotation("Exclude");
-                    if (a != null)
-                    {
-                        if ((v = a.getP().get("unless_output")) == null || 
-                                !isMatch(getOutputId(), v.toString()))
-                        {
-                            continue;
-                        }
-                    }
-                    else if (null != (a = message.getAnnotation("Include")) && 
-                            null != (v = a.getP().get("unless_output")) && 
-                            isMatch(getOutputId(), v.toString()))
-                    {
-                        continue;
-                    }
-                }
+                if (CompilerUtil.isSkip(outputId, message))
+                    continue;
                 
                 compileMessageBlock(module.clear(), message, packageName,
                         resolveFileName(message.getName()), messageBlockTemplate);
