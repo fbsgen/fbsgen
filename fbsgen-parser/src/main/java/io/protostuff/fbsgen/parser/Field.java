@@ -14,7 +14,6 @@
 
 package io.protostuff.fbsgen.parser;
 
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -744,7 +743,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         }
     }
     
-    public static class Bytes extends Field<byte[]>
+    public static class Bytes extends Field<java.lang.String>
     {
         public Bytes()
         {
@@ -761,7 +760,8 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         }
         public java.lang.String getDefaultValueAsString()
         {
-            return TextFormat.escapeBytes(ByteBuffer.wrap(getDefaultValue())).toString();
+            return super.getDefaultValue().toString();
+            //return TextFormat.escapeBytes(ByteBuffer.wrap(getDefaultValue())).toString();
         }
         public boolean isDelimited()
         {
