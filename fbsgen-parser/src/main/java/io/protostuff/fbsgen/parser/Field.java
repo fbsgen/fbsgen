@@ -436,7 +436,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         
         public java.lang.String getJavaType()
         {
-            return "byte";
+            return "int";
         }
         
         public java.lang.String getFbsType()
@@ -461,7 +461,7 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         
         public java.lang.String getJavaType()
         {
-            return "byte";
+            return "int";
         }
         
         public java.lang.String getFbsType()
