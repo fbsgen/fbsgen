@@ -17,6 +17,7 @@ package io.protostuff.fbsgen.compiler.map;
 import io.protostuff.fbsgen.compiler.CompilerUtil;
 import io.protostuff.fbsgen.compiler.FakeMap;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -60,6 +61,20 @@ public final class SplitMap extends FakeMap
     
     public enum Functions implements Function
     {
+        CHARS
+        {
+            @Override
+            public Object split(String str)
+            {
+                ArrayList<String> list = new ArrayList<String>(str.length());
+                
+                for (int i = 0, len = str.length(); i < len; i++)
+                    list.add(new String(new char[]{str.charAt(i)}));
+                
+                return list;
+            }
+            
+        },
         DOT_AFTER_SLASH
         {
             @Override
