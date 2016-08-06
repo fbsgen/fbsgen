@@ -19,6 +19,8 @@ import static io.protostuff.fbsgen.compiler.CompilerUtil.PRINT_STACK_TRACE;
 import static io.protostuff.fbsgen.compiler.CompilerUtil.SILENT_MODE;
 import static io.protostuff.fbsgen.compiler.ErrorUtil.err;
 
+import io.protostuff.fbsgen.parser.ParseException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -565,13 +567,17 @@ public final class CompilerMain
         {
             run(args);
         }
-        catch(Exception e)
+        catch (ParseException e)
         {
             if (PRINT_STACK_TRACE)
                 e.printStackTrace();
             else
                 System.err.println(e.getMessage());
-            
+            System.exit(1);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
             System.exit(1);
         }
     }
