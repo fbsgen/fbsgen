@@ -1497,6 +1497,15 @@ public final class Writable
     }
     
     /**
+     * Sets the number to zero.
+     */
+    public Writable getClearnum()
+    {
+        number = 0;
+        return this;
+    }
+    
+    /**
      * Shorthand to {@link #number}.
      */
     public int getNum()
