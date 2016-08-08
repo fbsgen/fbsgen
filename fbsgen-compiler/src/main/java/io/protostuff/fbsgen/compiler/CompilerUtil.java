@@ -16,6 +16,7 @@ package io.protostuff.fbsgen.compiler;
 
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.AnnotationContainer;
+import io.protostuff.fbsgen.parser.Proto;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -61,10 +62,19 @@ public final class CompilerUtil
         }
     }
     
-    public static boolean isSkip(String outputId, AnnotationContainer ac)
+    public static boolean isSkip(String outputId, Proto proto)
+    {
+        Object v;
+        return ((v = proto.getO().get("exclude.unless_output")) != null && 
+                !isMatch(outputId, v.toString())) || 
+                ((v = proto.getO().get("include.unless_output")) != null && 
+                isMatch(outputId, v.toString()));
+    }
+    
+    public static boolean isSkip(String outputId, AnnotationContainer ac, boolean def)
     {
         if (ac.getA().isEmpty())
-            return false;
+            return def;
         
         Object v;
         Annotation a = ac.getAnnotation("Exclude");
@@ -83,7 +93,7 @@ public final class CompilerUtil
             return true;
         }
         
-        return false;
+        return def;
     }
     
     public static boolean isMatch(String stg, String filter)

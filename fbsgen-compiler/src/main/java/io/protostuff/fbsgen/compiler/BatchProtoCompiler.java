@@ -292,6 +292,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             return;
         }
         
+        final boolean skip = CompilerUtil.isSkip(stg, proto);
         int templates = 0;
         if (compiler.messageBlockTemplate != null)
         {
@@ -299,7 +300,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             
             for (Message message : proto.getMessages())
             {
-                if (CompilerUtil.isSkip(stg, message))
+                if (CompilerUtil.isSkip(stg, message, skip))
                     continue;
                 
                 TemplatedProtoCompiler.compileMessageBlock(module.clear(), message, 
@@ -315,7 +316,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             
             for (EnumGroup eg : proto.getEnumGroups())
             {
-                if (CompilerUtil.isSkip(stg, eg))
+                if (CompilerUtil.isSkip(stg, eg, skip))
                     continue;
                 
                 TemplatedProtoCompiler.compileEnumBlock(module.clear(), eg, 
@@ -364,7 +365,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             
             for (Message message : messages)
             {
-                if (CompilerUtil.isSkip(stg, message))
+                if (CompilerUtil.isSkip(stg, message, CompilerUtil.isSkip(stg, message.getProto())))
                     continue;
                 
                 TemplatedProtoCompiler.compileMessageBlock(module.clear(), message, 
@@ -382,7 +383,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             
             for (EnumGroup eg : enumGroups)
             {
-                if (CompilerUtil.isSkip(stg, eg))
+                if (CompilerUtil.isSkip(stg, eg, CompilerUtil.isSkip(stg, eg.getProto())))
                     continue;
                 
                 TemplatedProtoCompiler.compileEnumBlock(module.clear(), eg, 

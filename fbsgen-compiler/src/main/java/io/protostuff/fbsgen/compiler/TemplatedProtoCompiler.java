@@ -115,11 +115,13 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
         }
         
         final String outputId = getOutputId();
+        final boolean skip = CompilerUtil.isSkip(outputId, proto);
+        
         if (enumBlockTemplate != null)
         {
             for (EnumGroup eg : proto.getEnumGroups())
             {
-                if (CompilerUtil.isSkip(outputId, eg))
+                if (CompilerUtil.isSkip(outputId, eg, skip))
                     continue;
                 
                 compileEnumBlock(module.clear(), eg, packageName,
@@ -131,7 +133,7 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
         {
             for (Message message : proto.getMessages())
             {
-                if (CompilerUtil.isSkip(outputId, message))
+                if (CompilerUtil.isSkip(outputId, message, skip))
                     continue;
                 
                 compileMessageBlock(module.clear(), message, packageName,
