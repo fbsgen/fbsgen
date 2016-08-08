@@ -40,7 +40,7 @@ public final class ErrorUtil
         if (proto == null)
             return new CodegenException(msg);
         
-        return new CodegenException(msg + " [" + proto.getSourcePath() + "]");
+        return new CodegenException(msg + " [ " + proto.getSourcePath() + " ]");
     }
     
     public static CodegenException err(Proto proto, String msg, Throwable cause)
@@ -48,7 +48,7 @@ public final class ErrorUtil
         if (proto == null)
             return new CodegenException(msg, cause);
         
-        return new CodegenException(msg + " [" + proto.getSourcePath() + "]", cause);
+        return new CodegenException(msg + " [ " + proto.getSourcePath() + " ]", cause);
     }
     
     public static Proto getProto(Object obj)
@@ -61,7 +61,7 @@ public final class ErrorUtil
         if (proto == null)
             return new CodegenException(msg);
         
-        return new CodegenException(msg + " [" + proto.getSourcePath() + "]");
+        return new CodegenException(msg + " [ " + proto.getSourcePath() + " ]");
     }
     
     public static CodegenException err(String msg, Message m)

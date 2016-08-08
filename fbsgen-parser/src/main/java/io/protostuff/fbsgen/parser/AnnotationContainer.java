@@ -172,7 +172,7 @@ public abstract class AnnotationContainer implements HasAnnotations, HasName
     
     public static String msg(String msg, Proto proto)
     {
-        return proto == null ? msg : msg + " [" + proto.getSourcePath() + "]";
+        return proto == null ? msg : msg + " [ " + proto.getSourcePath() + " ]";
     }
     
     public static ParseException err(String msg, Proto proto)
@@ -185,7 +185,7 @@ public abstract class AnnotationContainer implements HasAnnotations, HasName
         if (proto == null)
             return new ParseException(msg, cause);
         
-        return new ParseException(msg + " [" + proto.getSourcePath() + "]", cause);
+        return new ParseException(msg + " [ " + proto.getSourcePath() + " ]", cause);
     }
 
     @Override
