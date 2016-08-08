@@ -82,6 +82,20 @@ public abstract class TemplatedCodeGenerator implements ProtoCompiler
 
         return formatted;
     }
+    
+    static String removeDot(String str)
+    {
+        char c;
+        int i = 0, len = str.length();
+        StringBuilder sb = new StringBuilder(len);
+        while (i < len)
+        {
+            if ('.' != (c = str.charAt(i++)))
+                sb.append(c);
+        }
+        
+        return len == sb.length() ? str : sb.toString();
+    }
 
     /**
      * Formats the string {@code str} using the format {@code formatName}.
@@ -93,12 +107,17 @@ public abstract class TemplatedCodeGenerator implements ProtoCompiler
         final Formatter formatter = DEFAULT_FORMATTERS.get(formatName);
         if (formatter != null)
             return formatter.format(str);
-
+        
         // regex replace
-        int eq = formatName.indexOf("==");
+        int eq = formatName.indexOf("=="), len;
         if (eq > 0)
         {
-            return formatName.length() == 4 ?
+            len = formatName.length();
+            
+            if (len == eq + 2 && formatName.charAt(eq - 1) == '.')
+                return removeDot(str);
+            
+            return len == 4 ?
                     // single char replacement
                     str.replace(formatName.charAt(0), formatName.charAt(3)) :
                     // regex replace
