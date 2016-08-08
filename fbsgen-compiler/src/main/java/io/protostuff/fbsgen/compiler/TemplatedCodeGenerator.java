@@ -114,8 +114,12 @@ public abstract class TemplatedCodeGenerator implements ProtoCompiler
         {
             len = formatName.length();
             
-            if (len == eq + 2 && formatName.charAt(eq - 1) == '.')
+            if (len < 5 && len == eq + 2 && formatName.charAt(eq - 1) == '.' && 
+                    (len == 3 || formatName.charAt(0) == '\\'))
+            {
+                // .== or \.==
                 return removeDot(str);
+            }
             
             return len == 4 ?
                     // single char replacement
