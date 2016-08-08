@@ -42,14 +42,9 @@ import java.util.Set;
 public final class ErrorMap implements Map<String,Object>
 {
     
-    public static final ErrorMap INSTANCE = new ErrorMap(null);
+    public static final ErrorMap INSTANCE = new ErrorMap();
     
-    final Proto proto;
-    
-    ErrorMap(Proto proto)
-    {
-        this.proto = proto;
-    }
+    private ErrorMap() {}
 
     public void clear()
     {
@@ -59,7 +54,7 @@ public final class ErrorMap implements Map<String,Object>
     public boolean containsKey(Object arg0)
     {
         // error mechanism called by stringtemplate
-        throw AnnotationContainer.err(String.valueOf(arg0), proto);
+        throw AnnotationContainer.err(String.valueOf(arg0), null);
     }
 
     public Object get(Object arg0)

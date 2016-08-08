@@ -53,8 +53,6 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
     final ArrayList<ConfiguredReference> references = new ArrayList<ConfiguredReference>();
     final ArrayList<Annotation> typeAnnotations = new ArrayList<Annotation>();
     
-    final ErrorMap err = new ErrorMap(this);
-    
     int refOffset;
     
     private String sourcePath;
@@ -126,11 +124,6 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
     public Proto getProto()
     {
         return this;
-    }
-    
-    public ErrorMap getErr()
-    {
-        return err;
     }
     
     public ErrorMap getError()
