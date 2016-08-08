@@ -575,7 +575,15 @@ public final class CompilerMain
                 System.err.println(e.getMessage());
             System.exit(1);
         }
-        catch(Exception e)
+        catch (CodegenException e)
+        {
+            if (PRINT_STACK_TRACE)
+                e.printStackTrace();
+            else
+                System.err.println(e.getMessage());
+            System.exit(1);
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
             System.exit(1);
