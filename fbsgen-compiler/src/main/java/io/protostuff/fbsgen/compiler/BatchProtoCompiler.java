@@ -283,16 +283,18 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             final TemplatedProtoCompiler compiler, final Proto proto, 
             final String stg) throws IOException
     {
+        final boolean skip = CompilerUtil.isSkip(stg, proto);
         if (compiler.protoBlockTemplate != null)
         {
-            compiler.compileProtoBlock(module.clear(), proto, 
-                    getPackageName(proto, compiler), 
-                    compiler.protoBlockTemplate);
-            
+            if (!skip)
+            {
+                compiler.compileProtoBlock(module.clear(), proto, 
+                        getPackageName(proto, compiler), 
+                        compiler.protoBlockTemplate);
+            }
             return;
         }
         
-        final boolean skip = CompilerUtil.isSkip(stg, proto);
         int templates = 0;
         if (compiler.messageBlockTemplate != null)
         {
@@ -351,6 +353,9 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             
             for (Proto proto : protos)
             {
+                if (CompilerUtil.isSkip(stg, proto))
+                    continue;
+                
                 compiler.compileProtoBlock(module.clear(), proto, 
                         getPackageName(proto, compiler), 
                         compiler.protoBlockTemplate);
