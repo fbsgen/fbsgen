@@ -101,9 +101,13 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
         final String packageName = javaOutput ? proto.getJavaPackageName() :
                 proto.getPackageName();
         
+        final String outputId = getOutputId();
+        final boolean skip = CompilerUtil.isSkip(outputId, proto);
+        
         if (protoBlockTemplate != null)
         {
-            compileProtoBlock(module.clear(), proto, packageName, protoBlockTemplate);
+            if (!skip)
+                compileProtoBlock(module.clear(), proto, packageName, protoBlockTemplate);
             return;
         }
         
@@ -113,9 +117,6 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
                     "(proto_block|message_block|enum_block) " +
                     "need to be defined in " + module.getOutput());
         }
-        
-        final String outputId = getOutputId();
-        final boolean skip = CompilerUtil.isSkip(outputId, proto);
         
         if (enumBlockTemplate != null)
         {
