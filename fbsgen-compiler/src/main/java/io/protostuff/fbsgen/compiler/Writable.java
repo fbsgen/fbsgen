@@ -15,6 +15,9 @@
 package io.protostuff.fbsgen.compiler;
 
 import static io.protostuff.fbsgen.compiler.CompilerUtil.$int;
+import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.FORMAT_DELIM;
+import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.chainedFormat;
+import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.format;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.AnnotationContainer;
 
@@ -247,7 +250,13 @@ public final class Writable
             if (val == null)
                 throw new RuntimeException("Misuse of chain (val must not be null).");
             
-            return TemplatedCodeGenerator.format(val.toString(), entry.toString());
+            String formatName = entry.toString(),
+                    str = val.toString();
+            
+            String[] formats = FORMAT_DELIM.split(formatName);
+
+            return formats.length == 0 ? format(str, formatName) :
+                    chainedFormat(str, formats);
         }
     };
     
@@ -592,7 +601,12 @@ public final class Writable
             if (arg == null)
                 return k;
             
-            return TemplatedCodeGenerator.format(k, arg.toString());
+            String formatName = arg.toString();
+            
+            String[] formats = FORMAT_DELIM.split(formatName);
+
+            return formats.length == 0 ? format(k, formatName) :
+                    chainedFormat(k, formats);
         }
     };
     
