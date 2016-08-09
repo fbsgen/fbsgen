@@ -49,7 +49,8 @@ public final class Writable
     
     public int number = 0;
     
-    public final StringBuilder builder = new StringBuilder();
+    public final StringBuilder builder = new StringBuilder(),
+            builder2 = new StringBuilder();
     
     public final ArrayList<Object> list = new ArrayList<Object>();
     
@@ -84,6 +85,23 @@ public final class Writable
         {
             if (arg != null)
                 builder.append(arg.toString());
+            
+            return Writable.this;
+        }
+    };
+    
+    /**
+     * Appends the arg to the string builder.
+     * <pre>
+     *   «writable.b2.("a").b2.("b").»
+     * </pre>
+     */
+    public final FakeMap b2 = new FakeMap("b2")
+    {
+        public Object get(Object arg)
+        {
+            if (arg != null)
+                builder2.append(arg.toString());
             
             return Writable.this;
         }
@@ -1617,9 +1635,14 @@ public final class Writable
         return str;
     }
     
-    public StringBuilder getSb()
+    /**
+     * Returns {@link #builder2}'s toString();
+     */
+    public String getStr2()
     {
-        return builder;
+        String str = builder2.toString();
+        builder2.setLength(0);
+        return str;
     }
     
     public boolean isEmptyList()
@@ -1660,6 +1683,7 @@ public final class Writable
         list.clear();
         map.clear();
         builder.setLength(0);
+        builder2.setLength(0);
         return this;
     }
     
