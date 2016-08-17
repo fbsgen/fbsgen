@@ -487,7 +487,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
     {
         if (source.isDirectory())
         {
-            for (File f : CompilerUtil.getProtoFiles(source))
+            for (File f : CompilerUtil.getProtoFiles(source, !module.getO().containsKey("exclude_dirs")))
                 collect(parseProto(f, module), module, target);
         }
         else

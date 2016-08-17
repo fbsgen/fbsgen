@@ -195,41 +195,40 @@ public final class CompilerUtil
         return new File(sb.append(path.substring(dollar + 1)).toString());
     }
 
-    public static List<File> getProtoFiles(File dir)
+    public static List<File> getProtoFiles(File dir, boolean recursive)
     {
-        return getFilesByExtension(dir, new String[] { ".proto" });
+        return getFilesByExtension(dir, ".proto", recursive);
     }
 
     /**
      * Returns a list of file filtered by their file types/extensions; (E.g ".proto")
      */
-    public static List<File> getFilesByExtension(File dir, String[] extensions)
+    public static List<File> getFilesByExtension(File dir, String extension, 
+            boolean recursive)
     {
-        if (!dir.isDirectory() || extensions == null)
+        if (!dir.isDirectory())
             return Collections.emptyList();
         List<File> files = new ArrayList<File>();
-        addFilesByExtension(files, dir, extensions);
+        addFilesByExtension(files, dir, extension, recursive);
         return files;
     }
 
-    static void addFilesByExtension(List<File> list, File dir, String[] extensions)
+    static void addFilesByExtension(List<File> list, File dir, String extension, 
+            boolean recursive)
     {
         File[] files = dir.listFiles();
         for (int i = 0; i < files.length; i++)
         {
             File f = files[i];
             if (f.isDirectory())
-                addFilesByExtension(list, f, extensions);
-            else
             {
-                for (String s : extensions)
-                {
-                    if (f.getName().endsWith(s))
-                    {
-                        list.add(f);
-                        break;
-                    }
-                }
+                if (recursive)
+                    addFilesByExtension(list, f, extension, recursive);
+            }
+            else if (f.getName().endsWith(extension))
+            {
+                list.add(f);
+                break;
             }
         }
     }

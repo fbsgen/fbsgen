@@ -174,7 +174,7 @@ public abstract class TemplatedCodeGenerator implements ProtoCompiler
         File source = module.getSource();
         if (source.isDirectory())
         {
-            for (File f : CompilerUtil.getProtoFiles(source))
+            for (File f : CompilerUtil.getProtoFiles(source, !module.getO().containsKey("exclude_dirs")))
                 compile(module, parseProto(f, module), compileImports, recursive);
         }
         else
