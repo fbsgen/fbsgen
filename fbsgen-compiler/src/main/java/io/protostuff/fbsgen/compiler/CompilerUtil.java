@@ -228,7 +228,6 @@ public final class CompilerUtil
             else if (f.getName().endsWith(extension))
             {
                 list.add(f);
-                break;
             }
         }
     }
