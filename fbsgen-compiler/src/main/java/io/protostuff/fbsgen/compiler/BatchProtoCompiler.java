@@ -240,6 +240,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
         // allow override from options
         String value = module.getOption(name);
         if (value == null && 
+                null == (value = module.getO().getProperty(name)) && 
                 null == (value = module.getConfig().getProperty(name)))
         {
             throw err("Missing config: " + name);
