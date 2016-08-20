@@ -132,6 +132,11 @@ public final class EnumField extends Field<EnumGroup.Value>
         
     }
     
+    public java.lang.String getInitialValueAsString()
+    {
+        return "0";
+    }
+    
     public java.lang.String getRegularType()
     {
         java.lang.String javaType = getJavaType();

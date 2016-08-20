@@ -354,6 +354,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     protected abstract void resolvePbType();
     
+    public java.lang.String getInitialValueAsString()
+    {
+        return "null";
+    }
+    
     /**
      * Alias to {@link #getFbsType()}.
      */
@@ -390,6 +395,11 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         public boolean isFloatingPointType()
         {
             return false;
+        }
+        
+        public java.lang.String getInitialValueAsString()
+        {
+            return "0";
         }
         
         /**
@@ -711,6 +721,10 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         {
             
         }
+        public java.lang.String getInitialValueAsString()
+        {
+            return "false";
+        }
     }
     
     public static class String extends Field<java.lang.String>
@@ -740,6 +754,10 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         protected void resolvePbType()
         {
             
+        }
+        public java.lang.String getInitialValueAsString()
+        {
+            return "\"\"";
         }
     }
     
@@ -771,6 +789,10 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
         protected void resolvePbType()
         {
             
+        }
+        public java.lang.String getInitialValueAsString()
+        {
+            return "\"\"";
         }
     }
     
