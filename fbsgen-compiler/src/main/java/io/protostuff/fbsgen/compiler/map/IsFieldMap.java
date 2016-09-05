@@ -98,6 +98,31 @@ public final class IsFieldMap extends FakeMap
             }
         },
         
+        WITH_VALIDATION
+        {
+            public boolean query(Field<?> f)
+            {
+                if (f.getNumber() < 3 && f.getOwner().getO().containsKey("~entity.kind"))
+                    return false;
+                
+                return f.getA().size() >= (f.getAnnotation("Display") == null ? 1 : 2);
+            }
+        },
+        
+        WITH_CLIENT_VALIDATION
+        {
+            public boolean query(Field<?> f)
+            {
+                if (f.isRepeated() || f.isBytesField() || f.isMessageField())
+                    return false;
+                
+                if (f.getNumber() < 3 && f.getOwner().getO().containsKey("~entity.kind"))
+                    return false;
+                
+                return f.getA().size() >= (f.getAnnotation("Display") == null ? 1 : 2);
+            }
+        },
+        
         BYTES_OR_VALIDATED
         {
             public boolean query(Field<?> f)
