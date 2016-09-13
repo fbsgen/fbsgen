@@ -119,7 +119,7 @@ public final class IsFieldMap extends FakeMap
                 if (f.getNumber() < 3 && f.getOwner().getO().containsKey("~entity.kind"))
                     return false;
                 
-                if (f.getA().containsKey("Id") && f instanceof Field.UInt32)
+                if (f.getA().containsKey("Id") && f instanceof Field.UInt32 && f.getName().endsWith("_id"))
                     return false;
                 
                 return f.getA().size() >= (f.getAnnotation("Display") == null ? 1 : 2);
