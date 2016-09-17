@@ -500,7 +500,7 @@ public final class Writable
             if (arg instanceof Integer)
             {
                 int i = ((Integer)arg).intValue();
-                return i < 0 ? k.substring(0, k.length()+i) : k.substring(i);
+                return i < 0 ? k.substring(0, k.length()+i) : k.substring(0, i);
             }
             
             final String sub = arg.toString();
