@@ -20,10 +20,12 @@ import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.chainedFormat
 import static io.protostuff.fbsgen.compiler.TemplatedCodeGenerator.format;
 import io.protostuff.fbsgen.parser.Annotation;
 import io.protostuff.fbsgen.parser.AnnotationContainer;
+import io.protostuff.fbsgen.parser.HasName;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +38,12 @@ import java.util.Map;
  */
 public final class Writable
 {
+    /**
+     * Map used against the procedures of {@link Writable}.
+     */
+    @SuppressWarnings("serial")
+    static final class NewMap extends HashMap<Object,Object> {}
+    
     static final FakeMap EMPTY = new FakeMap("EMPTY")
     {
         @Override
@@ -1103,6 +1111,31 @@ public final class Writable
     };
     
     /**
+     * Clear the map or list.
+     * <pre>
+     *   «(writable.clear.(map_or_list))»
+     * </pre>
+     */
+    public final FakeMap clear = new FakeMap("clear")
+    {
+        public Object get(Object entry)
+        {
+            if (key != null || entry == null)
+                throw new RuntimeException("Misuse of chain.");
+            
+            if (entry instanceof String || entry instanceof HasName)
+                entry = map.get(entry.toString());
+            
+            if (entry instanceof Map)
+                ((Map<?,?>)entry).clear();
+            else if (entry instanceof Collection)
+                ((Collection<?>)entry).clear();
+            
+            return Writable.this;
+        }
+    };
+    
+    /**
      * Puts the entry into the map.
      * <pre>
      *   «(writable.k.("foo").put.(field))»
@@ -1134,25 +1167,36 @@ public final class Writable
     {
         public Object get(Object entry)
         {
+            if (entry instanceof NewMap)
+            {
+                final Object k = key;
+                if (k == null)
+                    throw new RuntimeException("Misuse of chain.");
+                
+                key = null;
+                // returns true if unique.
+                return $uput(k, k, (NewMap)entry);
+            }
+            
             if (key != null)
             {
-                $uput(key, entry);
+                $uput(key, entry, map);
                 key = null;
             }
             else if (entry != null)
-                $uput(entry.toString(), entry);
+                $uput(entry.toString(), entry, map);
             
             return Writable.this;
         }
     };
     
-    void $uput(Object key, Object value)
+    boolean $uput(Object key, Object value, Map<Object,Object> map)
     {
-        if (!map.containsKey(key))
-        {
-            // unique
+        final boolean unique = !map.containsKey(key);
+        if (unique)
             map.put(key, value);
-        }
+        
+        return unique;
     }
     
     /**
@@ -1671,6 +1715,14 @@ public final class Writable
     {
         map.clear();
         return this;
+    }
+    
+    /**
+     * Clears the map.
+     */
+    public NewMap getNewMap()
+    {
+        return new NewMap();
     }
     
     /**
