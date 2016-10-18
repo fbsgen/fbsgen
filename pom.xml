@@ -69,7 +69,7 @@
         <configuration>
           <archive>
             <manifestEntries>
-              <implementation-version>${pom.version}</implementation-version>
+              <implementation-version>${project.version}</implementation-version>
             </manifestEntries>
           </archive>
         </configuration>
