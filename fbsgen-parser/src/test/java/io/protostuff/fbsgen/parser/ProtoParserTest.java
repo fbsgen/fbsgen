@@ -12,7 +12,7 @@
 //limitations under the License.
 //========================================================================
 
-package io.protostuff.fbsgen.parser;
+package com.dyuproject.fbsgen.parser;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +20,7 @@ import java.net.URL;
 
 import junit.framework.TestCase;
 
-import io.protostuff.fbsgen.parser.Field.Modifier;
+import com.dyuproject.fbsgen.parser.Field.Modifier;
 
 /**
  * Various tests for the proto parser.

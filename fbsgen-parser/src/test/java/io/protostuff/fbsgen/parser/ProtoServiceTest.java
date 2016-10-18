@@ -12,11 +12,11 @@
 //limitations under the License.
 //========================================================================
 
-package io.protostuff.fbsgen.parser;
+package com.dyuproject.fbsgen.parser;
 
 import java.io.File;
 
-import io.protostuff.fbsgen.parser.Service.RpcMethod;
+import com.dyuproject.fbsgen.parser.Service.RpcMethod;
 
 import junit.framework.TestCase;
 

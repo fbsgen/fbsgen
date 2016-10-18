@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
     <artifactId>fbsgen</artifactId>
-    <groupId>io.protostuff.fbsgen</groupId>
+    <groupId>com.dyuproject.fbsgen</groupId>
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
@@ -27,7 +27,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>io.protostuff.fbsgen.compiler.CompilerMain</mainClass>
+              <mainClass>com.dyuproject.fbsgen.compiler.CompilerMain</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -42,12 +42,12 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.protostuff.fbsgen</groupId>
+      <groupId>com.dyuproject.fbsgen</groupId>
       <artifactId>fbsgen-parser</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>io.protostuff.jetg</groupId>
+      <groupId>com.dyuproject.jetg</groupId>
       <artifactId>jetg</artifactId>
       <version>${jetg-version}</version>
     </dependency>
@@ -82,7 +82,7 @@
               </descriptorRefs>
                <archive>
                 <manifest>
-                  <mainClass>io.protostuff.fbsgen.compiler.CompilerMain</mainClass>
+                  <mainClass>com.dyuproject.fbsgen.compiler.CompilerMain</mainClass>
                 </manifest>
                 <manifestEntries>
                   <implementation-version>${project.version}</implementation-version>
@@ -137,7 +137,7 @@
                       -dontwarn **
                       -dontnote
 
-                      -keep class io.protostuff.fbsgen.compiler.** { *; }
+                      -keep class com.dyuproject.fbsgen.compiler.** { *; }
                       -keep class jetbrick.compiler.** { *; }
                     </proguard>
                   </tasks>
@@ -154,11 +154,11 @@
                     <taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" />
                     <jarjar jarfile="target/fbsgen.jar">
                       <manifest>
-                        <attribute name="Main-Class" value="io.protostuff.fbsgen.compiler.CompilerMain" />
+                        <attribute name="Main-Class" value="com.dyuproject.fbsgen.compiler.CompilerMain" />
                         <attribute name="implementation-version" value="${project.version}" />
                       </manifest>
                       <zipfileset src="target/${project.build.finalName}-jar-with-dependencies.jar" />
-                      <keep pattern="io.protostuff.fbsgen.compiler.**" />
+                      <keep pattern="com.dyuproject.fbsgen.compiler.**" />
                       <keep pattern="jetbrick.**" />
                     </jarjar>
                   </tasks>

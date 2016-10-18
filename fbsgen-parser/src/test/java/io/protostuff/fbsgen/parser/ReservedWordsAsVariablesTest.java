@@ -12,7 +12,7 @@
 //limitations under the License.
 //========================================================================
 
-package io.protostuff.fbsgen.parser;
+package com.dyuproject.fbsgen.parser;
 
 import java.io.File;
 import java.util.Map;
@@ -31,7 +31,7 @@ public class ReservedWordsAsVariablesTest extends TestCase
     public void testIt() throws Exception
     {
         File file = ProtoParserTest.getFile(
-                "io/protostuff/fbsgen/parser/test_reserved_words_as_variables.proto");
+                "com.dyuproject/fbsgen/parser/test_reserved_words_as_variables.proto");
         assertTrue(file.exists());
 
         Proto proto = new Proto(file);

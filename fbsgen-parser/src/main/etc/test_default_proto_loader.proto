@@ -1,4 +1,4 @@
-package io.protostuff.fbsgen.parser;
+package com.dyuproject.fbsgen.parser;
 
 import "google/protobuf/unittest_import.proto";
 

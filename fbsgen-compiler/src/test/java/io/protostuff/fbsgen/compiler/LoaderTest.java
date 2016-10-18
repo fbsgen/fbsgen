@@ -12,7 +12,7 @@
 //limitations under the License.
 //========================================================================
 
-package io.protostuff.fbsgen.compiler;
+package com.dyuproject.fbsgen.compiler;
 
 import junit.framework.TestCase;
 

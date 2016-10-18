@@ -12,7 +12,7 @@
 //limitations under the License.
 //========================================================================
 
-package io.protostuff.fbsgen.parser;
+package com.dyuproject.fbsgen.parser;
 
 import java.io.File;
 
@@ -30,10 +30,10 @@ public class DefaultProtoLoaderTest extends TestCase
     public void testPackageBaseDir() throws Exception
     {
         File f = ProtoParserTest.getFile(
-                "io/protostuff/fbsgen/parser/test_default_proto_loader.proto");
+                "com.dyuproject/fbsgen/parser/test_default_proto_loader.proto");
         assertTrue(f.exists());
         Proto p = ProtoUtil.parseProto(f);
-        assertEquals("io.protostuff.fbsgen.parser", p.getPackageName());
+        assertEquals("com.dyuproject.fbsgen.parser", p.getPackageName());
     }
 
     public void testLoadProtoFromClasspath() throws Exception
@@ -49,7 +49,7 @@ public class DefaultProtoLoaderTest extends TestCase
         File f = new File("src/main/etc/test_default_proto_loader.proto");
         assertTrue(f.exists());
         Proto p = ProtoUtil.parseProto(f);
-        assertEquals("io.protostuff.fbsgen.parser", p.getPackageName());
+        assertEquals("com.dyuproject.fbsgen.parser", p.getPackageName());
 
         Message testMessage = p.getMessage("TestMessage");
         assertNotNull(testMessage);

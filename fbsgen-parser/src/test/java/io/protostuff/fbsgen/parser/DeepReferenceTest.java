@@ -12,7 +12,7 @@
 //limitations under the License.
 //========================================================================
 
-package io.protostuff.fbsgen.parser;
+package com.dyuproject.fbsgen.parser;
 
 import java.io.File;
 

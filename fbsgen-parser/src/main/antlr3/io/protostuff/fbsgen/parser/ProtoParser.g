@@ -46,7 +46,7 @@ options {
 // What package should the generated source exist in?
 //
 @header {
-    package io.protostuff.fbsgen.parser;
+    package com.dyuproject.fbsgen.parser;
 }
 
 parse [Proto proto]
