@@ -31,7 +31,7 @@ public class ReservedWordsAsVariablesTest extends TestCase
     public void testIt() throws Exception
     {
         File file = ProtoParserTest.getFile(
-                "com.dyuproject/fbsgen/parser/test_reserved_words_as_variables.proto");
+                "com/dyuproject/fbsgen/parser/test_reserved_words_as_variables.proto");
         assertTrue(file.exists());
 
         Proto proto = new Proto(file);

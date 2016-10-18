@@ -50,32 +50,32 @@ public class DuplicateEntriesTest extends TestCase
 
     public void testDupEnum() throws Exception
     {
-        assertDup("com.dyuproject/fbsgen/parser/test_duplicate_enum.proto");
+        assertDup("com/dyuproject/fbsgen/parser/test_duplicate_enum.proto");
     }
 
     public void testDupNestedEnum() throws Exception
     {
-        assertDup("com.dyuproject/fbsgen/parser/test_duplicate_nested_enum.proto");
+        assertDup("com/dyuproject/fbsgen/parser/test_duplicate_nested_enum.proto");
     }
 
     public void testDupMessage() throws Exception
     {
-        assertDup("com.dyuproject/fbsgen/parser/test_duplicate_message.proto");
+        assertDup("com/dyuproject/fbsgen/parser/test_duplicate_message.proto");
     }
 
     public void testDupNestedMessage() throws Exception
     {
-        assertDup("com.dyuproject/fbsgen/parser/test_duplicate_nested_message.proto");
+        assertDup("com/dyuproject/fbsgen/parser/test_duplicate_nested_message.proto");
     }
 
     public void testDupRpcMethod() throws Exception
     {
-        assertDup("com.dyuproject/fbsgen/parser/test_duplicate_rpcmethod.proto");
+        assertDup("com/dyuproject/fbsgen/parser/test_duplicate_rpcmethod.proto");
     }
 
     public void testDupService() throws Exception
     {
-        assertDup("com.dyuproject/fbsgen/parser/test_duplicate_service.proto");
+        assertDup("com/dyuproject/fbsgen/parser/test_duplicate_service.proto");
     }
 
 }

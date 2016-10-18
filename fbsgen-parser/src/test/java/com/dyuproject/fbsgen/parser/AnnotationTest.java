@@ -29,7 +29,7 @@ public class AnnotationTest extends TestCase
 
     public void testIt() throws Exception
     {
-        File f = ProtoParserTest.getFile("com.dyuproject/fbsgen/parser/test_annotations.proto");
+        File f = ProtoParserTest.getFile("com/dyuproject/fbsgen/parser/test_annotations.proto");
         assertTrue(f.exists());
 
         Proto proto = new Proto(f);

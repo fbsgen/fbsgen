@@ -30,7 +30,7 @@ public class DefaultProtoLoaderTest extends TestCase
     public void testPackageBaseDir() throws Exception
     {
         File f = ProtoParserTest.getFile(
-                "com.dyuproject/fbsgen/parser/test_default_proto_loader.proto");
+                "com/dyuproject/fbsgen/parser/test_default_proto_loader.proto");
         assertTrue(f.exists());
         Proto p = ProtoUtil.parseProto(f);
         assertEquals("com.dyuproject.fbsgen.parser", p.getPackageName());

@@ -29,7 +29,7 @@ public class OptionTest extends TestCase
 
     public void testIt() throws Exception
     {
-        File f = ProtoParserTest.getFile("com.dyuproject/fbsgen/parser/test_options.proto");
+        File f = ProtoParserTest.getFile("com/dyuproject/fbsgen/parser/test_options.proto");
         assertTrue(f.exists());
 
         Proto proto = new Proto(f);
