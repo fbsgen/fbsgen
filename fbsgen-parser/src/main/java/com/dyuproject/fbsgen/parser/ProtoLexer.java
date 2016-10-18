@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 com.dyuproject/fbsgen/parser/ProtoLexer.g 2014-09-08 21:38:55
+// $ANTLR 3.5.2 com/dyuproject/fbsgen/parser/ProtoLexer.g 2016-10-18 15:19:03
 
     package com.dyuproject.fbsgen.parser;
 
@@ -84,15 +84,15 @@ public class ProtoLexer extends AbstractLexer {
 	public ProtoLexer(CharStream input, RecognizerSharedState state) {
 		super(input,state);
 	}
-	@Override public String getGrammarFileName() { return "com.dyuproject/fbsgen/parser/ProtoLexer.g"; }
+	@Override public String getGrammarFileName() { return "com/dyuproject/fbsgen/parser/ProtoLexer.g"; }
 
 	// $ANTLR start "ASSIGN"
 	public final void mASSIGN() throws RecognitionException {
 		try {
 			int _type = ASSIGN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:35:5: ( '=' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:35:9: '='
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:35:5: ( '=' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:35:9: '='
 			{
 			match('='); 
 			}
@@ -111,8 +111,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = AT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:39:5: ( '@' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:39:9: '@'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:39:5: ( '@' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:39:9: '@'
 			{
 			match('@'); 
 			}
@@ -131,8 +131,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = LEFTCURLY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:43:5: ( '{' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:43:9: '{'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:43:5: ( '{' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:43:9: '{'
 			{
 			match('{'); 
 			}
@@ -151,8 +151,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = RIGHTCURLY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:47:5: ( '}' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:47:9: '}'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:47:5: ( '}' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:47:9: '}'
 			{
 			match('}'); 
 			}
@@ -171,8 +171,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = LEFTPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:51:5: ( '(' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:51:9: '('
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:51:5: ( '(' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:51:9: '('
 			{
 			match('('); 
 			}
@@ -191,8 +191,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = RIGHTPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:55:5: ( ')' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:55:9: ')'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:55:5: ( ')' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:55:9: ')'
 			{
 			match(')'); 
 			}
@@ -211,8 +211,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = LEFTSQUARE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:59:5: ( '[' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:59:9: '['
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:59:5: ( '[' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:59:9: '['
 			{
 			match('['); 
 			}
@@ -231,8 +231,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = RIGHTSQUARE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:63:5: ( ']' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:63:9: ']'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:63:5: ( ']' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:63:9: ']'
 			{
 			match(']'); 
 			}
@@ -251,8 +251,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = SEMICOLON;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:67:5: ( ';' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:67:9: ';'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:67:5: ( ';' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:67:9: ';'
 			{
 			match(';'); 
 			}
@@ -271,8 +271,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = COMMA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:71:5: ( ',' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:71:9: ','
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:71:5: ( ',' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:71:9: ','
 			{
 			match(','); 
 			}
@@ -291,8 +291,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = PLUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:75:5: ( '+' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:75:9: '+'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:75:5: ( '+' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:75:9: '+'
 			{
 			match('+'); 
 			}
@@ -311,8 +311,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = MINUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:79:5: ( '-' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:79:9: '-'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:79:5: ( '-' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:79:9: '-'
 			{
 			match('-'); 
 			}
@@ -331,8 +331,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = TO;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:83:5: ( 'to' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:83:9: 'to'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:83:5: ( 'to' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:83:9: 'to'
 			{
 			match("to"); 
 
@@ -352,8 +352,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = TRUE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:87:5: ( 'true' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:87:9: 'true'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:87:5: ( 'true' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:87:9: 'true'
 			{
 			match("true"); 
 
@@ -373,8 +373,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = FALSE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:91:5: ( 'false' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:91:9: 'false'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:91:5: ( 'false' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:91:9: 'false'
 			{
 			match("false"); 
 
@@ -394,8 +394,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = PKG;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:95:5: ( 'package' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:95:9: 'package'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:95:5: ( 'package' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:95:9: 'package'
 			{
 			match("package"); 
 
@@ -415,8 +415,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = SYNTAX;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:99:5: ( 'syntax' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:99:9: 'syntax'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:99:5: ( 'syntax' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:99:9: 'syntax'
 			{
 			match("syntax"); 
 
@@ -436,8 +436,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = IMPORT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:103:5: ( 'import' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:103:9: 'import'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:103:5: ( 'import' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:103:9: 'import'
 			{
 			match("import"); 
 
@@ -457,8 +457,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = OPTION;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:107:5: ( 'option' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:107:9: 'option'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:107:5: ( 'option' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:107:9: 'option'
 			{
 			match("option"); 
 
@@ -478,8 +478,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = MESSAGE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:111:5: ( 'message' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:111:9: 'message'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:111:5: ( 'message' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:111:9: 'message'
 			{
 			match("message"); 
 
@@ -499,8 +499,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = SERVICE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:115:5: ( 'service' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:115:9: 'service'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:115:5: ( 'service' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:115:9: 'service'
 			{
 			match("service"); 
 
@@ -520,8 +520,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = ENUM;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:119:5: ( 'enum' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:119:9: 'enum'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:119:5: ( 'enum' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:119:9: 'enum'
 			{
 			match("enum"); 
 
@@ -541,8 +541,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = REQUIRED;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:123:5: ( 'required' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:123:9: 'required'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:123:5: ( 'required' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:123:9: 'required'
 			{
 			match("required"); 
 
@@ -562,8 +562,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = OPTIONAL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:127:5: ( 'optional' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:127:9: 'optional'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:127:5: ( 'optional' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:127:9: 'optional'
 			{
 			match("optional"); 
 
@@ -583,8 +583,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = REPEATED;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:131:5: ( 'repeated' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:131:9: 'repeated'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:131:5: ( 'repeated' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:131:9: 'repeated'
 			{
 			match("repeated"); 
 
@@ -604,8 +604,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = RPC;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:147:5: ( 'rpc' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:147:9: 'rpc'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:147:5: ( 'rpc' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:147:9: 'rpc'
 			{
 			match("rpc"); 
 
@@ -625,8 +625,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = RETURNS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:151:5: ( 'returns' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:151:9: 'returns'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:151:5: ( 'returns' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:151:9: 'returns'
 			{
 			match("returns"); 
 
@@ -646,8 +646,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = INT8;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:155:5: ( 'int8' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:155:9: 'int8'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:155:5: ( 'int8' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:155:9: 'int8'
 			{
 			match("int8"); 
 
@@ -667,8 +667,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = INT16;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:159:5: ( 'int16' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:159:9: 'int16'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:159:5: ( 'int16' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:159:9: 'int16'
 			{
 			match("int16"); 
 
@@ -688,8 +688,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = INT32;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:163:5: ( 'int32' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:163:9: 'int32'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:163:5: ( 'int32' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:163:9: 'int32'
 			{
 			match("int32"); 
 
@@ -709,8 +709,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = INT64;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:167:5: ( 'int64' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:167:9: 'int64'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:167:5: ( 'int64' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:167:9: 'int64'
 			{
 			match("int64"); 
 
@@ -730,8 +730,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = UINT8;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:171:5: ( 'uint8' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:171:9: 'uint8'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:171:5: ( 'uint8' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:171:9: 'uint8'
 			{
 			match("uint8"); 
 
@@ -751,8 +751,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = UINT16;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:175:5: ( 'uint16' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:175:9: 'uint16'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:175:5: ( 'uint16' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:175:9: 'uint16'
 			{
 			match("uint16"); 
 
@@ -772,8 +772,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = UINT32;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:179:5: ( 'uint32' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:179:9: 'uint32'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:179:5: ( 'uint32' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:179:9: 'uint32'
 			{
 			match("uint32"); 
 
@@ -793,8 +793,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = UINT64;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:183:5: ( 'uint64' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:183:9: 'uint64'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:183:5: ( 'uint64' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:183:9: 'uint64'
 			{
 			match("uint64"); 
 
@@ -814,8 +814,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = FLOAT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:187:5: ( 'float' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:187:9: 'float'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:187:5: ( 'float' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:187:9: 'float'
 			{
 			match("float"); 
 
@@ -835,8 +835,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = DOUBLE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:191:5: ( 'double' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:191:9: 'double'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:191:5: ( 'double' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:191:9: 'double'
 			{
 			match("double"); 
 
@@ -856,8 +856,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = BOOL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:195:5: ( 'bool' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:195:9: 'bool'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:195:5: ( 'bool' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:195:9: 'bool'
 			{
 			match("bool"); 
 
@@ -877,8 +877,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = STRING;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:199:5: ( 'string' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:199:9: 'string'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:199:5: ( 'string' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:199:9: 'string'
 			{
 			match("string"); 
 
@@ -898,8 +898,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = BYTES;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:203:5: ( 'bytes' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:203:9: 'bytes'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:203:5: ( 'bytes' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:203:9: 'bytes'
 			{
 			match("bytes"); 
 
@@ -919,8 +919,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = DEFAULT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:207:5: ( 'default' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:207:9: 'default'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:207:5: ( 'default' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:207:9: 'default'
 			{
 			match("default"); 
 
@@ -940,8 +940,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = MAX;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:211:5: ( 'max' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:211:9: 'max'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:211:5: ( 'max' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:211:9: 'max'
 			{
 			match("max"); 
 
@@ -961,8 +961,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = VOID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:215:5: ( 'void' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:215:9: 'void'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:215:5: ( 'void' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:215:9: 'void'
 			{
 			match("void"); 
 
@@ -982,12 +982,12 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = FULL_ID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:219:5: ( ID ( '.' ID )+ )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:219:7: ID ( '.' ID )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:219:5: ( ID ( '.' ID )+ )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:219:7: ID ( '.' ID )+
 			{
 			mID(); 
 
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:219:10: ( '.' ID )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:219:10: ( '.' ID )+
 			int cnt1=0;
 			loop1:
 			while (true) {
@@ -999,7 +999,7 @@ public class ProtoLexer extends AbstractLexer {
 
 				switch (alt1) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:219:11: '.' ID
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:219:11: '.' ID
 					{
 					match('.'); 
 					mID(); 
@@ -1031,8 +1031,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = ID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:223:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:223:9: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:223:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:223:9: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -1042,7 +1042,7 @@ public class ProtoLexer extends AbstractLexer {
 				recover(mse);
 				throw mse;
 			}
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:223:33: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:223:33: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
 			loop2:
 			while (true) {
 				int alt2=2;
@@ -1053,7 +1053,7 @@ public class ProtoLexer extends AbstractLexer {
 
 				switch (alt2) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 						input.consume();
@@ -1087,8 +1087,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = EXP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:227:5: ( NUMINT ( 'e' | 'E' ) NUMINT )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:227:9: NUMINT ( 'e' | 'E' ) NUMINT
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:227:5: ( NUMINT ( 'e' | 'E' ) NUMINT )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:227:9: NUMINT ( 'e' | 'E' ) NUMINT
 			{
 			mNUMINT(); 
 
@@ -1118,22 +1118,22 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = NUMDOUBLE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:231:5: ( ( NUMFLOAT | NUMINT ) 'e' ( '0' .. '9' )+ )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:231:9: ( NUMFLOAT | NUMINT ) 'e' ( '0' .. '9' )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:231:5: ( ( NUMFLOAT | NUMINT ) 'e' ( '0' .. '9' )+ )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:231:9: ( NUMFLOAT | NUMINT ) 'e' ( '0' .. '9' )+
 			{
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:231:9: ( NUMFLOAT | NUMINT )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:231:9: ( NUMFLOAT | NUMINT )
 			int alt3=2;
 			alt3 = dfa3.predict(input);
 			switch (alt3) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:231:10: NUMFLOAT
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:231:10: NUMFLOAT
 					{
 					mNUMFLOAT(); 
 
 					}
 					break;
 				case 2 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:231:19: NUMINT
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:231:19: NUMINT
 					{
 					mNUMINT(); 
 
@@ -1143,7 +1143,7 @@ public class ProtoLexer extends AbstractLexer {
 			}
 
 			match('e'); 
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:232:13: ( '0' .. '9' )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:232:13: ( '0' .. '9' )+
 			int cnt4=0;
 			loop4:
 			while (true) {
@@ -1155,7 +1155,7 @@ public class ProtoLexer extends AbstractLexer {
 
 				switch (alt4) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -1192,13 +1192,13 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = NUMFLOAT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:236:5: ( NUMINT '.' ( '0' .. '9' )+ ( 'f' )? )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:236:9: NUMINT '.' ( '0' .. '9' )+ ( 'f' )?
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:236:5: ( NUMINT '.' ( '0' .. '9' )+ ( 'f' )? )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:236:9: NUMINT '.' ( '0' .. '9' )+ ( 'f' )?
 			{
 			mNUMINT(); 
 
 			match('.'); 
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:236:20: ( '0' .. '9' )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:236:20: ( '0' .. '9' )+
 			int cnt5=0;
 			loop5:
 			while (true) {
@@ -1210,7 +1210,7 @@ public class ProtoLexer extends AbstractLexer {
 
 				switch (alt5) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -1231,7 +1231,7 @@ public class ProtoLexer extends AbstractLexer {
 				cnt5++;
 			}
 
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:236:30: ( 'f' )?
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:236:30: ( 'f' )?
 			int alt6=2;
 			int LA6_0 = input.LA(1);
 			if ( (LA6_0=='f') ) {
@@ -1239,7 +1239,7 @@ public class ProtoLexer extends AbstractLexer {
 			}
 			switch (alt6) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:236:30: 'f'
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:236:30: 'f'
 					{
 					match('f'); 
 					}
@@ -1263,7 +1263,7 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = NUMINT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:240:5: ( '0' | ( MINUS )? '1' .. '9' ( '0' .. '9' )* )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:240:5: ( '0' | ( MINUS )? '1' .. '9' ( '0' .. '9' )* )
 			int alt9=2;
 			int LA9_0 = input.LA(1);
 			if ( (LA9_0=='0') ) {
@@ -1281,15 +1281,15 @@ public class ProtoLexer extends AbstractLexer {
 
 			switch (alt9) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:240:9: '0'
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:240:9: '0'
 					{
 					match('0'); 
 					}
 					break;
 				case 2 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:240:15: ( MINUS )? '1' .. '9' ( '0' .. '9' )*
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:240:15: ( MINUS )? '1' .. '9' ( '0' .. '9' )*
 					{
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:240:15: ( MINUS )?
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:240:15: ( MINUS )?
 					int alt7=2;
 					int LA7_0 = input.LA(1);
 					if ( (LA7_0=='-') ) {
@@ -1297,7 +1297,7 @@ public class ProtoLexer extends AbstractLexer {
 					}
 					switch (alt7) {
 						case 1 :
-							// com.dyuproject/fbsgen/parser/ProtoLexer.g:
+							// com/dyuproject/fbsgen/parser/ProtoLexer.g:
 							{
 							if ( input.LA(1)=='-' ) {
 								input.consume();
@@ -1313,7 +1313,7 @@ public class ProtoLexer extends AbstractLexer {
 					}
 
 					matchRange('1','9'); 
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:240:31: ( '0' .. '9' )*
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:240:31: ( '0' .. '9' )*
 					loop8:
 					while (true) {
 						int alt8=2;
@@ -1324,7 +1324,7 @@ public class ProtoLexer extends AbstractLexer {
 
 						switch (alt8) {
 						case 1 :
-							// com.dyuproject/fbsgen/parser/ProtoLexer.g:
+							// com/dyuproject/fbsgen/parser/ProtoLexer.g:
 							{
 							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 								input.consume();
@@ -1360,10 +1360,10 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = HEX;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:244:5: ( ( MINUS )? '0' ( 'x' | 'X' ) ( HEX_DIGIT )+ )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:244:9: ( MINUS )? '0' ( 'x' | 'X' ) ( HEX_DIGIT )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:244:5: ( ( MINUS )? '0' ( 'x' | 'X' ) ( HEX_DIGIT )+ )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:244:9: ( MINUS )? '0' ( 'x' | 'X' ) ( HEX_DIGIT )+
 			{
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:244:9: ( MINUS )?
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:244:9: ( MINUS )?
 			int alt10=2;
 			int LA10_0 = input.LA(1);
 			if ( (LA10_0=='-') ) {
@@ -1371,7 +1371,7 @@ public class ProtoLexer extends AbstractLexer {
 			}
 			switch (alt10) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:
 					{
 					if ( input.LA(1)=='-' ) {
 						input.consume();
@@ -1395,7 +1395,7 @@ public class ProtoLexer extends AbstractLexer {
 				recover(mse);
 				throw mse;
 			}
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:244:30: ( HEX_DIGIT )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:244:30: ( HEX_DIGIT )+
 			int cnt11=0;
 			loop11:
 			while (true) {
@@ -1407,7 +1407,7 @@ public class ProtoLexer extends AbstractLexer {
 
 				switch (alt11) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'F')||(input.LA(1) >= 'a' && input.LA(1) <= 'f') ) {
 						input.consume();
@@ -1444,11 +1444,11 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = OCTAL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:248:5: ( '0' ( '0' .. '7' )+ )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:248:9: '0' ( '0' .. '7' )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:248:5: ( '0' ( '0' .. '7' )+ )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:248:9: '0' ( '0' .. '7' )+
 			{
 			match('0'); 
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:248:13: ( '0' .. '7' )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:248:13: ( '0' .. '7' )+
 			int cnt12=0;
 			loop12:
 			while (true) {
@@ -1460,7 +1460,7 @@ public class ProtoLexer extends AbstractLexer {
 
 				switch (alt12) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '7') ) {
 						input.consume();
@@ -1497,15 +1497,15 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = DOC_COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:252:5: ( '///' ( (~ ( '\\n' | '\\r' ) )* ) ( '\\r' )? '\\n' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:252:9: '///' ( (~ ( '\\n' | '\\r' ) )* ) ( '\\r' )? '\\n'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:252:5: ( '///' ( (~ ( '\\n' | '\\r' ) )* ) ( '\\r' )? '\\n' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:252:9: '///' ( (~ ( '\\n' | '\\r' ) )* ) ( '\\r' )? '\\n'
 			{
 			match("///"); 
 
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:252:15: ( (~ ( '\\n' | '\\r' ) )* )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:252:16: (~ ( '\\n' | '\\r' ) )*
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:252:15: ( (~ ( '\\n' | '\\r' ) )* )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:252:16: (~ ( '\\n' | '\\r' ) )*
 			{
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:252:16: (~ ( '\\n' | '\\r' ) )*
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:252:16: (~ ( '\\n' | '\\r' ) )*
 			loop13:
 			while (true) {
 				int alt13=2;
@@ -1516,7 +1516,7 @@ public class ProtoLexer extends AbstractLexer {
 
 				switch (alt13) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:
 					{
 					if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t')||(input.LA(1) >= '\u000B' && input.LA(1) <= '\f')||(input.LA(1) >= '\u000E' && input.LA(1) <= '\uFFFF') ) {
 						input.consume();
@@ -1536,7 +1536,7 @@ public class ProtoLexer extends AbstractLexer {
 
 			}
 
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:252:31: ( '\\r' )?
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:252:31: ( '\\r' )?
 			int alt14=2;
 			int LA14_0 = input.LA(1);
 			if ( (LA14_0=='\r') ) {
@@ -1544,7 +1544,7 @@ public class ProtoLexer extends AbstractLexer {
 			}
 			switch (alt14) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:252:31: '\\r'
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:252:31: '\\r'
 					{
 					match('\r'); 
 					}
@@ -1569,7 +1569,7 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:256:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:256:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
 			int alt18=2;
 			int LA18_0 = input.LA(1);
 			if ( (LA18_0=='/') ) {
@@ -1603,11 +1603,11 @@ public class ProtoLexer extends AbstractLexer {
 
 			switch (alt18) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:256:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:256:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
 					{
 					match("//"); 
 
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:256:14: (~ ( '\\n' | '\\r' ) )*
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:256:14: (~ ( '\\n' | '\\r' ) )*
 					loop15:
 					while (true) {
 						int alt15=2;
@@ -1618,7 +1618,7 @@ public class ProtoLexer extends AbstractLexer {
 
 						switch (alt15) {
 						case 1 :
-							// com.dyuproject/fbsgen/parser/ProtoLexer.g:
+							// com/dyuproject/fbsgen/parser/ProtoLexer.g:
 							{
 							if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t')||(input.LA(1) >= '\u000B' && input.LA(1) <= '\f')||(input.LA(1) >= '\u000E' && input.LA(1) <= '\uFFFF') ) {
 								input.consume();
@@ -1636,7 +1636,7 @@ public class ProtoLexer extends AbstractLexer {
 						}
 					}
 
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:256:28: ( '\\r' )?
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:256:28: ( '\\r' )?
 					int alt16=2;
 					int LA16_0 = input.LA(1);
 					if ( (LA16_0=='\r') ) {
@@ -1644,7 +1644,7 @@ public class ProtoLexer extends AbstractLexer {
 					}
 					switch (alt16) {
 						case 1 :
-							// com.dyuproject/fbsgen/parser/ProtoLexer.g:256:28: '\\r'
+							// com/dyuproject/fbsgen/parser/ProtoLexer.g:256:28: '\\r'
 							{
 							match('\r'); 
 							}
@@ -1657,11 +1657,11 @@ public class ProtoLexer extends AbstractLexer {
 					}
 					break;
 				case 2 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:257:9: '/*' ( options {greedy=false; } : . )* '*/'
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:257:9: '/*' ( options {greedy=false; } : . )* '*/'
 					{
 					match("/*"); 
 
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:257:14: ( options {greedy=false; } : . )*
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:257:14: ( options {greedy=false; } : . )*
 					loop17:
 					while (true) {
 						int alt17=2;
@@ -1682,7 +1682,7 @@ public class ProtoLexer extends AbstractLexer {
 
 						switch (alt17) {
 						case 1 :
-							// com.dyuproject/fbsgen/parser/ProtoLexer.g:257:42: .
+							// com/dyuproject/fbsgen/parser/ProtoLexer.g:257:42: .
 							{
 							matchAny(); 
 							}
@@ -1714,8 +1714,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:260:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:260:9: ( ' ' | '\\t' | '\\r' | '\\n' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:260:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:260:9: ( ' ' | '\\t' | '\\r' | '\\n' )
 			{
 			if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
 				input.consume();
@@ -1742,11 +1742,11 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = STRING_LITERAL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:268:5: ( '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"' )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:268:9: '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:268:5: ( '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:268:9: '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"'
 			{
 			match('\"'); 
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:268:13: ( ESC_SEQ |~ ( '\\\\' | '\"' ) )*
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:268:13: ( ESC_SEQ |~ ( '\\\\' | '\"' ) )*
 			loop19:
 			while (true) {
 				int alt19=3;
@@ -1760,14 +1760,14 @@ public class ProtoLexer extends AbstractLexer {
 
 				switch (alt19) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:268:15: ESC_SEQ
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:268:15: ESC_SEQ
 					{
 					mESC_SEQ(); 
 
 					}
 					break;
 				case 2 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:268:25: ~ ( '\\\\' | '\"' )
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:268:25: ~ ( '\\\\' | '\"' )
 					{
 					if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
 						input.consume();
@@ -1800,8 +1800,8 @@ public class ProtoLexer extends AbstractLexer {
 	// $ANTLR start "HEX_DIGIT"
 	public final void mHEX_DIGIT() throws RecognitionException {
 		try {
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:272:5: ( ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:272:5: ( ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'F')||(input.LA(1) >= 'a' && input.LA(1) <= 'f') ) {
 				input.consume();
@@ -1823,7 +1823,7 @@ public class ProtoLexer extends AbstractLexer {
 	// $ANTLR start "ESC_SEQ"
 	public final void mESC_SEQ() throws RecognitionException {
 		try {
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:276:5: ( '\\\\' ( 'a' | 'v' | 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | '\\\\' ( 'x' | 'X' ) HEX_DIGIT HEX_DIGIT | UNICODE_ESC | OCTAL_ESC )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:276:5: ( '\\\\' ( 'a' | 'v' | 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | '\\\\' ( 'x' | 'X' ) HEX_DIGIT HEX_DIGIT | UNICODE_ESC | OCTAL_ESC )
 			int alt20=4;
 			int LA20_0 = input.LA(1);
 			if ( (LA20_0=='\\') ) {
@@ -1886,7 +1886,7 @@ public class ProtoLexer extends AbstractLexer {
 
 			switch (alt20) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:276:9: '\\\\' ( 'a' | 'v' | 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:276:9: '\\\\' ( 'a' | 'v' | 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
 					{
 					match('\\'); 
 					if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||(input.LA(1) >= 'a' && input.LA(1) <= 'b')||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t'||input.LA(1)=='v' ) {
@@ -1900,7 +1900,7 @@ public class ProtoLexer extends AbstractLexer {
 					}
 					break;
 				case 2 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:277:9: '\\\\' ( 'x' | 'X' ) HEX_DIGIT HEX_DIGIT
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:277:9: '\\\\' ( 'x' | 'X' ) HEX_DIGIT HEX_DIGIT
 					{
 					match('\\'); 
 					if ( input.LA(1)=='X'||input.LA(1)=='x' ) {
@@ -1918,14 +1918,14 @@ public class ProtoLexer extends AbstractLexer {
 					}
 					break;
 				case 3 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:278:9: UNICODE_ESC
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:278:9: UNICODE_ESC
 					{
 					mUNICODE_ESC(); 
 
 					}
 					break;
 				case 4 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:279:9: OCTAL_ESC
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:279:9: OCTAL_ESC
 					{
 					mOCTAL_ESC(); 
 
@@ -1943,7 +1943,7 @@ public class ProtoLexer extends AbstractLexer {
 	// $ANTLR start "OCTAL_ESC"
 	public final void mOCTAL_ESC() throws RecognitionException {
 		try {
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:283:5: ( '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:283:5: ( '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) )
 			int alt21=3;
 			int LA21_0 = input.LA(1);
 			if ( (LA21_0=='\\') ) {
@@ -2001,7 +2001,7 @@ public class ProtoLexer extends AbstractLexer {
 
 			switch (alt21) {
 				case 1 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:283:9: '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' )
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:283:9: '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' )
 					{
 					match('\\'); 
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '3') ) {
@@ -2031,7 +2031,7 @@ public class ProtoLexer extends AbstractLexer {
 					}
 					break;
 				case 2 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:284:9: '\\\\' ( '0' .. '7' ) ( '0' .. '7' )
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:284:9: '\\\\' ( '0' .. '7' ) ( '0' .. '7' )
 					{
 					match('\\'); 
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '7') ) {
@@ -2053,7 +2053,7 @@ public class ProtoLexer extends AbstractLexer {
 					}
 					break;
 				case 3 :
-					// com.dyuproject/fbsgen/parser/ProtoLexer.g:285:9: '\\\\' ( '0' .. '7' )
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:285:9: '\\\\' ( '0' .. '7' )
 					{
 					match('\\'); 
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '7') ) {
@@ -2078,8 +2078,8 @@ public class ProtoLexer extends AbstractLexer {
 	// $ANTLR start "UNICODE_ESC"
 	public final void mUNICODE_ESC() throws RecognitionException {
 		try {
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:289:5: ( '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT )
-			// com.dyuproject/fbsgen/parser/ProtoLexer.g:289:9: '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:289:5: ( '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:289:9: '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
 			{
 			match('\\'); 
 			match('u'); 
@@ -2102,390 +2102,390 @@ public class ProtoLexer extends AbstractLexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:8: ( ASSIGN | AT | LEFTCURLY | RIGHTCURLY | LEFTPAREN | RIGHTPAREN | LEFTSQUARE | RIGHTSQUARE | SEMICOLON | COMMA | PLUS | MINUS | TO | TRUE | FALSE | PKG | SYNTAX | IMPORT | OPTION | MESSAGE | SERVICE | ENUM | REQUIRED | OPTIONAL | REPEATED | RPC | RETURNS | INT8 | INT16 | INT32 | INT64 | UINT8 | UINT16 | UINT32 | UINT64 | FLOAT | DOUBLE | BOOL | STRING | BYTES | DEFAULT | MAX | VOID | FULL_ID | ID | EXP | NUMDOUBLE | NUMFLOAT | NUMINT | HEX | OCTAL | DOC_COMMENT | COMMENT | WS | STRING_LITERAL )
+		// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:8: ( ASSIGN | AT | LEFTCURLY | RIGHTCURLY | LEFTPAREN | RIGHTPAREN | LEFTSQUARE | RIGHTSQUARE | SEMICOLON | COMMA | PLUS | MINUS | TO | TRUE | FALSE | PKG | SYNTAX | IMPORT | OPTION | MESSAGE | SERVICE | ENUM | REQUIRED | OPTIONAL | REPEATED | RPC | RETURNS | INT8 | INT16 | INT32 | INT64 | UINT8 | UINT16 | UINT32 | UINT64 | FLOAT | DOUBLE | BOOL | STRING | BYTES | DEFAULT | MAX | VOID | FULL_ID | ID | EXP | NUMDOUBLE | NUMFLOAT | NUMINT | HEX | OCTAL | DOC_COMMENT | COMMENT | WS | STRING_LITERAL )
 		int alt22=55;
 		alt22 = dfa22.predict(input);
 		switch (alt22) {
 			case 1 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:10: ASSIGN
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:10: ASSIGN
 				{
 				mASSIGN(); 
 
 				}
 				break;
 			case 2 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:17: AT
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:17: AT
 				{
 				mAT(); 
 
 				}
 				break;
 			case 3 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:20: LEFTCURLY
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:20: LEFTCURLY
 				{
 				mLEFTCURLY(); 
 
 				}
 				break;
 			case 4 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:30: RIGHTCURLY
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:30: RIGHTCURLY
 				{
 				mRIGHTCURLY(); 
 
 				}
 				break;
 			case 5 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:41: LEFTPAREN
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:41: LEFTPAREN
 				{
 				mLEFTPAREN(); 
 
 				}
 				break;
 			case 6 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:51: RIGHTPAREN
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:51: RIGHTPAREN
 				{
 				mRIGHTPAREN(); 
 
 				}
 				break;
 			case 7 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:62: LEFTSQUARE
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:62: LEFTSQUARE
 				{
 				mLEFTSQUARE(); 
 
 				}
 				break;
 			case 8 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:73: RIGHTSQUARE
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:73: RIGHTSQUARE
 				{
 				mRIGHTSQUARE(); 
 
 				}
 				break;
 			case 9 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:85: SEMICOLON
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:85: SEMICOLON
 				{
 				mSEMICOLON(); 
 
 				}
 				break;
 			case 10 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:95: COMMA
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:95: COMMA
 				{
 				mCOMMA(); 
 
 				}
 				break;
 			case 11 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:101: PLUS
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:101: PLUS
 				{
 				mPLUS(); 
 
 				}
 				break;
 			case 12 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:106: MINUS
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:106: MINUS
 				{
 				mMINUS(); 
 
 				}
 				break;
 			case 13 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:112: TO
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:112: TO
 				{
 				mTO(); 
 
 				}
 				break;
 			case 14 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:115: TRUE
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:115: TRUE
 				{
 				mTRUE(); 
 
 				}
 				break;
 			case 15 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:120: FALSE
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:120: FALSE
 				{
 				mFALSE(); 
 
 				}
 				break;
 			case 16 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:126: PKG
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:126: PKG
 				{
 				mPKG(); 
 
 				}
 				break;
 			case 17 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:130: SYNTAX
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:130: SYNTAX
 				{
 				mSYNTAX(); 
 
 				}
 				break;
 			case 18 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:137: IMPORT
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:137: IMPORT
 				{
 				mIMPORT(); 
 
 				}
 				break;
 			case 19 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:144: OPTION
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:144: OPTION
 				{
 				mOPTION(); 
 
 				}
 				break;
 			case 20 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:151: MESSAGE
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:151: MESSAGE
 				{
 				mMESSAGE(); 
 
 				}
 				break;
 			case 21 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:159: SERVICE
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:159: SERVICE
 				{
 				mSERVICE(); 
 
 				}
 				break;
 			case 22 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:167: ENUM
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:167: ENUM
 				{
 				mENUM(); 
 
 				}
 				break;
 			case 23 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:172: REQUIRED
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:172: REQUIRED
 				{
 				mREQUIRED(); 
 
 				}
 				break;
 			case 24 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:181: OPTIONAL
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:181: OPTIONAL
 				{
 				mOPTIONAL(); 
 
 				}
 				break;
 			case 25 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:190: REPEATED
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:190: REPEATED
 				{
 				mREPEATED(); 
 
 				}
 				break;
 			case 26 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:199: RPC
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:199: RPC
 				{
 				mRPC(); 
 
 				}
 				break;
 			case 27 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:203: RETURNS
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:203: RETURNS
 				{
 				mRETURNS(); 
 
 				}
 				break;
 			case 28 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:211: INT8
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:211: INT8
 				{
 				mINT8(); 
 
 				}
 				break;
 			case 29 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:216: INT16
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:216: INT16
 				{
 				mINT16(); 
 
 				}
 				break;
 			case 30 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:222: INT32
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:222: INT32
 				{
 				mINT32(); 
 
 				}
 				break;
 			case 31 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:228: INT64
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:228: INT64
 				{
 				mINT64(); 
 
 				}
 				break;
 			case 32 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:234: UINT8
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:234: UINT8
 				{
 				mUINT8(); 
 
 				}
 				break;
 			case 33 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:240: UINT16
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:240: UINT16
 				{
 				mUINT16(); 
 
 				}
 				break;
 			case 34 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:247: UINT32
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:247: UINT32
 				{
 				mUINT32(); 
 
 				}
 				break;
 			case 35 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:254: UINT64
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:254: UINT64
 				{
 				mUINT64(); 
 
 				}
 				break;
 			case 36 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:261: FLOAT
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:261: FLOAT
 				{
 				mFLOAT(); 
 
 				}
 				break;
 			case 37 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:267: DOUBLE
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:267: DOUBLE
 				{
 				mDOUBLE(); 
 
 				}
 				break;
 			case 38 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:274: BOOL
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:274: BOOL
 				{
 				mBOOL(); 
 
 				}
 				break;
 			case 39 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:279: STRING
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:279: STRING
 				{
 				mSTRING(); 
 
 				}
 				break;
 			case 40 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:286: BYTES
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:286: BYTES
 				{
 				mBYTES(); 
 
 				}
 				break;
 			case 41 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:292: DEFAULT
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:292: DEFAULT
 				{
 				mDEFAULT(); 
 
 				}
 				break;
 			case 42 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:300: MAX
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:300: MAX
 				{
 				mMAX(); 
 
 				}
 				break;
 			case 43 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:304: VOID
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:304: VOID
 				{
 				mVOID(); 
 
 				}
 				break;
 			case 44 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:309: FULL_ID
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:309: FULL_ID
 				{
 				mFULL_ID(); 
 
 				}
 				break;
 			case 45 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:317: ID
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:317: ID
 				{
 				mID(); 
 
 				}
 				break;
 			case 46 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:320: EXP
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:320: EXP
 				{
 				mEXP(); 
 
 				}
 				break;
 			case 47 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:324: NUMDOUBLE
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:324: NUMDOUBLE
 				{
 				mNUMDOUBLE(); 
 
 				}
 				break;
 			case 48 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:334: NUMFLOAT
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:334: NUMFLOAT
 				{
 				mNUMFLOAT(); 
 
 				}
 				break;
 			case 49 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:343: NUMINT
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:343: NUMINT
 				{
 				mNUMINT(); 
 
 				}
 				break;
 			case 50 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:350: HEX
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:350: HEX
 				{
 				mHEX(); 
 
 				}
 				break;
 			case 51 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:354: OCTAL
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:354: OCTAL
 				{
 				mOCTAL(); 
 
 				}
 				break;
 			case 52 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:360: DOC_COMMENT
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:360: DOC_COMMENT
 				{
 				mDOC_COMMENT(); 
 
 				}
 				break;
 			case 53 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:372: COMMENT
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:372: COMMENT
 				{
 				mCOMMENT(); 
 
 				}
 				break;
 			case 54 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:380: WS
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:380: WS
 				{
 				mWS(); 
 
 				}
 				break;
 			case 55 :
-				// com.dyuproject/fbsgen/parser/ProtoLexer.g:1:383: STRING_LITERAL
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:383: STRING_LITERAL
 				{
 				mSTRING_LITERAL(); 
 
