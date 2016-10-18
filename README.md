@@ -1,1 +1,1 @@
-code generator using proto files with flatbuffer semantics
+code generator using proto files with flatbuffers semantics
