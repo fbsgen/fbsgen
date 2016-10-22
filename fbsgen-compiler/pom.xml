@@ -51,7 +51,7 @@
       <artifactId>jetg</artifactId>
       <version>${jetg-version}</version>
     </dependency>
-    <!-- jetbrick dependency -->
+    <!-- jetg dependency -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
