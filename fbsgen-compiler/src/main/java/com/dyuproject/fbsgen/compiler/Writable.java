@@ -1550,9 +1550,19 @@ public final class Writable
         return list.remove(size-1) == list.remove(size-2);
     }
     
+    public int getIncandget()
+    {
+        return ++number;
+    }
+    
     public int getGetandinc()
     {
         return number++;
+    }
+    
+    public int getDecandget()
+    {
+        return --number;
     }
     
     public int getGetanddec()
