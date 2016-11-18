@@ -1705,6 +1705,14 @@ public final class Writable
     }
     
     /**
+     * Returns a copy of the list.
+     */
+    public ArrayList<Object> getCopyList()
+    {
+        return new ArrayList<Object>(list);
+    }
+    
+    /**
      * Clears the list.
      */
     public Writable getClearList()
