@@ -50,6 +50,14 @@ public class MessageField extends Field<Message>
     {
         return message;
     }
+    
+    public java.lang.String getTsType()
+    {
+        StringBuilder buffer = new StringBuilder();
+        Message.computeName(message, owner, buffer, false);
+
+        return buffer.toString();
+    }
 
     public java.lang.String getJavaType()
     {

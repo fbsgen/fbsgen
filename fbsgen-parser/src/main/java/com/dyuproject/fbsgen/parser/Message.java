@@ -941,19 +941,22 @@ public final class Message extends AnnotationContainer implements UserDefinedTyp
             Message descendant, char separator)
     {
         buffer.insert(0, message.name);
-        if (message.parentMessage != null)
+        if (message.parentMessage != null && message.parentMessage != descendant)
         {
-            if (message.parentMessage!=descendant)
-            {
-                buffer.insert(0, separator);
-                resolveRelativeName(message.parentMessage, buffer, descendant, separator);
-            }
+            buffer.insert(0, separator);
+            resolveRelativeName(message.parentMessage, buffer, descendant, separator);
         }
     }
     
     static void computeName(Message message, Message owner, StringBuilder buffer)
     {
-        if (owner==message || message.parentMessage==owner || owner.isDescendant(message))
+        computeName(message, owner, buffer, true);
+    }
+    
+    static void computeName(Message message, Message owner, StringBuilder buffer, 
+            boolean checkDirectChild)
+    {
+        if (owner==message || (checkDirectChild && message.parentMessage==owner) || owner.isDescendant(message))
             buffer.append(message.name);
         else if (message.isDescendant(owner))
             Message.resolveRelativeName(message, buffer, owner, '.');
