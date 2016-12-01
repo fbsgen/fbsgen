@@ -54,7 +54,7 @@ public class MessageField extends Field<Message>
     public java.lang.String getTsType()
     {
         StringBuilder buffer = new StringBuilder();
-        Message.computeName(message, owner, buffer, false);
+        Message.computeName(message, owner, buffer, true);
 
         return buffer.toString();
     }

@@ -950,16 +950,29 @@ public final class Message extends AnnotationContainer implements UserDefinedTyp
     
     static void computeName(Message message, Message owner, StringBuilder buffer)
     {
-        computeName(message, owner, buffer, true);
+        computeName(message, owner, buffer, false);
     }
     
     static void computeName(Message message, Message owner, StringBuilder buffer, 
-            boolean checkDirectChild)
+            boolean withDescendantOwnerName)
     {
-        if (owner==message || (checkDirectChild && message.parentMessage==owner) || owner.isDescendant(message))
+        if (message.parentMessage==owner)
+        {
+            if (withDescendantOwnerName)
+                buffer.append(owner.name).append('.');
+            buffer.append(message.name);
+        }
+        else if (owner==message || owner.isDescendant(message))
             buffer.append(message.name);
         else if (message.isDescendant(owner))
+        {
             Message.resolveRelativeName(message, buffer, owner, '.');
+            if (withDescendantOwnerName)
+            {
+                buffer.insert(0, '.');
+                buffer.insert(0, owner.name);
+            }
+        }
         else if (message.getProto().getJavaPackageName().equals(owner.getProto().getJavaPackageName()))
             buffer.append(message.getRelativeName());
         else
