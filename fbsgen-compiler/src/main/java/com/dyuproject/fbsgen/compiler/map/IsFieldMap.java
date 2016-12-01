@@ -113,13 +113,16 @@ public final class IsFieldMap extends FakeMap
         {
             public boolean query(Field<?> f)
             {
-                if (f.isRepeated() || f.isBytesField() || f.isMessageField())
+                if (f.isRepeated() || Boolean.TRUE.equals(f.getO().get("readonly")))
+                    return false;
+                
+                if (!f.isStringField() && !f.isNumberField())
                     return false;
                 
                 if (f.getNumber() < 3 && f.getOwner().getO().containsKey("~entity.kind"))
                     return false;
                 
-                if (f.getA().containsKey("Id") && f instanceof Field.UInt32 && f.getName().endsWith("_id"))
+                if (f.getA().containsKey("Id") && f instanceof Field.UInt32)
                     return false;
                 
                 return f.getA().size() >= (f.getAnnotation("Display") == null ? 1 : 2);
