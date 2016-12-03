@@ -372,6 +372,9 @@ public final class AnonTemplateUtil
             if ((idx = argOut.lastIndexOf('/')) != -1)
                 new File(outDir, argOut.substring(0, idx)).mkdirs();
             
+            if (P_BLOCK && argOut.endsWith(".stg"))
+                argOut = argOut.substring(0, argOut.length() - 4);
+            
             compileTemplate(params, module, 
                     new FileInputStream(new File(inDir, arg)), 
                     new FileOutputStream(new File(outDir, argOut)));
