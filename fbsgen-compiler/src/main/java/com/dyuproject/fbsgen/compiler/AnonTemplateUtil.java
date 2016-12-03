@@ -43,6 +43,8 @@ public final class AnonTemplateUtil
     static final String IMPORTS = System.getProperty("cli.imports", ""),
             OPTIONS = System.getProperty("cli.options", "");
     
+    static final boolean P_BLOCK = Boolean.getBoolean("cli.p_block");
+    
     static final String SRC = "src/",
             MAIN_JAVA = "main/java/",
             TEST_JAVA = "test/java/",
@@ -265,10 +267,19 @@ public final class AnonTemplateUtil
     static void compileTemplate(LinkedHashMap<String,String> params, ProtoModule module, 
             InputStream in, OutputStream out) throws IOException
     {
-        final InWrapper iw = new InWrapper(in);
-        final TemplateGroup group = TemplateUtil.newGroup("anon", iw, iw.delim, false);
-        
-        final Template template = group.getTemplate("anon_block");
+        final TemplateGroup group;
+        final Template template;
+        if (P_BLOCK)
+        {
+            group = TemplateUtil.newGroup("anon", in, new char[4], true);
+            template = group.getTemplate("p_block");
+        }
+        else
+        {
+            InWrapper iw = new InWrapper(in);
+            group = TemplateUtil.newGroup("anon", iw, iw.delim, false);
+            template = group.getTemplate("anon_block");
+        }
         
         final BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(out, "UTF-8"));
