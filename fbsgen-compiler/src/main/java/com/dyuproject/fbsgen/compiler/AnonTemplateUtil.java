@@ -82,7 +82,7 @@ public final class AnonTemplateUtil
         return output.toString();
     }*/
     
-    static String interpolate(String str, final Map<String, String> map)
+    public static String interpolate(String str, final Map<String, String> map)
     {
         Matcher matcher = PATTERN_INTERPOLATE.matcher(str);
         // StringBuilder cannot be used here because Matcher expects
