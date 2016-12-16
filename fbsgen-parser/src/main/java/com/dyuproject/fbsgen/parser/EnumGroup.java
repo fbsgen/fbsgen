@@ -44,6 +44,9 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
     public static final boolean ENUM_SEQUENTIAL = Boolean.getBoolean(
             "fbsgen.enum_sequential");
     
+    public static final boolean ENUM_ALLOW_NEGATIVE = Boolean.parseBoolean(
+            System.getProperty("fbsgen.enum_allow_negative", "true"));
+    
     static final String ZERO_NAME = "ZERO";
     
     private static boolean isSequentialExempted(boolean config, String name)
@@ -300,6 +303,11 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         return declaredValueMap;
     }
     
+    public boolean isDeclaredFirstValueZero()
+    {
+        return firstValueIndex == 0 && sortedValues.get(0).number == 0;
+    }
+    
     public Value getFirstValue()
     {
         if (indexedValues == null)
@@ -330,13 +338,16 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
     public boolean isSequential()
     {
         final int size = sortedValues.size(),
-                diff = sortedValues.get(0).number == 0 ? -1 : 0;
+                diff = isDeclaredFirstValueZero() ? -1 : 0;
         
         return (size + diff) == sortedValues.get(size - 1).number;
     }
     
     void add(Value value)
     {
+        if (!ENUM_ALLOW_NEGATIVE && value.number < 0)
+            throw err(value, " cannot be negative.", getProto());
+        
         if (zero == null)
         {
             if (value.number == 0)
