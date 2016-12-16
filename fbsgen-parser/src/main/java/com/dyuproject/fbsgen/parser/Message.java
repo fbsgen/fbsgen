@@ -29,8 +29,8 @@ import java.util.List;
 public final class Message extends AnnotationContainer implements UserDefinedType, HasFields
 {
     
-    static final boolean SEQUENTIAL_FIELD_NUMBERS = Boolean.parseBoolean(
-            System.getProperty("fbsgen.sequential_field_numbers", "false"));
+    static final boolean SEQUENTIAL_FIELD_NUMBERS = Boolean.getBoolean(
+            "fbsgen.sequential_field_numbers");
     
     final String name;
     final Message parentMessage;

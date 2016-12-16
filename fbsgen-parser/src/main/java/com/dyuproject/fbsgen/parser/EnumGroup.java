@@ -35,13 +35,21 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
      * Disabled by default (the earlier protoc 2.x versions enabled this by default, but 
      * was changed later on).
      */
-    public static final boolean ENUM_ALLOW_ALIAS = Boolean.parseBoolean(
+    public static final boolean ENUM_ALLOW_ALIAS = Boolean.getBoolean(
             "fbsgen.enum_allow_alias");
     
-    public static final boolean ENUM_EXPLICIT_ZERO = Boolean.parseBoolean(
+    public static final boolean ENUM_EXPLICIT_ZERO = Boolean.getBoolean(
             "fbsgen.enum_explicit_zero");
     
+    public static final boolean ENUM_SEQUENTIAL = Boolean.getBoolean(
+            "fbsgen.enum_sequential");
+    
     static final String ZERO_NAME = "ZERO";
+    
+    private static boolean isSequentialExempted(boolean config, String name)
+    {
+        return config ? !"Q".equals(name) : "Tags".equals(name);
+    }
     
     final String name;
     final Message parentMessage;
@@ -319,6 +327,14 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
                 typeAnnotation.getValue("bit_flags"));
     }
     
+    public boolean isSequential()
+    {
+        final int size = sortedValues.size(),
+                diff = sortedValues.get(0).number == 0 ? -1 : 0;
+        
+        return (size + diff) == sortedValues.get(size - 1).number;
+    }
+    
     void add(Value value)
     {
         if (zero == null)
@@ -355,14 +371,11 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         // no alias allowed if field numbers should have no holes.
         final Boolean allowAlias = Message.SEQUENTIAL_FIELD_NUMBERS ? 
                 Boolean.FALSE : (Boolean)getOptions().get("allow_alias");
-        if (allowAlias != null)
-        {
-            if (allowAlias.booleanValue())
-                Collections.sort(sortedValues);
-            else
-                Collections.sort(sortedValues, Value.NO_ALIAS_COMPARATOR);
-        }
-        else if (ENUM_ALLOW_ALIAS)
+        
+        final boolean aliasAllowed = allowAlias != null ? 
+                allowAlias.booleanValue() : ENUM_ALLOW_ALIAS;
+        
+        if (aliasAllowed)
             Collections.sort(sortedValues);
         else
             Collections.sort(sortedValues, Value.NO_ALIAS_COMPARATOR);
@@ -404,11 +417,22 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
                 //case '4':
             }
         }
-        else if (zero == null && !getA().containsKey("Config"))
+        else
         {
-            throw err(//this, 
-                    "enum " + getRelativeName() + " does not have a declaration for this field's default of 0", 
-                    getProto());
+            boolean isConfig = getA().containsKey("Config");
+            if (zero == null && !isConfig)
+            {
+                throw err(//this, 
+                        "enum " + getRelativeName() + " does not have a declaration for this field's default of 0", 
+                        getProto());
+            }
+            
+            if (ENUM_SEQUENTIAL && !isSequentialExempted(isConfig, name) && !isSequential())
+            {
+                throw err(//this, 
+                        "enum " + getRelativeName() + " does not have sequential values", 
+                        getProto());
+            }
         }
         
         final Proto proto = getProto();
