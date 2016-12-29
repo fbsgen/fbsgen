@@ -84,6 +84,12 @@ public final class GetMap extends FakeMap
         {
             
         }
+        
+        @Override
+        public FakeField create()
+        {
+            return new FakeField(fbsType);
+        }
     }
     
     public enum Functions implements Function

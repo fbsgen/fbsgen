@@ -137,5 +137,11 @@ public class MessageField extends Field<Message>
 
         return path + targetPackage.replace('.', '/') + "/";
     }
+    
+    @Override
+    public MessageField create()
+    {
+        return new MessageField();
+    }
 
 }

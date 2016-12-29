@@ -189,4 +189,10 @@ public final class EnumField extends Field<EnumGroup.Value>
     {
         return ev != null ? ev.getProto() : super.getProto();
     }
+    
+    @Override
+    public EnumField create()
+    {
+        return new EnumField();
+    }
 }

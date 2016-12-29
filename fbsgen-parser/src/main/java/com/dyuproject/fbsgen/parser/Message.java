@@ -878,6 +878,21 @@ public final class Message extends AnnotationContainer implements UserDefinedTyp
         for (EnumGroup eg : nestedEnumGroups.values())
             eg.cacheFullyQualifiedName();
         
+        if (getA().containsKey("MergeParent"))
+        {
+            if (parentMessage == null)
+                throw err(this, "A message with @MergeParent must be nested.", proto);
+            
+            for (Field<?> f : parentMessage.fields.values())
+            {
+                Field<?> cf = f.create();
+                copy(f, cf, false);
+                cf.pbType = f.pbType;
+                cf.getO().put("~mp", Boolean.TRUE);
+                addField(cf);
+            }
+        }
+        
         if (!standardOptions.isEmpty())
             proto.references.add(new ConfiguredReference(standardOptions, extraOptions, getFullName()));
     }
@@ -914,10 +929,15 @@ public final class Message extends AnnotationContainer implements UserDefinedTyp
     
     static void copy(Field<?> from, Field<?> to)
     {
+        copy(from, to, true);
+    }
+    
+    static void copy(Field<?> from, Field<?> to, boolean clearSource)
+    {
         to.name = from.name;
         to.number = from.number;
         to.modifier = from.modifier;
-        to.addAnnotations(from, true);
+        to.addAnnotations(from, clearSource);
         to.standardOptions.putAll(from.standardOptions);
         to.extraOptions.putAll(from.extraOptions);
     }
