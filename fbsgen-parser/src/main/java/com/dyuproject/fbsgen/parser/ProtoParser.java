@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 com/dyuproject/fbsgen/parser/ProtoParser.g 2016-10-18 15:19:04
+// $ANTLR 3.5.2 com/dyuproject/fbsgen/parser/ProtoParser.g 2017-01-13 15:16:50
 
     package com.dyuproject.fbsgen.parser;
 
@@ -1061,7 +1061,7 @@ public class ProtoParser extends AbstractParser {
 					adaptor.addChild(root_0, NUMINT28_tree);
 					}
 
-					if ( state.backtracking==0 ) { annotation.put((k!=null?input.toString(k.start,k.stop):null), Integer.valueOf((NUMINT28!=null?NUMINT28.getText():null))); }
+					if ( state.backtracking==0 ) { annotation.put((k!=null?input.toString(k.start,k.stop):null), parseNumber((NUMINT28!=null?NUMINT28.getText():null))); }
 					}
 					break;
 				case 6 :
@@ -1656,7 +1656,7 @@ public class ProtoParser extends AbstractParser {
 					adaptor.addChild(root_0, NUMINT49_tree);
 					}
 
-					if ( state.backtracking==0 ) { putExtraOptionTo(ho, (k!=null?input.toString(k.start,k.stop):null), Integer.valueOf((NUMINT49!=null?NUMINT49.getText():null)), proto); }
+					if ( state.backtracking==0 ) { putExtraOptionTo(ho, (k!=null?input.toString(k.start,k.stop):null), parseNumber((NUMINT49!=null?NUMINT49.getText():null)), proto); }
 					}
 					break;
 				case 6 :
@@ -3019,7 +3019,7 @@ public class ProtoParser extends AbstractParser {
 
 					if ( state.backtracking==0 ) {
 					            if (!"default".equals((key!=null?input.toString(key.start,key.stop):null))) {
-					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), Integer.valueOf((NUMINT100!=null?NUMINT100.getText():null)));
+					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), parseNumber((NUMINT100!=null?NUMINT100.getText():null)));
 					            } else if (checkDefault) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
 					                    throw err(field, " can only have a single default value", proto);

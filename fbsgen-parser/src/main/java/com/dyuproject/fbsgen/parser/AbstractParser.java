@@ -244,6 +244,18 @@ public abstract class AbstractParser extends Parser
         return Integer.valueOf(defaultValue);
     }
     
+    static Number parseNumber(String text)
+    {
+        try
+        {
+            return Integer.valueOf(text);
+        }
+        catch (Exception e)
+        {
+            return Long.valueOf(text);
+        }
+    }
+    
     static int parseInt(Proto proto, HasName target, String text)
     {
         try

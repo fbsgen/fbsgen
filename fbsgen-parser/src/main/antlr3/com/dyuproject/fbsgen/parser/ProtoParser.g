@@ -111,7 +111,7 @@ annotation_keyval [Proto proto, Annotation annotation]
             |   ID { annotation.putRef($k.text, $ID.text); }
             |   fid=FULL_ID { annotation.putRef($k.text, $fid.text); }
             |   NUMFLOAT { annotation.put($k.text, Float.valueOf($NUMFLOAT.text)); }
-            |   NUMINT { annotation.put($k.text, Integer.valueOf($NUMINT.text)); }
+            |   NUMINT { annotation.put($k.text, parseNumber($NUMINT.text)); }
             |   NUMDOUBLE { annotation.put($k.text, Double.valueOf($NUMDOUBLE.text)); }
             |   TRUE { annotation.put($k.text, Boolean.TRUE); }
             |   FALSE { annotation.put($k.text, Boolean.FALSE); }
@@ -158,7 +158,7 @@ option_entry [Proto proto, HasOptions ho]
             |   id=ID { putStandardOptionTo(ho, $k.text, $id.text, proto); }
             |   fid=FULL_ID { putStandardOptionTo(ho, $k.text, $fid.text, proto); }
             |   NUMFLOAT { putExtraOptionTo(ho, $k.text, Float.valueOf($NUMFLOAT.text), proto); }
-            |   NUMINT { putExtraOptionTo(ho, $k.text, Integer.valueOf($NUMINT.text), proto); }
+            |   NUMINT { putExtraOptionTo(ho, $k.text, parseNumber($NUMINT.text), proto); }
             |   NUMDOUBLE { putExtraOptionTo(ho, $k.text, Double.valueOf($NUMDOUBLE.text), proto); }
             |   TRUE { putExtraOptionTo(ho, $k.text, Boolean.TRUE, proto); }
             |   FALSE { putExtraOptionTo(ho, $k.text, Boolean.FALSE, proto); }
@@ -313,7 +313,7 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
         } 
     |   NUMINT {
             if (!"default".equals($key.text)) {
-                field.putExtraOption($key.text, Integer.valueOf($NUMINT.text));
+                field.putExtraOption($key.text, parseNumber($NUMINT.text));
             } else if (checkDefault) {
                 if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
                     throw err(field, " can only have a single default value", proto);
