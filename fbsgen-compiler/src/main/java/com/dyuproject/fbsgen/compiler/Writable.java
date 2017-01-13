@@ -84,7 +84,7 @@ public final class Writable
     /**
      * Appends the arg to the string builder.
      * <pre>
-     *   «writable.b.("a").b.("b").»
+     *   «writable.b.("a").b.("b").str»
      * </pre>
      */
     public final FakeMap b = new FakeMap("b")
@@ -101,7 +101,7 @@ public final class Writable
     /**
      * Appends the arg to the string builder.
      * <pre>
-     *   «writable.b2.("a").b2.("b").»
+     *   «writable.b2.("a").b2.("b").str2»
      * </pre>
      */
     public final FakeMap b2 = new FakeMap("b2")
