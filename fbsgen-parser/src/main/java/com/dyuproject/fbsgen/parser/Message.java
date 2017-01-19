@@ -851,7 +851,7 @@ public final class Message extends AnnotationContainer implements UserDefinedTyp
             if (fields.size() > 1)
                 Collections.sort(sortedFields);
             
-            if (SEQUENTIAL_FIELD_NUMBERS && !isSequentialFieldNumbers())
+            if (SEQUENTIAL_FIELD_NUMBERS && !getA().containsKey("MergeParent") && !isSequentialFieldNumbers())
                 throw err(this, " must have sequential field numbers (starts at 1, no gaps in-between)", proto);
             
             if (struct && forceAlign != 0 && forceAlign < minAlign)
@@ -878,18 +878,42 @@ public final class Message extends AnnotationContainer implements UserDefinedTyp
         for (EnumGroup eg : nestedEnumGroups.values())
             eg.cacheFullyQualifiedName();
         
-        if (getA().containsKey("MergeParent"))
+        Annotation mp = getA().get("MergeParent");
+        if (mp != null)
         {
             if (parentMessage == null)
                 throw err(this, "A message with @MergeParent must be nested.", proto);
             
-            for (Field<?> f : parentMessage.fields.values())
+            if (Boolean.TRUE.equals(mp.getP().get("partial")))
             {
-                Field<?> cf = f.create();
-                copy(f, cf, false);
-                cf.pbType = f.pbType;
-                cf.getO().put("~mp", Boolean.TRUE);
-                addField(cf);
+                final boolean flex_modifier = Boolean.TRUE.equals(mp.getP().get("flex_modifier"));
+                for (Field<?> f : fields.values())
+                {
+                    f.getO().put("~mp.partial", Boolean.TRUE);
+                    
+                    Field<?> pf = parentMessage.getField(f.getName());
+                    if (pf == null)
+                        continue;
+                    
+                    if (pf.getClass() != f.getClass())
+                        throw err(f, " is not the same as its parent field.", proto);
+                    
+                    if (pf.getModifier() == f.getModifier())
+                        f.getO().put("~mp", Boolean.TRUE);
+                    else if (!flex_modifier)
+                        throw err(f, " is not the same as its parent field.", proto);
+                }
+            }
+            else
+            {
+                for (Field<?> f : parentMessage.fields.values())
+                {
+                    Field<?> cf = f.create();
+                    copy(f, cf, false);
+                    cf.pbType = f.pbType;
+                    cf.getO().put("~mp", Boolean.TRUE);
+                    addField(cf);
+                }
             }
         }
         

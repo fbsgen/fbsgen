@@ -92,6 +92,12 @@ public final class Annotation implements HasName
     {
         return (T)params.get(key);
     }
+    
+    public int getInt(String key, int defaultValue)
+    {
+        Integer val = (Integer)params.get(key);
+        return val == null ? defaultValue : val.intValue();
+    }
 
     public String getName()
     {
