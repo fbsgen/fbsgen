@@ -1,21 +1,22 @@
 #!/bin/sh
 
 CURRENT_DIR=$PWD
+# locate
+if [ ! -n "$BASH_SOURCE" ]; then
+    SCRIPT_DIR=`dirname "$(readlink -f "$0")"`
+else
+    F=$BASH_SOURCE
+    while [ -h "$F" ]; do
+        F="$(readlink "$F")"
+    done
+    SCRIPT_DIR=`dirname "$F"`
+fi
 
 PROPS_FILE=_.properties
 
 if [ ! -e $CURRENT_DIR/$PROPS_FILE ]; then
     PROPS_FILE=codegen.properties
     [ ! -e $CURRENT_DIR/$PROPS_FILE ] && echo "$PROPS_FILE not found on current dir." && exit 0
-fi
-
-SCRIPT_DIR=$CURRENT_DIR
-
-if [ ! -d $SCRIPT_DIR/fbsgen-compiler ]; then
-    
-    SCRIPT=$(readlink -f "$0")
-    # Absolute path this script is in
-    SCRIPT_DIR=$(dirname "$SCRIPT")
 fi
 
 JAR_FILE=$SCRIPT_DIR/fbsgen-compiler/target/fbsgen.jar
