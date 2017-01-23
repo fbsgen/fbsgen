@@ -250,6 +250,36 @@ public final class Writable
     };
     
     /**
+     * Returns the key if arg is null.
+     * <pre>
+     *   «writable.k.(field.name).kunless.(map.("field"))»
+     * </pre>
+     */
+    public final FakeMap kunless = new FakeMap("kunless")
+    {
+        public Object get(Object arg)
+        {
+            Object k = key;
+            key = null;
+            return arg == null ? k : arg;
+        }
+    };
+    
+    /**
+     * Returns the val if arg is null.
+     * <pre>
+     *   «writable.v.(field.name).vunless.(map.("field"))»
+     * </pre>
+     */
+    public final FakeMap vunless = new FakeMap("vunless")
+    {
+        public Object get(Object arg)
+        {
+            return arg == null ? val : arg;
+        }
+    };
+    
+    /**
      * Returns the arg if val is null.
      * <pre>
      *   «writable.v.(message).velse.(foo)»
