@@ -12,6 +12,8 @@ else
     SCRIPT_DIR=`dirname "$F"`
 fi
 
+# ==================================================
+
 PROPS_FILE=_.properties
 
 if [ ! -e $CURRENT_DIR/$PROPS_FILE ]; then
