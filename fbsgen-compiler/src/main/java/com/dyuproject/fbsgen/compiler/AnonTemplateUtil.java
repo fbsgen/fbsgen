@@ -423,7 +423,7 @@ public final class AnonTemplateUtil
             }
             else if (BINARY_EXTENSIONS.containsKey(ext))
             {
-                // simply copy this binary files
+                // simply copy this binary file
                 Files.copy(inFile.toPath(), new File(outDir, argOut).toPath());
                 continue;
             }
