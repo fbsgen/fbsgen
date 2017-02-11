@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.file.Files;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -45,12 +47,25 @@ public final class AnonTemplateUtil
     
     static final boolean P_BLOCK = Boolean.getBoolean("cli.p_block");
     
+    static final HashMap<String,Boolean> BINARY_EXTENSIONS = new HashMap<String,Boolean>();
+    
     static final String SRC = "src/",
             MAIN_JAVA = "main/java/",
             TEST_JAVA = "test/java/",
             START_INTERPOLATE = "{{";
     
     static Pattern PATTERN_INTERPOLATE = Pattern.compile("\\{\\{(.+?)\\}\\}");
+    
+    private static void bin(String ... extensions)
+    {
+        for (String ext : extensions)
+            BINARY_EXTENSIONS.put(ext, Boolean.TRUE);
+    }
+    
+    static
+    {
+        bin("bin", "png", "jpg", "jpeg", "gif", "ico");
+    }
     
     /*interface Replacer
     {
@@ -349,14 +364,39 @@ public final class AnonTemplateUtil
                 packagePath = packageName != null && !packageName.isEmpty() ? 
                         packageName.replace('.', '/') : null;
         
-        int src, idx;
+        int src, idx, lastDot;
+        String arg, ext, argOut, prefix, next;
+        File inFile;
         while (offset < args.length)
         {
-            String arg = args[offset++];
+            arg = args[offset++];
             if (arg.startsWith("./"))
                 arg = arg.substring(2);
             
-            String argOut = arg;
+            if (!(inFile = new File(inDir, arg)).exists())
+            {
+                // file/dir with space
+                prefix = args[offset - 1];
+                StringBuilder sb = new StringBuilder()
+                        .append(arg);
+                
+                while (offset < args.length && 
+                        !(inFile = new File(inDir, (next=args[offset]))).exists() && 
+                        !next.startsWith(prefix))
+                {
+                    sb.append(' ').append(next);
+                    offset++;
+                }
+                
+                arg = sb.toString();
+                if (!(inFile = new File(inDir, arg)).exists())
+                {
+                    System.err.println("Excluding: " + arg);
+                    continue;
+                }
+            }
+            
+            argOut = arg;
             if ((idx = arg.indexOf(START_INTERPOLATE)) != -1)
                 argOut = interpolate(arg, params);
             
@@ -372,11 +412,24 @@ public final class AnonTemplateUtil
             if ((idx = argOut.lastIndexOf('/')) != -1)
                 new File(outDir, argOut.substring(0, idx)).mkdirs();
             
-            if (P_BLOCK && argOut.endsWith(".stg"))
+            if ((lastDot = argOut.lastIndexOf('.')) == -1)
+            {
+                // pass-through
+            }
+            else if ((ext = argOut.substring(lastDot+1)).equals("stg") && P_BLOCK)
+            {
+                // strip stg extension
                 argOut = argOut.substring(0, argOut.length() - 4);
+            }
+            else if (BINARY_EXTENSIONS.containsKey(ext))
+            {
+                // simply copy this binary files
+                Files.copy(inFile.toPath(), new File(outDir, argOut).toPath());
+                continue;
+            }
             
             compileTemplate(params, module, 
-                    new FileInputStream(new File(inDir, arg)), 
+                    new FileInputStream(inFile), 
                     new FileOutputStream(new File(outDir, argOut)));
         }
     }
