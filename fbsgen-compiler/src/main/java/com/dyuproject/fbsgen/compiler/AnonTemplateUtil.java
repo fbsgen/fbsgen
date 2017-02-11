@@ -47,14 +47,14 @@ public final class AnonTemplateUtil
     
     static final boolean P_BLOCK = Boolean.getBoolean("cli.p_block");
     
-    static final HashMap<String,Boolean> BINARY_EXTENSIONS = new HashMap<String,Boolean>();
-    
     static final String SRC = "src/",
             MAIN_JAVA = "main/java/",
             TEST_JAVA = "test/java/",
             START_INTERPOLATE = "{{";
     
     static Pattern PATTERN_INTERPOLATE = Pattern.compile("\\{\\{(.+?)\\}\\}");
+    
+    static final HashMap<String,Boolean> BINARY_EXTENSIONS = new HashMap<String,Boolean>();
     
     private static void bin(String ... extensions)
     {
