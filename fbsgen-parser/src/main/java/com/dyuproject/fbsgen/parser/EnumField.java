@@ -79,6 +79,32 @@ public final class EnumField extends Field<EnumGroup.Value>
         return enumGroup;
     }
     
+    public java.lang.String getDartType()
+    {
+        //if (javaType != null)
+        //    return javaType;
+        
+        StringBuilder buffer = new StringBuilder();
+        if (enumGroup.isNested())
+        {
+            if (enumGroup.parentMessage==owner)
+                buffer.append(enumGroup.name);
+            else
+            {
+                Message.computeName(enumGroup.parentMessage, owner, buffer);
+                buffer.append('_').append(enumGroup.name);
+            }
+        }
+        else if (enumGroup.getProto().getJavaPackageName().equals(owner.getProto().getJavaPackageName()))
+            buffer.append(enumGroup.name);
+        else
+            buffer.append(enumGroup.getProto().getJavaPackageName()).append('_').append(enumGroup.getName());
+        
+        return buffer.toString();
+        //return (javaType=buffer.toString());
+        
+    }
+    
     public java.lang.String getJavaType()
     {
         //if (javaType != null)

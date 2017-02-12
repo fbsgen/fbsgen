@@ -51,6 +51,12 @@ public class MessageField extends Field<Message>
         return message;
     }
     
+    public java.lang.String getDartType()
+    {
+        // TODO
+        return getTsType();
+    }
+    
     public java.lang.String getTsType()
     {
         StringBuilder buffer = new StringBuilder();
