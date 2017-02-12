@@ -75,6 +75,9 @@ public final class Message extends AnnotationContainer implements UserDefinedTyp
     int requiredBytesFieldCount, repeatedBytesFieldCount, singularBytesFieldCount;
     int requiredStringFieldCount, repeatedStringFieldCount, singularStringFieldCount;
     
+    // cache these formats
+    private java.lang.String nameCC;
+    
     public Message(String name, Message parentMessage, Proto proto)
     {
         this.name = name;
@@ -90,6 +93,14 @@ public final class Message extends AnnotationContainer implements UserDefinedTyp
             this.proto = proto;
             proto.addMessage(this);
         }
+    }
+    
+    public java.lang.String getNameCC()
+    {
+        if (nameCC == null)
+            nameCC = Formatter.BUILTIN.CC.format(name);
+        
+        return nameCC;
     }
     
     public String getName()
