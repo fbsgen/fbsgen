@@ -91,15 +91,20 @@ public class MessageField extends Field<Message>
         
     }
     
+    @Override
     public java.lang.String getRegularType()
     {
+        if (regularType != null)
+            return regularType;
+        
         java.lang.String javaType = getJavaType();
         Proto messageProto = message.getProto();
         java.lang.String javaPackage = messageProto.getJavaPackageName();
         java.lang.String protoPackage = messageProto.getPackageName();
         if (javaType.startsWith(javaPackage) && !javaPackage.equals(protoPackage))
-            return javaType.replace(javaPackage, protoPackage);
+            javaType = javaType.replace(javaPackage, protoPackage);
         
+        regularType = javaType;
         return javaType;
     }
     

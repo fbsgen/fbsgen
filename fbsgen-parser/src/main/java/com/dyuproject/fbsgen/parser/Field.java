@@ -147,7 +147,8 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     protected final LinkedHashMap<java.lang.String,Object> extraOptions = 
             new LinkedHashMap<java.lang.String,Object>();
     
-    // cache these formats
+    // cache these
+    protected java.lang.String regularType;
     private java.lang.String nameCC, namePC, namePCS;
     
     public Field()
@@ -158,6 +159,14 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     public Field(boolean packable)
     {
         this.packable = packable;
+    }
+    
+    public java.lang.String getRegularType()
+    {
+        if (regularType == null)
+            regularType = getClass().getSimpleName().toLowerCase();
+        
+        return regularType;
     }
     
     public java.lang.String getNameCC()

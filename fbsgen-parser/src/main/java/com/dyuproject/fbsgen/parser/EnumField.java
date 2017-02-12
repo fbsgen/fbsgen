@@ -163,15 +163,20 @@ public final class EnumField extends Field<EnumGroup.Value>
         return "0";
     }
     
+    @Override
     public java.lang.String getRegularType()
     {
+        if (regularType != null)
+            return regularType;
+        
         java.lang.String javaType = getJavaType();
         Proto egProto = enumGroup.getProto();
         java.lang.String javaPackage = egProto.getJavaPackageName();
         java.lang.String protoPackage = egProto.getPackageName();
         if (javaType.startsWith(javaPackage) && !javaPackage.equals(protoPackage))
-            return javaType.replace(javaPackage, protoPackage);
+            javaType = javaType.replace(javaPackage, protoPackage);
         
+        regularType = javaType;
         return javaType;
     }
     
