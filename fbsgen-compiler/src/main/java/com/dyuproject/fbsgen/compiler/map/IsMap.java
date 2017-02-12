@@ -168,6 +168,14 @@ public final class IsMap extends FakeMap
             }
         },
         
+        INSTANCEOF_INTEGER
+        {
+            public boolean is(Object data)
+            {
+                return data instanceof Integer;
+            }
+        },
+        
         INSTANCEOF_STRING
         {
             public boolean is(Object data)
