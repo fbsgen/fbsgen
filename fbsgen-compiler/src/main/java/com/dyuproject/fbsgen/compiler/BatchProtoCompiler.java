@@ -32,17 +32,19 @@ package com.dyuproject.fbsgen.compiler;
 import static com.dyuproject.fbsgen.compiler.CompilerUtil.COMMA;
 import static com.dyuproject.fbsgen.compiler.CompilerUtil.SEMI_COLON;
 import static com.dyuproject.fbsgen.compiler.ErrorUtil.err;
-import com.dyuproject.fbsgen.parser.EnumGroup;
-import com.dyuproject.fbsgen.parser.Message;
-import com.dyuproject.fbsgen.parser.Proto;
-import com.dyuproject.fbsgen.parser.Service;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
+
+import com.dyuproject.fbsgen.parser.EnumGroup;
+import com.dyuproject.fbsgen.parser.Message;
+import com.dyuproject.fbsgen.parser.Proto;
+import com.dyuproject.fbsgen.parser.Service;
 
 /**
  * Batches the compilation after collecting all the proto components.
@@ -428,6 +430,7 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
         final String packageName = getOptionalStgConfigFrom(module, 
                 stg + ".package_name", null);
         
+        boolean underscore = false;
         String fileName = getOptionalStgConfigFrom(module, stg + ".filename", null);
         if (fileName != null)
         {
@@ -445,6 +448,8 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             final int dollar = fileName.lastIndexOf('$');
             if (dollar != -1)
                 fileName = resolveFileName(fileName, dollar, outputDir);
+            else if (fileName.startsWith("_."))
+                underscore = true;
             else if (packageName == null || packageName.isEmpty())
                 throw err("Missing option: " + stg + ".package_name");
         }
@@ -452,11 +457,57 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
         // hack
         module.setOutputDir(outputDir);
         
+        if (underscore)
+        {
+            compileByPkgDir(module, registry, fileName.substring(1), registryBlockTemplate);
+            return;
+        }
+        
         final BufferedWriter writer = CompilerUtil.newWriter(module, packageName, fileName);
         
         registryBlockTemplate.renderTo(writer, "registry", registry, module);
         
         writer.close();
+    }
+    
+    private static void compileByPkgDir(final ProtoModule module, final Registry registry,
+            String fileSuffix, Template registryBlockTemplate) throws IOException
+    {
+        String pkg, fileName, packageName;
+        int dotIdx;
+        for (Map.Entry<String,ArrayList<Proto>> entry : registry.getPkgProtoMapping().entrySet())
+        {
+            pkg = entry.getKey();
+            packageName = module.getOption(pkg);
+            // check if mapped
+            if (packageName != null)
+                pkg = packageName;
+            
+            dotIdx = pkg.lastIndexOf('.');
+            if (dotIdx == -1)
+            {
+                packageName = pkg;
+                fileName = pkg;
+            }
+            else
+            {
+                packageName = pkg.substring(0, dotIdx);
+                fileName = pkg.substring(dotIdx + 1);
+            }
+            
+            module.getA().put("_", fileName);
+            module.getA().put("@pkg", pkg);
+            module.getA().put("@protos", entry.getValue());
+            
+            BufferedWriter writer = CompilerUtil.newWriter(module, packageName, 
+                    fileName + fileSuffix, null, dotIdx != -1);
+            
+            registryBlockTemplate.renderTo(writer, "registry", registry, module);
+            
+            writer.close();
+            
+            module.clear();
+        }
     }
     
     static void collect(ProtoModule module, Registry target) throws IOException

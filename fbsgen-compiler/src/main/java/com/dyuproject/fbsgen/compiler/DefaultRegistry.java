@@ -39,6 +39,9 @@ public class DefaultRegistry implements Registry
     
     protected final ArrayList<Proto> protos = new ArrayList<Proto>();
     
+    protected final HashMap<String,ArrayList<Proto>> pkgProtoMapping = 
+            new HashMap<String, ArrayList<Proto>>();
+    
     protected final HashMap<String,ArrayList<Proto>> stgProtoMapping = 
             new HashMap<String, ArrayList<Proto>>();
     
@@ -91,6 +94,8 @@ public class DefaultRegistry implements Registry
         
         protoPathMap.put(proto.getSourcePath(), proto);
         
+        addTo(pkgProtoMapping, proto, proto.getDeclaredPackageName());
+        
         String stgs = (String)proto.getOptions().get("stgs");
         if (stgs != null)
             addTo(stgProtoMapping, proto, module, COMMA.split(stgs), proto);
@@ -123,6 +128,12 @@ public class DefaultRegistry implements Registry
         return protoPathMap;
     }
 
+    @Override
+    public Map<String,ArrayList<Proto>>  getPkgProtoMapping()
+    {
+        return pkgProtoMapping;
+    }
+    
     @Override
     public Map<String, ArrayList<Proto>> getStgProtoMapping()
     {

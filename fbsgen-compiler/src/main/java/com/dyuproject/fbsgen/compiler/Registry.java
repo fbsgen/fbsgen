@@ -43,6 +43,7 @@ public interface Registry
     List<Service> getServices();
     
     Map<String,Proto> getProtoPathMap();
+    Map<String,ArrayList<Proto>>  getPkgProtoMapping();
     Map<String,ArrayList<Proto>>  getStgProtoMapping();
     Map<String,ArrayList<Message>>  getStgMessageMapping();
     Map<String,ArrayList<EnumGroup>>  getStgEnumGroupMapping();

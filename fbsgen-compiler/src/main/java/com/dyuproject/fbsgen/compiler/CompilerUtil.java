@@ -127,6 +127,14 @@ public final class CompilerUtil
     public static BufferedWriter newWriter(ProtoModule module, 
             String packageName, String fileName, File sourceFile) throws IOException
     {
+        return newWriter(module, packageName, fileName, sourceFile, 
+                fileName.endsWith(".java") || module.getO().containsKey("with_package_dir"));
+    }
+    
+    public static BufferedWriter newWriter(ProtoModule module, 
+            String packageName, String fileName, File sourceFile, 
+            boolean withPackageDir) throws IOException
+    {
         String encoding = module.getEncoding();
         if (encoding == null || encoding.isEmpty())
             encoding = "UTF-8";
@@ -153,8 +161,7 @@ public final class CompilerUtil
             }
         }
         
-        final File outputDir = fileName.endsWith(".java") || 
-                module.getO().containsKey("with_package_dir") ? 
+        final File outputDir = withPackageDir ? 
                 new File(dir, packageName.replace('.', '/')) : dir;
         
         if (!outputDir.exists())
