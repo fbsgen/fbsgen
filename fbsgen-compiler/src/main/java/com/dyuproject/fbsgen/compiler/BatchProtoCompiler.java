@@ -508,6 +508,9 @@ public final class BatchProtoCompiler extends TemplatedCodeGenerator
             
             module.clear();
         }
+        
+        // do not keep the list ref
+        module.getA().put("@protos", null);
     }
     
     static void collect(ProtoModule module, Registry target) throws IOException
