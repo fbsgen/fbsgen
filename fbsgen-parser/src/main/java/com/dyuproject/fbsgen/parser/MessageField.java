@@ -53,8 +53,21 @@ public class MessageField extends Field<Message>
     
     public java.lang.String getDartType()
     {
-        // TODO
-        return getTsType();
+        StringBuilder buffer = new StringBuilder();
+        if (!message.getProto().getJavaPackageName().equals(owner.getProto().getJavaPackageName()))
+        {
+            buffer.append(message.getProto().getJavaPackageName().replace('.', '_')).append('.');
+        }
+        
+        if (message.isNested())
+        {
+            Message.resolveRelativeName(message, buffer, null, '_');
+            buffer.append('_');
+        }
+        
+        buffer.append(message.name);
+        
+        return buffer.toString();
     }
     
     public java.lang.String getTsType()
