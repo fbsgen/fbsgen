@@ -56,12 +56,13 @@ public class MessageField extends Field<Message>
         StringBuilder buffer = new StringBuilder();
         if (!message.getProto().getJavaPackageName().equals(owner.getProto().getJavaPackageName()))
         {
-            buffer.append(message.getProto().getJavaPackageName().replace('.', '_')).append('.');
+            buffer.append(message.getProto().getJavaPackageName().replace('.', '_'))
+                    .append('.');
         }
         
         if (message.isNested())
         {
-            Message.resolveRelativeName(message, buffer, null, '_');
+            Message.resolveRelativeName(message.parentMessage, buffer, null, '_');
             buffer.append('_');
         }
         

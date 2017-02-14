@@ -84,7 +84,8 @@ public final class EnumField extends Field<EnumGroup.Value>
         StringBuilder buffer = new StringBuilder();
         if (!enumGroup.getProto().getJavaPackageName().equals(owner.getProto().getJavaPackageName()))
         {
-            buffer.append(enumGroup.getProto().getJavaPackageName().replace('.', '_')).append('.');
+            buffer.append(enumGroup.getProto().getJavaPackageName().replace('.', '_'))
+                    .append('.');
         }
         
         if (enumGroup.isNested())
