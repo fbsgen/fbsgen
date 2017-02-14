@@ -479,6 +479,23 @@ public final class Writable
     };
     
     /**
+     * Compares the vaue against the arg.
+     * <pre>
+     *   «writable.v.("foo").veq.("foo")»
+     * </pre>
+     */
+    public final FakeMap veq = new FakeMap("veq")
+    {
+        public Object get(Object arg)
+        {
+            if (arg == null && val == null)
+                return true;
+            else
+                return arg != null && arg.equals(val);
+        }
+    };
+    
+    /**
      * Compares the key against the arg.
      * <pre>
      *   «writable.k.("foo").keq.("foo")»
