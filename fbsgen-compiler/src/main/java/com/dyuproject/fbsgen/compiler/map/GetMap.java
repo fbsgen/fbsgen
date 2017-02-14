@@ -195,6 +195,14 @@ public final class GetMap extends FakeMap
             {
                 return JetGroup.Base.get_str_last_ns((String)data);
             }
+        },
+        
+        STR_FIRST_NS
+        {
+            public Object get(Object data)
+            {
+                return JetGroup.Base.get_str_first_ns((String)data);
+            }
         }
         
         ;

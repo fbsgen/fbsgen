@@ -444,5 +444,11 @@ public final class JetGroup implements TemplateGroup, Template
             int dot = str.lastIndexOf('.');
             return dot == -1 ? str : str.substring(dot+1);
         }
+        
+        public static String get_str_first_ns(String str)
+        {
+            int dot = str.indexOf('.');
+            return dot == -1 ? str : str.substring(0, dot);
+        }
     }
 }
