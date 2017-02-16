@@ -190,7 +190,23 @@ public final class FilterMap extends FakeMap
                 
                 return list;
             }
-        }
+        },
+        
+        MP_DECLARED_FIELDS
+        {
+            public Collection<Field<?>> filter(Message message)
+            {
+                List<Field<?>> list = message.getFields();
+                
+                for (int i = list.size(); i-- > 0;)
+                {
+                    if (list.get(i).getO().containsKey("~mp"))
+                        return list.subList(i + 1, list.size());
+                }
+                
+                return Collections.emptyList();
+            }
+        },
         ;
         
         public final FilterMap map;
