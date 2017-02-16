@@ -25,6 +25,26 @@ import java.io.IOException;
  */
 public class MessageField extends Field<Message>
 {
+    static java.lang.String asDartType(Message message, Proto ownerProto)
+    {
+        java.lang.String pkg = message.getProto().getJavaPackageName();
+        StringBuilder buffer = new StringBuilder();
+        
+        if (!pkg.equals(ownerProto.getJavaPackageName()))
+        {
+            buffer.append(pkg.replace('.', '_')).append('.');
+        }
+        
+        if (message.isNested())
+        {
+            Message.resolveRelativeName(message.parentMessage, buffer, null, '_');
+            buffer.append('_');
+        }
+        
+        buffer.append(message.name);
+        
+        return buffer.toString();
+    }
     
     //java.lang.String javaType;
     Message message;
@@ -53,22 +73,7 @@ public class MessageField extends Field<Message>
     
     public java.lang.String getDartType()
     {
-        StringBuilder buffer = new StringBuilder();
-        if (!message.getProto().getJavaPackageName().equals(owner.getProto().getJavaPackageName()))
-        {
-            buffer.append(message.getProto().getJavaPackageName().replace('.', '_'))
-                    .append('.');
-        }
-        
-        if (message.isNested())
-        {
-            Message.resolveRelativeName(message.parentMessage, buffer, null, '_');
-            buffer.append('_');
-        }
-        
-        buffer.append(message.name);
-        
-        return buffer.toString();
+        return asDartType(message, owner.getProto());
     }
     
     public java.lang.String getTsType()

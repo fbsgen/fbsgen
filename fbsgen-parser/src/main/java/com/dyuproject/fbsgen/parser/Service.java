@@ -251,6 +251,11 @@ public final class Service extends AnnotationContainer implements HasName, HasOp
     
     public static class RpcMethod extends AnnotationContainer implements HasName, HasOptions
     {
+        static String asJavaType(Message message, Proto ownerProto)
+        {
+            return ownerProto.getJavaPackageName().equals(message.getProto().getJavaPackageName()) ? 
+                    message.getRelativeName() : message.getJavaFullName();
+        }
         
         final LinkedHashMap<String,Object> standardOptions = new LinkedHashMap<String,Object>();
         final LinkedHashMap<String,Object> extraOptions = new LinkedHashMap<String,Object>();
@@ -333,20 +338,22 @@ public final class Service extends AnnotationContainer implements HasName, HasOp
         
         public String getJavaArgType()
         {
-            if (argType == null)
-                return "null";
-            
-            return getProto().getJavaPackageName().equals(argType.getProto().getJavaPackageName()) ? 
-                    argType.getRelativeName() : argType.getJavaFullName();
+            return argType == null ? "null" : asJavaType(argType, getProto());
         }
         
         public String getJavaReturnType()
         {
-            if (returnType == null)
-                return "null";
-            
-            return getProto().getJavaPackageName().equals(returnType.getProto().getJavaPackageName()) ? 
-                    returnType.getRelativeName() : returnType.getJavaFullName();
+            return returnType == null ? "null" : asJavaType(returnType, getProto());
+        }
+        
+        public String getDartArgType()
+        {
+            return argType == null ? "null" : MessageField.asDartType(argType, getProto());
+        }
+        
+        public String getDartReturnType()
+        {
+            return returnType == null ? "null" : MessageField.asDartType(returnType, getProto());
         }
         
         public LinkedHashMap<String,Object> getStandardOptions()
