@@ -104,22 +104,19 @@ public final class AnonTemplateUtil
     public static String interpolate(String str, final Map<String, String> map)
     {
         Matcher matcher = PATTERN_INTERPOLATE.matcher(str);
-        // StringBuilder cannot be used here because Matcher expects
-        // StringBuffer
+        // StringBuilder cannot be used here because Matcher expects StringBuffer
         int replaceCount = 0;
         StringBuffer buffer = new StringBuffer();
         while (matcher.find())
         {
-            String g1 = matcher.group(1);
-            if (map.containsKey(g1))
-            {
-                String replacement = map.get(g1);
-                // quote to work properly with $ and {,} signs
-                matcher.appendReplacement(buffer, replacement != null ? 
-                        Matcher.quoteReplacement(replacement) : "null");
-                
-                replaceCount++;
-            }
+            String g1 = matcher.group(1),
+                    val = g1 == null ? null : map.get(g1.trim());
+            if (val == null)
+                continue;
+            
+            matcher.appendReplacement(buffer, Matcher.quoteReplacement(val));
+            
+            replaceCount++;
         }
         
         if (replaceCount == 0)
