@@ -43,7 +43,8 @@ public final class AnonTemplateUtil
 {
     
     static final String IMPORTS = System.getProperty("cli.imports", ""),
-            OPTIONS = System.getProperty("cli.options", "");
+            OPTIONS = System.getProperty("cli.options", ""),
+            COPY_EXT = System.getProperty("cli.copy_ext", "");
     
     static final boolean P_BLOCK = Boolean.getBoolean("cli.p_block");
     
@@ -54,17 +55,20 @@ public final class AnonTemplateUtil
     
     static Pattern PATTERN_INTERPOLATE = Pattern.compile("\\{\\{(.+?)\\}\\}");
     
-    static final HashMap<String,Boolean> BINARY_EXTENSIONS = new HashMap<String,Boolean>();
+    static final HashMap<String,Boolean> EXTENSIONS_TO_COPY = new HashMap<String,Boolean>();
     
-    private static void bin(String ... extensions)
+    private static void putExt(String ... extensions)
     {
         for (String ext : extensions)
-            BINARY_EXTENSIONS.put(ext, Boolean.TRUE);
+            EXTENSIONS_TO_COPY.put(ext, Boolean.TRUE);
     }
     
     static
     {
-        bin("bin", "png", "jpg", "jpeg", "gif", "ico");
+        putExt("bin", "exe", "png", "jpg", "jpeg", "gif", "ico", "stg");
+        
+        if (!COPY_EXT.isEmpty())
+            putExt(COMMA.split(COPY_EXT));
     }
     
     /*interface Replacer
@@ -421,9 +425,9 @@ public final class AnonTemplateUtil
                 // strip stg extension
                 argOut = argOut.substring(0, argOut.length() - 4);
             }
-            else if (BINARY_EXTENSIONS.containsKey(ext))
+            else if (EXTENSIONS_TO_COPY.containsKey(ext))
             {
-                // simply copy this binary file
+                // simply copy this file
                 Files.copy(inFile.toPath(), new File(outDir, argOut).toPath());
                 continue;
             }
