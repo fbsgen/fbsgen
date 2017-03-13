@@ -398,7 +398,7 @@ public final class AnonTemplateUtil
             }
             
             argOut = arg;
-            if ((idx = arg.indexOf(START_INTERPOLATE)) != -1)
+            if ((idx = arg.indexOf(START_INTERPOLATE)) != -1 && !argOut.endsWith(".stg"))
                 argOut = interpolate(arg, params);
             
             if (packageName != null && (src = argOut.indexOf(SRC)) != -1 && 
