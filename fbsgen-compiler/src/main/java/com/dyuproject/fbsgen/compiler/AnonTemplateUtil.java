@@ -103,7 +103,10 @@ public final class AnonTemplateUtil
     
     public static String interpolate(String str, final Map<String, String> map)
     {
-        Matcher matcher = PATTERN_INTERPOLATE.matcher(str);
+        final boolean stg = str.endsWith(".stg");
+        int lastIdx = str.length();
+        Matcher matcher = PATTERN_INTERPOLATE.matcher(!stg ? str :
+                str.substring(0, lastIdx = str.lastIndexOf('/')));
         // StringBuilder cannot be used here because Matcher expects StringBuffer
         int replaceCount = 0;
         StringBuffer buffer = new StringBuffer();
@@ -123,6 +126,10 @@ public final class AnonTemplateUtil
             return str;
         
         matcher.appendTail(buffer);
+        
+        if (stg)
+            buffer.append(str.substring(lastIdx));
+        
         return buffer.toString();
     }
     
@@ -398,7 +405,7 @@ public final class AnonTemplateUtil
             }
             
             argOut = arg;
-            if ((idx = arg.indexOf(START_INTERPOLATE)) != -1 && !argOut.endsWith(".stg"))
+            if ((idx = arg.indexOf(START_INTERPOLATE)) != -1)
                 argOut = interpolate(arg, params);
             
             if (packageName != null && (src = argOut.indexOf(SRC)) != -1 && 
