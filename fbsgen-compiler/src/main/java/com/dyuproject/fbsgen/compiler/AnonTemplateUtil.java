@@ -103,7 +103,7 @@ public final class AnonTemplateUtil
     
     public static String interpolate(String str, final Map<String, String> map)
     {
-        final boolean stg = str.endsWith(".stg");
+        final boolean stg = !P_BLOCK && str.endsWith(".stg");
         int lastIdx = str.length();
         Matcher matcher = PATTERN_INTERPOLATE.matcher(!stg ? str :
                 str.substring(0, lastIdx = str.lastIndexOf('/')));
