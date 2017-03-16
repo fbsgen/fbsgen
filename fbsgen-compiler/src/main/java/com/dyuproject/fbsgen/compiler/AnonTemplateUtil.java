@@ -65,7 +65,10 @@ public final class AnonTemplateUtil
     
     static
     {
-        putExt("bin", "exe", "png", "jpg", "jpeg", "gif", "ico", "stg");
+        putExt("bin", "exe", "dat",
+                "png", "jpg", "jpeg", "gif", "ico",
+                "ttf", "svg", "eot", "woff",
+                "stg");
         
         if (!COPY_EXT.isEmpty())
             putExt(COMMA.split(COPY_EXT));
