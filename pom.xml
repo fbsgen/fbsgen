@@ -18,7 +18,7 @@
   </developers>
   <scm>
     <url>https://gitlab.com/dyu/fbsgen</url>
-    <connection>scm:git:https://gitlab.com/dyu/fbsgen.git</connection>
+    <connection>scm:git:git@gitlab.com:dyu/fbsgen.git</connection>
     <developerConnection>scm:git:git@gitlab.com:dyu/fbsgen.git</developerConnection>
   </scm>
   <licenses>
