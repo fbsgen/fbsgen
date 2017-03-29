@@ -8,7 +8,7 @@
   <packaging>pom</packaging>
   <name>fbsgen</name>
   <description>code generator using proto files with flatbuffers semantics</description>
-  <url>http://gitlab.com/dyu/fbsgen/</url>
+  <url>http://github.com/fbsgen/fbsgen/</url>
   <inceptionYear>2014</inceptionYear>
   <developers>
     <developer>
@@ -17,9 +17,9 @@
     </developer>
   </developers>
   <scm>
-    <url>https://gitlab.com/dyu/fbsgen</url>
-    <connection>scm:git:git@gitlab.com:dyu/fbsgen.git</connection>
-    <developerConnection>scm:git:git@gitlab.com:dyu/fbsgen.git</developerConnection>
+    <url>https://github.com/fbsgen/fbsgen</url>
+    <connection>scm:git:git@github.com:fbsgen/fbsgen.git</connection>
+    <developerConnection>scm:git:git@github.com:fbsgen/fbsgen.git</developerConnection>
   </scm>
   <licenses>
     <license>
