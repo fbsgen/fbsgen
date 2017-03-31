@@ -196,6 +196,7 @@
   <modules>
     <module>fbsgen-parser</module>
     <module>fbsgen-compiler</module>
+    <module>fbsgen-fatjar</module>
   </modules>
   
   <dependencyManagement>
