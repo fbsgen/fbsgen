@@ -1,4 +1,4 @@
-# fbsgen - codegen and scaffolding
+# fbsgen - codegen and project scaffolding
 
 code generator with a custom dsl on top of proto files with flatbuffers semantics.
 
