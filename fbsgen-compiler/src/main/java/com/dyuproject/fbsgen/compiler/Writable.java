@@ -479,7 +479,7 @@ public final class Writable
     };
     
     /**
-     * Compares the vaue against the arg.
+     * Compares the value against the arg.
      * <pre>
      *   «writable.v.("foo").veq.("foo")»
      * </pre>
