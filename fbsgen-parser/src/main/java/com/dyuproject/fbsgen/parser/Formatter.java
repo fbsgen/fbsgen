@@ -168,6 +168,28 @@ public interface Formatter
         },
         
         /**
+         * kebab-case.
+         * 
+         * <pre>
+         * someFoo/SomeFoo/some_foo becomes some-foo
+         * </pre>
+         */
+        KC
+        {
+            public String format(String str)
+            {
+                final StringBuilder buffer = toUnderscoreCase(str);
+                for (int i = 0, len = buffer.length(); i < len; i++)
+                {
+                    if ('_' == buffer.charAt(i) && len != i+1)
+                        buffer.setCharAt(i, '-');
+                }
+                
+                return buffer.toString();
+            }
+        },
+        
+        /**
          * underscore-case.
          * 
          * <pre>
