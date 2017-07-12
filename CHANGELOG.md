@@ -1,3 +1,7 @@
+## 1.0.2
+
+* Added kebab-case to the formatter
+
 ## 1.0.1
 
 * Added fbsgen-fatjar module (standalone executable jar with dependencies)
