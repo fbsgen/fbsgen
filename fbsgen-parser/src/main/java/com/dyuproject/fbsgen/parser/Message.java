@@ -906,7 +906,7 @@ public final class Message extends AnnotationContainer implements UserDefinedTyp
                     if (pf == null)
                         continue;
                     
-                    if (pf.getClass() != f.getClass())
+                    if (pf.getClass() != f.getClass() || pf.number != f.number)
                         throw err(f, " is not the same as its parent field.", proto);
                     
                     if (pf.getModifier() == f.getModifier())
