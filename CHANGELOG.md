@@ -1,3 +1,7 @@
+## 1.0.3
+
+* Validate field numbers of messages annotated with ```@MergeParent(partial = true)```
+
 ## 1.0.2
 
 * Added kebab-case to the formatter
