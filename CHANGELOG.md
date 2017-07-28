@@ -1,3 +1,7 @@
+## 1.0.4 (2017-07-29)
+
+* allow negative index param on Writable.substr
+
 ## 1.0.3
 
 * Validate field numbers of messages annotated with ```@MergeParent(partial = true)```
