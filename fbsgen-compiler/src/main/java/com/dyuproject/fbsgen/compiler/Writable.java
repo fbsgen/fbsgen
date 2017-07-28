@@ -1375,8 +1375,13 @@ public final class Writable
             String str = key.toString();
             key = null;
             
-            int start = $int(entry);
-            return start == 0 ? str : str.substring(start);
+            int i = $int(entry);
+            if (i == 0)
+                return str;
+            else if (i < 0)
+                return str.substring(0, str.length() + i);
+            else
+                return str.substring(i);
         }
     };
     
