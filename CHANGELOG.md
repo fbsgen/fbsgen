@@ -1,3 +1,7 @@
+## 1.0.5
+
+* add the option 'cas_protected' to field_acces_bits
+
 ## 1.0.4 (2017-07-29)
 
 * allow negative index param on Writable.substr

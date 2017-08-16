@@ -176,6 +176,8 @@ public final class GetMap extends FakeMap
                     result |= 2;
                 if (Boolean.TRUE.equals(f.getOption("immutable")))
                     result |= 4;
+                if (Boolean.TRUE.equals(f.getOption("cas_protected")))
+                    result |= 8;
                 
                 return result;
             }
