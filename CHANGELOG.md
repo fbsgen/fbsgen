@@ -1,4 +1,4 @@
-## 1.0.5
+## 1.0.5 (2017-08-22)
 
 * add the option 'cas_protected' to field_acces_bits
 
