@@ -15,6 +15,19 @@
 package com.dyuproject.fbsgen.compiler;
 
 import static com.dyuproject.fbsgen.compiler.TemplatedCodeGenerator.FORMAT_DELIM;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
 import com.dyuproject.fbsgen.parser.Annotation;
 import com.dyuproject.fbsgen.parser.AnnotationContainer;
 import com.dyuproject.fbsgen.parser.EnumField;
@@ -37,18 +50,6 @@ import com.dyuproject.jetg.runtime.JetUtils;
 import com.dyuproject.jetg.runtime.JetWriter;
 import com.dyuproject.jetg.utils.UnsafeCharArrayWriter;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
 /**
  * TODO
  * 
@@ -58,6 +59,8 @@ import java.util.Properties;
 public final class JetGroup implements TemplateGroup, Template
 {
     private static final String ENCODING = "utf-8";
+    private static final String COMPILE_PATH = "..".equals(System.getProperty("proto_path")) && 
+            "modules".equals(getFileName(new File(".."))) ? "../target/jetg" : "target/jetg";
     
     private static final HashMap<String,FileSystemResource> CACHE = 
             new HashMap<String,FileSystemResource>();
@@ -90,6 +93,18 @@ public final class JetGroup implements TemplateGroup, Template
         ENGINE = JetEngine.create(newConfig(/*buffer.toString()*/));
     }
     
+    private static String getFileName(File f)
+    {
+        try
+        {
+            return f.getCanonicalFile().getName();
+        }
+        catch (IOException e)
+        {
+            return f.getName();
+        }
+    }
+    
     private static Properties newConfig(/*String importVars*/)
     {
         Properties config = new Properties();
@@ -110,7 +125,7 @@ public final class JetGroup implements TemplateGroup, Template
         config.put(JetConfig.TEMPLATE_SUFFIX, ".jetg");
         
         config.put(JetConfig.COMPILE_STRATEGY, "auto");
-        config.put(JetConfig.COMPILE_PATH, "target/jetg");
+        config.put(JetConfig.COMPILE_PATH, COMPILE_PATH);
         
         return config;
     }
