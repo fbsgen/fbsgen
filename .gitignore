@@ -1,5 +1,6 @@
 /lib/fbsgen.jar
 /templates
+/.idea
 target/
 .classpath
 .project
