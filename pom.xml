@@ -95,6 +95,7 @@
               <head>Date created:</head>
             </tag>
           </tags>
+          <additionalparam>-Xdoclint:none</additionalparam>
         </configuration>
         <executions>
           <execution>
