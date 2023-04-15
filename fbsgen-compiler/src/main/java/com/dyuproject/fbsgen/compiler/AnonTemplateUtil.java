@@ -46,7 +46,8 @@ public final class AnonTemplateUtil
             OPTIONS = System.getProperty("cli.options", ""),
             COPY_EXT = System.getProperty("cli.copy_ext", "");
     
-    static final boolean P_BLOCK = Boolean.getBoolean("cli.p_block");
+    static final boolean P_BLOCK = Boolean.getBoolean("cli.p_block"),
+            P_BLOCK_ON_STG_FILES = Boolean.getBoolean("cli.p_block_on_stg_files");
     
     static final String SRC = "src/",
             MAIN_JAVA = "main/java/",
@@ -106,9 +107,13 @@ public final class AnonTemplateUtil
     
     public static String interpolate(String str, final Map<String, String> map)
     {
-        final boolean stg = !P_BLOCK && str.endsWith(".stg");
+        return interpolate(str, map, !(P_BLOCK || P_BLOCK_ON_STG_FILES) && str.endsWith(".stg"));
+    }
+    
+    public static String interpolate(String str, final Map<String, String> map, boolean dirOnly)
+    {
         int lastIdx = str.length();
-        Matcher matcher = PATTERN_INTERPOLATE.matcher(!stg ? str :
+        Matcher matcher = PATTERN_INTERPOLATE.matcher(!dirOnly ? str :
                 str.substring(0, lastIdx = str.lastIndexOf('/')));
         // StringBuilder cannot be used here because Matcher expects StringBuffer
         int replaceCount = 0;
@@ -116,9 +121,12 @@ public final class AnonTemplateUtil
         while (matcher.find())
         {
             String g1 = matcher.group(1),
-                    val = g1 == null ? null : map.get(g1.trim());
+                    val = g1 == null ? null : map.get((g1 = g1.trim()));
             if (val == null)
+            {
+                System.err.println("Missing map entry: " + g1);
                 continue;
+            }
             
             matcher.appendReplacement(buffer, Matcher.quoteReplacement(val));
             
@@ -130,7 +138,7 @@ public final class AnonTemplateUtil
         
         matcher.appendTail(buffer);
         
-        if (stg)
+        if (dirOnly)
             buffer.append(str.substring(lastIdx));
         
         return buffer.toString();
@@ -289,13 +297,20 @@ public final class AnonTemplateUtil
         
         return params;
     }
+
+    static void compileTemplate(LinkedHashMap<String,String> params, ProtoModule module, 
+            InputStream in, OutputStream out) throws IOException
+    {
+        compileTemplate(params, module, P_BLOCK, in, out);
+    }
     
     static void compileTemplate(LinkedHashMap<String,String> params, ProtoModule module, 
+            boolean pBlock,
             InputStream in, OutputStream out) throws IOException
     {
         final TemplateGroup group;
         final Template template;
-        if (P_BLOCK)
+        if (pBlock)
         {
             group = TemplateUtil.newGroup("anon", in, new char[4], true);
             template = group.getTemplate("p_block");
@@ -375,10 +390,11 @@ public final class AnonTemplateUtil
                 packagePath = packageName != null && !packageName.isEmpty() ? 
                         packageName.replace('.', '/') : null;
         
+        boolean pBlock = P_BLOCK;
         int src, idx, lastDot;
         String arg, ext, argOut, prefix, next;
         File inFile;
-        while (offset < args.length)
+        for (; offset < args.length; pBlock = P_BLOCK)
         {
             arg = args[offset++];
             if (arg.startsWith("./"))
@@ -427,10 +443,12 @@ public final class AnonTemplateUtil
             {
                 // pass-through
             }
-            else if ((ext = argOut.substring(lastDot+1)).equals("stg") && P_BLOCK)
+            else if ((ext = argOut.substring(lastDot+1)).equals("stg") && 
+                    (P_BLOCK || P_BLOCK_ON_STG_FILES))
             {
                 // strip stg extension
                 argOut = argOut.substring(0, argOut.length() - 4);
+                pBlock = true;
             }
             else if (EXTENSIONS_TO_COPY.containsKey(ext))
             {
@@ -439,7 +457,7 @@ public final class AnonTemplateUtil
                 continue;
             }
             
-            compileTemplate(params, module, 
+            compileTemplate(params, module, pBlock,
                     new FileInputStream(inFile), 
                     new FileOutputStream(new File(outDir, argOut)));
         }
