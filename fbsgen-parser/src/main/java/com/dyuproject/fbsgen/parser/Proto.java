@@ -32,6 +32,8 @@ import java.util.Map;
 public final class Proto extends AnnotationContainer implements HasOptions, HasName
 {
     
+    static final boolean IMPLICIT_TYPE_ANNOTATIONS = Boolean.getBoolean("proto.implicit_type_annotations");
+    
     final File file;
     // if loaded form classpath.
     final URL url;
@@ -456,7 +458,11 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
         }
         
         if (typeAnnotations.isEmpty())
+        {
+            if (IMPLICIT_TYPE_ANNOTATIONS)
+                target.typeAnnotation = new Annotation("uint8", this);
             return;
+        }
         
         if (typeAnnotations.size() > 1)
             throw err(target, " has multiple (must only be one) type annotations: " + typeAnnotations, this);
