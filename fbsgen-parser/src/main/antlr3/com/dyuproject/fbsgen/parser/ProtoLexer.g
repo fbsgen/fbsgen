@@ -63,6 +63,10 @@ RIGHTSQUARE
     :   ']'
     ;
 
+COLON
+    :   ':'
+    ;
+
 SEMICOLON
     :   ';'
     ;

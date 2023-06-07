@@ -15,6 +15,8 @@
 package com.dyuproject.fbsgen.parser;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -26,7 +28,68 @@ import junit.framework.TestCase;
  */
 public class AnnotationTest extends TestCase
 {
-
+    @SuppressWarnings("unchecked")
+    static void verifySubList(List<Object> subList)
+    {
+        assertEquals(3, subList.size());
+        
+        assertEquals(Integer.valueOf(4), subList.get(0));
+        assertEquals(Boolean.FALSE, subList.get(1));
+        
+        Map<String, Object> subMap = (Map<String, Object>)subList.get(2);
+        assertEquals(1, subMap.size());
+        assertEquals(Boolean.TRUE, subMap.get("five"));
+    }
+    
+    @SuppressWarnings("unchecked")
+    static void verifySubMap(Map<String, Object> subMap)
+    {
+        assertEquals(2, subMap.size());
+        verifySubList((List<Object>)subMap.get("four"));
+        
+        Map<String, Object> map = (Map<String, Object>)subMap.get("five");
+        assertEquals(1, map.size());
+        verifySubList((List<Object>)map.get("four"));
+    }
+    
+    @SuppressWarnings("unchecked")
+    static void verifyList(Annotation a)
+    {
+        assertNotNull(a);
+        assertTrue(a.params.containsKey("test"));
+        List<Object> list = a.getValue("test");
+        assertEquals(5, list.size());
+        
+        assertEquals(Integer.valueOf(1), list.get(0));
+        assertEquals(Boolean.TRUE, list.get(1));
+        assertEquals("3", list.get(2));
+        
+        List<Object> subList = (List<Object>)list.get(3);
+        verifySubList(subList);
+        
+        Map<String, Object> subMap = (Map<String, Object>)list.get(4);
+        verifySubMap(subMap);
+    }
+    
+    @SuppressWarnings("unchecked")
+    static void verifyMap(Annotation a)
+    {
+        assertNotNull(a);
+        assertTrue(a.params.containsKey("test"));
+        Map<String, Object> map = a.getValue("test");
+        assertEquals(5, map.size());
+        
+        assertEquals(Integer.valueOf(1), map.get("one"));
+        assertEquals(Boolean.TRUE, map.get("two"));
+        assertEquals("3", map.get("three"));
+        
+        List<Object> subList = (List<Object>)map.get("four");
+        verifySubList(subList);
+        
+        Map<String, Object> subMap = (Map<String, Object>)map.get("five");
+        verifySubMap(subMap);
+    }
+    
     public void testIt() throws Exception
     {
         File f = ProtoParserTest.getFile("com/dyuproject/fbsgen/parser/test_annotations.proto");
@@ -38,6 +101,9 @@ public class AnnotationTest extends TestCase
         Message person = proto.getMessage("Person");
         assertNotNull(person);
         assertTrue(person.isSequentialFieldNumbers());
+        
+        verifyList(person.getAnnotation("List"));
+        verifyMap(person.getAnnotation("Map"));
 
         Annotation defaultPerson = person.getAnnotation("DefaultPerson");
         assertNotNull(defaultPerson);

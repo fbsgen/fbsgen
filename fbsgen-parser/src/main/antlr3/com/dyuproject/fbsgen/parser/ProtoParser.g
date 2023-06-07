@@ -105,9 +105,89 @@ annotation_entry [Proto proto]
         }
     ;
 
+list_val [List<Object> list]
+@init {
+    List<Object> sub = null;
+    Map<String, Object> map = null;
+}
+    :   (
+            (
+                LEFTSQUARE {
+                    list.add((sub = new ArrayList<Object>()));
+                }
+                list_val[sub] (COMMA list_val[sub])* 
+                RIGHTSQUARE
+            )
+            |
+            (
+                LEFTCURLY {
+                    list.add((map = new java.util.LinkedHashMap<String, Object>()));
+                }
+                map_val[map] (COMMA map_val[map])* 
+                RIGHTCURLY
+            )
+            |   NUMFLOAT { list.add(Float.valueOf($NUMFLOAT.text)); }
+            |   NUMINT { list.add(parseNumber($NUMINT.text)); }
+            |   NUMDOUBLE { list.add(Double.valueOf($NUMDOUBLE.text)); }
+            |   TRUE { list.add(Boolean.TRUE); }
+            |   FALSE { list.add(Boolean.FALSE); }
+            |   STRING_LITERAL { list.add(getStringFromStringLiteral($STRING_LITERAL.text)); }
+        )
+    ;
+
+map_val [Map<String, Object> map]
+@init {
+    Map<String, Object> sub = null;
+    List<Object> list = null;
+}
+    :   k=var_full COLON (
+            (
+                LEFTCURLY {
+                    map.put($k.text, (sub = new java.util.LinkedHashMap<String, Object>()));
+                }
+                map_val[sub] (COMMA map_val[sub])* 
+                RIGHTCURLY
+            )
+            |
+            (
+                LEFTSQUARE {
+                    map.put($k.text, (list = new ArrayList<Object>()));
+                }
+                list_val[list] (COMMA list_val[list])* 
+                RIGHTSQUARE
+            )
+            |   NUMFLOAT { map.put($k.text, Float.valueOf($NUMFLOAT.text)); }
+            |   NUMINT { map.put($k.text, parseNumber($NUMINT.text)); }
+            |   NUMDOUBLE { map.put($k.text, Double.valueOf($NUMDOUBLE.text)); }
+            |   TRUE { map.put($k.text, Boolean.TRUE); }
+            |   FALSE { map.put($k.text, Boolean.FALSE); }
+            |   STRING_LITERAL { map.put($k.text, getStringFromStringLiteral($STRING_LITERAL.text)); }
+        )
+    ;
+
 annotation_keyval [Proto proto, Annotation annotation]
-    :   k=var_full ASSIGN (
-                vr=var_reserved { annotation.put($k.text, $vr.text); }
+@init {
+    Map<String, Object> map = null;
+    List<Object> list = null;
+}
+    :   k=var_full (ASSIGN|COLON) (
+            (
+                LEFTCURLY {
+                    annotation.put($k.text, (map = new java.util.LinkedHashMap<String, Object>()));
+                }
+                map_val[map] (COMMA map_val[map])* 
+                RIGHTCURLY
+            )
+            |
+            (
+                LEFTSQUARE {
+                    annotation.put($k.text, (list = new ArrayList<Object>()));
+                }
+                list_val[list] (COMMA list_val[list])* 
+                RIGHTSQUARE
+            )
+            |
+            |   vr=var_reserved { annotation.put($k.text, $vr.text); }
             |   ID { annotation.putRef($k.text, $ID.text); }
             |   fid=FULL_ID { annotation.putRef($k.text, $fid.text); }
             |   NUMFLOAT { annotation.put($k.text, Float.valueOf($NUMFLOAT.text)); }

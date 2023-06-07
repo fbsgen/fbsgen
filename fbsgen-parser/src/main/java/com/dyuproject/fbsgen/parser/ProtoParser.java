@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 com/dyuproject/fbsgen/parser/ProtoParser.g 2017-01-13 15:16:50
+// $ANTLR 3.5.2 com/dyuproject/fbsgen/parser/ProtoParser.g 2023-06-07 18:13:47
 
     package com.dyuproject.fbsgen.parser;
 
@@ -17,75 +17,76 @@ import org.antlr.runtime.tree.*;
 public class ProtoParser extends AbstractParser {
 	public static final String[] tokenNames = new String[] {
 		"<invalid>", "<EOR>", "<DOWN>", "<UP>", "ASSIGN", "AT", "BOOL", "BYTES", 
-		"COMMA", "COMMENT", "DEFAULT", "DOC_COMMENT", "DOUBLE", "ENUM", "ESC_SEQ", 
-		"EXP", "FALSE", "FLOAT", "FULL_ID", "HEX", "HEX_DIGIT", "ID", "IMPORT", 
-		"INT16", "INT32", "INT64", "INT8", "LEFTCURLY", "LEFTPAREN", "LEFTSQUARE", 
-		"MAX", "MESSAGE", "MINUS", "NUMDOUBLE", "NUMFLOAT", "NUMINT", "OCTAL", 
-		"OCTAL_ESC", "OPTION", "OPTIONAL", "PKG", "PLUS", "REPEATED", "REQUIRED", 
-		"RETURNS", "RIGHTCURLY", "RIGHTPAREN", "RIGHTSQUARE", "RPC", "SEMICOLON", 
-		"SERVICE", "STRING", "STRING_LITERAL", "SYNTAX", "TO", "TRUE", "UINT16", 
-		"UINT32", "UINT64", "UINT8", "UNICODE_ESC", "VOID", "WS"
+		"COLON", "COMMA", "COMMENT", "DEFAULT", "DOC_COMMENT", "DOUBLE", "ENUM", 
+		"ESC_SEQ", "EXP", "FALSE", "FLOAT", "FULL_ID", "HEX", "HEX_DIGIT", "ID", 
+		"IMPORT", "INT16", "INT32", "INT64", "INT8", "LEFTCURLY", "LEFTPAREN", 
+		"LEFTSQUARE", "MAX", "MESSAGE", "MINUS", "NUMDOUBLE", "NUMFLOAT", "NUMINT", 
+		"OCTAL", "OCTAL_ESC", "OPTION", "OPTIONAL", "PKG", "PLUS", "REPEATED", 
+		"REQUIRED", "RETURNS", "RIGHTCURLY", "RIGHTPAREN", "RIGHTSQUARE", "RPC", 
+		"SEMICOLON", "SERVICE", "STRING", "STRING_LITERAL", "SYNTAX", "TO", "TRUE", 
+		"UINT16", "UINT32", "UINT64", "UINT8", "UNICODE_ESC", "VOID", "WS"
 	};
 	public static final int EOF=-1;
 	public static final int ASSIGN=4;
 	public static final int AT=5;
 	public static final int BOOL=6;
 	public static final int BYTES=7;
-	public static final int COMMA=8;
-	public static final int COMMENT=9;
-	public static final int DEFAULT=10;
-	public static final int DOC_COMMENT=11;
-	public static final int DOUBLE=12;
-	public static final int ENUM=13;
-	public static final int ESC_SEQ=14;
-	public static final int EXP=15;
-	public static final int FALSE=16;
-	public static final int FLOAT=17;
-	public static final int FULL_ID=18;
-	public static final int HEX=19;
-	public static final int HEX_DIGIT=20;
-	public static final int ID=21;
-	public static final int IMPORT=22;
-	public static final int INT16=23;
-	public static final int INT32=24;
-	public static final int INT64=25;
-	public static final int INT8=26;
-	public static final int LEFTCURLY=27;
-	public static final int LEFTPAREN=28;
-	public static final int LEFTSQUARE=29;
-	public static final int MAX=30;
-	public static final int MESSAGE=31;
-	public static final int MINUS=32;
-	public static final int NUMDOUBLE=33;
-	public static final int NUMFLOAT=34;
-	public static final int NUMINT=35;
-	public static final int OCTAL=36;
-	public static final int OCTAL_ESC=37;
-	public static final int OPTION=38;
-	public static final int OPTIONAL=39;
-	public static final int PKG=40;
-	public static final int PLUS=41;
-	public static final int REPEATED=42;
-	public static final int REQUIRED=43;
-	public static final int RETURNS=44;
-	public static final int RIGHTCURLY=45;
-	public static final int RIGHTPAREN=46;
-	public static final int RIGHTSQUARE=47;
-	public static final int RPC=48;
-	public static final int SEMICOLON=49;
-	public static final int SERVICE=50;
-	public static final int STRING=51;
-	public static final int STRING_LITERAL=52;
-	public static final int SYNTAX=53;
-	public static final int TO=54;
-	public static final int TRUE=55;
-	public static final int UINT16=56;
-	public static final int UINT32=57;
-	public static final int UINT64=58;
-	public static final int UINT8=59;
-	public static final int UNICODE_ESC=60;
-	public static final int VOID=61;
-	public static final int WS=62;
+	public static final int COLON=8;
+	public static final int COMMA=9;
+	public static final int COMMENT=10;
+	public static final int DEFAULT=11;
+	public static final int DOC_COMMENT=12;
+	public static final int DOUBLE=13;
+	public static final int ENUM=14;
+	public static final int ESC_SEQ=15;
+	public static final int EXP=16;
+	public static final int FALSE=17;
+	public static final int FLOAT=18;
+	public static final int FULL_ID=19;
+	public static final int HEX=20;
+	public static final int HEX_DIGIT=21;
+	public static final int ID=22;
+	public static final int IMPORT=23;
+	public static final int INT16=24;
+	public static final int INT32=25;
+	public static final int INT64=26;
+	public static final int INT8=27;
+	public static final int LEFTCURLY=28;
+	public static final int LEFTPAREN=29;
+	public static final int LEFTSQUARE=30;
+	public static final int MAX=31;
+	public static final int MESSAGE=32;
+	public static final int MINUS=33;
+	public static final int NUMDOUBLE=34;
+	public static final int NUMFLOAT=35;
+	public static final int NUMINT=36;
+	public static final int OCTAL=37;
+	public static final int OCTAL_ESC=38;
+	public static final int OPTION=39;
+	public static final int OPTIONAL=40;
+	public static final int PKG=41;
+	public static final int PLUS=42;
+	public static final int REPEATED=43;
+	public static final int REQUIRED=44;
+	public static final int RETURNS=45;
+	public static final int RIGHTCURLY=46;
+	public static final int RIGHTPAREN=47;
+	public static final int RIGHTSQUARE=48;
+	public static final int RPC=49;
+	public static final int SEMICOLON=50;
+	public static final int SERVICE=51;
+	public static final int STRING=52;
+	public static final int STRING_LITERAL=53;
+	public static final int SYNTAX=54;
+	public static final int TO=55;
+	public static final int TRUE=56;
+	public static final int UINT16=57;
+	public static final int UINT32=58;
+	public static final int UINT64=59;
+	public static final int UINT8=60;
+	public static final int UNICODE_ESC=61;
+	public static final int VOID=62;
+	public static final int WS=63;
 
 	// delegates
 	public AbstractParser[] getDelegates() {
@@ -865,6 +866,683 @@ public class ProtoParser extends AbstractParser {
 	// $ANTLR end "annotation_entry"
 
 
+	public static class list_val_return extends ParserRuleReturnScope {
+		Object tree;
+		@Override
+		public Object getTree() { return tree; }
+	};
+
+
+	// $ANTLR start "list_val"
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:108:1: list_val[List<Object> list] : ( ( LEFTSQUARE list_val[sub] ( COMMA list_val[sub] )* RIGHTSQUARE ) | ( LEFTCURLY map_val[map] ( COMMA map_val[map] )* RIGHTCURLY ) | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL ) ;
+	public final ProtoParser.list_val_return list_val(List<Object> list) throws RecognitionException {
+		ProtoParser.list_val_return retval = new ProtoParser.list_val_return();
+		retval.start = input.LT(1);
+
+		Object root_0 = null;
+
+		Token LEFTSQUARE25=null;
+		Token COMMA27=null;
+		Token RIGHTSQUARE29=null;
+		Token LEFTCURLY30=null;
+		Token COMMA32=null;
+		Token RIGHTCURLY34=null;
+		Token NUMFLOAT35=null;
+		Token NUMINT36=null;
+		Token NUMDOUBLE37=null;
+		Token TRUE38=null;
+		Token FALSE39=null;
+		Token STRING_LITERAL40=null;
+		ParserRuleReturnScope list_val26 =null;
+		ParserRuleReturnScope list_val28 =null;
+		ParserRuleReturnScope map_val31 =null;
+		ParserRuleReturnScope map_val33 =null;
+
+		Object LEFTSQUARE25_tree=null;
+		Object COMMA27_tree=null;
+		Object RIGHTSQUARE29_tree=null;
+		Object LEFTCURLY30_tree=null;
+		Object COMMA32_tree=null;
+		Object RIGHTCURLY34_tree=null;
+		Object NUMFLOAT35_tree=null;
+		Object NUMINT36_tree=null;
+		Object NUMDOUBLE37_tree=null;
+		Object TRUE38_tree=null;
+		Object FALSE39_tree=null;
+		Object STRING_LITERAL40_tree=null;
+
+
+		    List<Object> sub = null;
+		    Map<String, Object> map = null;
+
+		try {
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:113:5: ( ( ( LEFTSQUARE list_val[sub] ( COMMA list_val[sub] )* RIGHTSQUARE ) | ( LEFTCURLY map_val[map] ( COMMA map_val[map] )* RIGHTCURLY ) | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL ) )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:113:9: ( ( LEFTSQUARE list_val[sub] ( COMMA list_val[sub] )* RIGHTSQUARE ) | ( LEFTCURLY map_val[map] ( COMMA map_val[map] )* RIGHTCURLY ) | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL )
+			{
+			root_0 = (Object)adaptor.nil();
+
+
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:113:9: ( ( LEFTSQUARE list_val[sub] ( COMMA list_val[sub] )* RIGHTSQUARE ) | ( LEFTCURLY map_val[map] ( COMMA map_val[map] )* RIGHTCURLY ) | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL )
+			int alt9=8;
+			switch ( input.LA(1) ) {
+			case LEFTSQUARE:
+				{
+				alt9=1;
+				}
+				break;
+			case LEFTCURLY:
+				{
+				alt9=2;
+				}
+				break;
+			case NUMFLOAT:
+				{
+				alt9=3;
+				}
+				break;
+			case NUMINT:
+				{
+				alt9=4;
+				}
+				break;
+			case NUMDOUBLE:
+				{
+				alt9=5;
+				}
+				break;
+			case TRUE:
+				{
+				alt9=6;
+				}
+				break;
+			case FALSE:
+				{
+				alt9=7;
+				}
+				break;
+			case STRING_LITERAL:
+				{
+				alt9=8;
+				}
+				break;
+			default:
+				if (state.backtracking>0) {state.failed=true; return retval;}
+				NoViableAltException nvae =
+					new NoViableAltException("", 9, 0, input);
+				throw nvae;
+			}
+			switch (alt9) {
+				case 1 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:114:13: ( LEFTSQUARE list_val[sub] ( COMMA list_val[sub] )* RIGHTSQUARE )
+					{
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:114:13: ( LEFTSQUARE list_val[sub] ( COMMA list_val[sub] )* RIGHTSQUARE )
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:115:17: LEFTSQUARE list_val[sub] ( COMMA list_val[sub] )* RIGHTSQUARE
+					{
+					LEFTSQUARE25=(Token)match(input,LEFTSQUARE,FOLLOW_LEFTSQUARE_in_list_val704); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					LEFTSQUARE25_tree = (Object)adaptor.create(LEFTSQUARE25);
+					adaptor.addChild(root_0, LEFTSQUARE25_tree);
+					}
+
+					if ( state.backtracking==0 ) {
+					                    list.add((sub = new ArrayList<Object>()));
+					                }
+					pushFollow(FOLLOW_list_val_in_list_val724);
+					list_val26=list_val(sub);
+					state._fsp--;
+					if (state.failed) return retval;
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, list_val26.getTree());
+
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:118:31: ( COMMA list_val[sub] )*
+					loop7:
+					while (true) {
+						int alt7=2;
+						int LA7_0 = input.LA(1);
+						if ( (LA7_0==COMMA) ) {
+							alt7=1;
+						}
+
+						switch (alt7) {
+						case 1 :
+							// com/dyuproject/fbsgen/parser/ProtoParser.g:118:32: COMMA list_val[sub]
+							{
+							COMMA27=(Token)match(input,COMMA,FOLLOW_COMMA_in_list_val728); if (state.failed) return retval;
+							if ( state.backtracking==0 ) {
+							COMMA27_tree = (Object)adaptor.create(COMMA27);
+							adaptor.addChild(root_0, COMMA27_tree);
+							}
+
+							pushFollow(FOLLOW_list_val_in_list_val730);
+							list_val28=list_val(sub);
+							state._fsp--;
+							if (state.failed) return retval;
+							if ( state.backtracking==0 ) adaptor.addChild(root_0, list_val28.getTree());
+
+							}
+							break;
+
+						default :
+							break loop7;
+						}
+					}
+
+					RIGHTSQUARE29=(Token)match(input,RIGHTSQUARE,FOLLOW_RIGHTSQUARE_in_list_val752); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					RIGHTSQUARE29_tree = (Object)adaptor.create(RIGHTSQUARE29);
+					adaptor.addChild(root_0, RIGHTSQUARE29_tree);
+					}
+
+					}
+
+					}
+					break;
+				case 2 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:122:13: ( LEFTCURLY map_val[map] ( COMMA map_val[map] )* RIGHTCURLY )
+					{
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:122:13: ( LEFTCURLY map_val[map] ( COMMA map_val[map] )* RIGHTCURLY )
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:123:17: LEFTCURLY map_val[map] ( COMMA map_val[map] )* RIGHTCURLY
+					{
+					LEFTCURLY30=(Token)match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_list_val812); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					LEFTCURLY30_tree = (Object)adaptor.create(LEFTCURLY30);
+					adaptor.addChild(root_0, LEFTCURLY30_tree);
+					}
+
+					if ( state.backtracking==0 ) {
+					                    list.add((map = new java.util.LinkedHashMap<String, Object>()));
+					                }
+					pushFollow(FOLLOW_map_val_in_list_val832);
+					map_val31=map_val(map);
+					state._fsp--;
+					if (state.failed) return retval;
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, map_val31.getTree());
+
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:126:30: ( COMMA map_val[map] )*
+					loop8:
+					while (true) {
+						int alt8=2;
+						int LA8_0 = input.LA(1);
+						if ( (LA8_0==COMMA) ) {
+							alt8=1;
+						}
+
+						switch (alt8) {
+						case 1 :
+							// com/dyuproject/fbsgen/parser/ProtoParser.g:126:31: COMMA map_val[map]
+							{
+							COMMA32=(Token)match(input,COMMA,FOLLOW_COMMA_in_list_val836); if (state.failed) return retval;
+							if ( state.backtracking==0 ) {
+							COMMA32_tree = (Object)adaptor.create(COMMA32);
+							adaptor.addChild(root_0, COMMA32_tree);
+							}
+
+							pushFollow(FOLLOW_map_val_in_list_val838);
+							map_val33=map_val(map);
+							state._fsp--;
+							if (state.failed) return retval;
+							if ( state.backtracking==0 ) adaptor.addChild(root_0, map_val33.getTree());
+
+							}
+							break;
+
+						default :
+							break loop8;
+						}
+					}
+
+					RIGHTCURLY34=(Token)match(input,RIGHTCURLY,FOLLOW_RIGHTCURLY_in_list_val860); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					RIGHTCURLY34_tree = (Object)adaptor.create(RIGHTCURLY34);
+					adaptor.addChild(root_0, RIGHTCURLY34_tree);
+					}
+
+					}
+
+					}
+					break;
+				case 3 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:129:17: NUMFLOAT
+					{
+					NUMFLOAT35=(Token)match(input,NUMFLOAT,FOLLOW_NUMFLOAT_in_list_val892); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					NUMFLOAT35_tree = (Object)adaptor.create(NUMFLOAT35);
+					adaptor.addChild(root_0, NUMFLOAT35_tree);
+					}
+
+					if ( state.backtracking==0 ) { list.add(Float.valueOf((NUMFLOAT35!=null?NUMFLOAT35.getText():null))); }
+					}
+					break;
+				case 4 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:130:17: NUMINT
+					{
+					NUMINT36=(Token)match(input,NUMINT,FOLLOW_NUMINT_in_list_val912); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					NUMINT36_tree = (Object)adaptor.create(NUMINT36);
+					adaptor.addChild(root_0, NUMINT36_tree);
+					}
+
+					if ( state.backtracking==0 ) { list.add(parseNumber((NUMINT36!=null?NUMINT36.getText():null))); }
+					}
+					break;
+				case 5 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:131:17: NUMDOUBLE
+					{
+					NUMDOUBLE37=(Token)match(input,NUMDOUBLE,FOLLOW_NUMDOUBLE_in_list_val932); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					NUMDOUBLE37_tree = (Object)adaptor.create(NUMDOUBLE37);
+					adaptor.addChild(root_0, NUMDOUBLE37_tree);
+					}
+
+					if ( state.backtracking==0 ) { list.add(Double.valueOf((NUMDOUBLE37!=null?NUMDOUBLE37.getText():null))); }
+					}
+					break;
+				case 6 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:132:17: TRUE
+					{
+					TRUE38=(Token)match(input,TRUE,FOLLOW_TRUE_in_list_val952); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					TRUE38_tree = (Object)adaptor.create(TRUE38);
+					adaptor.addChild(root_0, TRUE38_tree);
+					}
+
+					if ( state.backtracking==0 ) { list.add(Boolean.TRUE); }
+					}
+					break;
+				case 7 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:133:17: FALSE
+					{
+					FALSE39=(Token)match(input,FALSE,FOLLOW_FALSE_in_list_val972); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					FALSE39_tree = (Object)adaptor.create(FALSE39);
+					adaptor.addChild(root_0, FALSE39_tree);
+					}
+
+					if ( state.backtracking==0 ) { list.add(Boolean.FALSE); }
+					}
+					break;
+				case 8 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:134:17: STRING_LITERAL
+					{
+					STRING_LITERAL40=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_list_val992); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					STRING_LITERAL40_tree = (Object)adaptor.create(STRING_LITERAL40);
+					adaptor.addChild(root_0, STRING_LITERAL40_tree);
+					}
+
+					if ( state.backtracking==0 ) { list.add(getStringFromStringLiteral((STRING_LITERAL40!=null?STRING_LITERAL40.getText():null))); }
+					}
+					break;
+
+			}
+
+			}
+
+			retval.stop = input.LT(-1);
+
+			if ( state.backtracking==0 ) {
+			retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+			adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+			}
+		}
+		catch (RecognitionException re) {
+			reportError(re);
+			recover(input,re);
+			retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+		}
+		finally {
+			// do for sure before leaving
+		}
+		return retval;
+	}
+	// $ANTLR end "list_val"
+
+
+	public static class map_val_return extends ParserRuleReturnScope {
+		Object tree;
+		@Override
+		public Object getTree() { return tree; }
+	};
+
+
+	// $ANTLR start "map_val"
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:138:1: map_val[Map<String, Object> map] : k= var_full COLON ( ( LEFTCURLY map_val[sub] ( COMMA map_val[sub] )* RIGHTCURLY ) | ( LEFTSQUARE list_val[list] ( COMMA list_val[list] )* RIGHTSQUARE ) | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL ) ;
+	public final ProtoParser.map_val_return map_val(Map<String, Object> map) throws RecognitionException {
+		ProtoParser.map_val_return retval = new ProtoParser.map_val_return();
+		retval.start = input.LT(1);
+
+		Object root_0 = null;
+
+		Token COLON41=null;
+		Token LEFTCURLY42=null;
+		Token COMMA44=null;
+		Token RIGHTCURLY46=null;
+		Token LEFTSQUARE47=null;
+		Token COMMA49=null;
+		Token RIGHTSQUARE51=null;
+		Token NUMFLOAT52=null;
+		Token NUMINT53=null;
+		Token NUMDOUBLE54=null;
+		Token TRUE55=null;
+		Token FALSE56=null;
+		Token STRING_LITERAL57=null;
+		ParserRuleReturnScope k =null;
+		ParserRuleReturnScope map_val43 =null;
+		ParserRuleReturnScope map_val45 =null;
+		ParserRuleReturnScope list_val48 =null;
+		ParserRuleReturnScope list_val50 =null;
+
+		Object COLON41_tree=null;
+		Object LEFTCURLY42_tree=null;
+		Object COMMA44_tree=null;
+		Object RIGHTCURLY46_tree=null;
+		Object LEFTSQUARE47_tree=null;
+		Object COMMA49_tree=null;
+		Object RIGHTSQUARE51_tree=null;
+		Object NUMFLOAT52_tree=null;
+		Object NUMINT53_tree=null;
+		Object NUMDOUBLE54_tree=null;
+		Object TRUE55_tree=null;
+		Object FALSE56_tree=null;
+		Object STRING_LITERAL57_tree=null;
+
+
+		    Map<String, Object> sub = null;
+		    List<Object> list = null;
+
+		try {
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:143:5: (k= var_full COLON ( ( LEFTCURLY map_val[sub] ( COMMA map_val[sub] )* RIGHTCURLY ) | ( LEFTSQUARE list_val[list] ( COMMA list_val[list] )* RIGHTSQUARE ) | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL ) )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:143:9: k= var_full COLON ( ( LEFTCURLY map_val[sub] ( COMMA map_val[sub] )* RIGHTCURLY ) | ( LEFTSQUARE list_val[list] ( COMMA list_val[list] )* RIGHTSQUARE ) | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL )
+			{
+			root_0 = (Object)adaptor.nil();
+
+
+			pushFollow(FOLLOW_var_full_in_map_val1032);
+			k=var_full();
+			state._fsp--;
+			if (state.failed) return retval;
+			if ( state.backtracking==0 ) adaptor.addChild(root_0, k.getTree());
+
+			COLON41=(Token)match(input,COLON,FOLLOW_COLON_in_map_val1034); if (state.failed) return retval;
+			if ( state.backtracking==0 ) {
+			COLON41_tree = (Object)adaptor.create(COLON41);
+			adaptor.addChild(root_0, COLON41_tree);
+			}
+
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:143:26: ( ( LEFTCURLY map_val[sub] ( COMMA map_val[sub] )* RIGHTCURLY ) | ( LEFTSQUARE list_val[list] ( COMMA list_val[list] )* RIGHTSQUARE ) | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL )
+			int alt12=8;
+			switch ( input.LA(1) ) {
+			case LEFTCURLY:
+				{
+				alt12=1;
+				}
+				break;
+			case LEFTSQUARE:
+				{
+				alt12=2;
+				}
+				break;
+			case NUMFLOAT:
+				{
+				alt12=3;
+				}
+				break;
+			case NUMINT:
+				{
+				alt12=4;
+				}
+				break;
+			case NUMDOUBLE:
+				{
+				alt12=5;
+				}
+				break;
+			case TRUE:
+				{
+				alt12=6;
+				}
+				break;
+			case FALSE:
+				{
+				alt12=7;
+				}
+				break;
+			case STRING_LITERAL:
+				{
+				alt12=8;
+				}
+				break;
+			default:
+				if (state.backtracking>0) {state.failed=true; return retval;}
+				NoViableAltException nvae =
+					new NoViableAltException("", 12, 0, input);
+				throw nvae;
+			}
+			switch (alt12) {
+				case 1 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:144:13: ( LEFTCURLY map_val[sub] ( COMMA map_val[sub] )* RIGHTCURLY )
+					{
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:144:13: ( LEFTCURLY map_val[sub] ( COMMA map_val[sub] )* RIGHTCURLY )
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:145:17: LEFTCURLY map_val[sub] ( COMMA map_val[sub] )* RIGHTCURLY
+					{
+					LEFTCURLY42=(Token)match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_map_val1068); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					LEFTCURLY42_tree = (Object)adaptor.create(LEFTCURLY42);
+					adaptor.addChild(root_0, LEFTCURLY42_tree);
+					}
+
+					if ( state.backtracking==0 ) {
+					                    map.put((k!=null?input.toString(k.start,k.stop):null), (sub = new java.util.LinkedHashMap<String, Object>()));
+					                }
+					pushFollow(FOLLOW_map_val_in_map_val1088);
+					map_val43=map_val(sub);
+					state._fsp--;
+					if (state.failed) return retval;
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, map_val43.getTree());
+
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:148:30: ( COMMA map_val[sub] )*
+					loop10:
+					while (true) {
+						int alt10=2;
+						int LA10_0 = input.LA(1);
+						if ( (LA10_0==COMMA) ) {
+							alt10=1;
+						}
+
+						switch (alt10) {
+						case 1 :
+							// com/dyuproject/fbsgen/parser/ProtoParser.g:148:31: COMMA map_val[sub]
+							{
+							COMMA44=(Token)match(input,COMMA,FOLLOW_COMMA_in_map_val1092); if (state.failed) return retval;
+							if ( state.backtracking==0 ) {
+							COMMA44_tree = (Object)adaptor.create(COMMA44);
+							adaptor.addChild(root_0, COMMA44_tree);
+							}
+
+							pushFollow(FOLLOW_map_val_in_map_val1094);
+							map_val45=map_val(sub);
+							state._fsp--;
+							if (state.failed) return retval;
+							if ( state.backtracking==0 ) adaptor.addChild(root_0, map_val45.getTree());
+
+							}
+							break;
+
+						default :
+							break loop10;
+						}
+					}
+
+					RIGHTCURLY46=(Token)match(input,RIGHTCURLY,FOLLOW_RIGHTCURLY_in_map_val1116); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					RIGHTCURLY46_tree = (Object)adaptor.create(RIGHTCURLY46);
+					adaptor.addChild(root_0, RIGHTCURLY46_tree);
+					}
+
+					}
+
+					}
+					break;
+				case 2 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:152:13: ( LEFTSQUARE list_val[list] ( COMMA list_val[list] )* RIGHTSQUARE )
+					{
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:152:13: ( LEFTSQUARE list_val[list] ( COMMA list_val[list] )* RIGHTSQUARE )
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:153:17: LEFTSQUARE list_val[list] ( COMMA list_val[list] )* RIGHTSQUARE
+					{
+					LEFTSQUARE47=(Token)match(input,LEFTSQUARE,FOLLOW_LEFTSQUARE_in_map_val1176); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					LEFTSQUARE47_tree = (Object)adaptor.create(LEFTSQUARE47);
+					adaptor.addChild(root_0, LEFTSQUARE47_tree);
+					}
+
+					if ( state.backtracking==0 ) {
+					                    map.put((k!=null?input.toString(k.start,k.stop):null), (list = new ArrayList<Object>()));
+					                }
+					pushFollow(FOLLOW_list_val_in_map_val1196);
+					list_val48=list_val(list);
+					state._fsp--;
+					if (state.failed) return retval;
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, list_val48.getTree());
+
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:156:32: ( COMMA list_val[list] )*
+					loop11:
+					while (true) {
+						int alt11=2;
+						int LA11_0 = input.LA(1);
+						if ( (LA11_0==COMMA) ) {
+							alt11=1;
+						}
+
+						switch (alt11) {
+						case 1 :
+							// com/dyuproject/fbsgen/parser/ProtoParser.g:156:33: COMMA list_val[list]
+							{
+							COMMA49=(Token)match(input,COMMA,FOLLOW_COMMA_in_map_val1200); if (state.failed) return retval;
+							if ( state.backtracking==0 ) {
+							COMMA49_tree = (Object)adaptor.create(COMMA49);
+							adaptor.addChild(root_0, COMMA49_tree);
+							}
+
+							pushFollow(FOLLOW_list_val_in_map_val1202);
+							list_val50=list_val(list);
+							state._fsp--;
+							if (state.failed) return retval;
+							if ( state.backtracking==0 ) adaptor.addChild(root_0, list_val50.getTree());
+
+							}
+							break;
+
+						default :
+							break loop11;
+						}
+					}
+
+					RIGHTSQUARE51=(Token)match(input,RIGHTSQUARE,FOLLOW_RIGHTSQUARE_in_map_val1224); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					RIGHTSQUARE51_tree = (Object)adaptor.create(RIGHTSQUARE51);
+					adaptor.addChild(root_0, RIGHTSQUARE51_tree);
+					}
+
+					}
+
+					}
+					break;
+				case 3 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:159:17: NUMFLOAT
+					{
+					NUMFLOAT52=(Token)match(input,NUMFLOAT,FOLLOW_NUMFLOAT_in_map_val1256); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					NUMFLOAT52_tree = (Object)adaptor.create(NUMFLOAT52);
+					adaptor.addChild(root_0, NUMFLOAT52_tree);
+					}
+
+					if ( state.backtracking==0 ) { map.put((k!=null?input.toString(k.start,k.stop):null), Float.valueOf((NUMFLOAT52!=null?NUMFLOAT52.getText():null))); }
+					}
+					break;
+				case 4 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:160:17: NUMINT
+					{
+					NUMINT53=(Token)match(input,NUMINT,FOLLOW_NUMINT_in_map_val1276); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					NUMINT53_tree = (Object)adaptor.create(NUMINT53);
+					adaptor.addChild(root_0, NUMINT53_tree);
+					}
+
+					if ( state.backtracking==0 ) { map.put((k!=null?input.toString(k.start,k.stop):null), parseNumber((NUMINT53!=null?NUMINT53.getText():null))); }
+					}
+					break;
+				case 5 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:161:17: NUMDOUBLE
+					{
+					NUMDOUBLE54=(Token)match(input,NUMDOUBLE,FOLLOW_NUMDOUBLE_in_map_val1296); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					NUMDOUBLE54_tree = (Object)adaptor.create(NUMDOUBLE54);
+					adaptor.addChild(root_0, NUMDOUBLE54_tree);
+					}
+
+					if ( state.backtracking==0 ) { map.put((k!=null?input.toString(k.start,k.stop):null), Double.valueOf((NUMDOUBLE54!=null?NUMDOUBLE54.getText():null))); }
+					}
+					break;
+				case 6 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:162:17: TRUE
+					{
+					TRUE55=(Token)match(input,TRUE,FOLLOW_TRUE_in_map_val1316); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					TRUE55_tree = (Object)adaptor.create(TRUE55);
+					adaptor.addChild(root_0, TRUE55_tree);
+					}
+
+					if ( state.backtracking==0 ) { map.put((k!=null?input.toString(k.start,k.stop):null), Boolean.TRUE); }
+					}
+					break;
+				case 7 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:163:17: FALSE
+					{
+					FALSE56=(Token)match(input,FALSE,FOLLOW_FALSE_in_map_val1336); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					FALSE56_tree = (Object)adaptor.create(FALSE56);
+					adaptor.addChild(root_0, FALSE56_tree);
+					}
+
+					if ( state.backtracking==0 ) { map.put((k!=null?input.toString(k.start,k.stop):null), Boolean.FALSE); }
+					}
+					break;
+				case 8 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:164:17: STRING_LITERAL
+					{
+					STRING_LITERAL57=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_map_val1356); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					STRING_LITERAL57_tree = (Object)adaptor.create(STRING_LITERAL57);
+					adaptor.addChild(root_0, STRING_LITERAL57_tree);
+					}
+
+					if ( state.backtracking==0 ) { map.put((k!=null?input.toString(k.start,k.stop):null), getStringFromStringLiteral((STRING_LITERAL57!=null?STRING_LITERAL57.getText():null))); }
+					}
+					break;
+
+			}
+
+			}
+
+			retval.stop = input.LT(-1);
+
+			if ( state.backtracking==0 ) {
+			retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+			adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+			}
+		}
+		catch (RecognitionException re) {
+			reportError(re);
+			recover(input,re);
+			retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+		}
+		finally {
+			// do for sure before leaving
+		}
+		return retval;
+	}
+	// $ANTLR end "map_val"
+
+
 	public static class annotation_keyval_return extends ParserRuleReturnScope {
 		Object tree;
 		@Override
@@ -873,7 +1551,7 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "annotation_keyval"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:108:1: annotation_keyval[Proto proto, Annotation annotation] : k= var_full ASSIGN (vr= var_reserved | ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL ) ;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:168:1: annotation_keyval[Proto proto, Annotation annotation] : k= var_full ( ASSIGN | COLON ) ( ( LEFTCURLY map_val[map] ( COMMA map_val[map] )* RIGHTCURLY ) | ( LEFTSQUARE list_val[list] ( COMMA list_val[list] )* RIGHTSQUARE ) ||vr= var_reserved | ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL ) ;
 	public final ProtoParser.annotation_keyval_return annotation_keyval(Proto proto, Annotation annotation) throws RecognitionException {
 		ProtoParser.annotation_keyval_return retval = new ProtoParser.annotation_keyval_return();
 		retval.start = input.LT(1);
@@ -881,49 +1559,91 @@ public class ProtoParser extends AbstractParser {
 		Object root_0 = null;
 
 		Token fid=null;
-		Token ASSIGN25=null;
-		Token ID26=null;
-		Token NUMFLOAT27=null;
-		Token NUMINT28=null;
-		Token NUMDOUBLE29=null;
-		Token TRUE30=null;
-		Token FALSE31=null;
-		Token STRING_LITERAL32=null;
+		Token set58=null;
+		Token LEFTCURLY59=null;
+		Token COMMA61=null;
+		Token RIGHTCURLY63=null;
+		Token LEFTSQUARE64=null;
+		Token COMMA66=null;
+		Token RIGHTSQUARE68=null;
+		Token ID69=null;
+		Token NUMFLOAT70=null;
+		Token NUMINT71=null;
+		Token NUMDOUBLE72=null;
+		Token TRUE73=null;
+		Token FALSE74=null;
+		Token STRING_LITERAL75=null;
 		ParserRuleReturnScope k =null;
 		ParserRuleReturnScope vr =null;
+		ParserRuleReturnScope map_val60 =null;
+		ParserRuleReturnScope map_val62 =null;
+		ParserRuleReturnScope list_val65 =null;
+		ParserRuleReturnScope list_val67 =null;
 
 		Object fid_tree=null;
-		Object ASSIGN25_tree=null;
-		Object ID26_tree=null;
-		Object NUMFLOAT27_tree=null;
-		Object NUMINT28_tree=null;
-		Object NUMDOUBLE29_tree=null;
-		Object TRUE30_tree=null;
-		Object FALSE31_tree=null;
-		Object STRING_LITERAL32_tree=null;
+		Object set58_tree=null;
+		Object LEFTCURLY59_tree=null;
+		Object COMMA61_tree=null;
+		Object RIGHTCURLY63_tree=null;
+		Object LEFTSQUARE64_tree=null;
+		Object COMMA66_tree=null;
+		Object RIGHTSQUARE68_tree=null;
+		Object ID69_tree=null;
+		Object NUMFLOAT70_tree=null;
+		Object NUMINT71_tree=null;
+		Object NUMDOUBLE72_tree=null;
+		Object TRUE73_tree=null;
+		Object FALSE74_tree=null;
+		Object STRING_LITERAL75_tree=null;
+
+
+		    Map<String, Object> map = null;
+		    List<Object> list = null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:109:5: (k= var_full ASSIGN (vr= var_reserved | ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL ) )
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:109:9: k= var_full ASSIGN (vr= var_reserved | ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:173:5: (k= var_full ( ASSIGN | COLON ) ( ( LEFTCURLY map_val[map] ( COMMA map_val[map] )* RIGHTCURLY ) | ( LEFTSQUARE list_val[list] ( COMMA list_val[list] )* RIGHTSQUARE ) ||vr= var_reserved | ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL ) )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:173:9: k= var_full ( ASSIGN | COLON ) ( ( LEFTCURLY map_val[map] ( COMMA map_val[map] )* RIGHTCURLY ) | ( LEFTSQUARE list_val[list] ( COMMA list_val[list] )* RIGHTSQUARE ) ||vr= var_reserved | ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL )
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_var_full_in_annotation_keyval669);
+			pushFollow(FOLLOW_var_full_in_annotation_keyval1396);
 			k=var_full();
 			state._fsp--;
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, k.getTree());
 
-			ASSIGN25=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_annotation_keyval671); if (state.failed) return retval;
-			if ( state.backtracking==0 ) {
-			ASSIGN25_tree = (Object)adaptor.create(ASSIGN25);
-			adaptor.addChild(root_0, ASSIGN25_tree);
+			set58=input.LT(1);
+			if ( input.LA(1)==ASSIGN||input.LA(1)==COLON ) {
+				input.consume();
+				if ( state.backtracking==0 ) adaptor.addChild(root_0, (Object)adaptor.create(set58));
+				state.errorRecovery=false;
+				state.failed=false;
 			}
-
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:109:27: (vr= var_reserved | ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL )
-			int alt7=9;
+			else {
+				if (state.backtracking>0) {state.failed=true; return retval;}
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				throw mse;
+			}
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:173:35: ( ( LEFTCURLY map_val[map] ( COMMA map_val[map] )* RIGHTCURLY ) | ( LEFTSQUARE list_val[list] ( COMMA list_val[list] )* RIGHTSQUARE ) ||vr= var_reserved | ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL )
+			int alt15=12;
 			switch ( input.LA(1) ) {
+			case LEFTCURLY:
+				{
+				alt15=1;
+				}
+				break;
+			case LEFTSQUARE:
+				{
+				alt15=2;
+				}
+				break;
+			case COMMA:
+			case RIGHTPAREN:
+				{
+				alt15=3;
+				}
+				break;
 			case BOOL:
 			case BYTES:
 			case DEFAULT:
@@ -954,60 +1674,193 @@ public class ProtoParser extends AbstractParser {
 			case UINT8:
 			case VOID:
 				{
-				alt7=1;
+				alt15=4;
 				}
 				break;
 			case ID:
 				{
-				alt7=2;
+				alt15=5;
 				}
 				break;
 			case FULL_ID:
 				{
-				alt7=3;
+				alt15=6;
 				}
 				break;
 			case NUMFLOAT:
 				{
-				alt7=4;
+				alt15=7;
 				}
 				break;
 			case NUMINT:
 				{
-				alt7=5;
+				alt15=8;
 				}
 				break;
 			case NUMDOUBLE:
 				{
-				alt7=6;
+				alt15=9;
 				}
 				break;
 			case TRUE:
 				{
-				alt7=7;
+				alt15=10;
 				}
 				break;
 			case FALSE:
 				{
-				alt7=8;
+				alt15=11;
 				}
 				break;
 			case STRING_LITERAL:
 				{
-				alt7=9;
+				alt15=12;
 				}
 				break;
 			default:
 				if (state.backtracking>0) {state.failed=true; return retval;}
 				NoViableAltException nvae =
-					new NoViableAltException("", 7, 0, input);
+					new NoViableAltException("", 15, 0, input);
 				throw nvae;
 			}
-			switch (alt7) {
+			switch (alt15) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:110:17: vr= var_reserved
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:174:13: ( LEFTCURLY map_val[map] ( COMMA map_val[map] )* RIGHTCURLY )
 					{
-					pushFollow(FOLLOW_var_reserved_in_annotation_keyval693);
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:174:13: ( LEFTCURLY map_val[map] ( COMMA map_val[map] )* RIGHTCURLY )
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:175:17: LEFTCURLY map_val[map] ( COMMA map_val[map] )* RIGHTCURLY
+					{
+					LEFTCURLY59=(Token)match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_annotation_keyval1436); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					LEFTCURLY59_tree = (Object)adaptor.create(LEFTCURLY59);
+					adaptor.addChild(root_0, LEFTCURLY59_tree);
+					}
+
+					if ( state.backtracking==0 ) {
+					                    annotation.put((k!=null?input.toString(k.start,k.stop):null), (map = new java.util.LinkedHashMap<String, Object>()));
+					                }
+					pushFollow(FOLLOW_map_val_in_annotation_keyval1456);
+					map_val60=map_val(map);
+					state._fsp--;
+					if (state.failed) return retval;
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, map_val60.getTree());
+
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:178:30: ( COMMA map_val[map] )*
+					loop13:
+					while (true) {
+						int alt13=2;
+						int LA13_0 = input.LA(1);
+						if ( (LA13_0==COMMA) ) {
+							alt13=1;
+						}
+
+						switch (alt13) {
+						case 1 :
+							// com/dyuproject/fbsgen/parser/ProtoParser.g:178:31: COMMA map_val[map]
+							{
+							COMMA61=(Token)match(input,COMMA,FOLLOW_COMMA_in_annotation_keyval1460); if (state.failed) return retval;
+							if ( state.backtracking==0 ) {
+							COMMA61_tree = (Object)adaptor.create(COMMA61);
+							adaptor.addChild(root_0, COMMA61_tree);
+							}
+
+							pushFollow(FOLLOW_map_val_in_annotation_keyval1462);
+							map_val62=map_val(map);
+							state._fsp--;
+							if (state.failed) return retval;
+							if ( state.backtracking==0 ) adaptor.addChild(root_0, map_val62.getTree());
+
+							}
+							break;
+
+						default :
+							break loop13;
+						}
+					}
+
+					RIGHTCURLY63=(Token)match(input,RIGHTCURLY,FOLLOW_RIGHTCURLY_in_annotation_keyval1484); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					RIGHTCURLY63_tree = (Object)adaptor.create(RIGHTCURLY63);
+					adaptor.addChild(root_0, RIGHTCURLY63_tree);
+					}
+
+					}
+
+					}
+					break;
+				case 2 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:182:13: ( LEFTSQUARE list_val[list] ( COMMA list_val[list] )* RIGHTSQUARE )
+					{
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:182:13: ( LEFTSQUARE list_val[list] ( COMMA list_val[list] )* RIGHTSQUARE )
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:183:17: LEFTSQUARE list_val[list] ( COMMA list_val[list] )* RIGHTSQUARE
+					{
+					LEFTSQUARE64=(Token)match(input,LEFTSQUARE,FOLLOW_LEFTSQUARE_in_annotation_keyval1544); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					LEFTSQUARE64_tree = (Object)adaptor.create(LEFTSQUARE64);
+					adaptor.addChild(root_0, LEFTSQUARE64_tree);
+					}
+
+					if ( state.backtracking==0 ) {
+					                    annotation.put((k!=null?input.toString(k.start,k.stop):null), (list = new ArrayList<Object>()));
+					                }
+					pushFollow(FOLLOW_list_val_in_annotation_keyval1564);
+					list_val65=list_val(list);
+					state._fsp--;
+					if (state.failed) return retval;
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, list_val65.getTree());
+
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:186:32: ( COMMA list_val[list] )*
+					loop14:
+					while (true) {
+						int alt14=2;
+						int LA14_0 = input.LA(1);
+						if ( (LA14_0==COMMA) ) {
+							alt14=1;
+						}
+
+						switch (alt14) {
+						case 1 :
+							// com/dyuproject/fbsgen/parser/ProtoParser.g:186:33: COMMA list_val[list]
+							{
+							COMMA66=(Token)match(input,COMMA,FOLLOW_COMMA_in_annotation_keyval1568); if (state.failed) return retval;
+							if ( state.backtracking==0 ) {
+							COMMA66_tree = (Object)adaptor.create(COMMA66);
+							adaptor.addChild(root_0, COMMA66_tree);
+							}
+
+							pushFollow(FOLLOW_list_val_in_annotation_keyval1570);
+							list_val67=list_val(list);
+							state._fsp--;
+							if (state.failed) return retval;
+							if ( state.backtracking==0 ) adaptor.addChild(root_0, list_val67.getTree());
+
+							}
+							break;
+
+						default :
+							break loop14;
+						}
+					}
+
+					RIGHTSQUARE68=(Token)match(input,RIGHTSQUARE,FOLLOW_RIGHTSQUARE_in_annotation_keyval1592); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					RIGHTSQUARE68_tree = (Object)adaptor.create(RIGHTSQUARE68);
+					adaptor.addChild(root_0, RIGHTSQUARE68_tree);
+					}
+
+					}
+
+					}
+					break;
+				case 3 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:190:13: 
+					{
+					}
+					break;
+				case 4 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:190:17: vr= var_reserved
+					{
+					pushFollow(FOLLOW_var_reserved_in_annotation_keyval1640);
 					vr=var_reserved();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -1016,22 +1869,22 @@ public class ProtoParser extends AbstractParser {
 					if ( state.backtracking==0 ) { annotation.put((k!=null?input.toString(k.start,k.stop):null), (vr!=null?input.toString(vr.start,vr.stop):null)); }
 					}
 					break;
-				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:111:17: ID
+				case 5 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:191:17: ID
 					{
-					ID26=(Token)match(input,ID,FOLLOW_ID_in_annotation_keyval713); if (state.failed) return retval;
+					ID69=(Token)match(input,ID,FOLLOW_ID_in_annotation_keyval1660); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					ID26_tree = (Object)adaptor.create(ID26);
-					adaptor.addChild(root_0, ID26_tree);
+					ID69_tree = (Object)adaptor.create(ID69);
+					adaptor.addChild(root_0, ID69_tree);
 					}
 
-					if ( state.backtracking==0 ) { annotation.putRef((k!=null?input.toString(k.start,k.stop):null), (ID26!=null?ID26.getText():null)); }
+					if ( state.backtracking==0 ) { annotation.putRef((k!=null?input.toString(k.start,k.stop):null), (ID69!=null?ID69.getText():null)); }
 					}
 					break;
-				case 3 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:112:17: fid= FULL_ID
+				case 6 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:192:17: fid= FULL_ID
 					{
-					fid=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_annotation_keyval735); if (state.failed) return retval;
+					fid=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_annotation_keyval1682); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					fid_tree = (Object)adaptor.create(fid);
 					adaptor.addChild(root_0, fid_tree);
@@ -1040,76 +1893,76 @@ public class ProtoParser extends AbstractParser {
 					if ( state.backtracking==0 ) { annotation.putRef((k!=null?input.toString(k.start,k.stop):null), (fid!=null?fid.getText():null)); }
 					}
 					break;
-				case 4 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:113:17: NUMFLOAT
-					{
-					NUMFLOAT27=(Token)match(input,NUMFLOAT,FOLLOW_NUMFLOAT_in_annotation_keyval755); if (state.failed) return retval;
-					if ( state.backtracking==0 ) {
-					NUMFLOAT27_tree = (Object)adaptor.create(NUMFLOAT27);
-					adaptor.addChild(root_0, NUMFLOAT27_tree);
-					}
-
-					if ( state.backtracking==0 ) { annotation.put((k!=null?input.toString(k.start,k.stop):null), Float.valueOf((NUMFLOAT27!=null?NUMFLOAT27.getText():null))); }
-					}
-					break;
-				case 5 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:114:17: NUMINT
-					{
-					NUMINT28=(Token)match(input,NUMINT,FOLLOW_NUMINT_in_annotation_keyval775); if (state.failed) return retval;
-					if ( state.backtracking==0 ) {
-					NUMINT28_tree = (Object)adaptor.create(NUMINT28);
-					adaptor.addChild(root_0, NUMINT28_tree);
-					}
-
-					if ( state.backtracking==0 ) { annotation.put((k!=null?input.toString(k.start,k.stop):null), parseNumber((NUMINT28!=null?NUMINT28.getText():null))); }
-					}
-					break;
-				case 6 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:115:17: NUMDOUBLE
-					{
-					NUMDOUBLE29=(Token)match(input,NUMDOUBLE,FOLLOW_NUMDOUBLE_in_annotation_keyval795); if (state.failed) return retval;
-					if ( state.backtracking==0 ) {
-					NUMDOUBLE29_tree = (Object)adaptor.create(NUMDOUBLE29);
-					adaptor.addChild(root_0, NUMDOUBLE29_tree);
-					}
-
-					if ( state.backtracking==0 ) { annotation.put((k!=null?input.toString(k.start,k.stop):null), Double.valueOf((NUMDOUBLE29!=null?NUMDOUBLE29.getText():null))); }
-					}
-					break;
 				case 7 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:116:17: TRUE
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:193:17: NUMFLOAT
 					{
-					TRUE30=(Token)match(input,TRUE,FOLLOW_TRUE_in_annotation_keyval815); if (state.failed) return retval;
+					NUMFLOAT70=(Token)match(input,NUMFLOAT,FOLLOW_NUMFLOAT_in_annotation_keyval1702); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					TRUE30_tree = (Object)adaptor.create(TRUE30);
-					adaptor.addChild(root_0, TRUE30_tree);
+					NUMFLOAT70_tree = (Object)adaptor.create(NUMFLOAT70);
+					adaptor.addChild(root_0, NUMFLOAT70_tree);
+					}
+
+					if ( state.backtracking==0 ) { annotation.put((k!=null?input.toString(k.start,k.stop):null), Float.valueOf((NUMFLOAT70!=null?NUMFLOAT70.getText():null))); }
+					}
+					break;
+				case 8 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:194:17: NUMINT
+					{
+					NUMINT71=(Token)match(input,NUMINT,FOLLOW_NUMINT_in_annotation_keyval1722); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					NUMINT71_tree = (Object)adaptor.create(NUMINT71);
+					adaptor.addChild(root_0, NUMINT71_tree);
+					}
+
+					if ( state.backtracking==0 ) { annotation.put((k!=null?input.toString(k.start,k.stop):null), parseNumber((NUMINT71!=null?NUMINT71.getText():null))); }
+					}
+					break;
+				case 9 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:195:17: NUMDOUBLE
+					{
+					NUMDOUBLE72=(Token)match(input,NUMDOUBLE,FOLLOW_NUMDOUBLE_in_annotation_keyval1742); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					NUMDOUBLE72_tree = (Object)adaptor.create(NUMDOUBLE72);
+					adaptor.addChild(root_0, NUMDOUBLE72_tree);
+					}
+
+					if ( state.backtracking==0 ) { annotation.put((k!=null?input.toString(k.start,k.stop):null), Double.valueOf((NUMDOUBLE72!=null?NUMDOUBLE72.getText():null))); }
+					}
+					break;
+				case 10 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:196:17: TRUE
+					{
+					TRUE73=(Token)match(input,TRUE,FOLLOW_TRUE_in_annotation_keyval1762); if (state.failed) return retval;
+					if ( state.backtracking==0 ) {
+					TRUE73_tree = (Object)adaptor.create(TRUE73);
+					adaptor.addChild(root_0, TRUE73_tree);
 					}
 
 					if ( state.backtracking==0 ) { annotation.put((k!=null?input.toString(k.start,k.stop):null), Boolean.TRUE); }
 					}
 					break;
-				case 8 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:117:17: FALSE
+				case 11 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:197:17: FALSE
 					{
-					FALSE31=(Token)match(input,FALSE,FOLLOW_FALSE_in_annotation_keyval835); if (state.failed) return retval;
+					FALSE74=(Token)match(input,FALSE,FOLLOW_FALSE_in_annotation_keyval1782); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					FALSE31_tree = (Object)adaptor.create(FALSE31);
-					adaptor.addChild(root_0, FALSE31_tree);
+					FALSE74_tree = (Object)adaptor.create(FALSE74);
+					adaptor.addChild(root_0, FALSE74_tree);
 					}
 
 					if ( state.backtracking==0 ) { annotation.put((k!=null?input.toString(k.start,k.stop):null), Boolean.FALSE); }
 					}
 					break;
-				case 9 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:118:17: STRING_LITERAL
+				case 12 :
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:198:17: STRING_LITERAL
 					{
-					STRING_LITERAL32=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_annotation_keyval855); if (state.failed) return retval;
+					STRING_LITERAL75=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_annotation_keyval1802); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					STRING_LITERAL32_tree = (Object)adaptor.create(STRING_LITERAL32);
-					adaptor.addChild(root_0, STRING_LITERAL32_tree);
+					STRING_LITERAL75_tree = (Object)adaptor.create(STRING_LITERAL75);
+					adaptor.addChild(root_0, STRING_LITERAL75_tree);
 					}
 
-					if ( state.backtracking==0 ) { annotation.put((k!=null?input.toString(k.start,k.stop):null), getStringFromStringLiteral((STRING_LITERAL32!=null?STRING_LITERAL32.getText():null))); }
+					if ( state.backtracking==0 ) { annotation.put((k!=null?input.toString(k.start,k.stop):null), getStringFromStringLiteral((STRING_LITERAL75!=null?STRING_LITERAL75.getText():null))); }
 					}
 					break;
 
@@ -1145,53 +1998,53 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "header_syntax"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:122:1: header_syntax[Proto proto] : SYNTAX ASSIGN STRING_LITERAL SEMICOLON !;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:202:1: header_syntax[Proto proto] : SYNTAX ASSIGN STRING_LITERAL SEMICOLON !;
 	public final ProtoParser.header_syntax_return header_syntax(Proto proto) throws RecognitionException {
 		ProtoParser.header_syntax_return retval = new ProtoParser.header_syntax_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token SYNTAX33=null;
-		Token ASSIGN34=null;
-		Token STRING_LITERAL35=null;
-		Token SEMICOLON36=null;
+		Token SYNTAX76=null;
+		Token ASSIGN77=null;
+		Token STRING_LITERAL78=null;
+		Token SEMICOLON79=null;
 
-		Object SYNTAX33_tree=null;
-		Object ASSIGN34_tree=null;
-		Object STRING_LITERAL35_tree=null;
-		Object SEMICOLON36_tree=null;
+		Object SYNTAX76_tree=null;
+		Object ASSIGN77_tree=null;
+		Object STRING_LITERAL78_tree=null;
+		Object SEMICOLON79_tree=null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:123:5: ( SYNTAX ASSIGN STRING_LITERAL SEMICOLON !)
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:123:9: SYNTAX ASSIGN STRING_LITERAL SEMICOLON !
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:203:5: ( SYNTAX ASSIGN STRING_LITERAL SEMICOLON !)
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:203:9: SYNTAX ASSIGN STRING_LITERAL SEMICOLON !
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			SYNTAX33=(Token)match(input,SYNTAX,FOLLOW_SYNTAX_in_header_syntax888); if (state.failed) return retval;
+			SYNTAX76=(Token)match(input,SYNTAX,FOLLOW_SYNTAX_in_header_syntax1835); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			SYNTAX33_tree = (Object)adaptor.create(SYNTAX33);
-			adaptor.addChild(root_0, SYNTAX33_tree);
+			SYNTAX76_tree = (Object)adaptor.create(SYNTAX76);
+			adaptor.addChild(root_0, SYNTAX76_tree);
 			}
 
-			ASSIGN34=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_header_syntax890); if (state.failed) return retval;
+			ASSIGN77=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_header_syntax1837); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			ASSIGN34_tree = (Object)adaptor.create(ASSIGN34);
-			adaptor.addChild(root_0, ASSIGN34_tree);
+			ASSIGN77_tree = (Object)adaptor.create(ASSIGN77);
+			adaptor.addChild(root_0, ASSIGN77_tree);
 			}
 
-			STRING_LITERAL35=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_header_syntax892); if (state.failed) return retval;
+			STRING_LITERAL78=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_header_syntax1839); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			STRING_LITERAL35_tree = (Object)adaptor.create(STRING_LITERAL35);
-			adaptor.addChild(root_0, STRING_LITERAL35_tree);
+			STRING_LITERAL78_tree = (Object)adaptor.create(STRING_LITERAL78);
+			adaptor.addChild(root_0, STRING_LITERAL78_tree);
 			}
 
-			SEMICOLON36=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_header_syntax894); if (state.failed) return retval;
+			SEMICOLON79=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_header_syntax1841); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			            if (!"proto2".equals(getStringFromStringLiteral((STRING_LITERAL35!=null?STRING_LITERAL35.getText():null)))) {
+			            if (!"proto2".equals(getStringFromStringLiteral((STRING_LITERAL78!=null?STRING_LITERAL78.getText():null)))) {
 			                throw err(proto, "Syntax isn't proto2: '" +
-			                        getStringFromStringLiteral((STRING_LITERAL35!=null?STRING_LITERAL35.getText():null))+"'");
+			                        getStringFromStringLiteral((STRING_LITERAL78!=null?STRING_LITERAL78.getText():null))+"'");
 			            }
 			            
 			            proto.checkAnnotations();
@@ -1226,84 +2079,84 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "header_package"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:133:1: header_package[Proto proto] : PKG ( FULL_ID | var ) SEMICOLON !;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:213:1: header_package[Proto proto] : PKG ( FULL_ID | var ) SEMICOLON !;
 	public final ProtoParser.header_package_return header_package(Proto proto) throws RecognitionException {
 		ProtoParser.header_package_return retval = new ProtoParser.header_package_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token PKG37=null;
-		Token FULL_ID38=null;
-		Token SEMICOLON40=null;
-		ParserRuleReturnScope var39 =null;
+		Token PKG80=null;
+		Token FULL_ID81=null;
+		Token SEMICOLON83=null;
+		ParserRuleReturnScope var82 =null;
 
-		Object PKG37_tree=null;
-		Object FULL_ID38_tree=null;
-		Object SEMICOLON40_tree=null;
+		Object PKG80_tree=null;
+		Object FULL_ID81_tree=null;
+		Object SEMICOLON83_tree=null;
 
 
 		    String value = null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:137:5: ( PKG ( FULL_ID | var ) SEMICOLON !)
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:137:9: PKG ( FULL_ID | var ) SEMICOLON !
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:217:5: ( PKG ( FULL_ID | var ) SEMICOLON !)
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:217:9: PKG ( FULL_ID | var ) SEMICOLON !
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			PKG37=(Token)match(input,PKG,FOLLOW_PKG_in_header_package923); if (state.failed) return retval;
+			PKG80=(Token)match(input,PKG,FOLLOW_PKG_in_header_package1870); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			PKG37_tree = (Object)adaptor.create(PKG37);
-			adaptor.addChild(root_0, PKG37_tree);
+			PKG80_tree = (Object)adaptor.create(PKG80);
+			adaptor.addChild(root_0, PKG80_tree);
 			}
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:137:13: ( FULL_ID | var )
-			int alt8=2;
-			int LA8_0 = input.LA(1);
-			if ( (LA8_0==FULL_ID) ) {
-				alt8=1;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:217:13: ( FULL_ID | var )
+			int alt16=2;
+			int LA16_0 = input.LA(1);
+			if ( (LA16_0==FULL_ID) ) {
+				alt16=1;
 			}
-			else if ( ((LA8_0 >= BOOL && LA8_0 <= BYTES)||LA8_0==DEFAULT||(LA8_0 >= DOUBLE && LA8_0 <= ENUM)||LA8_0==FLOAT||(LA8_0 >= ID && LA8_0 <= INT8)||(LA8_0 >= MAX && LA8_0 <= MESSAGE)||(LA8_0 >= OPTION && LA8_0 <= PKG)||(LA8_0 >= REPEATED && LA8_0 <= RETURNS)||LA8_0==RPC||(LA8_0 >= SERVICE && LA8_0 <= STRING)||(LA8_0 >= SYNTAX && LA8_0 <= TO)||(LA8_0 >= UINT16 && LA8_0 <= UINT8)||LA8_0==VOID) ) {
-				alt8=2;
+			else if ( ((LA16_0 >= BOOL && LA16_0 <= BYTES)||LA16_0==DEFAULT||(LA16_0 >= DOUBLE && LA16_0 <= ENUM)||LA16_0==FLOAT||(LA16_0 >= ID && LA16_0 <= INT8)||(LA16_0 >= MAX && LA16_0 <= MESSAGE)||(LA16_0 >= OPTION && LA16_0 <= PKG)||(LA16_0 >= REPEATED && LA16_0 <= RETURNS)||LA16_0==RPC||(LA16_0 >= SERVICE && LA16_0 <= STRING)||(LA16_0 >= SYNTAX && LA16_0 <= TO)||(LA16_0 >= UINT16 && LA16_0 <= UINT8)||LA16_0==VOID) ) {
+				alt16=2;
 			}
 
 			else {
 				if (state.backtracking>0) {state.failed=true; return retval;}
 				NoViableAltException nvae =
-					new NoViableAltException("", 8, 0, input);
+					new NoViableAltException("", 16, 0, input);
 				throw nvae;
 			}
 
-			switch (alt8) {
+			switch (alt16) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:137:14: FULL_ID
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:217:14: FULL_ID
 					{
-					FULL_ID38=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_header_package926); if (state.failed) return retval;
+					FULL_ID81=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_header_package1873); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					FULL_ID38_tree = (Object)adaptor.create(FULL_ID38);
-					adaptor.addChild(root_0, FULL_ID38_tree);
+					FULL_ID81_tree = (Object)adaptor.create(FULL_ID81);
+					adaptor.addChild(root_0, FULL_ID81_tree);
 					}
 
-					if ( state.backtracking==0 ) { value = (FULL_ID38!=null?FULL_ID38.getText():null); }
+					if ( state.backtracking==0 ) { value = (FULL_ID81!=null?FULL_ID81.getText():null); }
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:137:51: var
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:217:51: var
 					{
-					pushFollow(FOLLOW_var_in_header_package932);
-					var39=var();
+					pushFollow(FOLLOW_var_in_header_package1879);
+					var82=var();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, var39.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, var82.getTree());
 
-					if ( state.backtracking==0 ) { value = (var39!=null?input.toString(var39.start,var39.stop):null); }
+					if ( state.backtracking==0 ) { value = (var82!=null?input.toString(var82.start,var82.stop):null); }
 					}
 					break;
 
 			}
 
-			SEMICOLON40=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_header_package937); if (state.failed) return retval;
+			SEMICOLON83=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_header_package1884); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			            if (proto.getPackageName() != null)
 			                throw err(proto, "Multiple package definitions.");
@@ -1342,43 +2195,43 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "header_import"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:147:1: header_import[Proto proto] : IMPORT STRING_LITERAL SEMICOLON !;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:227:1: header_import[Proto proto] : IMPORT STRING_LITERAL SEMICOLON !;
 	public final ProtoParser.header_import_return header_import(Proto proto) throws RecognitionException {
 		ProtoParser.header_import_return retval = new ProtoParser.header_import_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token IMPORT41=null;
-		Token STRING_LITERAL42=null;
-		Token SEMICOLON43=null;
+		Token IMPORT84=null;
+		Token STRING_LITERAL85=null;
+		Token SEMICOLON86=null;
 
-		Object IMPORT41_tree=null;
-		Object STRING_LITERAL42_tree=null;
-		Object SEMICOLON43_tree=null;
+		Object IMPORT84_tree=null;
+		Object STRING_LITERAL85_tree=null;
+		Object SEMICOLON86_tree=null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:148:5: ( IMPORT STRING_LITERAL SEMICOLON !)
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:148:9: IMPORT STRING_LITERAL SEMICOLON !
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:228:5: ( IMPORT STRING_LITERAL SEMICOLON !)
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:228:9: IMPORT STRING_LITERAL SEMICOLON !
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			IMPORT41=(Token)match(input,IMPORT,FOLLOW_IMPORT_in_header_import965); if (state.failed) return retval;
+			IMPORT84=(Token)match(input,IMPORT,FOLLOW_IMPORT_in_header_import1912); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			IMPORT41_tree = (Object)adaptor.create(IMPORT41);
-			adaptor.addChild(root_0, IMPORT41_tree);
+			IMPORT84_tree = (Object)adaptor.create(IMPORT84);
+			adaptor.addChild(root_0, IMPORT84_tree);
 			}
 
-			STRING_LITERAL42=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_header_import967); if (state.failed) return retval;
+			STRING_LITERAL85=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_header_import1914); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			STRING_LITERAL42_tree = (Object)adaptor.create(STRING_LITERAL42);
-			adaptor.addChild(root_0, STRING_LITERAL42_tree);
+			STRING_LITERAL85_tree = (Object)adaptor.create(STRING_LITERAL85);
+			adaptor.addChild(root_0, STRING_LITERAL85_tree);
 			}
 
-			SEMICOLON43=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_header_import969); if (state.failed) return retval;
+			SEMICOLON86=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_header_import1916); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			            proto.importProto(getStringFromStringLiteral((STRING_LITERAL42!=null?STRING_LITERAL42.getText():null)));
+			            proto.importProto(getStringFromStringLiteral((STRING_LITERAL85!=null?STRING_LITERAL85.getText():null)));
 			            
 			            proto.checkAnnotations();
 			        }
@@ -1412,7 +2265,7 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "option_entry"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:155:1: option_entry[Proto proto, HasOptions ho] : OPTION ( LEFTPAREN )? k= var_full ( RIGHTPAREN )? ASSIGN (vr= var_reserved |id= ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL ) SEMICOLON !;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:235:1: option_entry[Proto proto, HasOptions ho] : OPTION ( LEFTPAREN )? k= var_full ( RIGHTPAREN )? ASSIGN (vr= var_reserved |id= ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL ) SEMICOLON !;
 	public final ProtoParser.option_entry_return option_entry(Proto proto, HasOptions ho) throws RecognitionException {
 		ProtoParser.option_entry_return retval = new ProtoParser.option_entry_return();
 		retval.start = input.LT(1);
@@ -1421,61 +2274,61 @@ public class ProtoParser extends AbstractParser {
 
 		Token id=null;
 		Token fid=null;
-		Token OPTION44=null;
-		Token LEFTPAREN45=null;
-		Token RIGHTPAREN46=null;
-		Token ASSIGN47=null;
-		Token NUMFLOAT48=null;
-		Token NUMINT49=null;
-		Token NUMDOUBLE50=null;
-		Token TRUE51=null;
-		Token FALSE52=null;
-		Token STRING_LITERAL53=null;
-		Token SEMICOLON54=null;
+		Token OPTION87=null;
+		Token LEFTPAREN88=null;
+		Token RIGHTPAREN89=null;
+		Token ASSIGN90=null;
+		Token NUMFLOAT91=null;
+		Token NUMINT92=null;
+		Token NUMDOUBLE93=null;
+		Token TRUE94=null;
+		Token FALSE95=null;
+		Token STRING_LITERAL96=null;
+		Token SEMICOLON97=null;
 		ParserRuleReturnScope k =null;
 		ParserRuleReturnScope vr =null;
 
 		Object id_tree=null;
 		Object fid_tree=null;
-		Object OPTION44_tree=null;
-		Object LEFTPAREN45_tree=null;
-		Object RIGHTPAREN46_tree=null;
-		Object ASSIGN47_tree=null;
-		Object NUMFLOAT48_tree=null;
-		Object NUMINT49_tree=null;
-		Object NUMDOUBLE50_tree=null;
-		Object TRUE51_tree=null;
-		Object FALSE52_tree=null;
-		Object STRING_LITERAL53_tree=null;
-		Object SEMICOLON54_tree=null;
+		Object OPTION87_tree=null;
+		Object LEFTPAREN88_tree=null;
+		Object RIGHTPAREN89_tree=null;
+		Object ASSIGN90_tree=null;
+		Object NUMFLOAT91_tree=null;
+		Object NUMINT92_tree=null;
+		Object NUMDOUBLE93_tree=null;
+		Object TRUE94_tree=null;
+		Object FALSE95_tree=null;
+		Object STRING_LITERAL96_tree=null;
+		Object SEMICOLON97_tree=null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:156:5: ( OPTION ( LEFTPAREN )? k= var_full ( RIGHTPAREN )? ASSIGN (vr= var_reserved |id= ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL ) SEMICOLON !)
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:156:9: OPTION ( LEFTPAREN )? k= var_full ( RIGHTPAREN )? ASSIGN (vr= var_reserved |id= ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL ) SEMICOLON !
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:236:5: ( OPTION ( LEFTPAREN )? k= var_full ( RIGHTPAREN )? ASSIGN (vr= var_reserved |id= ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL ) SEMICOLON !)
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:236:9: OPTION ( LEFTPAREN )? k= var_full ( RIGHTPAREN )? ASSIGN (vr= var_reserved |id= ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL ) SEMICOLON !
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			OPTION44=(Token)match(input,OPTION,FOLLOW_OPTION_in_option_entry993); if (state.failed) return retval;
+			OPTION87=(Token)match(input,OPTION,FOLLOW_OPTION_in_option_entry1940); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			OPTION44_tree = (Object)adaptor.create(OPTION44);
-			adaptor.addChild(root_0, OPTION44_tree);
+			OPTION87_tree = (Object)adaptor.create(OPTION87);
+			adaptor.addChild(root_0, OPTION87_tree);
 			}
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:156:16: ( LEFTPAREN )?
-			int alt9=2;
-			int LA9_0 = input.LA(1);
-			if ( (LA9_0==LEFTPAREN) ) {
-				alt9=1;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:236:16: ( LEFTPAREN )?
+			int alt17=2;
+			int LA17_0 = input.LA(1);
+			if ( (LA17_0==LEFTPAREN) ) {
+				alt17=1;
 			}
-			switch (alt9) {
+			switch (alt17) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:156:16: LEFTPAREN
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:236:16: LEFTPAREN
 					{
-					LEFTPAREN45=(Token)match(input,LEFTPAREN,FOLLOW_LEFTPAREN_in_option_entry995); if (state.failed) return retval;
+					LEFTPAREN88=(Token)match(input,LEFTPAREN,FOLLOW_LEFTPAREN_in_option_entry1942); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					LEFTPAREN45_tree = (Object)adaptor.create(LEFTPAREN45);
-					adaptor.addChild(root_0, LEFTPAREN45_tree);
+					LEFTPAREN88_tree = (Object)adaptor.create(LEFTPAREN88);
+					adaptor.addChild(root_0, LEFTPAREN88_tree);
 					}
 
 					}
@@ -1483,26 +2336,26 @@ public class ProtoParser extends AbstractParser {
 
 			}
 
-			pushFollow(FOLLOW_var_full_in_option_entry1000);
+			pushFollow(FOLLOW_var_full_in_option_entry1947);
 			k=var_full();
 			state._fsp--;
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, k.getTree());
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:156:38: ( RIGHTPAREN )?
-			int alt10=2;
-			int LA10_0 = input.LA(1);
-			if ( (LA10_0==RIGHTPAREN) ) {
-				alt10=1;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:236:38: ( RIGHTPAREN )?
+			int alt18=2;
+			int LA18_0 = input.LA(1);
+			if ( (LA18_0==RIGHTPAREN) ) {
+				alt18=1;
 			}
-			switch (alt10) {
+			switch (alt18) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:156:38: RIGHTPAREN
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:236:38: RIGHTPAREN
 					{
-					RIGHTPAREN46=(Token)match(input,RIGHTPAREN,FOLLOW_RIGHTPAREN_in_option_entry1002); if (state.failed) return retval;
+					RIGHTPAREN89=(Token)match(input,RIGHTPAREN,FOLLOW_RIGHTPAREN_in_option_entry1949); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					RIGHTPAREN46_tree = (Object)adaptor.create(RIGHTPAREN46);
-					adaptor.addChild(root_0, RIGHTPAREN46_tree);
+					RIGHTPAREN89_tree = (Object)adaptor.create(RIGHTPAREN89);
+					adaptor.addChild(root_0, RIGHTPAREN89_tree);
 					}
 
 					}
@@ -1510,14 +2363,14 @@ public class ProtoParser extends AbstractParser {
 
 			}
 
-			ASSIGN47=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_option_entry1005); if (state.failed) return retval;
+			ASSIGN90=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_option_entry1952); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			ASSIGN47_tree = (Object)adaptor.create(ASSIGN47);
-			adaptor.addChild(root_0, ASSIGN47_tree);
+			ASSIGN90_tree = (Object)adaptor.create(ASSIGN90);
+			adaptor.addChild(root_0, ASSIGN90_tree);
 			}
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:156:57: (vr= var_reserved |id= ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL )
-			int alt11=9;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:236:57: (vr= var_reserved |id= ID |fid= FULL_ID | NUMFLOAT | NUMINT | NUMDOUBLE | TRUE | FALSE | STRING_LITERAL )
+			int alt19=9;
 			switch ( input.LA(1) ) {
 			case BOOL:
 			case BYTES:
@@ -1549,60 +2402,60 @@ public class ProtoParser extends AbstractParser {
 			case UINT8:
 			case VOID:
 				{
-				alt11=1;
+				alt19=1;
 				}
 				break;
 			case ID:
 				{
-				alt11=2;
+				alt19=2;
 				}
 				break;
 			case FULL_ID:
 				{
-				alt11=3;
+				alt19=3;
 				}
 				break;
 			case NUMFLOAT:
 				{
-				alt11=4;
+				alt19=4;
 				}
 				break;
 			case NUMINT:
 				{
-				alt11=5;
+				alt19=5;
 				}
 				break;
 			case NUMDOUBLE:
 				{
-				alt11=6;
+				alt19=6;
 				}
 				break;
 			case TRUE:
 				{
-				alt11=7;
+				alt19=7;
 				}
 				break;
 			case FALSE:
 				{
-				alt11=8;
+				alt19=8;
 				}
 				break;
 			case STRING_LITERAL:
 				{
-				alt11=9;
+				alt19=9;
 				}
 				break;
 			default:
 				if (state.backtracking>0) {state.failed=true; return retval;}
 				NoViableAltException nvae =
-					new NoViableAltException("", 11, 0, input);
+					new NoViableAltException("", 19, 0, input);
 				throw nvae;
 			}
-			switch (alt11) {
+			switch (alt19) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:157:17: vr= var_reserved
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:237:17: vr= var_reserved
 					{
-					pushFollow(FOLLOW_var_reserved_in_option_entry1027);
+					pushFollow(FOLLOW_var_reserved_in_option_entry1974);
 					vr=var_reserved();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -1612,9 +2465,9 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:158:17: id= ID
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:238:17: id= ID
 					{
-					id=(Token)match(input,ID,FOLLOW_ID_in_option_entry1049); if (state.failed) return retval;
+					id=(Token)match(input,ID,FOLLOW_ID_in_option_entry1996); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					id_tree = (Object)adaptor.create(id);
 					adaptor.addChild(root_0, id_tree);
@@ -1624,9 +2477,9 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 3 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:159:17: fid= FULL_ID
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:239:17: fid= FULL_ID
 					{
-					fid=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_option_entry1071); if (state.failed) return retval;
+					fid=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_option_entry2018); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					fid_tree = (Object)adaptor.create(fid);
 					adaptor.addChild(root_0, fid_tree);
@@ -1636,81 +2489,81 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 4 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:160:17: NUMFLOAT
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:240:17: NUMFLOAT
 					{
-					NUMFLOAT48=(Token)match(input,NUMFLOAT,FOLLOW_NUMFLOAT_in_option_entry1091); if (state.failed) return retval;
+					NUMFLOAT91=(Token)match(input,NUMFLOAT,FOLLOW_NUMFLOAT_in_option_entry2038); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					NUMFLOAT48_tree = (Object)adaptor.create(NUMFLOAT48);
-					adaptor.addChild(root_0, NUMFLOAT48_tree);
+					NUMFLOAT91_tree = (Object)adaptor.create(NUMFLOAT91);
+					adaptor.addChild(root_0, NUMFLOAT91_tree);
 					}
 
-					if ( state.backtracking==0 ) { putExtraOptionTo(ho, (k!=null?input.toString(k.start,k.stop):null), Float.valueOf((NUMFLOAT48!=null?NUMFLOAT48.getText():null)), proto); }
+					if ( state.backtracking==0 ) { putExtraOptionTo(ho, (k!=null?input.toString(k.start,k.stop):null), Float.valueOf((NUMFLOAT91!=null?NUMFLOAT91.getText():null)), proto); }
 					}
 					break;
 				case 5 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:161:17: NUMINT
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:241:17: NUMINT
 					{
-					NUMINT49=(Token)match(input,NUMINT,FOLLOW_NUMINT_in_option_entry1111); if (state.failed) return retval;
+					NUMINT92=(Token)match(input,NUMINT,FOLLOW_NUMINT_in_option_entry2058); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					NUMINT49_tree = (Object)adaptor.create(NUMINT49);
-					adaptor.addChild(root_0, NUMINT49_tree);
+					NUMINT92_tree = (Object)adaptor.create(NUMINT92);
+					adaptor.addChild(root_0, NUMINT92_tree);
 					}
 
-					if ( state.backtracking==0 ) { putExtraOptionTo(ho, (k!=null?input.toString(k.start,k.stop):null), parseNumber((NUMINT49!=null?NUMINT49.getText():null)), proto); }
+					if ( state.backtracking==0 ) { putExtraOptionTo(ho, (k!=null?input.toString(k.start,k.stop):null), parseNumber((NUMINT92!=null?NUMINT92.getText():null)), proto); }
 					}
 					break;
 				case 6 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:162:17: NUMDOUBLE
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:242:17: NUMDOUBLE
 					{
-					NUMDOUBLE50=(Token)match(input,NUMDOUBLE,FOLLOW_NUMDOUBLE_in_option_entry1131); if (state.failed) return retval;
+					NUMDOUBLE93=(Token)match(input,NUMDOUBLE,FOLLOW_NUMDOUBLE_in_option_entry2078); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					NUMDOUBLE50_tree = (Object)adaptor.create(NUMDOUBLE50);
-					adaptor.addChild(root_0, NUMDOUBLE50_tree);
+					NUMDOUBLE93_tree = (Object)adaptor.create(NUMDOUBLE93);
+					adaptor.addChild(root_0, NUMDOUBLE93_tree);
 					}
 
-					if ( state.backtracking==0 ) { putExtraOptionTo(ho, (k!=null?input.toString(k.start,k.stop):null), Double.valueOf((NUMDOUBLE50!=null?NUMDOUBLE50.getText():null)), proto); }
+					if ( state.backtracking==0 ) { putExtraOptionTo(ho, (k!=null?input.toString(k.start,k.stop):null), Double.valueOf((NUMDOUBLE93!=null?NUMDOUBLE93.getText():null)), proto); }
 					}
 					break;
 				case 7 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:163:17: TRUE
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:243:17: TRUE
 					{
-					TRUE51=(Token)match(input,TRUE,FOLLOW_TRUE_in_option_entry1151); if (state.failed) return retval;
+					TRUE94=(Token)match(input,TRUE,FOLLOW_TRUE_in_option_entry2098); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					TRUE51_tree = (Object)adaptor.create(TRUE51);
-					adaptor.addChild(root_0, TRUE51_tree);
+					TRUE94_tree = (Object)adaptor.create(TRUE94);
+					adaptor.addChild(root_0, TRUE94_tree);
 					}
 
 					if ( state.backtracking==0 ) { putExtraOptionTo(ho, (k!=null?input.toString(k.start,k.stop):null), Boolean.TRUE, proto); }
 					}
 					break;
 				case 8 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:164:17: FALSE
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:244:17: FALSE
 					{
-					FALSE52=(Token)match(input,FALSE,FOLLOW_FALSE_in_option_entry1171); if (state.failed) return retval;
+					FALSE95=(Token)match(input,FALSE,FOLLOW_FALSE_in_option_entry2118); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					FALSE52_tree = (Object)adaptor.create(FALSE52);
-					adaptor.addChild(root_0, FALSE52_tree);
+					FALSE95_tree = (Object)adaptor.create(FALSE95);
+					adaptor.addChild(root_0, FALSE95_tree);
 					}
 
 					if ( state.backtracking==0 ) { putExtraOptionTo(ho, (k!=null?input.toString(k.start,k.stop):null), Boolean.FALSE, proto); }
 					}
 					break;
 				case 9 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:165:17: STRING_LITERAL
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:245:17: STRING_LITERAL
 					{
-					STRING_LITERAL53=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_option_entry1191); if (state.failed) return retval;
+					STRING_LITERAL96=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_option_entry2138); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					STRING_LITERAL53_tree = (Object)adaptor.create(STRING_LITERAL53);
-					adaptor.addChild(root_0, STRING_LITERAL53_tree);
+					STRING_LITERAL96_tree = (Object)adaptor.create(STRING_LITERAL96);
+					adaptor.addChild(root_0, STRING_LITERAL96_tree);
 					}
 
-					if ( state.backtracking==0 ) { putExtraOptionTo(ho, (k!=null?input.toString(k.start,k.stop):null), getStringFromStringLiteral((STRING_LITERAL53!=null?STRING_LITERAL53.getText():null)), proto); }
+					if ( state.backtracking==0 ) { putExtraOptionTo(ho, (k!=null?input.toString(k.start,k.stop):null), getStringFromStringLiteral((STRING_LITERAL96!=null?STRING_LITERAL96.getText():null)), proto); }
 					}
 					break;
 
 			}
 
-			SEMICOLON54=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_option_entry1205); if (state.failed) return retval;
+			SEMICOLON97=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_option_entry2152); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			            proto.checkAnnotations();
 			        }
@@ -1744,87 +2597,87 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "message_block"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:171:1: message_block[Proto proto, Message parent] : MESSAGE ID LEFTCURLY ( message_body[proto, message] )* RIGHTCURLY ;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:251:1: message_block[Proto proto, Message parent] : MESSAGE ID LEFTCURLY ( message_body[proto, message] )* RIGHTCURLY ;
 	public final ProtoParser.message_block_return message_block(Proto proto, Message parent) throws RecognitionException {
 		ProtoParser.message_block_return retval = new ProtoParser.message_block_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token MESSAGE55=null;
-		Token ID56=null;
-		Token LEFTCURLY57=null;
-		Token RIGHTCURLY59=null;
-		ParserRuleReturnScope message_body58 =null;
+		Token MESSAGE98=null;
+		Token ID99=null;
+		Token LEFTCURLY100=null;
+		Token RIGHTCURLY102=null;
+		ParserRuleReturnScope message_body101 =null;
 
-		Object MESSAGE55_tree=null;
-		Object ID56_tree=null;
-		Object LEFTCURLY57_tree=null;
-		Object RIGHTCURLY59_tree=null;
+		Object MESSAGE98_tree=null;
+		Object ID99_tree=null;
+		Object LEFTCURLY100_tree=null;
+		Object RIGHTCURLY102_tree=null;
 
 
 		    Message message = null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:175:5: ( MESSAGE ID LEFTCURLY ( message_body[proto, message] )* RIGHTCURLY )
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:175:9: MESSAGE ID LEFTCURLY ( message_body[proto, message] )* RIGHTCURLY
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:255:5: ( MESSAGE ID LEFTCURLY ( message_body[proto, message] )* RIGHTCURLY )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:255:9: MESSAGE ID LEFTCURLY ( message_body[proto, message] )* RIGHTCURLY
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			MESSAGE55=(Token)match(input,MESSAGE,FOLLOW_MESSAGE_in_message_block1238); if (state.failed) return retval;
+			MESSAGE98=(Token)match(input,MESSAGE,FOLLOW_MESSAGE_in_message_block2185); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			MESSAGE55_tree = (Object)adaptor.create(MESSAGE55);
-			adaptor.addChild(root_0, MESSAGE55_tree);
+			MESSAGE98_tree = (Object)adaptor.create(MESSAGE98);
+			adaptor.addChild(root_0, MESSAGE98_tree);
 			}
 
-			ID56=(Token)match(input,ID,FOLLOW_ID_in_message_block1240); if (state.failed) return retval;
+			ID99=(Token)match(input,ID,FOLLOW_ID_in_message_block2187); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			ID56_tree = (Object)adaptor.create(ID56);
-			adaptor.addChild(root_0, ID56_tree);
+			ID99_tree = (Object)adaptor.create(ID99);
+			adaptor.addChild(root_0, ID99_tree);
 			}
 
 			if ( state.backtracking==0 ) { 
-			            message = new Message((ID56!=null?ID56.getText():null), parent, proto);
+			            message = new Message((ID99!=null?ID99.getText():null), parent, proto);
 			            proto.addAnnotationsTo(message);
 			        }
-			LEFTCURLY57=(Token)match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_message_block1253); if (state.failed) return retval;
+			LEFTCURLY100=(Token)match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_message_block2200); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			LEFTCURLY57_tree = (Object)adaptor.create(LEFTCURLY57);
-			adaptor.addChild(root_0, LEFTCURLY57_tree);
+			LEFTCURLY100_tree = (Object)adaptor.create(LEFTCURLY100);
+			adaptor.addChild(root_0, LEFTCURLY100_tree);
 			}
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:179:19: ( message_body[proto, message] )*
-			loop12:
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:259:19: ( message_body[proto, message] )*
+			loop20:
 			while (true) {
-				int alt12=2;
-				int LA12_0 = input.LA(1);
-				if ( (LA12_0==AT||LA12_0==DOC_COMMENT||LA12_0==ENUM||LA12_0==MESSAGE||(LA12_0 >= OPTION && LA12_0 <= OPTIONAL)||(LA12_0 >= REPEATED && LA12_0 <= REQUIRED)||LA12_0==SERVICE) ) {
-					alt12=1;
+				int alt20=2;
+				int LA20_0 = input.LA(1);
+				if ( (LA20_0==AT||LA20_0==DOC_COMMENT||LA20_0==ENUM||LA20_0==MESSAGE||(LA20_0 >= OPTION && LA20_0 <= OPTIONAL)||(LA20_0 >= REPEATED && LA20_0 <= REQUIRED)||LA20_0==SERVICE) ) {
+					alt20=1;
 				}
 
-				switch (alt12) {
+				switch (alt20) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:179:20: message_body[proto, message]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:259:20: message_body[proto, message]
 					{
-					pushFollow(FOLLOW_message_body_in_message_block1256);
-					message_body58=message_body(proto, message);
+					pushFollow(FOLLOW_message_body_in_message_block2203);
+					message_body101=message_body(proto, message);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, message_body58.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, message_body101.getTree());
 
 					}
 					break;
 
 				default :
-					break loop12;
+					break loop20;
 				}
 			}
 
-			RIGHTCURLY59=(Token)match(input,RIGHTCURLY,FOLLOW_RIGHTCURLY_in_message_block1261); if (state.failed) return retval;
+			RIGHTCURLY102=(Token)match(input,RIGHTCURLY,FOLLOW_RIGHTCURLY_in_message_block2208); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			RIGHTCURLY59_tree = (Object)adaptor.create(RIGHTCURLY59);
-			adaptor.addChild(root_0, RIGHTCURLY59_tree);
+			RIGHTCURLY102_tree = (Object)adaptor.create(RIGHTCURLY102);
+			adaptor.addChild(root_0, RIGHTCURLY102_tree);
 			}
 
 			if ( state.backtracking==0 ) {
@@ -1860,165 +2713,165 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "message_body"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:184:1: message_body[Proto proto, Message message] : ( message_block[proto, message] | message_field[proto, message] | enum_block[proto, message] | service_block[proto, message] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, message] );
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:264:1: message_body[Proto proto, Message message] : ( message_block[proto, message] | message_field[proto, message] | enum_block[proto, message] | service_block[proto, message] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, message] );
 	public final ProtoParser.message_body_return message_body(Proto proto, Message message) throws RecognitionException {
 		ProtoParser.message_body_return retval = new ProtoParser.message_body_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		ParserRuleReturnScope message_block60 =null;
-		ParserRuleReturnScope message_field61 =null;
-		ParserRuleReturnScope enum_block62 =null;
-		ParserRuleReturnScope service_block63 =null;
-		ParserRuleReturnScope annotation_entry64 =null;
-		ParserRuleReturnScope comment_entry65 =null;
-		ParserRuleReturnScope option_entry66 =null;
+		ParserRuleReturnScope message_block103 =null;
+		ParserRuleReturnScope message_field104 =null;
+		ParserRuleReturnScope enum_block105 =null;
+		ParserRuleReturnScope service_block106 =null;
+		ParserRuleReturnScope annotation_entry107 =null;
+		ParserRuleReturnScope comment_entry108 =null;
+		ParserRuleReturnScope option_entry109 =null;
 
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:185:5: ( message_block[proto, message] | message_field[proto, message] | enum_block[proto, message] | service_block[proto, message] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, message] )
-			int alt13=7;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:265:5: ( message_block[proto, message] | message_field[proto, message] | enum_block[proto, message] | service_block[proto, message] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, message] )
+			int alt21=7;
 			switch ( input.LA(1) ) {
 			case MESSAGE:
 				{
-				alt13=1;
+				alt21=1;
 				}
 				break;
 			case OPTIONAL:
 			case REPEATED:
 			case REQUIRED:
 				{
-				alt13=2;
+				alt21=2;
 				}
 				break;
 			case ENUM:
 				{
-				alt13=3;
+				alt21=3;
 				}
 				break;
 			case SERVICE:
 				{
-				alt13=4;
+				alt21=4;
 				}
 				break;
 			case AT:
 				{
-				alt13=5;
+				alt21=5;
 				}
 				break;
 			case DOC_COMMENT:
 				{
-				alt13=6;
+				alt21=6;
 				}
 				break;
 			case OPTION:
 				{
-				alt13=7;
+				alt21=7;
 				}
 				break;
 			default:
 				if (state.backtracking>0) {state.failed=true; return retval;}
 				NoViableAltException nvae =
-					new NoViableAltException("", 13, 0, input);
+					new NoViableAltException("", 21, 0, input);
 				throw nvae;
 			}
-			switch (alt13) {
+			switch (alt21) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:185:9: message_block[proto, message]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:265:9: message_block[proto, message]
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_message_block_in_message_body1284);
-					message_block60=message_block(proto, message);
+					pushFollow(FOLLOW_message_block_in_message_body2231);
+					message_block103=message_block(proto, message);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, message_block60.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, message_block103.getTree());
 
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:186:9: message_field[proto, message]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:266:9: message_field[proto, message]
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_message_field_in_message_body1295);
-					message_field61=message_field(proto, message);
+					pushFollow(FOLLOW_message_field_in_message_body2242);
+					message_field104=message_field(proto, message);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, message_field61.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, message_field104.getTree());
 
 					}
 					break;
 				case 3 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:187:9: enum_block[proto, message]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:267:9: enum_block[proto, message]
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_enum_block_in_message_body1306);
-					enum_block62=enum_block(proto, message);
+					pushFollow(FOLLOW_enum_block_in_message_body2253);
+					enum_block105=enum_block(proto, message);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, enum_block62.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, enum_block105.getTree());
 
 					}
 					break;
 				case 4 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:188:9: service_block[proto, message]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:268:9: service_block[proto, message]
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_service_block_in_message_body1317);
-					service_block63=service_block(proto, message);
+					pushFollow(FOLLOW_service_block_in_message_body2264);
+					service_block106=service_block(proto, message);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, service_block63.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, service_block106.getTree());
 
 					}
 					break;
 				case 5 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:191:9: annotation_entry[proto]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:271:9: annotation_entry[proto]
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_annotation_entry_in_message_body1338);
-					annotation_entry64=annotation_entry(proto);
+					pushFollow(FOLLOW_annotation_entry_in_message_body2285);
+					annotation_entry107=annotation_entry(proto);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, annotation_entry64.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, annotation_entry107.getTree());
 
 					}
 					break;
 				case 6 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:192:9: comment_entry[proto]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:272:9: comment_entry[proto]
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_comment_entry_in_message_body1349);
-					comment_entry65=comment_entry(proto);
+					pushFollow(FOLLOW_comment_entry_in_message_body2296);
+					comment_entry108=comment_entry(proto);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, comment_entry65.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, comment_entry108.getTree());
 
 					}
 					break;
 				case 7 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:193:9: option_entry[proto, message]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:273:9: option_entry[proto, message]
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_option_entry_in_message_body1360);
-					option_entry66=option_entry(proto, message);
+					pushFollow(FOLLOW_option_entry_in_message_body2307);
+					option_entry109=option_entry(proto, message);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, option_entry66.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, option_entry109.getTree());
 
 					}
 					break;
@@ -2052,98 +2905,98 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "message_field"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:208:1: message_field[Proto proto, HasFields message] : ( OPTIONAL | REQUIRED | REPEATED ) field_type[proto, message, fieldHolder] var ASSIGN NUMINT ( field_options[proto, message, fieldHolder.field] )? ( SEMICOLON !| ignore_block ) ;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:288:1: message_field[Proto proto, HasFields message] : ( OPTIONAL | REQUIRED | REPEATED ) field_type[proto, message, fieldHolder] var ASSIGN NUMINT ( field_options[proto, message, fieldHolder.field] )? ( SEMICOLON !| ignore_block ) ;
 	public final ProtoParser.message_field_return message_field(Proto proto, HasFields message) throws RecognitionException {
 		ProtoParser.message_field_return retval = new ProtoParser.message_field_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token OPTIONAL67=null;
-		Token REQUIRED68=null;
-		Token REPEATED69=null;
-		Token ASSIGN72=null;
-		Token NUMINT73=null;
-		Token SEMICOLON75=null;
-		ParserRuleReturnScope field_type70 =null;
-		ParserRuleReturnScope var71 =null;
-		ParserRuleReturnScope field_options74 =null;
-		ParserRuleReturnScope ignore_block76 =null;
+		Token OPTIONAL110=null;
+		Token REQUIRED111=null;
+		Token REPEATED112=null;
+		Token ASSIGN115=null;
+		Token NUMINT116=null;
+		Token SEMICOLON118=null;
+		ParserRuleReturnScope field_type113 =null;
+		ParserRuleReturnScope var114 =null;
+		ParserRuleReturnScope field_options117 =null;
+		ParserRuleReturnScope ignore_block119 =null;
 
-		Object OPTIONAL67_tree=null;
-		Object REQUIRED68_tree=null;
-		Object REPEATED69_tree=null;
-		Object ASSIGN72_tree=null;
-		Object NUMINT73_tree=null;
-		Object SEMICOLON75_tree=null;
+		Object OPTIONAL110_tree=null;
+		Object REQUIRED111_tree=null;
+		Object REPEATED112_tree=null;
+		Object ASSIGN115_tree=null;
+		Object NUMINT116_tree=null;
+		Object SEMICOLON118_tree=null;
 
 
 		    Field.Modifier modifier = null;
 		    FieldHolder fieldHolder = null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:213:5: ( ( OPTIONAL | REQUIRED | REPEATED ) field_type[proto, message, fieldHolder] var ASSIGN NUMINT ( field_options[proto, message, fieldHolder.field] )? ( SEMICOLON !| ignore_block ) )
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:213:9: ( OPTIONAL | REQUIRED | REPEATED ) field_type[proto, message, fieldHolder] var ASSIGN NUMINT ( field_options[proto, message, fieldHolder.field] )? ( SEMICOLON !| ignore_block )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:293:5: ( ( OPTIONAL | REQUIRED | REPEATED ) field_type[proto, message, fieldHolder] var ASSIGN NUMINT ( field_options[proto, message, fieldHolder.field] )? ( SEMICOLON !| ignore_block ) )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:293:9: ( OPTIONAL | REQUIRED | REPEATED ) field_type[proto, message, fieldHolder] var ASSIGN NUMINT ( field_options[proto, message, fieldHolder.field] )? ( SEMICOLON !| ignore_block )
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:213:9: ( OPTIONAL | REQUIRED | REPEATED )
-			int alt14=3;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:293:9: ( OPTIONAL | REQUIRED | REPEATED )
+			int alt22=3;
 			switch ( input.LA(1) ) {
 			case OPTIONAL:
 				{
-				alt14=1;
+				alt22=1;
 				}
 				break;
 			case REQUIRED:
 				{
-				alt14=2;
+				alt22=2;
 				}
 				break;
 			case REPEATED:
 				{
-				alt14=3;
+				alt22=3;
 				}
 				break;
 			default:
 				if (state.backtracking>0) {state.failed=true; return retval;}
 				NoViableAltException nvae =
-					new NoViableAltException("", 14, 0, input);
+					new NoViableAltException("", 22, 0, input);
 				throw nvae;
 			}
-			switch (alt14) {
+			switch (alt22) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:213:10: OPTIONAL
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:293:10: OPTIONAL
 					{
-					OPTIONAL67=(Token)match(input,OPTIONAL,FOLLOW_OPTIONAL_in_message_field1408); if (state.failed) return retval;
+					OPTIONAL110=(Token)match(input,OPTIONAL,FOLLOW_OPTIONAL_in_message_field2355); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					OPTIONAL67_tree = (Object)adaptor.create(OPTIONAL67);
-					adaptor.addChild(root_0, OPTIONAL67_tree);
+					OPTIONAL110_tree = (Object)adaptor.create(OPTIONAL110);
+					adaptor.addChild(root_0, OPTIONAL110_tree);
 					}
 
 					if ( state.backtracking==0 ) { modifier = Field.Modifier.OPTIONAL;  }
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:214:13: REQUIRED
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:294:13: REQUIRED
 					{
-					REQUIRED68=(Token)match(input,REQUIRED,FOLLOW_REQUIRED_in_message_field1425); if (state.failed) return retval;
+					REQUIRED111=(Token)match(input,REQUIRED,FOLLOW_REQUIRED_in_message_field2372); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					REQUIRED68_tree = (Object)adaptor.create(REQUIRED68);
-					adaptor.addChild(root_0, REQUIRED68_tree);
+					REQUIRED111_tree = (Object)adaptor.create(REQUIRED111);
+					adaptor.addChild(root_0, REQUIRED111_tree);
 					}
 
 					if ( state.backtracking==0 ) { modifier = Field.Modifier.REQUIRED; }
 					}
 					break;
 				case 3 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:215:13: REPEATED
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:295:13: REPEATED
 					{
-					REPEATED69=(Token)match(input,REPEATED,FOLLOW_REPEATED_in_message_field1442); if (state.failed) return retval;
+					REPEATED112=(Token)match(input,REPEATED,FOLLOW_REPEATED_in_message_field2389); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					REPEATED69_tree = (Object)adaptor.create(REPEATED69);
-					adaptor.addChild(root_0, REPEATED69_tree);
+					REPEATED112_tree = (Object)adaptor.create(REPEATED112);
+					adaptor.addChild(root_0, REPEATED112_tree);
 					}
 
 					if ( state.backtracking==0 ) { modifier = Field.Modifier.REPEATED; }
@@ -2155,53 +3008,53 @@ public class ProtoParser extends AbstractParser {
 			if ( state.backtracking==0 ) {
 			            fieldHolder = new FieldHolder();
 			        }
-			pushFollow(FOLLOW_field_type_in_message_field1457);
-			field_type70=field_type(proto, message, fieldHolder);
+			pushFollow(FOLLOW_field_type_in_message_field2404);
+			field_type113=field_type(proto, message, fieldHolder);
 			state._fsp--;
 			if (state.failed) return retval;
-			if ( state.backtracking==0 ) adaptor.addChild(root_0, field_type70.getTree());
+			if ( state.backtracking==0 ) adaptor.addChild(root_0, field_type113.getTree());
 
-			pushFollow(FOLLOW_var_in_message_field1469);
-			var71=var();
+			pushFollow(FOLLOW_var_in_message_field2416);
+			var114=var();
 			state._fsp--;
 			if (state.failed) return retval;
-			if ( state.backtracking==0 ) adaptor.addChild(root_0, var71.getTree());
+			if ( state.backtracking==0 ) adaptor.addChild(root_0, var114.getTree());
 
-			ASSIGN72=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_message_field1471); if (state.failed) return retval;
+			ASSIGN115=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_message_field2418); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			ASSIGN72_tree = (Object)adaptor.create(ASSIGN72);
-			adaptor.addChild(root_0, ASSIGN72_tree);
+			ASSIGN115_tree = (Object)adaptor.create(ASSIGN115);
+			adaptor.addChild(root_0, ASSIGN115_tree);
 			}
 
-			NUMINT73=(Token)match(input,NUMINT,FOLLOW_NUMINT_in_message_field1473); if (state.failed) return retval;
+			NUMINT116=(Token)match(input,NUMINT,FOLLOW_NUMINT_in_message_field2420); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			NUMINT73_tree = (Object)adaptor.create(NUMINT73);
-			adaptor.addChild(root_0, NUMINT73_tree);
+			NUMINT116_tree = (Object)adaptor.create(NUMINT116);
+			adaptor.addChild(root_0, NUMINT116_tree);
 			}
 
 			if ( state.backtracking==0 ) {
 			            if (fieldHolder.field != null) {
 			                fieldHolder.field.modifier = modifier;
-			                fieldHolder.field.name = (var71!=null?input.toString(var71.start,var71.stop):null);
-			                fieldHolder.field.number = Integer.parseInt((NUMINT73!=null?NUMINT73.getText():null));
+			                fieldHolder.field.name = (var114!=null?input.toString(var114.start,var114.stop):null);
+			                fieldHolder.field.number = Integer.parseInt((NUMINT116!=null?NUMINT116.getText():null));
 			                message.addField(fieldHolder.field);
 			            }
 			        }
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:227:9: ( field_options[proto, message, fieldHolder.field] )?
-			int alt15=2;
-			int LA15_0 = input.LA(1);
-			if ( (LA15_0==LEFTSQUARE) ) {
-				alt15=1;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:307:9: ( field_options[proto, message, fieldHolder.field] )?
+			int alt23=2;
+			int LA23_0 = input.LA(1);
+			if ( (LA23_0==LEFTSQUARE) ) {
+				alt23=1;
 			}
-			switch (alt15) {
+			switch (alt23) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:227:10: field_options[proto, message, fieldHolder.field]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:307:10: field_options[proto, message, fieldHolder.field]
 					{
-					pushFollow(FOLLOW_field_options_in_message_field1487);
-					field_options74=field_options(proto, message, fieldHolder.field);
+					pushFollow(FOLLOW_field_options_in_message_field2434);
+					field_options117=field_options(proto, message, fieldHolder.field);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, field_options74.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, field_options117.getTree());
 
 					}
 					break;
@@ -2214,38 +3067,38 @@ public class ProtoParser extends AbstractParser {
 			                fieldHolder.field.resolvePbType();
 			            }
 			        }
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:233:9: ( SEMICOLON !| ignore_block )
-			int alt16=2;
-			int LA16_0 = input.LA(1);
-			if ( (LA16_0==SEMICOLON) ) {
-				alt16=1;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:313:9: ( SEMICOLON !| ignore_block )
+			int alt24=2;
+			int LA24_0 = input.LA(1);
+			if ( (LA24_0==SEMICOLON) ) {
+				alt24=1;
 			}
-			else if ( (LA16_0==LEFTCURLY) ) {
-				alt16=2;
+			else if ( (LA24_0==LEFTCURLY) ) {
+				alt24=2;
 			}
 
 			else {
 				if (state.backtracking>0) {state.failed=true; return retval;}
 				NoViableAltException nvae =
-					new NoViableAltException("", 16, 0, input);
+					new NoViableAltException("", 24, 0, input);
 				throw nvae;
 			}
 
-			switch (alt16) {
+			switch (alt24) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:233:10: SEMICOLON !
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:313:10: SEMICOLON !
 					{
-					SEMICOLON75=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_message_field1503); if (state.failed) return retval;
+					SEMICOLON118=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_message_field2450); if (state.failed) return retval;
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:233:23: ignore_block
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:313:23: ignore_block
 					{
-					pushFollow(FOLLOW_ignore_block_in_message_field1508);
-					ignore_block76=ignore_block();
+					pushFollow(FOLLOW_ignore_block_in_message_field2455);
+					ignore_block119=ignore_block();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, ignore_block76.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, ignore_block119.getTree());
 
 					}
 					break;
@@ -2282,340 +3135,340 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "field_type"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:236:1: field_type[Proto proto, HasFields message, FieldHolder fieldHolder] : ( BOOL | INT8 | UINT8 | INT16 | UINT16 | INT32 | UINT32 | INT64 | UINT64 | FLOAT | DOUBLE | STRING | BYTES | FULL_ID | ID );
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:316:1: field_type[Proto proto, HasFields message, FieldHolder fieldHolder] : ( BOOL | INT8 | UINT8 | INT16 | UINT16 | INT32 | UINT32 | INT64 | UINT64 | FLOAT | DOUBLE | STRING | BYTES | FULL_ID | ID );
 	public final ProtoParser.field_type_return field_type(Proto proto, HasFields message, FieldHolder fieldHolder) throws RecognitionException {
 		ProtoParser.field_type_return retval = new ProtoParser.field_type_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token BOOL77=null;
-		Token INT878=null;
-		Token UINT879=null;
-		Token INT1680=null;
-		Token UINT1681=null;
-		Token INT3282=null;
-		Token UINT3283=null;
-		Token INT6484=null;
-		Token UINT6485=null;
-		Token FLOAT86=null;
-		Token DOUBLE87=null;
-		Token STRING88=null;
-		Token BYTES89=null;
-		Token FULL_ID90=null;
-		Token ID91=null;
+		Token BOOL120=null;
+		Token INT8121=null;
+		Token UINT8122=null;
+		Token INT16123=null;
+		Token UINT16124=null;
+		Token INT32125=null;
+		Token UINT32126=null;
+		Token INT64127=null;
+		Token UINT64128=null;
+		Token FLOAT129=null;
+		Token DOUBLE130=null;
+		Token STRING131=null;
+		Token BYTES132=null;
+		Token FULL_ID133=null;
+		Token ID134=null;
 
-		Object BOOL77_tree=null;
-		Object INT878_tree=null;
-		Object UINT879_tree=null;
-		Object INT1680_tree=null;
-		Object UINT1681_tree=null;
-		Object INT3282_tree=null;
-		Object UINT3283_tree=null;
-		Object INT6484_tree=null;
-		Object UINT6485_tree=null;
-		Object FLOAT86_tree=null;
-		Object DOUBLE87_tree=null;
-		Object STRING88_tree=null;
-		Object BYTES89_tree=null;
-		Object FULL_ID90_tree=null;
-		Object ID91_tree=null;
+		Object BOOL120_tree=null;
+		Object INT8121_tree=null;
+		Object UINT8122_tree=null;
+		Object INT16123_tree=null;
+		Object UINT16124_tree=null;
+		Object INT32125_tree=null;
+		Object UINT32126_tree=null;
+		Object INT64127_tree=null;
+		Object UINT64128_tree=null;
+		Object FLOAT129_tree=null;
+		Object DOUBLE130_tree=null;
+		Object STRING131_tree=null;
+		Object BYTES132_tree=null;
+		Object FULL_ID133_tree=null;
+		Object ID134_tree=null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:237:5: ( BOOL | INT8 | UINT8 | INT16 | UINT16 | INT32 | UINT32 | INT64 | UINT64 | FLOAT | DOUBLE | STRING | BYTES | FULL_ID | ID )
-			int alt17=15;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:317:5: ( BOOL | INT8 | UINT8 | INT16 | UINT16 | INT32 | UINT32 | INT64 | UINT64 | FLOAT | DOUBLE | STRING | BYTES | FULL_ID | ID )
+			int alt25=15;
 			switch ( input.LA(1) ) {
 			case BOOL:
 				{
-				alt17=1;
+				alt25=1;
 				}
 				break;
 			case INT8:
 				{
-				alt17=2;
+				alt25=2;
 				}
 				break;
 			case UINT8:
 				{
-				alt17=3;
+				alt25=3;
 				}
 				break;
 			case INT16:
 				{
-				alt17=4;
+				alt25=4;
 				}
 				break;
 			case UINT16:
 				{
-				alt17=5;
+				alt25=5;
 				}
 				break;
 			case INT32:
 				{
-				alt17=6;
+				alt25=6;
 				}
 				break;
 			case UINT32:
 				{
-				alt17=7;
+				alt25=7;
 				}
 				break;
 			case INT64:
 				{
-				alt17=8;
+				alt25=8;
 				}
 				break;
 			case UINT64:
 				{
-				alt17=9;
+				alt25=9;
 				}
 				break;
 			case FLOAT:
 				{
-				alt17=10;
+				alt25=10;
 				}
 				break;
 			case DOUBLE:
 				{
-				alt17=11;
+				alt25=11;
 				}
 				break;
 			case STRING:
 				{
-				alt17=12;
+				alt25=12;
 				}
 				break;
 			case BYTES:
 				{
-				alt17=13;
+				alt25=13;
 				}
 				break;
 			case FULL_ID:
 				{
-				alt17=14;
+				alt25=14;
 				}
 				break;
 			case ID:
 				{
-				alt17=15;
+				alt25=15;
 				}
 				break;
 			default:
 				if (state.backtracking>0) {state.failed=true; return retval;}
 				NoViableAltException nvae =
-					new NoViableAltException("", 17, 0, input);
+					new NoViableAltException("", 25, 0, input);
 				throw nvae;
 			}
-			switch (alt17) {
+			switch (alt25) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:237:9: BOOL
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:317:9: BOOL
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					BOOL77=(Token)match(input,BOOL,FOLLOW_BOOL_in_field_type1534); if (state.failed) return retval;
+					BOOL120=(Token)match(input,BOOL,FOLLOW_BOOL_in_field_type2481); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					BOOL77_tree = (Object)adaptor.create(BOOL77);
-					adaptor.addChild(root_0, BOOL77_tree);
+					BOOL120_tree = (Object)adaptor.create(BOOL120);
+					adaptor.addChild(root_0, BOOL120_tree);
 					}
 
 					if ( state.backtracking==0 ) { fieldHolder.setField(new Field.Bool()); }
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:238:9: INT8
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:318:9: INT8
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					INT878=(Token)match(input,INT8,FOLLOW_INT8_in_field_type1546); if (state.failed) return retval;
+					INT8121=(Token)match(input,INT8,FOLLOW_INT8_in_field_type2493); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					INT878_tree = (Object)adaptor.create(INT878);
-					adaptor.addChild(root_0, INT878_tree);
+					INT8121_tree = (Object)adaptor.create(INT8121);
+					adaptor.addChild(root_0, INT8121_tree);
 					}
 
 					if ( state.backtracking==0 ) { fieldHolder.setField(new Field.Int8()); }
 					}
 					break;
 				case 3 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:239:9: UINT8
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:319:9: UINT8
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					UINT879=(Token)match(input,UINT8,FOLLOW_UINT8_in_field_type1558); if (state.failed) return retval;
+					UINT8122=(Token)match(input,UINT8,FOLLOW_UINT8_in_field_type2505); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					UINT879_tree = (Object)adaptor.create(UINT879);
-					adaptor.addChild(root_0, UINT879_tree);
+					UINT8122_tree = (Object)adaptor.create(UINT8122);
+					adaptor.addChild(root_0, UINT8122_tree);
 					}
 
 					if ( state.backtracking==0 ) { fieldHolder.setField(new Field.UInt8()); }
 					}
 					break;
 				case 4 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:240:9: INT16
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:320:9: INT16
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					INT1680=(Token)match(input,INT16,FOLLOW_INT16_in_field_type1570); if (state.failed) return retval;
+					INT16123=(Token)match(input,INT16,FOLLOW_INT16_in_field_type2517); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					INT1680_tree = (Object)adaptor.create(INT1680);
-					adaptor.addChild(root_0, INT1680_tree);
+					INT16123_tree = (Object)adaptor.create(INT16123);
+					adaptor.addChild(root_0, INT16123_tree);
 					}
 
 					if ( state.backtracking==0 ) { fieldHolder.setField(new Field.Int16()); }
 					}
 					break;
 				case 5 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:241:9: UINT16
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:321:9: UINT16
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					UINT1681=(Token)match(input,UINT16,FOLLOW_UINT16_in_field_type1582); if (state.failed) return retval;
+					UINT16124=(Token)match(input,UINT16,FOLLOW_UINT16_in_field_type2529); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					UINT1681_tree = (Object)adaptor.create(UINT1681);
-					adaptor.addChild(root_0, UINT1681_tree);
+					UINT16124_tree = (Object)adaptor.create(UINT16124);
+					adaptor.addChild(root_0, UINT16124_tree);
 					}
 
 					if ( state.backtracking==0 ) { fieldHolder.setField(new Field.UInt16()); }
 					}
 					break;
 				case 6 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:242:9: INT32
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:322:9: INT32
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					INT3282=(Token)match(input,INT32,FOLLOW_INT32_in_field_type1594); if (state.failed) return retval;
+					INT32125=(Token)match(input,INT32,FOLLOW_INT32_in_field_type2541); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					INT3282_tree = (Object)adaptor.create(INT3282);
-					adaptor.addChild(root_0, INT3282_tree);
+					INT32125_tree = (Object)adaptor.create(INT32125);
+					adaptor.addChild(root_0, INT32125_tree);
 					}
 
 					if ( state.backtracking==0 ) { fieldHolder.setField(new Field.Int32()); }
 					}
 					break;
 				case 7 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:243:9: UINT32
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:323:9: UINT32
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					UINT3283=(Token)match(input,UINT32,FOLLOW_UINT32_in_field_type1606); if (state.failed) return retval;
+					UINT32126=(Token)match(input,UINT32,FOLLOW_UINT32_in_field_type2553); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					UINT3283_tree = (Object)adaptor.create(UINT3283);
-					adaptor.addChild(root_0, UINT3283_tree);
+					UINT32126_tree = (Object)adaptor.create(UINT32126);
+					adaptor.addChild(root_0, UINT32126_tree);
 					}
 
 					if ( state.backtracking==0 ) { fieldHolder.setField(new Field.UInt32()); }
 					}
 					break;
 				case 8 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:244:9: INT64
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:324:9: INT64
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					INT6484=(Token)match(input,INT64,FOLLOW_INT64_in_field_type1618); if (state.failed) return retval;
+					INT64127=(Token)match(input,INT64,FOLLOW_INT64_in_field_type2565); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					INT6484_tree = (Object)adaptor.create(INT6484);
-					adaptor.addChild(root_0, INT6484_tree);
+					INT64127_tree = (Object)adaptor.create(INT64127);
+					adaptor.addChild(root_0, INT64127_tree);
 					}
 
 					if ( state.backtracking==0 ) { fieldHolder.setField(new Field.Int64()); }
 					}
 					break;
 				case 9 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:245:9: UINT64
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:325:9: UINT64
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					UINT6485=(Token)match(input,UINT64,FOLLOW_UINT64_in_field_type1630); if (state.failed) return retval;
+					UINT64128=(Token)match(input,UINT64,FOLLOW_UINT64_in_field_type2577); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					UINT6485_tree = (Object)adaptor.create(UINT6485);
-					adaptor.addChild(root_0, UINT6485_tree);
+					UINT64128_tree = (Object)adaptor.create(UINT64128);
+					adaptor.addChild(root_0, UINT64128_tree);
 					}
 
 					if ( state.backtracking==0 ) { fieldHolder.setField(new Field.UInt64()); }
 					}
 					break;
 				case 10 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:246:9: FLOAT
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:326:9: FLOAT
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					FLOAT86=(Token)match(input,FLOAT,FOLLOW_FLOAT_in_field_type1642); if (state.failed) return retval;
+					FLOAT129=(Token)match(input,FLOAT,FOLLOW_FLOAT_in_field_type2589); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					FLOAT86_tree = (Object)adaptor.create(FLOAT86);
-					adaptor.addChild(root_0, FLOAT86_tree);
+					FLOAT129_tree = (Object)adaptor.create(FLOAT129);
+					adaptor.addChild(root_0, FLOAT129_tree);
 					}
 
 					if ( state.backtracking==0 ) { fieldHolder.setField(new Field.Float()); }
 					}
 					break;
 				case 11 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:247:9: DOUBLE
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:327:9: DOUBLE
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					DOUBLE87=(Token)match(input,DOUBLE,FOLLOW_DOUBLE_in_field_type1654); if (state.failed) return retval;
+					DOUBLE130=(Token)match(input,DOUBLE,FOLLOW_DOUBLE_in_field_type2601); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					DOUBLE87_tree = (Object)adaptor.create(DOUBLE87);
-					adaptor.addChild(root_0, DOUBLE87_tree);
+					DOUBLE130_tree = (Object)adaptor.create(DOUBLE130);
+					adaptor.addChild(root_0, DOUBLE130_tree);
 					}
 
 					if ( state.backtracking==0 ) { fieldHolder.setField(new Field.Double()); }
 					}
 					break;
 				case 12 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:248:9: STRING
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:328:9: STRING
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					STRING88=(Token)match(input,STRING,FOLLOW_STRING_in_field_type1666); if (state.failed) return retval;
+					STRING131=(Token)match(input,STRING,FOLLOW_STRING_in_field_type2613); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					STRING88_tree = (Object)adaptor.create(STRING88);
-					adaptor.addChild(root_0, STRING88_tree);
+					STRING131_tree = (Object)adaptor.create(STRING131);
+					adaptor.addChild(root_0, STRING131_tree);
 					}
 
 					if ( state.backtracking==0 ) { fieldHolder.setField(new Field.String()); }
 					}
 					break;
 				case 13 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:249:9: BYTES
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:329:9: BYTES
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					BYTES89=(Token)match(input,BYTES,FOLLOW_BYTES_in_field_type1678); if (state.failed) return retval;
+					BYTES132=(Token)match(input,BYTES,FOLLOW_BYTES_in_field_type2625); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					BYTES89_tree = (Object)adaptor.create(BYTES89);
-					adaptor.addChild(root_0, BYTES89_tree);
+					BYTES132_tree = (Object)adaptor.create(BYTES132);
+					adaptor.addChild(root_0, BYTES132_tree);
 					}
 
 					if ( state.backtracking==0 ) { fieldHolder.setField(new Field.Bytes()); }
 					}
 					break;
 				case 14 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:254:9: FULL_ID
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:334:9: FULL_ID
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					FULL_ID90=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_field_type1710); if (state.failed) return retval;
+					FULL_ID133=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_field_type2657); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					FULL_ID90_tree = (Object)adaptor.create(FULL_ID90);
-					adaptor.addChild(root_0, FULL_ID90_tree);
+					FULL_ID133_tree = (Object)adaptor.create(FULL_ID133);
+					adaptor.addChild(root_0, FULL_ID133_tree);
 					}
 
 					if ( state.backtracking==0 ) {
-					            String fullType = (FULL_ID90!=null?FULL_ID90.getText():null);
+					            String fullType = (FULL_ID133!=null?FULL_ID133.getText():null);
 					            int lastDot = fullType.lastIndexOf('.');
 					            String packageName = fullType.substring(0, lastDot);
 					            String type = fullType.substring(lastDot+1);
@@ -2624,19 +3477,19 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 15 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:261:9: ID
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:341:9: ID
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					ID91=(Token)match(input,ID,FOLLOW_ID_in_field_type1722); if (state.failed) return retval;
+					ID134=(Token)match(input,ID,FOLLOW_ID_in_field_type2669); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					ID91_tree = (Object)adaptor.create(ID91);
-					adaptor.addChild(root_0, ID91_tree);
+					ID134_tree = (Object)adaptor.create(ID134);
+					adaptor.addChild(root_0, ID134_tree);
 					}
 
 					if ( state.backtracking==0 ) { 
-					            String type = (ID91!=null?ID91.getText():null);
+					            String type = (ID134!=null?ID134.getText():null);
 					            fieldHolder.setField(new Field.Reference(null, type, message));
 					        }
 					}
@@ -2671,79 +3524,79 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "field_options"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:267:1: field_options[Proto proto, HasFields message, Field field] : LEFTSQUARE field_options_keyval[proto, message, field, true] ( COMMA field_options_keyval[proto, message, field, true] )* RIGHTSQUARE ;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:347:1: field_options[Proto proto, HasFields message, Field field] : LEFTSQUARE field_options_keyval[proto, message, field, true] ( COMMA field_options_keyval[proto, message, field, true] )* RIGHTSQUARE ;
 	public final ProtoParser.field_options_return field_options(Proto proto, HasFields message, Field field) throws RecognitionException {
 		ProtoParser.field_options_return retval = new ProtoParser.field_options_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token LEFTSQUARE92=null;
-		Token COMMA94=null;
-		Token RIGHTSQUARE96=null;
-		ParserRuleReturnScope field_options_keyval93 =null;
-		ParserRuleReturnScope field_options_keyval95 =null;
+		Token LEFTSQUARE135=null;
+		Token COMMA137=null;
+		Token RIGHTSQUARE139=null;
+		ParserRuleReturnScope field_options_keyval136 =null;
+		ParserRuleReturnScope field_options_keyval138 =null;
 
-		Object LEFTSQUARE92_tree=null;
-		Object COMMA94_tree=null;
-		Object RIGHTSQUARE96_tree=null;
+		Object LEFTSQUARE135_tree=null;
+		Object COMMA137_tree=null;
+		Object RIGHTSQUARE139_tree=null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:268:5: ( LEFTSQUARE field_options_keyval[proto, message, field, true] ( COMMA field_options_keyval[proto, message, field, true] )* RIGHTSQUARE )
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:268:9: LEFTSQUARE field_options_keyval[proto, message, field, true] ( COMMA field_options_keyval[proto, message, field, true] )* RIGHTSQUARE
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:348:5: ( LEFTSQUARE field_options_keyval[proto, message, field, true] ( COMMA field_options_keyval[proto, message, field, true] )* RIGHTSQUARE )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:348:9: LEFTSQUARE field_options_keyval[proto, message, field, true] ( COMMA field_options_keyval[proto, message, field, true] )* RIGHTSQUARE
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			LEFTSQUARE92=(Token)match(input,LEFTSQUARE,FOLLOW_LEFTSQUARE_in_field_options1749); if (state.failed) return retval;
+			LEFTSQUARE135=(Token)match(input,LEFTSQUARE,FOLLOW_LEFTSQUARE_in_field_options2696); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			LEFTSQUARE92_tree = (Object)adaptor.create(LEFTSQUARE92);
-			adaptor.addChild(root_0, LEFTSQUARE92_tree);
+			LEFTSQUARE135_tree = (Object)adaptor.create(LEFTSQUARE135);
+			adaptor.addChild(root_0, LEFTSQUARE135_tree);
 			}
 
-			pushFollow(FOLLOW_field_options_keyval_in_field_options1751);
-			field_options_keyval93=field_options_keyval(proto, message, field, true);
+			pushFollow(FOLLOW_field_options_keyval_in_field_options2698);
+			field_options_keyval136=field_options_keyval(proto, message, field, true);
 			state._fsp--;
 			if (state.failed) return retval;
-			if ( state.backtracking==0 ) adaptor.addChild(root_0, field_options_keyval93.getTree());
+			if ( state.backtracking==0 ) adaptor.addChild(root_0, field_options_keyval136.getTree());
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:269:9: ( COMMA field_options_keyval[proto, message, field, true] )*
-			loop18:
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:349:9: ( COMMA field_options_keyval[proto, message, field, true] )*
+			loop26:
 			while (true) {
-				int alt18=2;
-				int LA18_0 = input.LA(1);
-				if ( (LA18_0==COMMA) ) {
-					alt18=1;
+				int alt26=2;
+				int LA26_0 = input.LA(1);
+				if ( (LA26_0==COMMA) ) {
+					alt26=1;
 				}
 
-				switch (alt18) {
+				switch (alt26) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:269:10: COMMA field_options_keyval[proto, message, field, true]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:349:10: COMMA field_options_keyval[proto, message, field, true]
 					{
-					COMMA94=(Token)match(input,COMMA,FOLLOW_COMMA_in_field_options1764); if (state.failed) return retval;
+					COMMA137=(Token)match(input,COMMA,FOLLOW_COMMA_in_field_options2711); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					COMMA94_tree = (Object)adaptor.create(COMMA94);
-					adaptor.addChild(root_0, COMMA94_tree);
+					COMMA137_tree = (Object)adaptor.create(COMMA137);
+					adaptor.addChild(root_0, COMMA137_tree);
 					}
 
-					pushFollow(FOLLOW_field_options_keyval_in_field_options1766);
-					field_options_keyval95=field_options_keyval(proto, message, field, true);
+					pushFollow(FOLLOW_field_options_keyval_in_field_options2713);
+					field_options_keyval138=field_options_keyval(proto, message, field, true);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, field_options_keyval95.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, field_options_keyval138.getTree());
 
 					}
 					break;
 
 				default :
-					break loop18;
+					break loop26;
 				}
 			}
 
-			RIGHTSQUARE96=(Token)match(input,RIGHTSQUARE,FOLLOW_RIGHTSQUARE_in_field_options1771); if (state.failed) return retval;
+			RIGHTSQUARE139=(Token)match(input,RIGHTSQUARE,FOLLOW_RIGHTSQUARE_in_field_options2718); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			RIGHTSQUARE96_tree = (Object)adaptor.create(RIGHTSQUARE96);
-			adaptor.addChild(root_0, RIGHTSQUARE96_tree);
+			RIGHTSQUARE139_tree = (Object)adaptor.create(RIGHTSQUARE139);
+			adaptor.addChild(root_0, RIGHTSQUARE139_tree);
 			}
 
 			}
@@ -2776,7 +3629,7 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "field_options_keyval"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:272:1: field_options_keyval[Proto proto, HasFields message, Field field, boolean checkDefault] : key= var_full ASSIGN (vr= var_reserved | STRING_LITERAL | NUMFLOAT | NUMINT | NUMDOUBLE | HEX | OCTAL | TRUE | FALSE |val= ID | FULL_ID | EXP | signed_constant[proto, message, field, $key.text, checkDefault] ) ;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:352:1: field_options_keyval[Proto proto, HasFields message, Field field, boolean checkDefault] : key= var_full ASSIGN (vr= var_reserved | STRING_LITERAL | NUMFLOAT | NUMINT | NUMDOUBLE | HEX | OCTAL | TRUE | FALSE |val= ID | FULL_ID | EXP | signed_constant[proto, message, field, $key.text, checkDefault] ) ;
 	public final ProtoParser.field_options_keyval_return field_options_keyval(Proto proto, HasFields message, Field field, boolean checkDefault) throws RecognitionException {
 		ProtoParser.field_options_keyval_return retval = new ProtoParser.field_options_keyval_return();
 		retval.start = input.LT(1);
@@ -2784,55 +3637,55 @@ public class ProtoParser extends AbstractParser {
 		Object root_0 = null;
 
 		Token val=null;
-		Token ASSIGN97=null;
-		Token STRING_LITERAL98=null;
-		Token NUMFLOAT99=null;
-		Token NUMINT100=null;
-		Token NUMDOUBLE101=null;
-		Token HEX102=null;
-		Token OCTAL103=null;
-		Token TRUE104=null;
-		Token FALSE105=null;
-		Token FULL_ID106=null;
-		Token EXP107=null;
+		Token ASSIGN140=null;
+		Token STRING_LITERAL141=null;
+		Token NUMFLOAT142=null;
+		Token NUMINT143=null;
+		Token NUMDOUBLE144=null;
+		Token HEX145=null;
+		Token OCTAL146=null;
+		Token TRUE147=null;
+		Token FALSE148=null;
+		Token FULL_ID149=null;
+		Token EXP150=null;
 		ParserRuleReturnScope key =null;
 		ParserRuleReturnScope vr =null;
-		ParserRuleReturnScope signed_constant108 =null;
+		ParserRuleReturnScope signed_constant151 =null;
 
 		Object val_tree=null;
-		Object ASSIGN97_tree=null;
-		Object STRING_LITERAL98_tree=null;
-		Object NUMFLOAT99_tree=null;
-		Object NUMINT100_tree=null;
-		Object NUMDOUBLE101_tree=null;
-		Object HEX102_tree=null;
-		Object OCTAL103_tree=null;
-		Object TRUE104_tree=null;
-		Object FALSE105_tree=null;
-		Object FULL_ID106_tree=null;
-		Object EXP107_tree=null;
+		Object ASSIGN140_tree=null;
+		Object STRING_LITERAL141_tree=null;
+		Object NUMFLOAT142_tree=null;
+		Object NUMINT143_tree=null;
+		Object NUMDOUBLE144_tree=null;
+		Object HEX145_tree=null;
+		Object OCTAL146_tree=null;
+		Object TRUE147_tree=null;
+		Object FALSE148_tree=null;
+		Object FULL_ID149_tree=null;
+		Object EXP150_tree=null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:273:5: (key= var_full ASSIGN (vr= var_reserved | STRING_LITERAL | NUMFLOAT | NUMINT | NUMDOUBLE | HEX | OCTAL | TRUE | FALSE |val= ID | FULL_ID | EXP | signed_constant[proto, message, field, $key.text, checkDefault] ) )
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:273:9: key= var_full ASSIGN (vr= var_reserved | STRING_LITERAL | NUMFLOAT | NUMINT | NUMDOUBLE | HEX | OCTAL | TRUE | FALSE |val= ID | FULL_ID | EXP | signed_constant[proto, message, field, $key.text, checkDefault] )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:353:5: (key= var_full ASSIGN (vr= var_reserved | STRING_LITERAL | NUMFLOAT | NUMINT | NUMDOUBLE | HEX | OCTAL | TRUE | FALSE |val= ID | FULL_ID | EXP | signed_constant[proto, message, field, $key.text, checkDefault] ) )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:353:9: key= var_full ASSIGN (vr= var_reserved | STRING_LITERAL | NUMFLOAT | NUMINT | NUMDOUBLE | HEX | OCTAL | TRUE | FALSE |val= ID | FULL_ID | EXP | signed_constant[proto, message, field, $key.text, checkDefault] )
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_var_full_in_field_options_keyval1798);
+			pushFollow(FOLLOW_var_full_in_field_options_keyval2745);
 			key=var_full();
 			state._fsp--;
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, key.getTree());
 
-			ASSIGN97=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_field_options_keyval1800); if (state.failed) return retval;
+			ASSIGN140=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_field_options_keyval2747); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			ASSIGN97_tree = (Object)adaptor.create(ASSIGN97);
-			adaptor.addChild(root_0, ASSIGN97_tree);
+			ASSIGN140_tree = (Object)adaptor.create(ASSIGN140);
+			adaptor.addChild(root_0, ASSIGN140_tree);
 			}
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:273:29: (vr= var_reserved | STRING_LITERAL | NUMFLOAT | NUMINT | NUMDOUBLE | HEX | OCTAL | TRUE | FALSE |val= ID | FULL_ID | EXP | signed_constant[proto, message, field, $key.text, checkDefault] )
-			int alt19=13;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:353:29: (vr= var_reserved | STRING_LITERAL | NUMFLOAT | NUMINT | NUMDOUBLE | HEX | OCTAL | TRUE | FALSE |val= ID | FULL_ID | EXP | signed_constant[proto, message, field, $key.text, checkDefault] )
+			int alt27=13;
 			switch ( input.LA(1) ) {
 			case BOOL:
 			case BYTES:
@@ -2864,80 +3717,80 @@ public class ProtoParser extends AbstractParser {
 			case UINT8:
 			case VOID:
 				{
-				alt19=1;
+				alt27=1;
 				}
 				break;
 			case STRING_LITERAL:
 				{
-				alt19=2;
+				alt27=2;
 				}
 				break;
 			case NUMFLOAT:
 				{
-				alt19=3;
+				alt27=3;
 				}
 				break;
 			case NUMINT:
 				{
-				alt19=4;
+				alt27=4;
 				}
 				break;
 			case NUMDOUBLE:
 				{
-				alt19=5;
+				alt27=5;
 				}
 				break;
 			case HEX:
 				{
-				alt19=6;
+				alt27=6;
 				}
 				break;
 			case OCTAL:
 				{
-				alt19=7;
+				alt27=7;
 				}
 				break;
 			case TRUE:
 				{
-				alt19=8;
+				alt27=8;
 				}
 				break;
 			case FALSE:
 				{
-				alt19=9;
+				alt27=9;
 				}
 				break;
 			case ID:
 				{
-				alt19=10;
+				alt27=10;
 				}
 				break;
 			case FULL_ID:
 				{
-				alt19=11;
+				alt27=11;
 				}
 				break;
 			case EXP:
 				{
-				alt19=12;
+				alt27=12;
 				}
 				break;
 			case MINUS:
 				{
-				alt19=13;
+				alt27=13;
 				}
 				break;
 			default:
 				if (state.backtracking>0) {state.failed=true; return retval;}
 				NoViableAltException nvae =
-					new NoViableAltException("", 19, 0, input);
+					new NoViableAltException("", 27, 0, input);
 				throw nvae;
 			}
-			switch (alt19) {
+			switch (alt27) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:273:30: vr= var_reserved
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:353:30: vr= var_reserved
 					{
-					pushFollow(FOLLOW_var_reserved_in_field_options_keyval1805);
+					pushFollow(FOLLOW_var_reserved_in_field_options_keyval2752);
 					vr=var_reserved();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -2949,23 +3802,23 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:276:9: STRING_LITERAL
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:356:9: STRING_LITERAL
 					{
-					STRING_LITERAL98=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_field_options_keyval1818); if (state.failed) return retval;
+					STRING_LITERAL141=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_field_options_keyval2765); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					STRING_LITERAL98_tree = (Object)adaptor.create(STRING_LITERAL98);
-					adaptor.addChild(root_0, STRING_LITERAL98_tree);
+					STRING_LITERAL141_tree = (Object)adaptor.create(STRING_LITERAL141);
+					adaptor.addChild(root_0, STRING_LITERAL141_tree);
 					}
 
 					if ( state.backtracking==0 ) {
 					            if (!"default".equals((key!=null?input.toString(key.start,key.stop):null))) {
-					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), getStringFromStringLiteral((STRING_LITERAL98!=null?STRING_LITERAL98.getText():null)));
+					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), getStringFromStringLiteral((STRING_LITERAL141!=null?STRING_LITERAL141.getText():null)));
 					            } else if (checkDefault) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
 					                    throw err(field, " can only have a single default value", proto);
 					                
 					                if (field instanceof Field.String || field instanceof Field.Bytes)
-					                    field.defaultValue = getStringFromStringLiteral((STRING_LITERAL98!=null?STRING_LITERAL98.getText():null));
+					                    field.defaultValue = getStringFromStringLiteral((STRING_LITERAL141!=null?STRING_LITERAL141.getText():null));
 					                else
 					                    throw err(field, " has an invalid string default value", proto);
 					                
@@ -2978,25 +3831,25 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 3 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:294:9: NUMFLOAT
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:374:9: NUMFLOAT
 					{
-					NUMFLOAT99=(Token)match(input,NUMFLOAT,FOLLOW_NUMFLOAT_in_field_options_keyval1830); if (state.failed) return retval;
+					NUMFLOAT142=(Token)match(input,NUMFLOAT,FOLLOW_NUMFLOAT_in_field_options_keyval2777); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					NUMFLOAT99_tree = (Object)adaptor.create(NUMFLOAT99);
-					adaptor.addChild(root_0, NUMFLOAT99_tree);
+					NUMFLOAT142_tree = (Object)adaptor.create(NUMFLOAT142);
+					adaptor.addChild(root_0, NUMFLOAT142_tree);
 					}
 
 					if ( state.backtracking==0 ) {
 					            if (!"default".equals((key!=null?input.toString(key.start,key.stop):null))) {
-					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), Float.valueOf((NUMFLOAT99!=null?NUMFLOAT99.getText():null)));
+					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), Float.valueOf((NUMFLOAT142!=null?NUMFLOAT142.getText():null)));
 					            } else if (checkDefault) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
 					                    throw err(field, " can only have a single default value", proto);
 					                
 					                if (field instanceof Field.Float)
-					                    field.defaultValue = Float.valueOf((NUMFLOAT99!=null?NUMFLOAT99.getText():null));
+					                    field.defaultValue = Float.valueOf((NUMFLOAT142!=null?NUMFLOAT142.getText():null));
 					                else if (field instanceof Field.Double) 
-					                    field.defaultValue = Double.valueOf((NUMFLOAT99!=null?NUMFLOAT99.getText():null));
+					                    field.defaultValue = Double.valueOf((NUMFLOAT142!=null?NUMFLOAT142.getText():null));
 					                else
 					                    throw err(field, " has an invalid float default value", proto);
 					                
@@ -3009,30 +3862,30 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 4 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:314:9: NUMINT
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:394:9: NUMINT
 					{
-					NUMINT100=(Token)match(input,NUMINT,FOLLOW_NUMINT_in_field_options_keyval1843); if (state.failed) return retval;
+					NUMINT143=(Token)match(input,NUMINT,FOLLOW_NUMINT_in_field_options_keyval2790); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					NUMINT100_tree = (Object)adaptor.create(NUMINT100);
-					adaptor.addChild(root_0, NUMINT100_tree);
+					NUMINT143_tree = (Object)adaptor.create(NUMINT143);
+					adaptor.addChild(root_0, NUMINT143_tree);
 					}
 
 					if ( state.backtracking==0 ) {
 					            if (!"default".equals((key!=null?input.toString(key.start,key.stop):null))) {
-					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), parseNumber((NUMINT100!=null?NUMINT100.getText():null)));
+					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), parseNumber((NUMINT143!=null?NUMINT143.getText():null)));
 					            } else if (checkDefault) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
 					                    throw err(field, " can only have a single default value", proto);
 					                
 					                if (field instanceof Field.Number) {
 					                    if (field instanceof Field.Float)
-					                        field.defaultValue = Float.valueOf((NUMINT100!=null?NUMINT100.getText():null));
+					                        field.defaultValue = Float.valueOf((NUMINT143!=null?NUMINT143.getText():null));
 					                    else if (field instanceof Field.Double) 
-					                        field.defaultValue = Double.valueOf((NUMINT100!=null?NUMINT100.getText():null));
+					                        field.defaultValue = Double.valueOf((NUMINT143!=null?NUMINT143.getText():null));
 					                    else if (field.getClass().getSimpleName().endsWith("64"))
-					                        field.defaultValue = validate(proto, field, Long.parseLong((NUMINT100!=null?NUMINT100.getText():null)));
+					                        field.defaultValue = validate(proto, field, Long.parseLong((NUMINT143!=null?NUMINT143.getText():null)));
 					                    else
-					                        field.defaultValue = validate(proto, field, Integer.parseInt((NUMINT100!=null?NUMINT100.getText():null)));
+					                        field.defaultValue = validate(proto, field, Integer.parseInt((NUMINT143!=null?NUMINT143.getText():null)));
 					                }
 					                else
 					                    throw err(field, " has an invalid numeric default value", proto);
@@ -3046,25 +3899,25 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 5 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:340:9: NUMDOUBLE
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:420:9: NUMDOUBLE
 					{
-					NUMDOUBLE101=(Token)match(input,NUMDOUBLE,FOLLOW_NUMDOUBLE_in_field_options_keyval1855); if (state.failed) return retval;
+					NUMDOUBLE144=(Token)match(input,NUMDOUBLE,FOLLOW_NUMDOUBLE_in_field_options_keyval2802); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					NUMDOUBLE101_tree = (Object)adaptor.create(NUMDOUBLE101);
-					adaptor.addChild(root_0, NUMDOUBLE101_tree);
+					NUMDOUBLE144_tree = (Object)adaptor.create(NUMDOUBLE144);
+					adaptor.addChild(root_0, NUMDOUBLE144_tree);
 					}
 
 					if ( state.backtracking==0 ) {
 					            if (!"default".equals((key!=null?input.toString(key.start,key.stop):null))) {
-					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), Double.valueOf((NUMDOUBLE101!=null?NUMDOUBLE101.getText():null)));
+					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), Double.valueOf((NUMDOUBLE144!=null?NUMDOUBLE144.getText():null)));
 					            } else if (checkDefault) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
 					                    throw err(field, " can only have a single default value", proto);
 
 					                if (field instanceof Field.Float)
-					                    field.defaultValue = Float.valueOf((NUMDOUBLE101!=null?NUMDOUBLE101.getText():null));
+					                    field.defaultValue = Float.valueOf((NUMDOUBLE144!=null?NUMDOUBLE144.getText():null));
 					                else if (field instanceof Field.Double) 
-					                    field.defaultValue = Double.valueOf((NUMDOUBLE101!=null?NUMDOUBLE101.getText():null));
+					                    field.defaultValue = Double.valueOf((NUMDOUBLE144!=null?NUMDOUBLE144.getText():null));
 					                else
 					                    throw err(field, " has an invalid double default value", proto);
 					                
@@ -3077,36 +3930,36 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 6 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:360:9: HEX
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:440:9: HEX
 					{
-					HEX102=(Token)match(input,HEX,FOLLOW_HEX_in_field_options_keyval1867); if (state.failed) return retval;
+					HEX145=(Token)match(input,HEX,FOLLOW_HEX_in_field_options_keyval2814); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					HEX102_tree = (Object)adaptor.create(HEX102);
-					adaptor.addChild(root_0, HEX102_tree);
+					HEX145_tree = (Object)adaptor.create(HEX145);
+					adaptor.addChild(root_0, HEX145_tree);
 					}
 
 					if ( state.backtracking==0 ) {
 					            if (!"default".equals((key!=null?input.toString(key.start,key.stop):null))) {
-					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), Long.valueOf(TextFormat.parseLong(proto, field, (HEX102!=null?HEX102.getText():null), true)));
+					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), Long.valueOf(TextFormat.parseLong(proto, field, (HEX145!=null?HEX145.getText():null), true)));
 					            } else if (checkDefault) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
 					                    throw err(field, " can only have a single default value", proto);
 					                
 					                if (field instanceof Field.Number) {
 					                    if (field instanceof Field.Float)
-					                        field.defaultValue = new Float(Long.decode((HEX102!=null?HEX102.getText():null)).floatValue());
+					                        field.defaultValue = new Float(Long.decode((HEX145!=null?HEX145.getText():null)).floatValue());
 					                    else if (field instanceof Field.Double) 
-					                        field.defaultValue = new Double(Long.decode((HEX102!=null?HEX102.getText():null)).doubleValue());
+					                        field.defaultValue = new Double(Long.decode((HEX145!=null?HEX145.getText():null)).doubleValue());
 					                    else if (field.getClass().getSimpleName().endsWith("64")) {
-					                        field.defaultValue = Long.valueOf(validate(proto, field, TextFormat.parseLong(proto, field, (HEX102!=null?HEX102.getText():null), 
+					                        field.defaultValue = Long.valueOf(validate(proto, field, TextFormat.parseLong(proto, field, (HEX145!=null?HEX145.getText():null), 
 					                                field.getClass().getSimpleName().charAt(0) != 'U')));
 					                    } else {
-					                        field.defaultValue = Integer.valueOf(validate(proto, field, TextFormat.parseInt(proto, field, (HEX102!=null?HEX102.getText():null), 
+					                        field.defaultValue = Integer.valueOf(validate(proto, field, TextFormat.parseInt(proto, field, (HEX145!=null?HEX145.getText():null), 
 					                                field.getClass().getSimpleName().charAt(0) != 'U')));
 					                    }
 					                }
 					                else if (field instanceof Field.Bytes) {
-					                    field.defaultValue = (HEX102!=null?HEX102.getText():null);
+					                    field.defaultValue = (HEX145!=null?HEX145.getText():null);
 					                }
 					                else
 					                    throw err(field, " has an invalid numeric default value", proto);
@@ -3120,31 +3973,31 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 7 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:392:9: OCTAL
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:472:9: OCTAL
 					{
-					OCTAL103=(Token)match(input,OCTAL,FOLLOW_OCTAL_in_field_options_keyval1879); if (state.failed) return retval;
+					OCTAL146=(Token)match(input,OCTAL,FOLLOW_OCTAL_in_field_options_keyval2826); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					OCTAL103_tree = (Object)adaptor.create(OCTAL103);
-					adaptor.addChild(root_0, OCTAL103_tree);
+					OCTAL146_tree = (Object)adaptor.create(OCTAL146);
+					adaptor.addChild(root_0, OCTAL146_tree);
 					}
 
 					if ( state.backtracking==0 ) {
 					            if (!"default".equals((key!=null?input.toString(key.start,key.stop):null))) {
-					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), Integer.valueOf(TextFormat.parseInt(proto, field, (OCTAL103!=null?OCTAL103.getText():null), true)));
+					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), Integer.valueOf(TextFormat.parseInt(proto, field, (OCTAL146!=null?OCTAL146.getText():null), true)));
 					            } else if (checkDefault) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
 					                    throw err(field, " can only have a single default value", proto);
 					                
 					                if (field instanceof Field.Number) {
 					                    if (field instanceof Field.Float)
-					                        field.defaultValue = new Float(Long.decode((OCTAL103!=null?OCTAL103.getText():null)).floatValue());
+					                        field.defaultValue = new Float(Long.decode((OCTAL146!=null?OCTAL146.getText():null)).floatValue());
 					                    else if (field instanceof Field.Double) 
-					                        field.defaultValue = new Double(Long.decode((OCTAL103!=null?OCTAL103.getText():null)).doubleValue());
+					                        field.defaultValue = new Double(Long.decode((OCTAL146!=null?OCTAL146.getText():null)).doubleValue());
 					                    else if (field.getClass().getSimpleName().endsWith("64")) {
-					                        field.defaultValue = Long.valueOf(validate(proto, field, TextFormat.parseLong(proto, field, (OCTAL103!=null?OCTAL103.getText():null), 
+					                        field.defaultValue = Long.valueOf(validate(proto, field, TextFormat.parseLong(proto, field, (OCTAL146!=null?OCTAL146.getText():null), 
 					                                field.getClass().getSimpleName().charAt(0) != 'U')));
 					                    } else {
-					                        field.defaultValue = Integer.valueOf(validate(proto, field, TextFormat.parseInt(proto, field, (OCTAL103!=null?OCTAL103.getText():null), 
+					                        field.defaultValue = Integer.valueOf(validate(proto, field, TextFormat.parseInt(proto, field, (OCTAL146!=null?OCTAL146.getText():null), 
 					                                field.getClass().getSimpleName().charAt(0) != 'U')));
 					                    }
 					                }
@@ -3160,12 +4013,12 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 8 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:421:9: TRUE
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:501:9: TRUE
 					{
-					TRUE104=(Token)match(input,TRUE,FOLLOW_TRUE_in_field_options_keyval1891); if (state.failed) return retval;
+					TRUE147=(Token)match(input,TRUE,FOLLOW_TRUE_in_field_options_keyval2838); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					TRUE104_tree = (Object)adaptor.create(TRUE104);
-					adaptor.addChild(root_0, TRUE104_tree);
+					TRUE147_tree = (Object)adaptor.create(TRUE147);
+					adaptor.addChild(root_0, TRUE147_tree);
 					}
 
 					if ( state.backtracking==0 ) {
@@ -3188,12 +4041,12 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 9 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:438:9: FALSE
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:518:9: FALSE
 					{
-					FALSE105=(Token)match(input,FALSE,FOLLOW_FALSE_in_field_options_keyval1907); if (state.failed) return retval;
+					FALSE148=(Token)match(input,FALSE,FOLLOW_FALSE_in_field_options_keyval2854); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					FALSE105_tree = (Object)adaptor.create(FALSE105);
-					adaptor.addChild(root_0, FALSE105_tree);
+					FALSE148_tree = (Object)adaptor.create(FALSE148);
+					adaptor.addChild(root_0, FALSE148_tree);
 					}
 
 					if ( state.backtracking==0 ) {
@@ -3216,9 +4069,9 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 10 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:455:9: val= ID
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:535:9: val= ID
 					{
-					val=(Token)match(input,ID,FOLLOW_ID_in_field_options_keyval1921); if (state.failed) return retval;
+					val=(Token)match(input,ID,FOLLOW_ID_in_field_options_keyval2868); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					val_tree = (Object)adaptor.create(val);
 					adaptor.addChild(root_0, val_tree);
@@ -3268,17 +4121,17 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 11 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:496:9: FULL_ID
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:576:9: FULL_ID
 					{
-					FULL_ID106=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_field_options_keyval1933); if (state.failed) return retval;
+					FULL_ID149=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_field_options_keyval2880); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					FULL_ID106_tree = (Object)adaptor.create(FULL_ID106);
-					adaptor.addChild(root_0, FULL_ID106_tree);
+					FULL_ID149_tree = (Object)adaptor.create(FULL_ID149);
+					adaptor.addChild(root_0, FULL_ID149_tree);
 					}
 
 					if ( state.backtracking==0 ) {
 					            if (!"default".equals((key!=null?input.toString(key.start,key.stop):null))) {
-					                field.putStandardOption((key!=null?input.toString(key.start,key.stop):null), (FULL_ID106!=null?FULL_ID106.getText():null));
+					                field.putStandardOption((key!=null?input.toString(key.start,key.stop):null), (FULL_ID149!=null?FULL_ID149.getText():null));
 					            } else {
 					                warnDefaultKeyword(field, proto);
 					            }
@@ -3286,25 +4139,25 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 12 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:503:9: EXP
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:583:9: EXP
 					{
-					EXP107=(Token)match(input,EXP,FOLLOW_EXP_in_field_options_keyval1945); if (state.failed) return retval;
+					EXP150=(Token)match(input,EXP,FOLLOW_EXP_in_field_options_keyval2892); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					EXP107_tree = (Object)adaptor.create(EXP107);
-					adaptor.addChild(root_0, EXP107_tree);
+					EXP150_tree = (Object)adaptor.create(EXP150);
+					adaptor.addChild(root_0, EXP150_tree);
 					}
 
 					if ( state.backtracking==0 ) {
 					            if (!"default".equals((key!=null?input.toString(key.start,key.stop):null))) {
-					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), (EXP107!=null?EXP107.getText():null));
+					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), (EXP150!=null?EXP150.getText():null));
 					            } else if (checkDefault) {
 					                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
 					                    throw err(field, " can only have a single default value", proto);
 					                
 					                if (field instanceof Field.Float)
-					                    field.defaultValue = Float.valueOf((EXP107!=null?EXP107.getText():null));
+					                    field.defaultValue = Float.valueOf((EXP150!=null?EXP150.getText():null));
 					                else if (field instanceof Field.Double)
-					                    field.defaultValue = Double.valueOf((EXP107!=null?EXP107.getText():null));
+					                    field.defaultValue = Double.valueOf((EXP150!=null?EXP150.getText():null));
 					                else
 					                    throw err(field, " has an invalid float default value", proto);
 					                
@@ -3316,18 +4169,18 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 13 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:522:9: signed_constant[proto, message, field, $key.text, checkDefault]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:602:9: signed_constant[proto, message, field, $key.text, checkDefault]
 					{
-					pushFollow(FOLLOW_signed_constant_in_field_options_keyval1957);
-					signed_constant108=signed_constant(proto, message, field, (key!=null?input.toString(key.start,key.stop):null), checkDefault);
+					pushFollow(FOLLOW_signed_constant_in_field_options_keyval2904);
+					signed_constant151=signed_constant(proto, message, field, (key!=null?input.toString(key.start,key.stop):null), checkDefault);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, signed_constant108.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, signed_constant151.getTree());
 
 					if ( state.backtracking==0 ) {
 					            // handled by signed_constant
 					            if (!"default".equals((key!=null?input.toString(key.start,key.stop):null))) {
-					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), (signed_constant108!=null?input.toString(signed_constant108.start,signed_constant108.stop):null));
+					                field.putExtraOption((key!=null?input.toString(key.start,key.stop):null), (signed_constant151!=null?input.toString(signed_constant151.start,signed_constant151.stop):null));
 					            } else if (!checkDefault) {
 					                warnDefaultKeyword(field, proto);
 					            }
@@ -3367,36 +4220,36 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "signed_constant"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:533:1: signed_constant[Proto proto, HasFields message, Field field, String key, boolean checkDefault] : MINUS ID ;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:613:1: signed_constant[Proto proto, HasFields message, Field field, String key, boolean checkDefault] : MINUS ID ;
 	public final ProtoParser.signed_constant_return signed_constant(Proto proto, HasFields message, Field field, String key, boolean checkDefault) throws RecognitionException {
 		ProtoParser.signed_constant_return retval = new ProtoParser.signed_constant_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token MINUS109=null;
-		Token ID110=null;
+		Token MINUS152=null;
+		Token ID153=null;
 
-		Object MINUS109_tree=null;
-		Object ID110_tree=null;
+		Object MINUS152_tree=null;
+		Object ID153_tree=null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:534:5: ( MINUS ID )
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:534:9: MINUS ID
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:614:5: ( MINUS ID )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:614:9: MINUS ID
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			MINUS109=(Token)match(input,MINUS,FOLLOW_MINUS_in_signed_constant1995); if (state.failed) return retval;
+			MINUS152=(Token)match(input,MINUS,FOLLOW_MINUS_in_signed_constant2942); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			MINUS109_tree = (Object)adaptor.create(MINUS109);
-			adaptor.addChild(root_0, MINUS109_tree);
+			MINUS152_tree = (Object)adaptor.create(MINUS152);
+			adaptor.addChild(root_0, MINUS152_tree);
 			}
 
-			ID110=(Token)match(input,ID,FOLLOW_ID_in_signed_constant1997); if (state.failed) return retval;
+			ID153=(Token)match(input,ID,FOLLOW_ID_in_signed_constant2944); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			ID110_tree = (Object)adaptor.create(ID110);
-			adaptor.addChild(root_0, ID110_tree);
+			ID153_tree = (Object)adaptor.create(ID153);
+			adaptor.addChild(root_0, ID153_tree);
 			}
 
 			if ( state.backtracking==0 ) {
@@ -3404,7 +4257,7 @@ public class ProtoParser extends AbstractParser {
 			                if (field.defaultValue != null || field.modifier == Field.Modifier.REPEATED)
 			                    throw err(field, " can only have a single default value", proto);
 			                
-			                String refName = (ID110!=null?ID110.getText():null);
+			                String refName = (ID153!=null?ID153.getText():null);
 			                if (field instanceof Field.Float) {
 			                    if ("inf".equals(refName)) {
 			                        field.defaultValue = Float.NEGATIVE_INFINITY;
@@ -3455,111 +4308,111 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "enum_block"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:562:1: enum_block[Proto proto, Message message] : ENUM ID LEFTCURLY ( enum_body[proto, message, enumGroup] )* RIGHTCURLY ( ( SEMICOLON )? ) !;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:642:1: enum_block[Proto proto, Message message] : ENUM ID LEFTCURLY ( enum_body[proto, message, enumGroup] )* RIGHTCURLY ( ( SEMICOLON )? ) !;
 	public final ProtoParser.enum_block_return enum_block(Proto proto, Message message) throws RecognitionException {
 		ProtoParser.enum_block_return retval = new ProtoParser.enum_block_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token ENUM111=null;
-		Token ID112=null;
-		Token LEFTCURLY113=null;
-		Token RIGHTCURLY115=null;
-		Token SEMICOLON116=null;
-		ParserRuleReturnScope enum_body114 =null;
+		Token ENUM154=null;
+		Token ID155=null;
+		Token LEFTCURLY156=null;
+		Token RIGHTCURLY158=null;
+		Token SEMICOLON159=null;
+		ParserRuleReturnScope enum_body157 =null;
 
-		Object ENUM111_tree=null;
-		Object ID112_tree=null;
-		Object LEFTCURLY113_tree=null;
-		Object RIGHTCURLY115_tree=null;
-		Object SEMICOLON116_tree=null;
+		Object ENUM154_tree=null;
+		Object ID155_tree=null;
+		Object LEFTCURLY156_tree=null;
+		Object RIGHTCURLY158_tree=null;
+		Object SEMICOLON159_tree=null;
 
 
 		    EnumGroup enumGroup = null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:566:5: ( ENUM ID LEFTCURLY ( enum_body[proto, message, enumGroup] )* RIGHTCURLY ( ( SEMICOLON )? ) !)
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:566:9: ENUM ID LEFTCURLY ( enum_body[proto, message, enumGroup] )* RIGHTCURLY ( ( SEMICOLON )? ) !
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:646:5: ( ENUM ID LEFTCURLY ( enum_body[proto, message, enumGroup] )* RIGHTCURLY ( ( SEMICOLON )? ) !)
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:646:9: ENUM ID LEFTCURLY ( enum_body[proto, message, enumGroup] )* RIGHTCURLY ( ( SEMICOLON )? ) !
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			ENUM111=(Token)match(input,ENUM,FOLLOW_ENUM_in_enum_block2029); if (state.failed) return retval;
+			ENUM154=(Token)match(input,ENUM,FOLLOW_ENUM_in_enum_block2976); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			ENUM111_tree = (Object)adaptor.create(ENUM111);
-			adaptor.addChild(root_0, ENUM111_tree);
+			ENUM154_tree = (Object)adaptor.create(ENUM154);
+			adaptor.addChild(root_0, ENUM154_tree);
 			}
 
-			ID112=(Token)match(input,ID,FOLLOW_ID_in_enum_block2031); if (state.failed) return retval;
+			ID155=(Token)match(input,ID,FOLLOW_ID_in_enum_block2978); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			ID112_tree = (Object)adaptor.create(ID112);
-			adaptor.addChild(root_0, ID112_tree);
+			ID155_tree = (Object)adaptor.create(ID155);
+			adaptor.addChild(root_0, ID155_tree);
 			}
 
 			if ( state.backtracking==0 ) { 
-			            enumGroup = new EnumGroup((ID112!=null?ID112.getText():null), message, proto);
+			            enumGroup = new EnumGroup((ID155!=null?ID155.getText():null), message, proto);
 			            proto.addAnnotationsTo(enumGroup);
 			        }
-			LEFTCURLY113=(Token)match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_enum_block2044); if (state.failed) return retval;
+			LEFTCURLY156=(Token)match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_enum_block2991); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			LEFTCURLY113_tree = (Object)adaptor.create(LEFTCURLY113);
-			adaptor.addChild(root_0, LEFTCURLY113_tree);
+			LEFTCURLY156_tree = (Object)adaptor.create(LEFTCURLY156);
+			adaptor.addChild(root_0, LEFTCURLY156_tree);
 			}
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:570:19: ( enum_body[proto, message, enumGroup] )*
-			loop20:
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:650:19: ( enum_body[proto, message, enumGroup] )*
+			loop28:
 			while (true) {
-				int alt20=2;
-				int LA20_0 = input.LA(1);
-				if ( (LA20_0==AT||LA20_0==DOC_COMMENT||LA20_0==ID||LA20_0==OPTION) ) {
-					alt20=1;
+				int alt28=2;
+				int LA28_0 = input.LA(1);
+				if ( (LA28_0==AT||LA28_0==DOC_COMMENT||LA28_0==ID||LA28_0==OPTION) ) {
+					alt28=1;
 				}
 
-				switch (alt20) {
+				switch (alt28) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:570:20: enum_body[proto, message, enumGroup]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:650:20: enum_body[proto, message, enumGroup]
 					{
-					pushFollow(FOLLOW_enum_body_in_enum_block2047);
-					enum_body114=enum_body(proto, message, enumGroup);
+					pushFollow(FOLLOW_enum_body_in_enum_block2994);
+					enum_body157=enum_body(proto, message, enumGroup);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, enum_body114.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, enum_body157.getTree());
 
 					}
 					break;
 
 				default :
-					break loop20;
+					break loop28;
 				}
 			}
 
-			RIGHTCURLY115=(Token)match(input,RIGHTCURLY,FOLLOW_RIGHTCURLY_in_enum_block2052); if (state.failed) return retval;
+			RIGHTCURLY158=(Token)match(input,RIGHTCURLY,FOLLOW_RIGHTCURLY_in_enum_block2999); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			RIGHTCURLY115_tree = (Object)adaptor.create(RIGHTCURLY115);
-			adaptor.addChild(root_0, RIGHTCURLY115_tree);
+			RIGHTCURLY158_tree = (Object)adaptor.create(RIGHTCURLY158);
+			adaptor.addChild(root_0, RIGHTCURLY158_tree);
 			}
 
 			if ( state.backtracking==0 ) {
 			            proto.checkAnnotations();
 			        }
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:572:11: ( ( SEMICOLON )? )
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:572:12: ( SEMICOLON )?
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:652:11: ( ( SEMICOLON )? )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:652:12: ( SEMICOLON )?
 			{
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:572:12: ( SEMICOLON )?
-			int alt21=2;
-			int LA21_0 = input.LA(1);
-			if ( (LA21_0==SEMICOLON) ) {
-				alt21=1;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:652:12: ( SEMICOLON )?
+			int alt29=2;
+			int LA29_0 = input.LA(1);
+			if ( (LA29_0==SEMICOLON) ) {
+				alt29=1;
 			}
-			switch (alt21) {
+			switch (alt29) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:572:12: SEMICOLON
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:652:12: SEMICOLON
 					{
-					SEMICOLON116=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_enum_block2057); if (state.failed) return retval;
+					SEMICOLON159=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_enum_block3004); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					SEMICOLON116_tree = (Object)adaptor.create(SEMICOLON116);
-					adaptor.addChild(root_0, SEMICOLON116_tree);
+					SEMICOLON159_tree = (Object)adaptor.create(SEMICOLON159);
+					adaptor.addChild(root_0, SEMICOLON159_tree);
 					}
 
 					}
@@ -3599,103 +4452,103 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "enum_body"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:575:1: enum_body[Proto proto, Message message, EnumGroup enumGroup] : ( enum_field[proto, message, enumGroup] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, enumGroup] );
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:655:1: enum_body[Proto proto, Message message, EnumGroup enumGroup] : ( enum_field[proto, message, enumGroup] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, enumGroup] );
 	public final ProtoParser.enum_body_return enum_body(Proto proto, Message message, EnumGroup enumGroup) throws RecognitionException {
 		ProtoParser.enum_body_return retval = new ProtoParser.enum_body_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		ParserRuleReturnScope enum_field117 =null;
-		ParserRuleReturnScope annotation_entry118 =null;
-		ParserRuleReturnScope comment_entry119 =null;
-		ParserRuleReturnScope option_entry120 =null;
+		ParserRuleReturnScope enum_field160 =null;
+		ParserRuleReturnScope annotation_entry161 =null;
+		ParserRuleReturnScope comment_entry162 =null;
+		ParserRuleReturnScope option_entry163 =null;
 
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:576:5: ( enum_field[proto, message, enumGroup] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, enumGroup] )
-			int alt22=4;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:656:5: ( enum_field[proto, message, enumGroup] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, enumGroup] )
+			int alt30=4;
 			switch ( input.LA(1) ) {
 			case ID:
 				{
-				alt22=1;
+				alt30=1;
 				}
 				break;
 			case AT:
 				{
-				alt22=2;
+				alt30=2;
 				}
 				break;
 			case DOC_COMMENT:
 				{
-				alt22=3;
+				alt30=3;
 				}
 				break;
 			case OPTION:
 				{
-				alt22=4;
+				alt30=4;
 				}
 				break;
 			default:
 				if (state.backtracking>0) {state.failed=true; return retval;}
 				NoViableAltException nvae =
-					new NoViableAltException("", 22, 0, input);
+					new NoViableAltException("", 30, 0, input);
 				throw nvae;
 			}
-			switch (alt22) {
+			switch (alt30) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:576:9: enum_field[proto, message, enumGroup]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:656:9: enum_field[proto, message, enumGroup]
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_enum_field_in_enum_body2085);
-					enum_field117=enum_field(proto, message, enumGroup);
+					pushFollow(FOLLOW_enum_field_in_enum_body3032);
+					enum_field160=enum_field(proto, message, enumGroup);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, enum_field117.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, enum_field160.getTree());
 
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:577:9: annotation_entry[proto]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:657:9: annotation_entry[proto]
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_annotation_entry_in_enum_body2096);
-					annotation_entry118=annotation_entry(proto);
+					pushFollow(FOLLOW_annotation_entry_in_enum_body3043);
+					annotation_entry161=annotation_entry(proto);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, annotation_entry118.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, annotation_entry161.getTree());
 
 					}
 					break;
 				case 3 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:578:9: comment_entry[proto]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:658:9: comment_entry[proto]
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_comment_entry_in_enum_body2107);
-					comment_entry119=comment_entry(proto);
+					pushFollow(FOLLOW_comment_entry_in_enum_body3054);
+					comment_entry162=comment_entry(proto);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, comment_entry119.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, comment_entry162.getTree());
 
 					}
 					break;
 				case 4 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:579:9: option_entry[proto, enumGroup]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:659:9: option_entry[proto, enumGroup]
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_option_entry_in_enum_body2118);
-					option_entry120=option_entry(proto, enumGroup);
+					pushFollow(FOLLOW_option_entry_in_enum_body3065);
+					option_entry163=option_entry(proto, enumGroup);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, option_entry120.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, option_entry163.getTree());
 
 					}
 					break;
@@ -3729,78 +4582,78 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "enum_field"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:582:1: enum_field[Proto proto, Message message, EnumGroup enumGroup] : ID ASSIGN NUMINT ( enum_options[proto, enumGroup, v] )? SEMICOLON !;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:662:1: enum_field[Proto proto, Message message, EnumGroup enumGroup] : ID ASSIGN NUMINT ( enum_options[proto, enumGroup, v] )? SEMICOLON !;
 	public final ProtoParser.enum_field_return enum_field(Proto proto, Message message, EnumGroup enumGroup) throws RecognitionException {
 		ProtoParser.enum_field_return retval = new ProtoParser.enum_field_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token ID121=null;
-		Token ASSIGN122=null;
-		Token NUMINT123=null;
-		Token SEMICOLON125=null;
-		ParserRuleReturnScope enum_options124 =null;
+		Token ID164=null;
+		Token ASSIGN165=null;
+		Token NUMINT166=null;
+		Token SEMICOLON168=null;
+		ParserRuleReturnScope enum_options167 =null;
 
-		Object ID121_tree=null;
-		Object ASSIGN122_tree=null;
-		Object NUMINT123_tree=null;
-		Object SEMICOLON125_tree=null;
+		Object ID164_tree=null;
+		Object ASSIGN165_tree=null;
+		Object NUMINT166_tree=null;
+		Object SEMICOLON168_tree=null;
 
 
 		    EnumGroup.Value v = null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:586:5: ( ID ASSIGN NUMINT ( enum_options[proto, enumGroup, v] )? SEMICOLON !)
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:586:9: ID ASSIGN NUMINT ( enum_options[proto, enumGroup, v] )? SEMICOLON !
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:666:5: ( ID ASSIGN NUMINT ( enum_options[proto, enumGroup, v] )? SEMICOLON !)
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:666:9: ID ASSIGN NUMINT ( enum_options[proto, enumGroup, v] )? SEMICOLON !
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			ID121=(Token)match(input,ID,FOLLOW_ID_in_enum_field2145); if (state.failed) return retval;
+			ID164=(Token)match(input,ID,FOLLOW_ID_in_enum_field3092); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			ID121_tree = (Object)adaptor.create(ID121);
-			adaptor.addChild(root_0, ID121_tree);
+			ID164_tree = (Object)adaptor.create(ID164);
+			adaptor.addChild(root_0, ID164_tree);
 			}
 
-			ASSIGN122=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_enum_field2147); if (state.failed) return retval;
+			ASSIGN165=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_enum_field3094); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			ASSIGN122_tree = (Object)adaptor.create(ASSIGN122);
-			adaptor.addChild(root_0, ASSIGN122_tree);
+			ASSIGN165_tree = (Object)adaptor.create(ASSIGN165);
+			adaptor.addChild(root_0, ASSIGN165_tree);
 			}
 
-			NUMINT123=(Token)match(input,NUMINT,FOLLOW_NUMINT_in_enum_field2149); if (state.failed) return retval;
+			NUMINT166=(Token)match(input,NUMINT,FOLLOW_NUMINT_in_enum_field3096); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			NUMINT123_tree = (Object)adaptor.create(NUMINT123);
-			adaptor.addChild(root_0, NUMINT123_tree);
+			NUMINT166_tree = (Object)adaptor.create(NUMINT166);
+			adaptor.addChild(root_0, NUMINT166_tree);
 			}
 
 			if ( state.backtracking==0 ) {
-			            v = new EnumGroup.Value((ID121!=null?ID121.getText():null), Integer.parseInt((NUMINT123!=null?NUMINT123.getText():null)), enumGroup);
+			            v = new EnumGroup.Value((ID164!=null?ID164.getText():null), Integer.parseInt((NUMINT166!=null?NUMINT166.getText():null)), enumGroup);
 			            proto.addAnnotationsTo(v);
 			        }
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:589:11: ( enum_options[proto, enumGroup, v] )?
-			int alt23=2;
-			int LA23_0 = input.LA(1);
-			if ( (LA23_0==LEFTSQUARE) ) {
-				alt23=1;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:669:11: ( enum_options[proto, enumGroup, v] )?
+			int alt31=2;
+			int LA31_0 = input.LA(1);
+			if ( (LA31_0==LEFTSQUARE) ) {
+				alt31=1;
 			}
-			switch (alt23) {
+			switch (alt31) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:589:12: enum_options[proto, enumGroup, v]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:669:12: enum_options[proto, enumGroup, v]
 					{
-					pushFollow(FOLLOW_enum_options_in_enum_field2154);
-					enum_options124=enum_options(proto, enumGroup, v);
+					pushFollow(FOLLOW_enum_options_in_enum_field3101);
+					enum_options167=enum_options(proto, enumGroup, v);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, enum_options124.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, enum_options167.getTree());
 
 					}
 					break;
 
 			}
 
-			SEMICOLON125=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_enum_field2159); if (state.failed) return retval;
+			SEMICOLON168=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_enum_field3106); if (state.failed) return retval;
 			}
 
 			retval.stop = input.LT(-1);
@@ -3831,79 +4684,79 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "enum_options"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:592:1: enum_options[Proto proto, EnumGroup enumGroup, EnumGroup.Value v] : LEFTSQUARE field_options_keyval[proto, null, v.field, false] ( COMMA field_options_keyval[proto, null, v.field, false] )* RIGHTSQUARE ;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:672:1: enum_options[Proto proto, EnumGroup enumGroup, EnumGroup.Value v] : LEFTSQUARE field_options_keyval[proto, null, v.field, false] ( COMMA field_options_keyval[proto, null, v.field, false] )* RIGHTSQUARE ;
 	public final ProtoParser.enum_options_return enum_options(Proto proto, EnumGroup enumGroup, EnumGroup.Value v) throws RecognitionException {
 		ProtoParser.enum_options_return retval = new ProtoParser.enum_options_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token LEFTSQUARE126=null;
-		Token COMMA128=null;
-		Token RIGHTSQUARE130=null;
-		ParserRuleReturnScope field_options_keyval127 =null;
-		ParserRuleReturnScope field_options_keyval129 =null;
+		Token LEFTSQUARE169=null;
+		Token COMMA171=null;
+		Token RIGHTSQUARE173=null;
+		ParserRuleReturnScope field_options_keyval170 =null;
+		ParserRuleReturnScope field_options_keyval172 =null;
 
-		Object LEFTSQUARE126_tree=null;
-		Object COMMA128_tree=null;
-		Object RIGHTSQUARE130_tree=null;
+		Object LEFTSQUARE169_tree=null;
+		Object COMMA171_tree=null;
+		Object RIGHTSQUARE173_tree=null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:593:5: ( LEFTSQUARE field_options_keyval[proto, null, v.field, false] ( COMMA field_options_keyval[proto, null, v.field, false] )* RIGHTSQUARE )
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:593:9: LEFTSQUARE field_options_keyval[proto, null, v.field, false] ( COMMA field_options_keyval[proto, null, v.field, false] )* RIGHTSQUARE
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:673:5: ( LEFTSQUARE field_options_keyval[proto, null, v.field, false] ( COMMA field_options_keyval[proto, null, v.field, false] )* RIGHTSQUARE )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:673:9: LEFTSQUARE field_options_keyval[proto, null, v.field, false] ( COMMA field_options_keyval[proto, null, v.field, false] )* RIGHTSQUARE
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			LEFTSQUARE126=(Token)match(input,LEFTSQUARE,FOLLOW_LEFTSQUARE_in_enum_options2182); if (state.failed) return retval;
+			LEFTSQUARE169=(Token)match(input,LEFTSQUARE,FOLLOW_LEFTSQUARE_in_enum_options3129); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			LEFTSQUARE126_tree = (Object)adaptor.create(LEFTSQUARE126);
-			adaptor.addChild(root_0, LEFTSQUARE126_tree);
+			LEFTSQUARE169_tree = (Object)adaptor.create(LEFTSQUARE169);
+			adaptor.addChild(root_0, LEFTSQUARE169_tree);
 			}
 
-			pushFollow(FOLLOW_field_options_keyval_in_enum_options2184);
-			field_options_keyval127=field_options_keyval(proto, null, v.field, false);
+			pushFollow(FOLLOW_field_options_keyval_in_enum_options3131);
+			field_options_keyval170=field_options_keyval(proto, null, v.field, false);
 			state._fsp--;
 			if (state.failed) return retval;
-			if ( state.backtracking==0 ) adaptor.addChild(root_0, field_options_keyval127.getTree());
+			if ( state.backtracking==0 ) adaptor.addChild(root_0, field_options_keyval170.getTree());
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:594:9: ( COMMA field_options_keyval[proto, null, v.field, false] )*
-			loop24:
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:674:9: ( COMMA field_options_keyval[proto, null, v.field, false] )*
+			loop32:
 			while (true) {
-				int alt24=2;
-				int LA24_0 = input.LA(1);
-				if ( (LA24_0==COMMA) ) {
-					alt24=1;
+				int alt32=2;
+				int LA32_0 = input.LA(1);
+				if ( (LA32_0==COMMA) ) {
+					alt32=1;
 				}
 
-				switch (alt24) {
+				switch (alt32) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:594:10: COMMA field_options_keyval[proto, null, v.field, false]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:674:10: COMMA field_options_keyval[proto, null, v.field, false]
 					{
-					COMMA128=(Token)match(input,COMMA,FOLLOW_COMMA_in_enum_options2197); if (state.failed) return retval;
+					COMMA171=(Token)match(input,COMMA,FOLLOW_COMMA_in_enum_options3144); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					COMMA128_tree = (Object)adaptor.create(COMMA128);
-					adaptor.addChild(root_0, COMMA128_tree);
+					COMMA171_tree = (Object)adaptor.create(COMMA171);
+					adaptor.addChild(root_0, COMMA171_tree);
 					}
 
-					pushFollow(FOLLOW_field_options_keyval_in_enum_options2199);
-					field_options_keyval129=field_options_keyval(proto, null, v.field, false);
+					pushFollow(FOLLOW_field_options_keyval_in_enum_options3146);
+					field_options_keyval172=field_options_keyval(proto, null, v.field, false);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, field_options_keyval129.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, field_options_keyval172.getTree());
 
 					}
 					break;
 
 				default :
-					break loop24;
+					break loop32;
 				}
 			}
 
-			RIGHTSQUARE130=(Token)match(input,RIGHTSQUARE,FOLLOW_RIGHTSQUARE_in_enum_options2204); if (state.failed) return retval;
+			RIGHTSQUARE173=(Token)match(input,RIGHTSQUARE,FOLLOW_RIGHTSQUARE_in_enum_options3151); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			RIGHTSQUARE130_tree = (Object)adaptor.create(RIGHTSQUARE130);
-			adaptor.addChild(root_0, RIGHTSQUARE130_tree);
+			RIGHTSQUARE173_tree = (Object)adaptor.create(RIGHTSQUARE173);
+			adaptor.addChild(root_0, RIGHTSQUARE173_tree);
 			}
 
 			}
@@ -3936,113 +4789,113 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "service_block"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:597:1: service_block[Proto proto, Message message] : SERVICE ID LEFTCURLY ( service_body[proto, service] )+ RIGHTCURLY ( ( SEMICOLON )? ) !;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:677:1: service_block[Proto proto, Message message] : SERVICE ID LEFTCURLY ( service_body[proto, service] )+ RIGHTCURLY ( ( SEMICOLON )? ) !;
 	public final ProtoParser.service_block_return service_block(Proto proto, Message message) throws RecognitionException {
 		ProtoParser.service_block_return retval = new ProtoParser.service_block_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token SERVICE131=null;
-		Token ID132=null;
-		Token LEFTCURLY133=null;
-		Token RIGHTCURLY135=null;
-		Token SEMICOLON136=null;
-		ParserRuleReturnScope service_body134 =null;
+		Token SERVICE174=null;
+		Token ID175=null;
+		Token LEFTCURLY176=null;
+		Token RIGHTCURLY178=null;
+		Token SEMICOLON179=null;
+		ParserRuleReturnScope service_body177 =null;
 
-		Object SERVICE131_tree=null;
-		Object ID132_tree=null;
-		Object LEFTCURLY133_tree=null;
-		Object RIGHTCURLY135_tree=null;
-		Object SEMICOLON136_tree=null;
+		Object SERVICE174_tree=null;
+		Object ID175_tree=null;
+		Object LEFTCURLY176_tree=null;
+		Object RIGHTCURLY178_tree=null;
+		Object SEMICOLON179_tree=null;
 
 
 		    Service service = null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:601:5: ( SERVICE ID LEFTCURLY ( service_body[proto, service] )+ RIGHTCURLY ( ( SEMICOLON )? ) !)
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:601:9: SERVICE ID LEFTCURLY ( service_body[proto, service] )+ RIGHTCURLY ( ( SEMICOLON )? ) !
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:681:5: ( SERVICE ID LEFTCURLY ( service_body[proto, service] )+ RIGHTCURLY ( ( SEMICOLON )? ) !)
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:681:9: SERVICE ID LEFTCURLY ( service_body[proto, service] )+ RIGHTCURLY ( ( SEMICOLON )? ) !
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			SERVICE131=(Token)match(input,SERVICE,FOLLOW_SERVICE_in_service_block2234); if (state.failed) return retval;
+			SERVICE174=(Token)match(input,SERVICE,FOLLOW_SERVICE_in_service_block3181); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			SERVICE131_tree = (Object)adaptor.create(SERVICE131);
-			adaptor.addChild(root_0, SERVICE131_tree);
+			SERVICE174_tree = (Object)adaptor.create(SERVICE174);
+			adaptor.addChild(root_0, SERVICE174_tree);
 			}
 
-			ID132=(Token)match(input,ID,FOLLOW_ID_in_service_block2236); if (state.failed) return retval;
+			ID175=(Token)match(input,ID,FOLLOW_ID_in_service_block3183); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			ID132_tree = (Object)adaptor.create(ID132);
-			adaptor.addChild(root_0, ID132_tree);
+			ID175_tree = (Object)adaptor.create(ID175);
+			adaptor.addChild(root_0, ID175_tree);
 			}
 
 			if ( state.backtracking==0 ) { 
-			            service = new Service((ID132!=null?ID132.getText():null), message, proto); 
+			            service = new Service((ID175!=null?ID175.getText():null), message, proto); 
 			            proto.addAnnotationsTo(service);
 			        }
-			LEFTCURLY133=(Token)match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_service_block2240); if (state.failed) return retval;
+			LEFTCURLY176=(Token)match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_service_block3187); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			LEFTCURLY133_tree = (Object)adaptor.create(LEFTCURLY133);
-			adaptor.addChild(root_0, LEFTCURLY133_tree);
+			LEFTCURLY176_tree = (Object)adaptor.create(LEFTCURLY176);
+			adaptor.addChild(root_0, LEFTCURLY176_tree);
 			}
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:605:9: ( service_body[proto, service] )+
-			int cnt25=0;
-			loop25:
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:685:9: ( service_body[proto, service] )+
+			int cnt33=0;
+			loop33:
 			while (true) {
-				int alt25=2;
-				int LA25_0 = input.LA(1);
-				if ( (LA25_0==AT||LA25_0==DOC_COMMENT||LA25_0==OPTION||LA25_0==RPC) ) {
-					alt25=1;
+				int alt33=2;
+				int LA33_0 = input.LA(1);
+				if ( (LA33_0==AT||LA33_0==DOC_COMMENT||LA33_0==OPTION||LA33_0==RPC) ) {
+					alt33=1;
 				}
 
-				switch (alt25) {
+				switch (alt33) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:605:10: service_body[proto, service]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:685:10: service_body[proto, service]
 					{
-					pushFollow(FOLLOW_service_body_in_service_block2251);
-					service_body134=service_body(proto, service);
+					pushFollow(FOLLOW_service_body_in_service_block3198);
+					service_body177=service_body(proto, service);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, service_body134.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, service_body177.getTree());
 
 					}
 					break;
 
 				default :
-					if ( cnt25 >= 1 ) break loop25;
+					if ( cnt33 >= 1 ) break loop33;
 					if (state.backtracking>0) {state.failed=true; return retval;}
-					EarlyExitException eee = new EarlyExitException(25, input);
+					EarlyExitException eee = new EarlyExitException(33, input);
 					throw eee;
 				}
-				cnt25++;
+				cnt33++;
 			}
 
-			RIGHTCURLY135=(Token)match(input,RIGHTCURLY,FOLLOW_RIGHTCURLY_in_service_block2256); if (state.failed) return retval;
+			RIGHTCURLY178=(Token)match(input,RIGHTCURLY,FOLLOW_RIGHTCURLY_in_service_block3203); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			RIGHTCURLY135_tree = (Object)adaptor.create(RIGHTCURLY135);
-			adaptor.addChild(root_0, RIGHTCURLY135_tree);
+			RIGHTCURLY178_tree = (Object)adaptor.create(RIGHTCURLY178);
+			adaptor.addChild(root_0, RIGHTCURLY178_tree);
 			}
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:605:52: ( ( SEMICOLON )? )
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:605:53: ( SEMICOLON )?
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:685:52: ( ( SEMICOLON )? )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:685:53: ( SEMICOLON )?
 			{
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:605:53: ( SEMICOLON )?
-			int alt26=2;
-			int LA26_0 = input.LA(1);
-			if ( (LA26_0==SEMICOLON) ) {
-				alt26=1;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:685:53: ( SEMICOLON )?
+			int alt34=2;
+			int LA34_0 = input.LA(1);
+			if ( (LA34_0==SEMICOLON) ) {
+				alt34=1;
 			}
-			switch (alt26) {
+			switch (alt34) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:605:53: SEMICOLON
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:685:53: SEMICOLON
 					{
-					SEMICOLON136=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_service_block2259); if (state.failed) return retval;
+					SEMICOLON179=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_service_block3206); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					SEMICOLON136_tree = (Object)adaptor.create(SEMICOLON136);
-					adaptor.addChild(root_0, SEMICOLON136_tree);
+					SEMICOLON179_tree = (Object)adaptor.create(SEMICOLON179);
+					adaptor.addChild(root_0, SEMICOLON179_tree);
 					}
 
 					}
@@ -4088,103 +4941,103 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "service_body"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:613:1: service_body[Proto proto, Service service] : ( rpc_block[proto, service] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, service] );
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:693:1: service_body[Proto proto, Service service] : ( rpc_block[proto, service] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, service] );
 	public final ProtoParser.service_body_return service_body(Proto proto, Service service) throws RecognitionException {
 		ProtoParser.service_body_return retval = new ProtoParser.service_body_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		ParserRuleReturnScope rpc_block137 =null;
-		ParserRuleReturnScope annotation_entry138 =null;
-		ParserRuleReturnScope comment_entry139 =null;
-		ParserRuleReturnScope option_entry140 =null;
+		ParserRuleReturnScope rpc_block180 =null;
+		ParserRuleReturnScope annotation_entry181 =null;
+		ParserRuleReturnScope comment_entry182 =null;
+		ParserRuleReturnScope option_entry183 =null;
 
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:614:5: ( rpc_block[proto, service] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, service] )
-			int alt27=4;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:694:5: ( rpc_block[proto, service] | annotation_entry[proto] | comment_entry[proto] | option_entry[proto, service] )
+			int alt35=4;
 			switch ( input.LA(1) ) {
 			case RPC:
 				{
-				alt27=1;
+				alt35=1;
 				}
 				break;
 			case AT:
 				{
-				alt27=2;
+				alt35=2;
 				}
 				break;
 			case DOC_COMMENT:
 				{
-				alt27=3;
+				alt35=3;
 				}
 				break;
 			case OPTION:
 				{
-				alt27=4;
+				alt35=4;
 				}
 				break;
 			default:
 				if (state.backtracking>0) {state.failed=true; return retval;}
 				NoViableAltException nvae =
-					new NoViableAltException("", 27, 0, input);
+					new NoViableAltException("", 35, 0, input);
 				throw nvae;
 			}
-			switch (alt27) {
+			switch (alt35) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:614:9: rpc_block[proto, service]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:694:9: rpc_block[proto, service]
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_rpc_block_in_service_body2289);
-					rpc_block137=rpc_block(proto, service);
+					pushFollow(FOLLOW_rpc_block_in_service_body3236);
+					rpc_block180=rpc_block(proto, service);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, rpc_block137.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, rpc_block180.getTree());
 
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:615:9: annotation_entry[proto]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:695:9: annotation_entry[proto]
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_annotation_entry_in_service_body2300);
-					annotation_entry138=annotation_entry(proto);
+					pushFollow(FOLLOW_annotation_entry_in_service_body3247);
+					annotation_entry181=annotation_entry(proto);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, annotation_entry138.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, annotation_entry181.getTree());
 
 					}
 					break;
 				case 3 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:616:9: comment_entry[proto]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:696:9: comment_entry[proto]
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_comment_entry_in_service_body2311);
-					comment_entry139=comment_entry(proto);
+					pushFollow(FOLLOW_comment_entry_in_service_body3258);
+					comment_entry182=comment_entry(proto);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, comment_entry139.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, comment_entry182.getTree());
 
 					}
 					break;
 				case 4 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:617:9: option_entry[proto, service]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:697:9: option_entry[proto, service]
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_option_entry_in_service_body2322);
-					option_entry140=option_entry(proto, service);
+					pushFollow(FOLLOW_option_entry_in_service_body3269);
+					option_entry183=option_entry(proto, service);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, option_entry140.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, option_entry183.getTree());
 
 					}
 					break;
@@ -4218,7 +5071,7 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "rpc_block"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:620:1: rpc_block[Proto proto, Service service] : RPC n= ID LEFTPAREN (ap= FULL_ID |a= ( VOID | ID ) ) RIGHTPAREN RETURNS LEFTPAREN (rp= FULL_ID |r= ( VOID | ID ) ) RIGHTPAREN ( rpc_body_block[proto, rm] )? SEMICOLON !;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:700:1: rpc_block[Proto proto, Service service] : RPC n= ID LEFTPAREN (ap= FULL_ID |a= ( VOID | ID ) ) RIGHTPAREN RETURNS LEFTPAREN (rp= FULL_ID |r= ( VOID | ID ) ) RIGHTPAREN ( rpc_body_block[proto, rm] )? SEMICOLON !;
 	public final ProtoParser.rpc_block_return rpc_block(Proto proto, Service service) throws RecognitionException {
 		ProtoParser.rpc_block_return retval = new ProtoParser.rpc_block_return();
 		retval.start = input.LT(1);
@@ -4230,79 +5083,79 @@ public class ProtoParser extends AbstractParser {
 		Token a=null;
 		Token rp=null;
 		Token r=null;
-		Token RPC141=null;
-		Token LEFTPAREN142=null;
-		Token RIGHTPAREN143=null;
-		Token RETURNS144=null;
-		Token LEFTPAREN145=null;
-		Token RIGHTPAREN146=null;
-		Token SEMICOLON148=null;
-		ParserRuleReturnScope rpc_body_block147 =null;
+		Token RPC184=null;
+		Token LEFTPAREN185=null;
+		Token RIGHTPAREN186=null;
+		Token RETURNS187=null;
+		Token LEFTPAREN188=null;
+		Token RIGHTPAREN189=null;
+		Token SEMICOLON191=null;
+		ParserRuleReturnScope rpc_body_block190 =null;
 
 		Object n_tree=null;
 		Object ap_tree=null;
 		Object a_tree=null;
 		Object rp_tree=null;
 		Object r_tree=null;
-		Object RPC141_tree=null;
-		Object LEFTPAREN142_tree=null;
-		Object RIGHTPAREN143_tree=null;
-		Object RETURNS144_tree=null;
-		Object LEFTPAREN145_tree=null;
-		Object RIGHTPAREN146_tree=null;
-		Object SEMICOLON148_tree=null;
+		Object RPC184_tree=null;
+		Object LEFTPAREN185_tree=null;
+		Object RIGHTPAREN186_tree=null;
+		Object RETURNS187_tree=null;
+		Object LEFTPAREN188_tree=null;
+		Object RIGHTPAREN189_tree=null;
+		Object SEMICOLON191_tree=null;
 
 
 		    String argName = null, argPackage = null, retName = null, retPackage = null;
 		    Service.RpcMethod rm = null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:625:5: ( RPC n= ID LEFTPAREN (ap= FULL_ID |a= ( VOID | ID ) ) RIGHTPAREN RETURNS LEFTPAREN (rp= FULL_ID |r= ( VOID | ID ) ) RIGHTPAREN ( rpc_body_block[proto, rm] )? SEMICOLON !)
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:625:9: RPC n= ID LEFTPAREN (ap= FULL_ID |a= ( VOID | ID ) ) RIGHTPAREN RETURNS LEFTPAREN (rp= FULL_ID |r= ( VOID | ID ) ) RIGHTPAREN ( rpc_body_block[proto, rm] )? SEMICOLON !
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:705:5: ( RPC n= ID LEFTPAREN (ap= FULL_ID |a= ( VOID | ID ) ) RIGHTPAREN RETURNS LEFTPAREN (rp= FULL_ID |r= ( VOID | ID ) ) RIGHTPAREN ( rpc_body_block[proto, rm] )? SEMICOLON !)
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:705:9: RPC n= ID LEFTPAREN (ap= FULL_ID |a= ( VOID | ID ) ) RIGHTPAREN RETURNS LEFTPAREN (rp= FULL_ID |r= ( VOID | ID ) ) RIGHTPAREN ( rpc_body_block[proto, rm] )? SEMICOLON !
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			RPC141=(Token)match(input,RPC,FOLLOW_RPC_in_rpc_block2353); if (state.failed) return retval;
+			RPC184=(Token)match(input,RPC,FOLLOW_RPC_in_rpc_block3300); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			RPC141_tree = (Object)adaptor.create(RPC141);
-			adaptor.addChild(root_0, RPC141_tree);
+			RPC184_tree = (Object)adaptor.create(RPC184);
+			adaptor.addChild(root_0, RPC184_tree);
 			}
 
-			n=(Token)match(input,ID,FOLLOW_ID_in_rpc_block2357); if (state.failed) return retval;
+			n=(Token)match(input,ID,FOLLOW_ID_in_rpc_block3304); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			n_tree = (Object)adaptor.create(n);
 			adaptor.addChild(root_0, n_tree);
 			}
 
-			LEFTPAREN142=(Token)match(input,LEFTPAREN,FOLLOW_LEFTPAREN_in_rpc_block2359); if (state.failed) return retval;
+			LEFTPAREN185=(Token)match(input,LEFTPAREN,FOLLOW_LEFTPAREN_in_rpc_block3306); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			LEFTPAREN142_tree = (Object)adaptor.create(LEFTPAREN142);
-			adaptor.addChild(root_0, LEFTPAREN142_tree);
+			LEFTPAREN185_tree = (Object)adaptor.create(LEFTPAREN185);
+			adaptor.addChild(root_0, LEFTPAREN185_tree);
 			}
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:625:28: (ap= FULL_ID |a= ( VOID | ID ) )
-			int alt28=2;
-			int LA28_0 = input.LA(1);
-			if ( (LA28_0==FULL_ID) ) {
-				alt28=1;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:705:28: (ap= FULL_ID |a= ( VOID | ID ) )
+			int alt36=2;
+			int LA36_0 = input.LA(1);
+			if ( (LA36_0==FULL_ID) ) {
+				alt36=1;
 			}
-			else if ( (LA28_0==ID||LA28_0==VOID) ) {
-				alt28=2;
+			else if ( (LA36_0==ID||LA36_0==VOID) ) {
+				alt36=2;
 			}
 
 			else {
 				if (state.backtracking>0) {state.failed=true; return retval;}
 				NoViableAltException nvae =
-					new NoViableAltException("", 28, 0, input);
+					new NoViableAltException("", 36, 0, input);
 				throw nvae;
 			}
 
-			switch (alt28) {
+			switch (alt36) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:625:29: ap= FULL_ID
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:705:29: ap= FULL_ID
 					{
-					ap=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_rpc_block2364); if (state.failed) return retval;
+					ap=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_rpc_block3311); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					ap_tree = (Object)adaptor.create(ap);
 					adaptor.addChild(root_0, ap_tree);
@@ -4317,7 +5170,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:630:13: a= ( VOID | ID )
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:710:13: a= ( VOID | ID )
 					{
 					a=input.LT(1);
 					if ( input.LA(1)==ID||input.LA(1)==VOID ) {
@@ -4337,46 +5190,46 @@ public class ProtoParser extends AbstractParser {
 
 			}
 
-			RIGHTPAREN143=(Token)match(input,RIGHTPAREN,FOLLOW_RIGHTPAREN_in_rpc_block2381); if (state.failed) return retval;
+			RIGHTPAREN186=(Token)match(input,RIGHTPAREN,FOLLOW_RIGHTPAREN_in_rpc_block3328); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			RIGHTPAREN143_tree = (Object)adaptor.create(RIGHTPAREN143);
-			adaptor.addChild(root_0, RIGHTPAREN143_tree);
+			RIGHTPAREN186_tree = (Object)adaptor.create(RIGHTPAREN186);
+			adaptor.addChild(root_0, RIGHTPAREN186_tree);
 			}
 
-			RETURNS144=(Token)match(input,RETURNS,FOLLOW_RETURNS_in_rpc_block2392); if (state.failed) return retval;
+			RETURNS187=(Token)match(input,RETURNS,FOLLOW_RETURNS_in_rpc_block3339); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			RETURNS144_tree = (Object)adaptor.create(RETURNS144);
-			adaptor.addChild(root_0, RETURNS144_tree);
+			RETURNS187_tree = (Object)adaptor.create(RETURNS187);
+			adaptor.addChild(root_0, RETURNS187_tree);
 			}
 
-			LEFTPAREN145=(Token)match(input,LEFTPAREN,FOLLOW_LEFTPAREN_in_rpc_block2394); if (state.failed) return retval;
+			LEFTPAREN188=(Token)match(input,LEFTPAREN,FOLLOW_LEFTPAREN_in_rpc_block3341); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			LEFTPAREN145_tree = (Object)adaptor.create(LEFTPAREN145);
-			adaptor.addChild(root_0, LEFTPAREN145_tree);
+			LEFTPAREN188_tree = (Object)adaptor.create(LEFTPAREN188);
+			adaptor.addChild(root_0, LEFTPAREN188_tree);
 			}
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:631:27: (rp= FULL_ID |r= ( VOID | ID ) )
-			int alt29=2;
-			int LA29_0 = input.LA(1);
-			if ( (LA29_0==FULL_ID) ) {
-				alt29=1;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:711:27: (rp= FULL_ID |r= ( VOID | ID ) )
+			int alt37=2;
+			int LA37_0 = input.LA(1);
+			if ( (LA37_0==FULL_ID) ) {
+				alt37=1;
 			}
-			else if ( (LA29_0==ID||LA29_0==VOID) ) {
-				alt29=2;
+			else if ( (LA37_0==ID||LA37_0==VOID) ) {
+				alt37=2;
 			}
 
 			else {
 				if (state.backtracking>0) {state.failed=true; return retval;}
 				NoViableAltException nvae =
-					new NoViableAltException("", 29, 0, input);
+					new NoViableAltException("", 37, 0, input);
 				throw nvae;
 			}
 
-			switch (alt29) {
+			switch (alt37) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:631:28: rp= FULL_ID
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:711:28: rp= FULL_ID
 					{
-					rp=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_rpc_block2399); if (state.failed) return retval;
+					rp=(Token)match(input,FULL_ID,FOLLOW_FULL_ID_in_rpc_block3346); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					rp_tree = (Object)adaptor.create(rp);
 					adaptor.addChild(root_0, rp_tree);
@@ -4391,7 +5244,7 @@ public class ProtoParser extends AbstractParser {
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:636:13: r= ( VOID | ID )
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:716:13: r= ( VOID | ID )
 					{
 					r=input.LT(1);
 					if ( input.LA(1)==ID||input.LA(1)==VOID ) {
@@ -4411,38 +5264,38 @@ public class ProtoParser extends AbstractParser {
 
 			}
 
-			RIGHTPAREN146=(Token)match(input,RIGHTPAREN,FOLLOW_RIGHTPAREN_in_rpc_block2416); if (state.failed) return retval;
+			RIGHTPAREN189=(Token)match(input,RIGHTPAREN,FOLLOW_RIGHTPAREN_in_rpc_block3363); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			RIGHTPAREN146_tree = (Object)adaptor.create(RIGHTPAREN146);
-			adaptor.addChild(root_0, RIGHTPAREN146_tree);
+			RIGHTPAREN189_tree = (Object)adaptor.create(RIGHTPAREN189);
+			adaptor.addChild(root_0, RIGHTPAREN189_tree);
 			}
 
 			if ( state.backtracking==0 ) {
 			            rm = service.addRpcMethod((n!=null?n.getText():null), argName, argPackage, retName, retPackage);
 			            proto.addAnnotationsTo(rm);
 			        }
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:639:11: ( rpc_body_block[proto, rm] )?
-			int alt30=2;
-			int LA30_0 = input.LA(1);
-			if ( (LA30_0==LEFTCURLY) ) {
-				alt30=1;
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:719:11: ( rpc_body_block[proto, rm] )?
+			int alt38=2;
+			int LA38_0 = input.LA(1);
+			if ( (LA38_0==LEFTCURLY) ) {
+				alt38=1;
 			}
-			switch (alt30) {
+			switch (alt38) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:639:11: rpc_body_block[proto, rm]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:719:11: rpc_body_block[proto, rm]
 					{
-					pushFollow(FOLLOW_rpc_body_block_in_rpc_block2420);
-					rpc_body_block147=rpc_body_block(proto, rm);
+					pushFollow(FOLLOW_rpc_body_block_in_rpc_block3367);
+					rpc_body_block190=rpc_body_block(proto, rm);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, rpc_body_block147.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, rpc_body_block190.getTree());
 
 					}
 					break;
 
 			}
 
-			SEMICOLON148=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_rpc_block2424); if (state.failed) return retval;
+			SEMICOLON191=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_rpc_block3371); if (state.failed) return retval;
 			}
 
 			retval.stop = input.LT(-1);
@@ -4473,64 +5326,64 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "rpc_body_block"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:642:1: rpc_body_block[Proto proto, Service.RpcMethod rm] : LEFTCURLY ( option_entry[proto, rm] )* RIGHTCURLY ;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:722:1: rpc_body_block[Proto proto, Service.RpcMethod rm] : LEFTCURLY ( option_entry[proto, rm] )* RIGHTCURLY ;
 	public final ProtoParser.rpc_body_block_return rpc_body_block(Proto proto, Service.RpcMethod rm) throws RecognitionException {
 		ProtoParser.rpc_body_block_return retval = new ProtoParser.rpc_body_block_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token LEFTCURLY149=null;
-		Token RIGHTCURLY151=null;
-		ParserRuleReturnScope option_entry150 =null;
+		Token LEFTCURLY192=null;
+		Token RIGHTCURLY194=null;
+		ParserRuleReturnScope option_entry193 =null;
 
-		Object LEFTCURLY149_tree=null;
-		Object RIGHTCURLY151_tree=null;
+		Object LEFTCURLY192_tree=null;
+		Object RIGHTCURLY194_tree=null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:643:5: ( LEFTCURLY ( option_entry[proto, rm] )* RIGHTCURLY )
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:643:9: LEFTCURLY ( option_entry[proto, rm] )* RIGHTCURLY
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:723:5: ( LEFTCURLY ( option_entry[proto, rm] )* RIGHTCURLY )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:723:9: LEFTCURLY ( option_entry[proto, rm] )* RIGHTCURLY
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			LEFTCURLY149=(Token)match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_rpc_body_block2450); if (state.failed) return retval;
+			LEFTCURLY192=(Token)match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_rpc_body_block3397); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			LEFTCURLY149_tree = (Object)adaptor.create(LEFTCURLY149);
-			adaptor.addChild(root_0, LEFTCURLY149_tree);
+			LEFTCURLY192_tree = (Object)adaptor.create(LEFTCURLY192);
+			adaptor.addChild(root_0, LEFTCURLY192_tree);
 			}
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:643:19: ( option_entry[proto, rm] )*
-			loop31:
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:723:19: ( option_entry[proto, rm] )*
+			loop39:
 			while (true) {
-				int alt31=2;
-				int LA31_0 = input.LA(1);
-				if ( (LA31_0==OPTION) ) {
-					alt31=1;
+				int alt39=2;
+				int LA39_0 = input.LA(1);
+				if ( (LA39_0==OPTION) ) {
+					alt39=1;
 				}
 
-				switch (alt31) {
+				switch (alt39) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:643:19: option_entry[proto, rm]
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:723:19: option_entry[proto, rm]
 					{
-					pushFollow(FOLLOW_option_entry_in_rpc_body_block2452);
-					option_entry150=option_entry(proto, rm);
+					pushFollow(FOLLOW_option_entry_in_rpc_body_block3399);
+					option_entry193=option_entry(proto, rm);
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, option_entry150.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, option_entry193.getTree());
 
 					}
 					break;
 
 				default :
-					break loop31;
+					break loop39;
 				}
 			}
 
-			RIGHTCURLY151=(Token)match(input,RIGHTCURLY,FOLLOW_RIGHTCURLY_in_rpc_body_block2456); if (state.failed) return retval;
+			RIGHTCURLY194=(Token)match(input,RIGHTCURLY,FOLLOW_RIGHTCURLY_in_rpc_body_block3403); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			RIGHTCURLY151_tree = (Object)adaptor.create(RIGHTCURLY151);
-			adaptor.addChild(root_0, RIGHTCURLY151_tree);
+			RIGHTCURLY194_tree = (Object)adaptor.create(RIGHTCURLY194);
+			adaptor.addChild(root_0, RIGHTCURLY194_tree);
 			}
 
 			if ( state.backtracking==0 ) {
@@ -4566,64 +5419,64 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "ignore_block"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:679:1: ignore_block : LEFTCURLY ( ignore_block_body )* RIGHTCURLY ;
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:759:1: ignore_block : LEFTCURLY ( ignore_block_body )* RIGHTCURLY ;
 	public final ProtoParser.ignore_block_return ignore_block() throws RecognitionException {
 		ProtoParser.ignore_block_return retval = new ProtoParser.ignore_block_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token LEFTCURLY152=null;
-		Token RIGHTCURLY154=null;
-		ParserRuleReturnScope ignore_block_body153 =null;
+		Token LEFTCURLY195=null;
+		Token RIGHTCURLY197=null;
+		ParserRuleReturnScope ignore_block_body196 =null;
 
-		Object LEFTCURLY152_tree=null;
-		Object RIGHTCURLY154_tree=null;
+		Object LEFTCURLY195_tree=null;
+		Object RIGHTCURLY197_tree=null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:680:5: ( LEFTCURLY ( ignore_block_body )* RIGHTCURLY )
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:680:9: LEFTCURLY ( ignore_block_body )* RIGHTCURLY
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:760:5: ( LEFTCURLY ( ignore_block_body )* RIGHTCURLY )
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:760:9: LEFTCURLY ( ignore_block_body )* RIGHTCURLY
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			LEFTCURLY152=(Token)match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_ignore_block2520); if (state.failed) return retval;
+			LEFTCURLY195=(Token)match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_ignore_block3467); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			LEFTCURLY152_tree = (Object)adaptor.create(LEFTCURLY152);
-			adaptor.addChild(root_0, LEFTCURLY152_tree);
+			LEFTCURLY195_tree = (Object)adaptor.create(LEFTCURLY195);
+			adaptor.addChild(root_0, LEFTCURLY195_tree);
 			}
 
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:680:19: ( ignore_block_body )*
-			loop32:
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:760:19: ( ignore_block_body )*
+			loop40:
 			while (true) {
-				int alt32=2;
-				int LA32_0 = input.LA(1);
-				if ( ((LA32_0 >= ASSIGN && LA32_0 <= RETURNS)||(LA32_0 >= RIGHTPAREN && LA32_0 <= WS)) ) {
-					alt32=1;
+				int alt40=2;
+				int LA40_0 = input.LA(1);
+				if ( ((LA40_0 >= ASSIGN && LA40_0 <= RETURNS)||(LA40_0 >= RIGHTPAREN && LA40_0 <= WS)) ) {
+					alt40=1;
 				}
 
-				switch (alt32) {
+				switch (alt40) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:680:19: ignore_block_body
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:760:19: ignore_block_body
 					{
-					pushFollow(FOLLOW_ignore_block_body_in_ignore_block2522);
-					ignore_block_body153=ignore_block_body();
+					pushFollow(FOLLOW_ignore_block_body_in_ignore_block3469);
+					ignore_block_body196=ignore_block_body();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, ignore_block_body153.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, ignore_block_body196.getTree());
 
 					}
 					break;
 
 				default :
-					break loop32;
+					break loop40;
 				}
 			}
 
-			RIGHTCURLY154=(Token)match(input,RIGHTCURLY,FOLLOW_RIGHTCURLY_in_ignore_block2525); if (state.failed) return retval;
+			RIGHTCURLY197=(Token)match(input,RIGHTCURLY,FOLLOW_RIGHTCURLY_in_ignore_block3472); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			RIGHTCURLY154_tree = (Object)adaptor.create(RIGHTCURLY154);
-			adaptor.addChild(root_0, RIGHTCURLY154_tree);
+			RIGHTCURLY197_tree = (Object)adaptor.create(RIGHTCURLY197);
+			adaptor.addChild(root_0, RIGHTCURLY197_tree);
 			}
 
 			}
@@ -4656,68 +5509,68 @@ public class ProtoParser extends AbstractParser {
 
 
 	// $ANTLR start "ignore_block_body"
-	// com/dyuproject/fbsgen/parser/ProtoParser.g:683:1: ignore_block_body : ( ( LEFTCURLY )=> ignore_block |~ RIGHTCURLY );
+	// com/dyuproject/fbsgen/parser/ProtoParser.g:763:1: ignore_block_body : ( ( LEFTCURLY )=> ignore_block |~ RIGHTCURLY );
 	public final ProtoParser.ignore_block_body_return ignore_block_body() throws RecognitionException {
 		ProtoParser.ignore_block_body_return retval = new ProtoParser.ignore_block_body_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token set156=null;
-		ParserRuleReturnScope ignore_block155 =null;
+		Token set199=null;
+		ParserRuleReturnScope ignore_block198 =null;
 
-		Object set156_tree=null;
+		Object set199_tree=null;
 
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoParser.g:684:5: ( ( LEFTCURLY )=> ignore_block |~ RIGHTCURLY )
-			int alt33=2;
-			int LA33_0 = input.LA(1);
-			if ( (LA33_0==LEFTCURLY) ) {
-				int LA33_1 = input.LA(2);
+			// com/dyuproject/fbsgen/parser/ProtoParser.g:764:5: ( ( LEFTCURLY )=> ignore_block |~ RIGHTCURLY )
+			int alt41=2;
+			int LA41_0 = input.LA(1);
+			if ( (LA41_0==LEFTCURLY) ) {
+				int LA41_1 = input.LA(2);
 				if ( (synpred1_ProtoParser()) ) {
-					alt33=1;
+					alt41=1;
 				}
 				else if ( (true) ) {
-					alt33=2;
+					alt41=2;
 				}
 
 			}
-			else if ( ((LA33_0 >= ASSIGN && LA33_0 <= INT8)||(LA33_0 >= LEFTPAREN && LA33_0 <= RETURNS)||(LA33_0 >= RIGHTPAREN && LA33_0 <= WS)) ) {
-				alt33=2;
+			else if ( ((LA41_0 >= ASSIGN && LA41_0 <= INT8)||(LA41_0 >= LEFTPAREN && LA41_0 <= RETURNS)||(LA41_0 >= RIGHTPAREN && LA41_0 <= WS)) ) {
+				alt41=2;
 			}
 
 			else {
 				if (state.backtracking>0) {state.failed=true; return retval;}
 				NoViableAltException nvae =
-					new NoViableAltException("", 33, 0, input);
+					new NoViableAltException("", 41, 0, input);
 				throw nvae;
 			}
 
-			switch (alt33) {
+			switch (alt41) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:684:9: ( LEFTCURLY )=> ignore_block
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:764:9: ( LEFTCURLY )=> ignore_block
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_ignore_block_in_ignore_block_body2553);
-					ignore_block155=ignore_block();
+					pushFollow(FOLLOW_ignore_block_in_ignore_block_body3500);
+					ignore_block198=ignore_block();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, ignore_block155.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, ignore_block198.getTree());
 
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoParser.g:685:9: ~ RIGHTCURLY
+					// com/dyuproject/fbsgen/parser/ProtoParser.g:765:9: ~ RIGHTCURLY
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					set156=input.LT(1);
+					set199=input.LT(1);
 					if ( (input.LA(1) >= ASSIGN && input.LA(1) <= RETURNS)||(input.LA(1) >= RIGHTPAREN && input.LA(1) <= WS) ) {
 						input.consume();
-						if ( state.backtracking==0 ) adaptor.addChild(root_0, (Object)adaptor.create(set156));
+						if ( state.backtracking==0 ) adaptor.addChild(root_0, (Object)adaptor.create(set199));
 						state.errorRecovery=false;
 						state.failed=false;
 					}
@@ -4751,10 +5604,10 @@ public class ProtoParser extends AbstractParser {
 
 	// $ANTLR start synpred1_ProtoParser
 	public final void synpred1_ProtoParser_fragment() throws RecognitionException {
-		// com/dyuproject/fbsgen/parser/ProtoParser.g:684:9: ( LEFTCURLY )
-		// com/dyuproject/fbsgen/parser/ProtoParser.g:684:10: LEFTCURLY
+		// com/dyuproject/fbsgen/parser/ProtoParser.g:764:9: ( LEFTCURLY )
+		// com/dyuproject/fbsgen/parser/ProtoParser.g:764:10: LEFTCURLY
 		{
-		match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_synpred1_ProtoParser2549); if (state.failed) return;
+		match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_synpred1_ProtoParser3496); if (state.failed) return;
 
 		}
 
@@ -4780,7 +5633,7 @@ public class ProtoParser extends AbstractParser {
 
 
 
-	public static final BitSet FOLLOW_statement_in_parse178 = new BitSet(new long[]{0x0024014080402820L});
+	public static final BitSet FOLLOW_statement_in_parse178 = new BitSet(new long[]{0x0048028100805020L});
 	public static final BitSet FOLLOW_EOF_in_parse183 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_header_syntax_in_statement211 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_header_package_in_statement222 = new BitSet(new long[]{0x0000000000000002L});
@@ -4796,159 +5649,203 @@ public class ProtoParser extends AbstractParser {
 	public static final BitSet FOLLOW_FULL_ID_in_var_full543 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_var_in_var_full547 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_DOC_COMMENT_in_comment_entry568 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_AT_in_annotation_entry596 = new BitSet(new long[]{0x2F6D1DC0C7E234C0L});
-	public static final BitSet FOLLOW_var_in_annotation_entry598 = new BitSet(new long[]{0x0000000010000002L});
-	public static final BitSet FOLLOW_LEFTPAREN_in_annotation_entry611 = new BitSet(new long[]{0x2F6D1DC0C7E634C0L});
-	public static final BitSet FOLLOW_annotation_keyval_in_annotation_entry622 = new BitSet(new long[]{0x0000400000000100L});
-	public static final BitSet FOLLOW_COMMA_in_annotation_entry626 = new BitSet(new long[]{0x2F6D1DC0C7E634C0L});
-	public static final BitSet FOLLOW_annotation_keyval_in_annotation_entry628 = new BitSet(new long[]{0x0000400000000100L});
+	public static final BitSet FOLLOW_AT_in_annotation_entry596 = new BitSet(new long[]{0x5EDA3B818FC468C0L});
+	public static final BitSet FOLLOW_var_in_annotation_entry598 = new BitSet(new long[]{0x0000000020000002L});
+	public static final BitSet FOLLOW_LEFTPAREN_in_annotation_entry611 = new BitSet(new long[]{0x5EDA3B818FCC68C0L});
+	public static final BitSet FOLLOW_annotation_keyval_in_annotation_entry622 = new BitSet(new long[]{0x0000800000000200L});
+	public static final BitSet FOLLOW_COMMA_in_annotation_entry626 = new BitSet(new long[]{0x5EDA3B818FCC68C0L});
+	public static final BitSet FOLLOW_annotation_keyval_in_annotation_entry628 = new BitSet(new long[]{0x0000800000000200L});
 	public static final BitSet FOLLOW_RIGHTPAREN_in_annotation_entry642 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_var_full_in_annotation_keyval669 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_ASSIGN_in_annotation_keyval671 = new BitSet(new long[]{0x2FFD1DCEC7E734C0L});
-	public static final BitSet FOLLOW_var_reserved_in_annotation_keyval693 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_annotation_keyval713 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FULL_ID_in_annotation_keyval735 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMFLOAT_in_annotation_keyval755 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMINT_in_annotation_keyval775 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMDOUBLE_in_annotation_keyval795 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_TRUE_in_annotation_keyval815 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FALSE_in_annotation_keyval835 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_STRING_LITERAL_in_annotation_keyval855 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_SYNTAX_in_header_syntax888 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_ASSIGN_in_header_syntax890 = new BitSet(new long[]{0x0010000000000000L});
-	public static final BitSet FOLLOW_STRING_LITERAL_in_header_syntax892 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_SEMICOLON_in_header_syntax894 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PKG_in_header_package923 = new BitSet(new long[]{0x2F6D1DC0C7E634C0L});
-	public static final BitSet FOLLOW_FULL_ID_in_header_package926 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_var_in_header_package932 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_SEMICOLON_in_header_package937 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_IMPORT_in_header_import965 = new BitSet(new long[]{0x0010000000000000L});
-	public static final BitSet FOLLOW_STRING_LITERAL_in_header_import967 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_SEMICOLON_in_header_import969 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_OPTION_in_option_entry993 = new BitSet(new long[]{0x2F6D1DC0D7E634C0L});
-	public static final BitSet FOLLOW_LEFTPAREN_in_option_entry995 = new BitSet(new long[]{0x2F6D1DC0C7E634C0L});
-	public static final BitSet FOLLOW_var_full_in_option_entry1000 = new BitSet(new long[]{0x0000400000000010L});
-	public static final BitSet FOLLOW_RIGHTPAREN_in_option_entry1002 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_ASSIGN_in_option_entry1005 = new BitSet(new long[]{0x2FFD1DCEC7E734C0L});
-	public static final BitSet FOLLOW_var_reserved_in_option_entry1027 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_ID_in_option_entry1049 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_FULL_ID_in_option_entry1071 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_NUMFLOAT_in_option_entry1091 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_NUMINT_in_option_entry1111 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_NUMDOUBLE_in_option_entry1131 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_TRUE_in_option_entry1151 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_FALSE_in_option_entry1171 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_STRING_LITERAL_in_option_entry1191 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_SEMICOLON_in_option_entry1205 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MESSAGE_in_message_block1238 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_ID_in_message_block1240 = new BitSet(new long[]{0x0000000008000000L});
-	public static final BitSet FOLLOW_LEFTCURLY_in_message_block1253 = new BitSet(new long[]{0x00042CC080002820L});
-	public static final BitSet FOLLOW_message_body_in_message_block1256 = new BitSet(new long[]{0x00042CC080002820L});
-	public static final BitSet FOLLOW_RIGHTCURLY_in_message_block1261 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_message_block_in_message_body1284 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_message_field_in_message_body1295 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_enum_block_in_message_body1306 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_service_block_in_message_body1317 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_annotation_entry_in_message_body1338 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_comment_entry_in_message_body1349 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_option_entry_in_message_body1360 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_OPTIONAL_in_message_field1408 = new BitSet(new long[]{0x0F08000007A610C0L});
-	public static final BitSet FOLLOW_REQUIRED_in_message_field1425 = new BitSet(new long[]{0x0F08000007A610C0L});
-	public static final BitSet FOLLOW_REPEATED_in_message_field1442 = new BitSet(new long[]{0x0F08000007A610C0L});
-	public static final BitSet FOLLOW_field_type_in_message_field1457 = new BitSet(new long[]{0x2F6D1DC0C7E234C0L});
-	public static final BitSet FOLLOW_var_in_message_field1469 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_ASSIGN_in_message_field1471 = new BitSet(new long[]{0x0000000800000000L});
-	public static final BitSet FOLLOW_NUMINT_in_message_field1473 = new BitSet(new long[]{0x0002000028000000L});
-	public static final BitSet FOLLOW_field_options_in_message_field1487 = new BitSet(new long[]{0x0002000008000000L});
-	public static final BitSet FOLLOW_SEMICOLON_in_message_field1503 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ignore_block_in_message_field1508 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_BOOL_in_field_type1534 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT8_in_field_type1546 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_UINT8_in_field_type1558 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT16_in_field_type1570 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_UINT16_in_field_type1582 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT32_in_field_type1594 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_UINT32_in_field_type1606 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT64_in_field_type1618 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_UINT64_in_field_type1630 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FLOAT_in_field_type1642 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_DOUBLE_in_field_type1654 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_STRING_in_field_type1666 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_BYTES_in_field_type1678 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FULL_ID_in_field_type1710 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_field_type1722 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LEFTSQUARE_in_field_options1749 = new BitSet(new long[]{0x2F6D1DC0C7E634C0L});
-	public static final BitSet FOLLOW_field_options_keyval_in_field_options1751 = new BitSet(new long[]{0x0000800000000100L});
-	public static final BitSet FOLLOW_COMMA_in_field_options1764 = new BitSet(new long[]{0x2F6D1DC0C7E634C0L});
-	public static final BitSet FOLLOW_field_options_keyval_in_field_options1766 = new BitSet(new long[]{0x0000800000000100L});
-	public static final BitSet FOLLOW_RIGHTSQUARE_in_field_options1771 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_var_full_in_field_options_keyval1798 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_ASSIGN_in_field_options_keyval1800 = new BitSet(new long[]{0x2FFD1DDFC7EFB4C0L});
-	public static final BitSet FOLLOW_var_reserved_in_field_options_keyval1805 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_STRING_LITERAL_in_field_options_keyval1818 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMFLOAT_in_field_options_keyval1830 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMINT_in_field_options_keyval1843 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMDOUBLE_in_field_options_keyval1855 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_HEX_in_field_options_keyval1867 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_OCTAL_in_field_options_keyval1879 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_TRUE_in_field_options_keyval1891 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FALSE_in_field_options_keyval1907 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_field_options_keyval1921 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FULL_ID_in_field_options_keyval1933 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_EXP_in_field_options_keyval1945 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_signed_constant_in_field_options_keyval1957 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MINUS_in_signed_constant1995 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_ID_in_signed_constant1997 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ENUM_in_enum_block2029 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_ID_in_enum_block2031 = new BitSet(new long[]{0x0000000008000000L});
-	public static final BitSet FOLLOW_LEFTCURLY_in_enum_block2044 = new BitSet(new long[]{0x0000204000200820L});
-	public static final BitSet FOLLOW_enum_body_in_enum_block2047 = new BitSet(new long[]{0x0000204000200820L});
-	public static final BitSet FOLLOW_RIGHTCURLY_in_enum_block2052 = new BitSet(new long[]{0x0002000000000002L});
-	public static final BitSet FOLLOW_SEMICOLON_in_enum_block2057 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_enum_field_in_enum_body2085 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_annotation_entry_in_enum_body2096 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_comment_entry_in_enum_body2107 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_option_entry_in_enum_body2118 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_enum_field2145 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_ASSIGN_in_enum_field2147 = new BitSet(new long[]{0x0000000800000000L});
-	public static final BitSet FOLLOW_NUMINT_in_enum_field2149 = new BitSet(new long[]{0x0002000020000000L});
-	public static final BitSet FOLLOW_enum_options_in_enum_field2154 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_SEMICOLON_in_enum_field2159 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LEFTSQUARE_in_enum_options2182 = new BitSet(new long[]{0x2F6D1DC0C7E634C0L});
-	public static final BitSet FOLLOW_field_options_keyval_in_enum_options2184 = new BitSet(new long[]{0x0000800000000100L});
-	public static final BitSet FOLLOW_COMMA_in_enum_options2197 = new BitSet(new long[]{0x2F6D1DC0C7E634C0L});
-	public static final BitSet FOLLOW_field_options_keyval_in_enum_options2199 = new BitSet(new long[]{0x0000800000000100L});
-	public static final BitSet FOLLOW_RIGHTSQUARE_in_enum_options2204 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_SERVICE_in_service_block2234 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_ID_in_service_block2236 = new BitSet(new long[]{0x0000000008000000L});
-	public static final BitSet FOLLOW_LEFTCURLY_in_service_block2240 = new BitSet(new long[]{0x0001004000000820L});
-	public static final BitSet FOLLOW_service_body_in_service_block2251 = new BitSet(new long[]{0x0001204000000820L});
-	public static final BitSet FOLLOW_RIGHTCURLY_in_service_block2256 = new BitSet(new long[]{0x0002000000000002L});
-	public static final BitSet FOLLOW_SEMICOLON_in_service_block2259 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rpc_block_in_service_body2289 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_annotation_entry_in_service_body2300 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_comment_entry_in_service_body2311 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_option_entry_in_service_body2322 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_RPC_in_rpc_block2353 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_ID_in_rpc_block2357 = new BitSet(new long[]{0x0000000010000000L});
-	public static final BitSet FOLLOW_LEFTPAREN_in_rpc_block2359 = new BitSet(new long[]{0x2000000000240000L});
-	public static final BitSet FOLLOW_FULL_ID_in_rpc_block2364 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_set_in_rpc_block2372 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_RIGHTPAREN_in_rpc_block2381 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_RETURNS_in_rpc_block2392 = new BitSet(new long[]{0x0000000010000000L});
-	public static final BitSet FOLLOW_LEFTPAREN_in_rpc_block2394 = new BitSet(new long[]{0x2000000000240000L});
-	public static final BitSet FOLLOW_FULL_ID_in_rpc_block2399 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_set_in_rpc_block2407 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_RIGHTPAREN_in_rpc_block2416 = new BitSet(new long[]{0x0002000008000000L});
-	public static final BitSet FOLLOW_rpc_body_block_in_rpc_block2420 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_SEMICOLON_in_rpc_block2424 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LEFTCURLY_in_rpc_body_block2450 = new BitSet(new long[]{0x0000204000000000L});
-	public static final BitSet FOLLOW_option_entry_in_rpc_body_block2452 = new BitSet(new long[]{0x0000204000000000L});
-	public static final BitSet FOLLOW_RIGHTCURLY_in_rpc_body_block2456 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LEFTCURLY_in_ignore_block2520 = new BitSet(new long[]{0x7FFFFFFFFFFFFFF0L});
-	public static final BitSet FOLLOW_ignore_block_body_in_ignore_block2522 = new BitSet(new long[]{0x7FFFFFFFFFFFFFF0L});
-	public static final BitSet FOLLOW_RIGHTCURLY_in_ignore_block2525 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ignore_block_in_ignore_block_body2553 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_ignore_block_body2563 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LEFTCURLY_in_synpred1_ProtoParser2549 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LEFTSQUARE_in_list_val704 = new BitSet(new long[]{0x0120001C50020000L});
+	public static final BitSet FOLLOW_list_val_in_list_val724 = new BitSet(new long[]{0x0001000000000200L});
+	public static final BitSet FOLLOW_COMMA_in_list_val728 = new BitSet(new long[]{0x0120001C50020000L});
+	public static final BitSet FOLLOW_list_val_in_list_val730 = new BitSet(new long[]{0x0001000000000200L});
+	public static final BitSet FOLLOW_RIGHTSQUARE_in_list_val752 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LEFTCURLY_in_list_val812 = new BitSet(new long[]{0x5EDA3B818FCC68C0L});
+	public static final BitSet FOLLOW_map_val_in_list_val832 = new BitSet(new long[]{0x0000400000000200L});
+	public static final BitSet FOLLOW_COMMA_in_list_val836 = new BitSet(new long[]{0x5EDA3B818FCC68C0L});
+	public static final BitSet FOLLOW_map_val_in_list_val838 = new BitSet(new long[]{0x0000400000000200L});
+	public static final BitSet FOLLOW_RIGHTCURLY_in_list_val860 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMFLOAT_in_list_val892 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMINT_in_list_val912 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMDOUBLE_in_list_val932 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_TRUE_in_list_val952 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FALSE_in_list_val972 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_STRING_LITERAL_in_list_val992 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_var_full_in_map_val1032 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_COLON_in_map_val1034 = new BitSet(new long[]{0x0120001C50020000L});
+	public static final BitSet FOLLOW_LEFTCURLY_in_map_val1068 = new BitSet(new long[]{0x5EDA3B818FCC68C0L});
+	public static final BitSet FOLLOW_map_val_in_map_val1088 = new BitSet(new long[]{0x0000400000000200L});
+	public static final BitSet FOLLOW_COMMA_in_map_val1092 = new BitSet(new long[]{0x5EDA3B818FCC68C0L});
+	public static final BitSet FOLLOW_map_val_in_map_val1094 = new BitSet(new long[]{0x0000400000000200L});
+	public static final BitSet FOLLOW_RIGHTCURLY_in_map_val1116 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LEFTSQUARE_in_map_val1176 = new BitSet(new long[]{0x0120001C50020000L});
+	public static final BitSet FOLLOW_list_val_in_map_val1196 = new BitSet(new long[]{0x0001000000000200L});
+	public static final BitSet FOLLOW_COMMA_in_map_val1200 = new BitSet(new long[]{0x0120001C50020000L});
+	public static final BitSet FOLLOW_list_val_in_map_val1202 = new BitSet(new long[]{0x0001000000000200L});
+	public static final BitSet FOLLOW_RIGHTSQUARE_in_map_val1224 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMFLOAT_in_map_val1256 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMINT_in_map_val1276 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMDOUBLE_in_map_val1296 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_TRUE_in_map_val1316 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FALSE_in_map_val1336 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_STRING_LITERAL_in_map_val1356 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_var_full_in_annotation_keyval1396 = new BitSet(new long[]{0x0000000000000110L});
+	public static final BitSet FOLLOW_set_in_annotation_keyval1398 = new BitSet(new long[]{0x5FFA3B9DDFCE68C2L});
+	public static final BitSet FOLLOW_LEFTCURLY_in_annotation_keyval1436 = new BitSet(new long[]{0x5EDA3B818FCC68C0L});
+	public static final BitSet FOLLOW_map_val_in_annotation_keyval1456 = new BitSet(new long[]{0x0000400000000200L});
+	public static final BitSet FOLLOW_COMMA_in_annotation_keyval1460 = new BitSet(new long[]{0x5EDA3B818FCC68C0L});
+	public static final BitSet FOLLOW_map_val_in_annotation_keyval1462 = new BitSet(new long[]{0x0000400000000200L});
+	public static final BitSet FOLLOW_RIGHTCURLY_in_annotation_keyval1484 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LEFTSQUARE_in_annotation_keyval1544 = new BitSet(new long[]{0x0120001C50020000L});
+	public static final BitSet FOLLOW_list_val_in_annotation_keyval1564 = new BitSet(new long[]{0x0001000000000200L});
+	public static final BitSet FOLLOW_COMMA_in_annotation_keyval1568 = new BitSet(new long[]{0x0120001C50020000L});
+	public static final BitSet FOLLOW_list_val_in_annotation_keyval1570 = new BitSet(new long[]{0x0001000000000200L});
+	public static final BitSet FOLLOW_RIGHTSQUARE_in_annotation_keyval1592 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_var_reserved_in_annotation_keyval1640 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_annotation_keyval1660 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FULL_ID_in_annotation_keyval1682 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMFLOAT_in_annotation_keyval1702 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMINT_in_annotation_keyval1722 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMDOUBLE_in_annotation_keyval1742 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_TRUE_in_annotation_keyval1762 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FALSE_in_annotation_keyval1782 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_STRING_LITERAL_in_annotation_keyval1802 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_SYNTAX_in_header_syntax1835 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_ASSIGN_in_header_syntax1837 = new BitSet(new long[]{0x0020000000000000L});
+	public static final BitSet FOLLOW_STRING_LITERAL_in_header_syntax1839 = new BitSet(new long[]{0x0004000000000000L});
+	public static final BitSet FOLLOW_SEMICOLON_in_header_syntax1841 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PKG_in_header_package1870 = new BitSet(new long[]{0x5EDA3B818FCC68C0L});
+	public static final BitSet FOLLOW_FULL_ID_in_header_package1873 = new BitSet(new long[]{0x0004000000000000L});
+	public static final BitSet FOLLOW_var_in_header_package1879 = new BitSet(new long[]{0x0004000000000000L});
+	public static final BitSet FOLLOW_SEMICOLON_in_header_package1884 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_IMPORT_in_header_import1912 = new BitSet(new long[]{0x0020000000000000L});
+	public static final BitSet FOLLOW_STRING_LITERAL_in_header_import1914 = new BitSet(new long[]{0x0004000000000000L});
+	public static final BitSet FOLLOW_SEMICOLON_in_header_import1916 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_OPTION_in_option_entry1940 = new BitSet(new long[]{0x5EDA3B81AFCC68C0L});
+	public static final BitSet FOLLOW_LEFTPAREN_in_option_entry1942 = new BitSet(new long[]{0x5EDA3B818FCC68C0L});
+	public static final BitSet FOLLOW_var_full_in_option_entry1947 = new BitSet(new long[]{0x0000800000000010L});
+	public static final BitSet FOLLOW_RIGHTPAREN_in_option_entry1949 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_ASSIGN_in_option_entry1952 = new BitSet(new long[]{0x5FFA3B9D8FCE68C0L});
+	public static final BitSet FOLLOW_var_reserved_in_option_entry1974 = new BitSet(new long[]{0x0004000000000000L});
+	public static final BitSet FOLLOW_ID_in_option_entry1996 = new BitSet(new long[]{0x0004000000000000L});
+	public static final BitSet FOLLOW_FULL_ID_in_option_entry2018 = new BitSet(new long[]{0x0004000000000000L});
+	public static final BitSet FOLLOW_NUMFLOAT_in_option_entry2038 = new BitSet(new long[]{0x0004000000000000L});
+	public static final BitSet FOLLOW_NUMINT_in_option_entry2058 = new BitSet(new long[]{0x0004000000000000L});
+	public static final BitSet FOLLOW_NUMDOUBLE_in_option_entry2078 = new BitSet(new long[]{0x0004000000000000L});
+	public static final BitSet FOLLOW_TRUE_in_option_entry2098 = new BitSet(new long[]{0x0004000000000000L});
+	public static final BitSet FOLLOW_FALSE_in_option_entry2118 = new BitSet(new long[]{0x0004000000000000L});
+	public static final BitSet FOLLOW_STRING_LITERAL_in_option_entry2138 = new BitSet(new long[]{0x0004000000000000L});
+	public static final BitSet FOLLOW_SEMICOLON_in_option_entry2152 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MESSAGE_in_message_block2185 = new BitSet(new long[]{0x0000000000400000L});
+	public static final BitSet FOLLOW_ID_in_message_block2187 = new BitSet(new long[]{0x0000000010000000L});
+	public static final BitSet FOLLOW_LEFTCURLY_in_message_block2200 = new BitSet(new long[]{0x0008598100005020L});
+	public static final BitSet FOLLOW_message_body_in_message_block2203 = new BitSet(new long[]{0x0008598100005020L});
+	public static final BitSet FOLLOW_RIGHTCURLY_in_message_block2208 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_message_block_in_message_body2231 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_message_field_in_message_body2242 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_enum_block_in_message_body2253 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_service_block_in_message_body2264 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_annotation_entry_in_message_body2285 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_comment_entry_in_message_body2296 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_option_entry_in_message_body2307 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_OPTIONAL_in_message_field2355 = new BitSet(new long[]{0x1E1000000F4C20C0L});
+	public static final BitSet FOLLOW_REQUIRED_in_message_field2372 = new BitSet(new long[]{0x1E1000000F4C20C0L});
+	public static final BitSet FOLLOW_REPEATED_in_message_field2389 = new BitSet(new long[]{0x1E1000000F4C20C0L});
+	public static final BitSet FOLLOW_field_type_in_message_field2404 = new BitSet(new long[]{0x5EDA3B818FC468C0L});
+	public static final BitSet FOLLOW_var_in_message_field2416 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_ASSIGN_in_message_field2418 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_NUMINT_in_message_field2420 = new BitSet(new long[]{0x0004000050000000L});
+	public static final BitSet FOLLOW_field_options_in_message_field2434 = new BitSet(new long[]{0x0004000010000000L});
+	public static final BitSet FOLLOW_SEMICOLON_in_message_field2450 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ignore_block_in_message_field2455 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_BOOL_in_field_type2481 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT8_in_field_type2493 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_UINT8_in_field_type2505 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT16_in_field_type2517 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_UINT16_in_field_type2529 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT32_in_field_type2541 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_UINT32_in_field_type2553 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT64_in_field_type2565 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_UINT64_in_field_type2577 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FLOAT_in_field_type2589 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_DOUBLE_in_field_type2601 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_STRING_in_field_type2613 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_BYTES_in_field_type2625 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FULL_ID_in_field_type2657 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_field_type2669 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LEFTSQUARE_in_field_options2696 = new BitSet(new long[]{0x5EDA3B818FCC68C0L});
+	public static final BitSet FOLLOW_field_options_keyval_in_field_options2698 = new BitSet(new long[]{0x0001000000000200L});
+	public static final BitSet FOLLOW_COMMA_in_field_options2711 = new BitSet(new long[]{0x5EDA3B818FCC68C0L});
+	public static final BitSet FOLLOW_field_options_keyval_in_field_options2713 = new BitSet(new long[]{0x0001000000000200L});
+	public static final BitSet FOLLOW_RIGHTSQUARE_in_field_options2718 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_var_full_in_field_options_keyval2745 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_ASSIGN_in_field_options_keyval2747 = new BitSet(new long[]{0x5FFA3BBF8FDF68C0L});
+	public static final BitSet FOLLOW_var_reserved_in_field_options_keyval2752 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_STRING_LITERAL_in_field_options_keyval2765 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMFLOAT_in_field_options_keyval2777 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMINT_in_field_options_keyval2790 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMDOUBLE_in_field_options_keyval2802 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_HEX_in_field_options_keyval2814 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_OCTAL_in_field_options_keyval2826 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_TRUE_in_field_options_keyval2838 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FALSE_in_field_options_keyval2854 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_field_options_keyval2868 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FULL_ID_in_field_options_keyval2880 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_EXP_in_field_options_keyval2892 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_signed_constant_in_field_options_keyval2904 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MINUS_in_signed_constant2942 = new BitSet(new long[]{0x0000000000400000L});
+	public static final BitSet FOLLOW_ID_in_signed_constant2944 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ENUM_in_enum_block2976 = new BitSet(new long[]{0x0000000000400000L});
+	public static final BitSet FOLLOW_ID_in_enum_block2978 = new BitSet(new long[]{0x0000000010000000L});
+	public static final BitSet FOLLOW_LEFTCURLY_in_enum_block2991 = new BitSet(new long[]{0x0000408000401020L});
+	public static final BitSet FOLLOW_enum_body_in_enum_block2994 = new BitSet(new long[]{0x0000408000401020L});
+	public static final BitSet FOLLOW_RIGHTCURLY_in_enum_block2999 = new BitSet(new long[]{0x0004000000000002L});
+	public static final BitSet FOLLOW_SEMICOLON_in_enum_block3004 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_enum_field_in_enum_body3032 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_annotation_entry_in_enum_body3043 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_comment_entry_in_enum_body3054 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_option_entry_in_enum_body3065 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_enum_field3092 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_ASSIGN_in_enum_field3094 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_NUMINT_in_enum_field3096 = new BitSet(new long[]{0x0004000040000000L});
+	public static final BitSet FOLLOW_enum_options_in_enum_field3101 = new BitSet(new long[]{0x0004000000000000L});
+	public static final BitSet FOLLOW_SEMICOLON_in_enum_field3106 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LEFTSQUARE_in_enum_options3129 = new BitSet(new long[]{0x5EDA3B818FCC68C0L});
+	public static final BitSet FOLLOW_field_options_keyval_in_enum_options3131 = new BitSet(new long[]{0x0001000000000200L});
+	public static final BitSet FOLLOW_COMMA_in_enum_options3144 = new BitSet(new long[]{0x5EDA3B818FCC68C0L});
+	public static final BitSet FOLLOW_field_options_keyval_in_enum_options3146 = new BitSet(new long[]{0x0001000000000200L});
+	public static final BitSet FOLLOW_RIGHTSQUARE_in_enum_options3151 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_SERVICE_in_service_block3181 = new BitSet(new long[]{0x0000000000400000L});
+	public static final BitSet FOLLOW_ID_in_service_block3183 = new BitSet(new long[]{0x0000000010000000L});
+	public static final BitSet FOLLOW_LEFTCURLY_in_service_block3187 = new BitSet(new long[]{0x0002008000001020L});
+	public static final BitSet FOLLOW_service_body_in_service_block3198 = new BitSet(new long[]{0x0002408000001020L});
+	public static final BitSet FOLLOW_RIGHTCURLY_in_service_block3203 = new BitSet(new long[]{0x0004000000000002L});
+	public static final BitSet FOLLOW_SEMICOLON_in_service_block3206 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rpc_block_in_service_body3236 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_annotation_entry_in_service_body3247 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_comment_entry_in_service_body3258 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_option_entry_in_service_body3269 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_RPC_in_rpc_block3300 = new BitSet(new long[]{0x0000000000400000L});
+	public static final BitSet FOLLOW_ID_in_rpc_block3304 = new BitSet(new long[]{0x0000000020000000L});
+	public static final BitSet FOLLOW_LEFTPAREN_in_rpc_block3306 = new BitSet(new long[]{0x4000000000480000L});
+	public static final BitSet FOLLOW_FULL_ID_in_rpc_block3311 = new BitSet(new long[]{0x0000800000000000L});
+	public static final BitSet FOLLOW_set_in_rpc_block3319 = new BitSet(new long[]{0x0000800000000000L});
+	public static final BitSet FOLLOW_RIGHTPAREN_in_rpc_block3328 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_RETURNS_in_rpc_block3339 = new BitSet(new long[]{0x0000000020000000L});
+	public static final BitSet FOLLOW_LEFTPAREN_in_rpc_block3341 = new BitSet(new long[]{0x4000000000480000L});
+	public static final BitSet FOLLOW_FULL_ID_in_rpc_block3346 = new BitSet(new long[]{0x0000800000000000L});
+	public static final BitSet FOLLOW_set_in_rpc_block3354 = new BitSet(new long[]{0x0000800000000000L});
+	public static final BitSet FOLLOW_RIGHTPAREN_in_rpc_block3363 = new BitSet(new long[]{0x0004000010000000L});
+	public static final BitSet FOLLOW_rpc_body_block_in_rpc_block3367 = new BitSet(new long[]{0x0004000000000000L});
+	public static final BitSet FOLLOW_SEMICOLON_in_rpc_block3371 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LEFTCURLY_in_rpc_body_block3397 = new BitSet(new long[]{0x0000408000000000L});
+	public static final BitSet FOLLOW_option_entry_in_rpc_body_block3399 = new BitSet(new long[]{0x0000408000000000L});
+	public static final BitSet FOLLOW_RIGHTCURLY_in_rpc_body_block3403 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LEFTCURLY_in_ignore_block3467 = new BitSet(new long[]{0xFFFFFFFFFFFFFFF0L});
+	public static final BitSet FOLLOW_ignore_block_body_in_ignore_block3469 = new BitSet(new long[]{0xFFFFFFFFFFFFFFF0L});
+	public static final BitSet FOLLOW_RIGHTCURLY_in_ignore_block3472 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ignore_block_in_ignore_block_body3500 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_ignore_block_body3510 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LEFTCURLY_in_synpred1_ProtoParser3496 = new BitSet(new long[]{0x0000000000000002L});
 }

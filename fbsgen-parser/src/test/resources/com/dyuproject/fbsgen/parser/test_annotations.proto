@@ -1,6 +1,40 @@
 package test_annotations;
 
 /// DefaultPerson
+@List(test: [
+  1,
+  true,
+  "3",
+  [ 4, false, { five: true } ],
+  {
+    four: [
+      4, false, { five: true }
+    ],
+    five: {
+      four: [
+        4, false, { five: true }
+      ]
+    }
+  }
+])
+@Map(test: {
+  one: 1,
+  two: true,
+  three: "3",
+  four: [
+    4, false, { five: true }
+  ],
+  five: {
+    four: [
+      4, false, { five: true }
+    ],
+    five: {
+      four: [
+        4, false, { five: true }
+      ]
+    }
+  }
+})
 @DefaultPerson(name="Anonymous Coward")
 message Person {
     required uint32 id = 1;
