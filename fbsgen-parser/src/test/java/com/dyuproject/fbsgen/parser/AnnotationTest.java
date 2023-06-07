@@ -116,6 +116,11 @@ public class AnnotationTest extends TestCase
         assertEquals(1, person.getComments().size());
         assertEquals("DefaultPerson", person.getComments().get(0));
 
+        Field<?> id = person.getField("id");
+        assertNotNull(id);
+        verifyList((List<Object>)id.getO().get("list"));
+        verifyMap((Map<String, Object>)id.getO().get("map"));
+        
         Field<?> age = person.getField("age");
         assertNotNull(age);
 
@@ -150,6 +155,9 @@ public class AnnotationTest extends TestCase
         assertNotNull(femaleA);
         assertEquals("f", femaleA.getValue("value"));
         assertTrue(person == femaleA.getValue("type"));
+        
+        verifyList((List<Object>)female.getO().get("list"));
+        verifyMap((Map<String, Object>)female.getO().get("map"));
 
         Message listRequest = person.getNestedMessage("ListRequest");
         assertNotNull(listRequest);

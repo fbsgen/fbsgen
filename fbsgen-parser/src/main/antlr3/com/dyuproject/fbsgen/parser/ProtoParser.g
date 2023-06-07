@@ -368,7 +368,27 @@ field_options [Proto proto, HasFields message, Field field]
     ;
     
 field_options_keyval [Proto proto, HasFields message, Field field, boolean checkDefault]
-    :   key=var_full ASSIGN (vr=var_reserved {
+@init {
+    Map<String, Object> map = null;
+    List<Object> list = null;
+}
+    :   key=var_full ASSIGN (
+    (
+        LEFTCURLY {
+            field.putExtraOption($key.text, (map = new java.util.LinkedHashMap<String, Object>()));
+        }
+        map_val[map] (COMMA map_val[map])* 
+        RIGHTCURLY
+    )
+    |
+    (
+        LEFTSQUARE {
+            field.putExtraOption($key.text, (list = new ArrayList<Object>()));
+        }
+        list_val[list] (COMMA list_val[list])* 
+        RIGHTSQUARE
+    )
+    |   vr=var_reserved {
             field.putExtraOption($key.text, $vr.text);
         } 
     |   STRING_LITERAL {
