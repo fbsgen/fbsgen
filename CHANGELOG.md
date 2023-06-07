@@ -1,3 +1,7 @@
+## 1.1.0 (2023-06-07)
+
+* list/map support for option/annotation values
+
 ## 1.0.6 (2018-02-22)
 
 * jetg output_dir resolution
