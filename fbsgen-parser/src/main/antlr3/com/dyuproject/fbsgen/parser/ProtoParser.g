@@ -186,7 +186,6 @@ annotation_keyval [Proto proto, Annotation annotation]
                 list_val[list] (COMMA list_val[list])* 
                 RIGHTSQUARE
             )
-            |
             |   vr=var_reserved { annotation.put($k.text, $vr.text); }
             |   ID { annotation.putRef($k.text, $ID.text); }
             |   fid=FULL_ID { annotation.putRef($k.text, $fid.text); }
