@@ -232,8 +232,27 @@ header_import [Proto proto]
     ;
 
 option_entry [Proto proto, HasOptions ho]
+@init {
+    Map<String, Object> map = null;
+    List<Object> list = null;
+}
     :   OPTION LEFTPAREN? k=var_full RIGHTPAREN? ASSIGN (
-                vr=var_reserved { putExtraOptionTo(ho, $k.text, $vr.text, proto); }
+            (
+                LEFTCURLY {
+                    putExtraOptionTo(ho, $k.text, (map = new java.util.LinkedHashMap<String, Object>()), proto);
+                }
+                map_val[map] (COMMA map_val[map])* 
+                RIGHTCURLY
+            )
+            |
+            (
+                LEFTSQUARE {
+                    putExtraOptionTo(ho, $k.text, (list = new ArrayList<Object>()), proto);
+                }
+                list_val[list] (COMMA list_val[list])* 
+                RIGHTSQUARE
+            )
+            |   vr=var_reserved { putExtraOptionTo(ho, $k.text, $vr.text, proto); }
             |   id=ID { putStandardOptionTo(ho, $k.text, $id.text, proto); }
             |   fid=FULL_ID { putStandardOptionTo(ho, $k.text, $fid.text, proto); }
             |   NUMFLOAT { putExtraOptionTo(ho, $k.text, Float.valueOf($NUMFLOAT.text), proto); }

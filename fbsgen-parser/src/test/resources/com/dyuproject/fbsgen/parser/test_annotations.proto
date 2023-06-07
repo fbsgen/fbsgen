@@ -37,6 +37,40 @@ package test_annotations;
 })
 @DefaultPerson(name="Anonymous Coward")
 message Person {
+    option list = [
+      1,
+      true,
+      "3",
+      [ 4, false, { five: true } ],
+      {
+        four: [
+          4, false, { five: true }
+        ],
+        five: {
+          four: [
+            4, false, { five: true }
+          ]
+        }
+      }
+    ];
+    option map = {
+      one: 1,
+      two: true,
+      three: "3",
+      four: [
+        4, false, { five: true }
+      ],
+      five: {
+        four: [
+          4, false, { five: true }
+        ],
+        five: {
+          four: [
+            4, false, { five: true }
+          ]
+        }
+      }
+    };
     required uint32 id = 1;
     
     /// DefaultAge

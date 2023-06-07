@@ -53,11 +53,8 @@ public class AnnotationTest extends TestCase
     }
     
     @SuppressWarnings("unchecked")
-    static void verifyList(Annotation a)
+    static void verifyList(List<Object> list)
     {
-        assertNotNull(a);
-        assertTrue(a.params.containsKey("test"));
-        List<Object> list = a.getValue("test");
         assertEquals(5, list.size());
         
         assertEquals(Integer.valueOf(1), list.get(0));
@@ -72,11 +69,8 @@ public class AnnotationTest extends TestCase
     }
     
     @SuppressWarnings("unchecked")
-    static void verifyMap(Annotation a)
+    static void verifyMap(Map<String, Object> map)
     {
-        assertNotNull(a);
-        assertTrue(a.params.containsKey("test"));
-        Map<String, Object> map = a.getValue("test");
         assertEquals(5, map.size());
         
         assertEquals(Integer.valueOf(1), map.get("one"));
@@ -90,6 +84,7 @@ public class AnnotationTest extends TestCase
         verifySubMap(subMap);
     }
     
+    @SuppressWarnings("unchecked")
     public void testIt() throws Exception
     {
         File f = ProtoParserTest.getFile("com/dyuproject/fbsgen/parser/test_annotations.proto");
@@ -102,9 +97,18 @@ public class AnnotationTest extends TestCase
         assertNotNull(person);
         assertTrue(person.isSequentialFieldNumbers());
         
-        verifyList(person.getAnnotation("List"));
-        verifyMap(person.getAnnotation("Map"));
-
+        Annotation aList = person.getAnnotation("List");
+        assertNotNull(aList);
+        
+        Annotation aMap = person.getAnnotation("Map");
+        assertNotNull(aMap);
+        
+        verifyList((List<Object>)aList.getP().get("test"));
+        verifyMap((Map<String, Object>)aMap.getP().get("test"));
+        
+        verifyList((List<Object>)person.getO().get("list"));
+        verifyMap((Map<String, Object>)person.getO().get("map"));
+        
         Annotation defaultPerson = person.getAnnotation("DefaultPerson");
         assertNotNull(defaultPerson);
         assertEquals("Anonymous Coward", defaultPerson.getValue("name"));
