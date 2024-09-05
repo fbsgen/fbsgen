@@ -105,7 +105,7 @@ annotation_entry [Proto proto]
         }
     ;
 
-list_val [List<Object> list]
+list_val [Proto proto, List<Object> list]
 @init {
     List<Object> sub = null;
     Map<String, Object> map = null;
@@ -115,7 +115,7 @@ list_val [List<Object> list]
                 LEFTSQUARE {
                     list.add((sub = new ArrayList<Object>()));
                 }
-                list_val[sub] (COMMA list_val[sub])* 
+                list_val[proto, sub] (COMMA list_val[proto, sub])* 
                 RIGHTSQUARE
             )
             |
@@ -123,9 +123,12 @@ list_val [List<Object> list]
                 LEFTCURLY {
                     list.add((map = new java.util.LinkedHashMap<String, Object>()));
                 }
-                map_val[map] (COMMA map_val[map])* 
+                map_val[proto, map] (COMMA map_val[proto, map])* 
                 RIGHTCURLY
             )
+            |   vr=var_reserved { list.add($vr.text); }
+            |   ID { proto.addRefTo(list, $ID.text); }
+            |   fid=FULL_ID { proto.addRefTo(list, $fid.text); }
             |   NUMFLOAT { list.add(Float.valueOf($NUMFLOAT.text)); }
             |   NUMINT { list.add(parseNumber($NUMINT.text)); }
             |   NUMDOUBLE { list.add(Double.valueOf($NUMDOUBLE.text)); }
@@ -135,7 +138,7 @@ list_val [List<Object> list]
         )
     ;
 
-map_val [Map<String, Object> map]
+map_val [Proto proto, Map<String, Object> map]
 @init {
     Map<String, Object> sub = null;
     List<Object> list = null;
@@ -145,7 +148,7 @@ map_val [Map<String, Object> map]
                 LEFTCURLY {
                     map.put($k.text, (sub = new java.util.LinkedHashMap<String, Object>()));
                 }
-                map_val[sub] (COMMA map_val[sub])* 
+                map_val[proto, sub] (COMMA map_val[proto, sub])* 
                 RIGHTCURLY
             )
             |
@@ -153,9 +156,12 @@ map_val [Map<String, Object> map]
                 LEFTSQUARE {
                     map.put($k.text, (list = new ArrayList<Object>()));
                 }
-                list_val[list] (COMMA list_val[list])* 
+                list_val[proto, list] (COMMA list_val[proto, list])* 
                 RIGHTSQUARE
             )
+            |   vr=var_reserved { map.put($k.text, $vr.text); }
+            |   ID { proto.putRefTo(map, $k.text, $ID.text); }
+            |   fid=FULL_ID { proto.putRefTo(map, $k.text, $fid.text); }
             |   NUMFLOAT { map.put($k.text, Float.valueOf($NUMFLOAT.text)); }
             |   NUMINT { map.put($k.text, parseNumber($NUMINT.text)); }
             |   NUMDOUBLE { map.put($k.text, Double.valueOf($NUMDOUBLE.text)); }
@@ -175,7 +181,7 @@ annotation_keyval [Proto proto, Annotation annotation]
                 LEFTCURLY {
                     annotation.put($k.text, (map = new java.util.LinkedHashMap<String, Object>()));
                 }
-                map_val[map] (COMMA map_val[map])* 
+                map_val[proto, map] (COMMA map_val[proto, map])* 
                 RIGHTCURLY
             )
             |
@@ -183,7 +189,7 @@ annotation_keyval [Proto proto, Annotation annotation]
                 LEFTSQUARE {
                     annotation.put($k.text, (list = new ArrayList<Object>()));
                 }
-                list_val[list] (COMMA list_val[list])* 
+                list_val[proto, list] (COMMA list_val[proto, list])* 
                 RIGHTSQUARE
             )
             |   vr=var_reserved { annotation.put($k.text, $vr.text); }
@@ -241,7 +247,7 @@ option_entry [Proto proto, HasOptions ho]
                 LEFTCURLY {
                     putExtraOptionTo(ho, $k.text, (map = new java.util.LinkedHashMap<String, Object>()), proto);
                 }
-                map_val[map] (COMMA map_val[map])* 
+                map_val[proto, map] (COMMA map_val[proto, map])* 
                 RIGHTCURLY
             )
             |
@@ -249,7 +255,7 @@ option_entry [Proto proto, HasOptions ho]
                 LEFTSQUARE {
                     putExtraOptionTo(ho, $k.text, (list = new ArrayList<Object>()), proto);
                 }
-                list_val[list] (COMMA list_val[list])* 
+                list_val[proto, list] (COMMA list_val[proto, list])* 
                 RIGHTSQUARE
             )
             |   vr=var_reserved { putExtraOptionTo(ho, $k.text, $vr.text, proto); }
@@ -377,7 +383,7 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
         LEFTCURLY {
             field.putExtraOption($key.text, (map = new java.util.LinkedHashMap<String, Object>()));
         }
-        map_val[map] (COMMA map_val[map])* 
+        map_val[proto, map] (COMMA map_val[proto, map])* 
         RIGHTCURLY
     )
     |
@@ -385,7 +391,7 @@ field_options_keyval [Proto proto, HasFields message, Field field, boolean check
         LEFTSQUARE {
             field.putExtraOption($key.text, (list = new ArrayList<Object>()));
         }
-        list_val[list] (COMMA list_val[list])* 
+        list_val[proto, list] (COMMA list_val[proto, list])* 
         RIGHTSQUARE
     )
     |   vr=var_reserved {

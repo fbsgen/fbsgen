@@ -15,7 +15,9 @@ package test_annotations;
         4, false, { five: true }
       ]
     }
-  }
+  },
+  Person,
+  [ Person, { ref: Person.Gender } ]
 ])
 @Map(test: {
   one: 1,
@@ -33,7 +35,9 @@ package test_annotations;
         4, false, { five: true }
       ]
     }
-  }
+  },
+  ref: Person,
+  refs: [ Person, { ref: Person.Gender } ]
 })
 @DefaultPerson(name="Anonymous Coward")
 message Person {
@@ -51,7 +55,9 @@ message Person {
             4, false, { five: true }
           ]
         }
-      }
+      },
+      Person,
+      [ Person, { ref: Person.Gender } ]
     ];
     option map = {
       one: 1,
@@ -69,7 +75,9 @@ message Person {
             4, false, { five: true }
           ]
         }
-      }
+      },
+      ref: Person,
+      refs: [ Person, { ref: Person.Gender } ]
     };
     required uint32 id = 1 [
       list = [
@@ -86,7 +94,9 @@ message Person {
               4, false, { five: true }
             ]
           }
-        }
+        },
+        Person,
+        [ Person, { ref: Person.Gender } ]
       ],
       map = {
         one: 1,
@@ -104,7 +114,9 @@ message Person {
               4, false, { five: true }
             ]
           }
-        }
+        },
+        ref: Person,
+        refs: [ Person, { ref: Person.Gender } ]
       }
     ];
     
@@ -137,7 +149,9 @@ message Person {
                   4, false, { five: true }
                 ]
               }
-            }
+            },
+            Person,
+            [ Person, { ref: Person.Gender } ]
           ],
           map = {
             one: 1,
@@ -155,7 +169,9 @@ message Person {
                   4, false, { five: true }
                 ]
               }
-            }
+            },
+            ref: Person,
+            refs: [ Person, { ref: Person.Gender } ]
           }
         ];
     }

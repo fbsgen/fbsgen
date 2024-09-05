@@ -30,6 +30,7 @@
 package com.dyuproject.fbsgen.parser;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * The reference configured via options and annotations.
@@ -62,6 +63,8 @@ public final class ConfiguredReference
     static void resolve(Proto proto, LinkedHashMap<String,Object> source, 
             LinkedHashMap<String,Object> destination, String enclosingNamespace)
     {
+        int dot;
+        HasName hn;
         // we iterate this way (no EntrySet) to avoid concurrent modification exception 
         // if the source and destination are the same.
         String[] keys = source.keySet().toArray(new String[source.size()]);
@@ -74,30 +77,51 @@ public final class ConfiguredReference
                 String ns = enclosingNamespace == null ? proto.getPackageName() : 
                     enclosingNamespace;
                 
-                HasName hn = proto.findReference(refName, ns);
-                
-                if (hn != null)
-                    destination.put(key, hn);
-                else if (RESOLVE_ENUM_VALUE_REF)
+                if (null != (hn = proto.findReference(refName, ns)))
                 {
-                    int dot = refName.lastIndexOf('.');
-                    if (dot > 0)
-                    {
-                        String egName = refName.substring(0, dot);
-                        hn = proto.findReference(egName, ns);
-                        if (hn instanceof EnumGroup)
-                        {
-                            EnumGroup eg = (EnumGroup)hn;
-                            EnumGroup.Value v = eg.getValue(refName.substring(dot + 1));
-                            if (v != null)
-                                destination.put(key, v);
-                        }
-                    }
+                    destination.put(key, hn);
+                }
+                else if (RESOLVE_ENUM_VALUE_REF &&
+                        0 < (dot = refName.lastIndexOf('.')) &&
+                        (dot + 1) != refName.length() &&
+                        (hn = proto.findReference(refName.substring(0, dot), ns)) instanceof EnumGroup)
+                {
+                    EnumGroup.Value v = ((EnumGroup)hn).getValue(refName.substring(dot + 1));
+                    if (v != null)
+                        destination.put(key, v);
                 }
             }
         }
     }
     
-    
-
+    static void resolveJsonRefs(Proto proto, List<Proto.RefEntry> refs,
+            String enclosingNamespace)
+    {
+        int dot;
+        HasName hn;
+        for (Proto.RefEntry ref : refs)
+        {
+            Object val = ref.get();
+            if (val instanceof String)
+            {
+                String refName = (String)val;
+                String ns = enclosingNamespace == null ? proto.getPackageName() : 
+                    enclosingNamespace;
+                
+                if (null != (hn = proto.findReference(refName, ns)))
+                {
+                    ref.put(hn);
+                }
+                else if (RESOLVE_ENUM_VALUE_REF &&
+                        0 < (dot = refName.lastIndexOf('.')) &&
+                        (dot + 1) != refName.length() &&
+                        (hn = proto.findReference(refName.substring(0, dot), ns)) instanceof EnumGroup)
+                {
+                    EnumGroup.Value v = ((EnumGroup)hn).getValue(refName.substring(dot + 1));
+                    if (v != null)
+                        ref.put(v);
+                }
+            }
+        }
+    }
 }

@@ -55,7 +55,7 @@ public class AnnotationTest extends TestCase
     @SuppressWarnings("unchecked")
     static void verifyList(List<Object> list)
     {
-        assertEquals(5, list.size());
+        assertEquals(7, list.size());
         
         assertEquals(Integer.valueOf(1), list.get(0));
         assertEquals(Boolean.TRUE, list.get(1));
@@ -66,12 +66,21 @@ public class AnnotationTest extends TestCase
         
         Map<String, Object> subMap = (Map<String, Object>)list.get(4);
         verifySubMap(subMap);
+        
+        assertTrue(list.get(5) instanceof Message);
+        assertTrue(list.get(6) instanceof List);
+        
+        List<Object> refs = (List<Object>)list.get(6);
+        assertEquals(2, refs.size());
+        assertTrue(refs.get(0) instanceof Message);
+        assertTrue(refs.get(1) instanceof Map);
+        assertTrue(((Map<String, Object>)refs.get(1)).get("ref") instanceof EnumGroup);
     }
     
     @SuppressWarnings("unchecked")
     static void verifyMap(Map<String, Object> map)
     {
-        assertEquals(5, map.size());
+        assertEquals(7, map.size());
         
         assertEquals(Integer.valueOf(1), map.get("one"));
         assertEquals(Boolean.TRUE, map.get("two"));
@@ -82,6 +91,15 @@ public class AnnotationTest extends TestCase
         
         Map<String, Object> subMap = (Map<String, Object>)map.get("five");
         verifySubMap(subMap);
+        
+        assertTrue(map.get("ref") instanceof Message);
+        assertTrue(map.get("refs") instanceof List);
+        
+        List<Object> refs = (List<Object>)map.get("refs");
+        assertEquals(2, refs.size());
+        assertTrue(refs.get(0) instanceof Message);
+        assertTrue(refs.get(1) instanceof Map);
+        assertTrue(((Map<String, Object>)refs.get(1)).get("ref") instanceof EnumGroup);
     }
     
     @SuppressWarnings("unchecked")

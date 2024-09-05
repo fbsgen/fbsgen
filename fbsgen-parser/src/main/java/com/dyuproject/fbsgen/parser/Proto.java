@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,7 +32,54 @@ import java.util.Map;
  */
 public final class Proto extends AnnotationContainer implements HasOptions, HasName
 {
-    
+    static abstract class RefEntry
+    {
+        abstract Object get();
+        abstract void put(Object obj);
+    }
+    static final class ListRefEntry extends RefEntry
+    {
+        final int idx;
+        final List<Object> list;
+        
+        ListRefEntry(int idx, List<Object> list)
+        {
+            this.idx = idx;
+            this.list = list;
+        }
+        @Override
+        Object get()
+        {
+            return list.get(idx);
+        }
+        @Override
+        void put(Object obj)
+        {
+            list.set(idx, obj);
+        }
+    }
+    static final class MapRefEntry extends RefEntry
+    {
+        final String key;
+        final Map<String, Object> map;
+        
+        MapRefEntry(String key, Map<String, Object> map)
+        {
+            this.key = key;
+            this.map = map;
+        }
+        @Override
+        Object get()
+        {
+            return map.get(key);
+        }
+        @Override
+        void put(Object obj)
+        {
+            map.put(key, obj);
+        }
+    }
+  
     static final boolean IMPLICIT_TYPE_ANNOTATIONS = Boolean.getBoolean("proto.implicit_type_annotations");
     
     final File file;
@@ -54,6 +102,9 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
     // from options and annotations
     final ArrayList<ConfiguredReference> references = new ArrayList<ConfiguredReference>();
     final ArrayList<Annotation> typeAnnotations = new ArrayList<Annotation>();
+    
+    // list/map values that point to messages/enums/etc
+    final ArrayList<RefEntry> jsonReferences = new ArrayList<RefEntry>();
     
     int refOffset;
     
@@ -215,6 +266,18 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
     public LinkedHashMap<String,Object> getOptions()
     {
         return extraOptions;
+    }
+    
+    public void addRefTo(List<Object> list, String value)
+    {
+        jsonReferences.add(new ListRefEntry(list.size(), list));
+        list.add(value);
+    }
+    
+    public void putRefTo(Map<String, Object> map, String key, String value)
+    {
+        jsonReferences.add(new MapRefEntry(key, map));
+        map.put(key, value);  
     }
     
     public void putStandardOption(String key, Object value)
@@ -409,6 +472,9 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
         
         if (!standardOptions.isEmpty())
             ConfiguredReference.resolve(this, standardOptions, extraOptions, getPackageName());
+        
+        if (!jsonReferences.isEmpty())
+            ConfiguredReference.resolveJsonRefs(this, jsonReferences, getPackageName());
     }
     
     public void add(Annotation annotation)
