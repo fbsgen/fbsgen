@@ -1,3 +1,7 @@
+## 1.1.1 (2024-09-06)
+
+* allow references inside list/map values embedded in options/annotations
+
 ## 1.1.0 (2023-06-07)
 
 * list/map support for option/annotation values
