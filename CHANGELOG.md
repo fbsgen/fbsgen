@@ -1,3 +1,7 @@
+## 1.1.2 (2024-09-13)
+
+* add helper functions for List/Map instances
+
 ## 1.1.1 (2024-09-06)
 
 * allow references inside list/map values embedded in options/annotations

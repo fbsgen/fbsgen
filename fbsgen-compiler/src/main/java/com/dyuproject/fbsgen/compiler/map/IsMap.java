@@ -184,6 +184,22 @@ public final class IsMap extends FakeMap
             }
         },
         
+        INSTANCEOF_LIST
+        {
+            public boolean is(Object data)
+            {
+                return data instanceof List;
+            }
+        },
+        
+        INSTANCEOF_MAP
+        {
+            public boolean is(Object data)
+            {
+                return data instanceof Map;
+            }
+        },
+        
         INSTANCEOF_MESSAGE
         {
             public boolean is(Object data)
