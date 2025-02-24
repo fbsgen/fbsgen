@@ -42,6 +42,8 @@ public final class ConfiguredReference
 {
     public static final boolean RESOLVE_ENUM_VALUE_REF = Boolean.parseBoolean(
             System.getProperty("fbsgen.resolve_enum_value_ref", "true"));
+    public static final boolean RESOLVE_UDT_AS_FQCN = Boolean.parseBoolean(
+            System.getProperty("fbsgen.resolve_udt_as_fqcn", "false"));
     
     // could be same
     final LinkedHashMap<String,Object> source, destination;
@@ -79,7 +81,10 @@ public final class ConfiguredReference
                 
                 if (null != (hn = proto.findReference(refName, ns)))
                 {
-                    destination.put(key, hn);
+                    if (RESOLVE_UDT_AS_FQCN && hn instanceof UserDefinedType)
+                        destination.put(key, ((UserDefinedType)hn).getFullName());
+                    else
+                        destination.put(key, hn);
                 }
                 else if (RESOLVE_ENUM_VALUE_REF &&
                         0 < (dot = refName.lastIndexOf('.')) &&
@@ -110,7 +115,10 @@ public final class ConfiguredReference
                 
                 if (null != (hn = proto.findReference(refName, ns)))
                 {
-                    ref.put(hn);
+                    if (RESOLVE_UDT_AS_FQCN && hn instanceof UserDefinedType)
+                        ref.put(((UserDefinedType)hn).getFullName());
+                    else
+                        ref.put(hn);
                 }
                 else if (RESOLVE_ENUM_VALUE_REF &&
                         0 < (dot = refName.lastIndexOf('.')) &&
