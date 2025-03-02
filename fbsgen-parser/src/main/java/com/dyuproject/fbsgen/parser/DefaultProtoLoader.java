@@ -14,7 +14,7 @@
 
 package com.dyuproject.fbsgen.parser;
 
-import static com.dyuproject.fbsgen.parser.AbstractParser.err;
+import static com.dyuproject.fbsgen.parser.AnnotationContainer.err;
 
 import java.io.File;
 import java.io.IOException;

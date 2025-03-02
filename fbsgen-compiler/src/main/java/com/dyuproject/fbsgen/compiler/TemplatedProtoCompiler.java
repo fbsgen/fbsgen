@@ -18,7 +18,7 @@ import static com.dyuproject.fbsgen.compiler.ErrorUtil.err;
 import com.dyuproject.fbsgen.parser.EnumGroup;
 import com.dyuproject.fbsgen.parser.Message;
 import com.dyuproject.fbsgen.parser.Proto;
-import com.dyuproject.fbsgen.parser.ProtoUtil;
+import com.dyuproject.fbsgen.parser.TextFormat;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -195,7 +195,7 @@ public final class TemplatedProtoCompiler extends TemplatedCodeGenerator
             if (outerClassname != null)
                 name = outerClassname;
             else
-                name = ProtoUtil.toPascalCase(name).toString();
+                name = TextFormat.toPascalCase(name).toString();
         }
         
         // resolve the prefix/suffix from module option

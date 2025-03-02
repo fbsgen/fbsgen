@@ -34,7 +34,7 @@ public class ReservedWordsAsVariablesTest extends TestCase
                 "com/dyuproject/fbsgen/parser/test_reserved_words_as_variables.proto");
         assertTrue(file.exists());
 
-        Proto proto = new Proto(file);
+        Proto proto = new Proto(file, DefaultProtoLoader.DEFAULT_INSTANCE);
         ProtoUtil.loadFrom(file, proto);
 
         Message test = proto.getMessage("Test");

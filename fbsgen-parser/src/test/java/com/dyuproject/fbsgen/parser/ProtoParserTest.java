@@ -46,7 +46,7 @@ public class ProtoParserTest extends TestCase
         File f = getFile("TestModel.proto");
         assertTrue(f.exists());
 
-        Proto proto = new Proto(f);
+        Proto proto = new Proto(f, DefaultProtoLoader.DEFAULT_INSTANCE);
         ProtoUtil.loadFrom(f, proto);
         assertEquals(proto.getPackageName(), "simple");
         assertEquals(proto.getJavaPackageName(), "com.example.simple");
@@ -138,7 +138,7 @@ public class ProtoParserTest extends TestCase
         File f = getFile("unittest.proto");
         assertTrue(f.exists());
 
-        Proto proto = new Proto(f);
+        Proto proto = new Proto(f, DefaultProtoLoader.DEFAULT_INSTANCE);
         ProtoUtil.loadFrom(f, proto);
 
         Proto iProto = proto.getImportedProto(getFile("google/protobuf/unittest_import.proto"));
@@ -397,7 +397,7 @@ public class ProtoParserTest extends TestCase
         File f = getFile("enum_with_semicolon.proto");
         assertTrue(f.exists());
 
-        Proto proto = new Proto(f);
+        Proto proto = new Proto(f, DefaultProtoLoader.DEFAULT_INSTANCE);
         ProtoUtil.loadFrom(f, proto);
         assertEquals(proto.getPackageName(), "rpc");
     }
@@ -407,7 +407,7 @@ public class ProtoParserTest extends TestCase
         File f = getFile("descriptor.proto");
         assertTrue(f.exists());
 
-        Proto proto = new Proto(f);
+        Proto proto = new Proto(f, DefaultProtoLoader.DEFAULT_INSTANCE);
         ProtoUtil.loadFrom(f, proto);
         assertEquals(proto.getPackageName(), "google.protobuf");
     }
@@ -416,7 +416,7 @@ public class ProtoParserTest extends TestCase
      * public static void main(String[] args) throws Exception { File f = getFile("unittest.proto");
      * assertTrue(f.exists());
      * 
-     * Proto proto = new Proto(f); ProtoUtil.loadFrom(f, proto); System.err.println(Float.parseFloat("6.13e5")); byte[]
+     * Proto proto = new Proto(f, DefaultProtoLoader.DEFAULT_INSTANCE); ProtoUtil.loadFrom(f, proto); System.err.println(Float.parseFloat("6.13e5")); byte[]
      * b = "123".getBytes(); for (int i=0; i<b.length; i++) System.err.println(b[i]);
      * 
      * }

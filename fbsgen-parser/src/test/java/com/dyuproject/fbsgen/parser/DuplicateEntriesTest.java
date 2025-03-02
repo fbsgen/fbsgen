@@ -32,7 +32,7 @@ public class DuplicateEntriesTest extends TestCase
         File f = ProtoParserTest.getFile(source);
         assertTrue(f.exists());
 
-        Proto proto = new Proto(f);
+        Proto proto = new Proto(f, DefaultProtoLoader.DEFAULT_INSTANCE);
 
         try
         {

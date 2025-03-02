@@ -85,12 +85,12 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
     final File file;
     // if loaded form classpath.
     final URL url;
-    final Loader loader;
+    transient final Loader loader;
     final Proto importer;
     Mutable<String> packageName, javaPackageName;
     final LinkedHashMap<String, Proto> importedProtos = new LinkedHashMap<String, Proto>();
     final ArrayList<String> importPaths = new ArrayList<String>();
-    final LinkedHashMap<String,Object> standardOptions = new LinkedHashMap<String,Object>();
+    transient final LinkedHashMap<String,Object> standardOptions = new LinkedHashMap<String,Object>();
     final LinkedHashMap<String,Object> extraOptions = new LinkedHashMap<String,Object>();
     final LinkedHashMap<String, Message> messages = new LinkedHashMap<String, Message>();
     final LinkedHashMap<String, EnumGroup> enumGroups = new LinkedHashMap<String, EnumGroup>();
@@ -100,24 +100,24 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
     final LinkedHashMap<String, EnumGroup> fullyQualifiedEnumGroups = new LinkedHashMap<String, EnumGroup>();
     
     // from options and annotations
-    final ArrayList<ConfiguredReference> references = new ArrayList<ConfiguredReference>();
-    final ArrayList<Annotation> typeAnnotations = new ArrayList<Annotation>();
+    transient final ArrayList<ConfiguredReference> references = new ArrayList<ConfiguredReference>();
+    transient final ArrayList<Annotation> typeAnnotations = new ArrayList<Annotation>();
     
     // list/map values that point to messages/enums/etc
-    final ArrayList<RefEntry> jsonReferences = new ArrayList<RefEntry>();
+    transient final ArrayList<RefEntry> jsonReferences = new ArrayList<RefEntry>();
     
-    int refOffset;
+    transient int refOffset;
     
     private String sourcePath;
     
     public Proto()
     {
-        this((File)null, DefaultProtoLoader.DEFAULT_INSTANCE, null);
+        this((File)null, null, null);
     }
     
     public Proto(File file)
     {
-        this(file, DefaultProtoLoader.DEFAULT_INSTANCE, null);
+        this(file, null, null);
     }
     
     public Proto(Loader loader)
@@ -151,7 +151,7 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
     void checkAnnotations()
     {
         if (!annotations.isEmpty())
-            throw AbstractParser.err(this, "Misplaced annotations: " + annotations);
+            throw err(this, "Misplaced annotations: " + annotations);
     }
     
     void addComment(String comment)
@@ -422,6 +422,8 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
     
     void importProto(String path)
     {
+        if (loader == null)
+            throw err("Failed to import " + path + " (No loader set)", this);
         try
         {
             addImportedProto(loader.load(path, this));

@@ -33,7 +33,7 @@ public class ProtoServiceTest extends TestCase
     {
         File f = ProtoParserTest.getFile("test_rpc.proto");
         assertTrue(f.exists());
-        Proto proto = new Proto(f);
+        Proto proto = new Proto(f, DefaultProtoLoader.DEFAULT_INSTANCE);
         ProtoUtil.loadFrom(f, proto);
 
         assertTrue(proto.getImportedProtos().size() == 2);

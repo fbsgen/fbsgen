@@ -108,7 +108,7 @@ public class AnnotationTest extends TestCase
         File f = ProtoParserTest.getFile("com/dyuproject/fbsgen/parser/test_annotations.proto");
         assertTrue(f.exists());
 
-        Proto proto = new Proto(f);
+        Proto proto = new Proto(f, DefaultProtoLoader.DEFAULT_INSTANCE);
         ProtoUtil.loadFrom(f, proto);
 
         Message person = proto.getMessage("Person");

@@ -180,6 +180,11 @@ public abstract class AnnotationContainer implements HasAnnotations, HasName
         return new ParseException(msg(msg, proto));
     }
     
+    public static ParseException err(Proto proto, String msg)
+    {
+        return new ParseException(msg(msg, proto));
+    }
+    
     public static ParseException err(String msg, Proto proto, Throwable cause)
     {
         if (proto == null)

@@ -6,9 +6,9 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>fbsgen-parser</artifactId>
-  <name>fbsgen :: parser</name>
-  <description>parser for .proto files</description>
+  <artifactId>fbsgen-api</artifactId>
+  <name>fbsgen :: api</name>
+  <description>core models for .proto files</description>
   <packaging>jar</packaging>
   
   <build>
@@ -45,11 +45,6 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.dyuproject.fbsgen</groupId>
-      <artifactId>fbsgen-api</artifactId>
-      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.antlr</groupId>

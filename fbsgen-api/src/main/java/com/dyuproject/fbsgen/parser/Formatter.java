@@ -14,9 +14,9 @@
 
 package com.dyuproject.fbsgen.parser;
 
-import static com.dyuproject.fbsgen.parser.ProtoUtil.toCamelCase;
-import static com.dyuproject.fbsgen.parser.ProtoUtil.toPascalCase;
-import static com.dyuproject.fbsgen.parser.ProtoUtil.toUnderscoreCase;
+import static com.dyuproject.fbsgen.parser.TextFormat.toCamelCase;
+import static com.dyuproject.fbsgen.parser.TextFormat.toPascalCase;
+import static com.dyuproject.fbsgen.parser.TextFormat.toUnderscoreCase;
 
 import java.util.Map;
 

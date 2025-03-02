@@ -32,7 +32,7 @@ public class OptionTest extends TestCase
         File f = ProtoParserTest.getFile("com/dyuproject/fbsgen/parser/test_options.proto");
         assertTrue(f.exists());
 
-        Proto proto = new Proto(f);
+        Proto proto = new Proto(f, DefaultProtoLoader.DEFAULT_INSTANCE);
         ProtoUtil.loadFrom(f, proto);
 
         Message aMessage = proto.getMessage("AMessage");
