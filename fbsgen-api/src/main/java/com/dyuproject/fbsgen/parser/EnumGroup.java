@@ -513,6 +513,12 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         return uniqueSortedDeclaredValues;
     }
     
+    @Override
+    public String toString()
+    {
+        return  ConfiguredReference.UDT_TO_STRING_AS_FQCN ? getFullName() : getName();
+    }
+    
     public static class Value extends AnnotationContainer implements Comparable<Value>, HasName
     {
         public static final Comparator<Value> NO_ALIAS_COMPARATOR = 

@@ -734,6 +734,4 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
     {
         public Proto load(String path, Proto importer) throws IOException;
     }
-
-
 }

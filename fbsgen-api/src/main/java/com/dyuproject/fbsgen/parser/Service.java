@@ -23,7 +23,7 @@ import java.util.LinkedHashMap;
  * @author David Yu
  * @created Jun 18, 2010
  */
-public final class Service extends AnnotationContainer implements HasName, HasOptions
+public final class Service extends AnnotationContainer implements UserDefinedType, HasOptions
 {
     
     final String name;
@@ -247,6 +247,12 @@ public final class Service extends AnnotationContainer implements HasName, HasOp
         
         if (!standardOptions.isEmpty())
             proto.references.add(new ConfiguredReference(standardOptions, extraOptions, proto.getPackageName()));
+    }
+    
+    @Override
+    public String toString()
+    {
+        return  ConfiguredReference.UDT_TO_STRING_AS_FQCN ? getFullName() : getName();
     }
     
     public static class RpcMethod extends AnnotationContainer implements HasName, HasOptions

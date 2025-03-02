@@ -44,6 +44,8 @@ public final class ConfiguredReference
             System.getProperty("fbsgen.resolve_enum_value_ref", "true"));
     public static final boolean RESOLVE_UDT_AS_FQCN = Boolean.parseBoolean(
             System.getProperty("fbsgen.resolve_udt_as_fqcn", "false"));
+    public static final boolean UDT_TO_STRING_AS_FQCN = Boolean.parseBoolean(
+            System.getProperty("fbsgen.udt_to_string_as_fqcn", "true"));
     
     // could be same
     final LinkedHashMap<String,Object> source, destination;

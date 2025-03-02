@@ -1050,5 +1050,10 @@ public final class Message extends AnnotationContainer implements UserDefinedTyp
     {
         return parent.parentMessage == null ? parent: getRoot(parent.parentMessage);
     }
-
+    
+    @Override
+    public String toString()
+    {
+        return  ConfiguredReference.UDT_TO_STRING_AS_FQCN ? getFullName() : getName();
+    }
 }

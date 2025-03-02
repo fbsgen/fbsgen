@@ -206,7 +206,7 @@ public abstract class AnnotationContainer implements HasAnnotations, HasName
     }
     
     @Override
-    public final String toString()
+    public String toString()
     {
         return getName();
     }
