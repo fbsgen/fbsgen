@@ -22,21 +22,6 @@
             <target>1.6</target>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.antlr</groupId>
-        <artifactId>antlr3-maven-plugin</artifactId>
-        <version>${antlr3-version}</version>
-        <configuration>
-          <outputDirectory>src/main/java</outputDirectory>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>antlr</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
   
@@ -45,10 +30,6 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.antlr</groupId>
-      <artifactId>antlr-runtime</artifactId>
     </dependency>
   </dependencies>
   
