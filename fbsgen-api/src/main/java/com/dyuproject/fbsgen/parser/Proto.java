@@ -82,12 +82,13 @@ public final class Proto extends AnnotationContainer implements HasOptions, HasN
   
     static final boolean IMPLICIT_TYPE_ANNOTATIONS = Boolean.getBoolean("proto.implicit_type_annotations");
     
-    final File file;
+    transient final File file;
     // if loaded form classpath.
-    final URL url;
+    transient final URL url;
     transient final Loader loader;
     final Proto importer;
-    Mutable<String> packageName, javaPackageName;
+    Mutable<String> packageName;
+    transient Mutable<String> javaPackageName;
     final LinkedHashMap<String, Proto> importedProtos = new LinkedHashMap<String, Proto>();
     final ArrayList<String> importPaths = new ArrayList<String>();
     transient final LinkedHashMap<String,Object> standardOptions = new LinkedHashMap<String,Object>();

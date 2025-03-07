@@ -74,5 +74,10 @@ public final class Mutable<T>
     {
         return last != null;
     }
-
+    
+    @Override
+    public String toString()
+    {
+        return String.valueOf(current);
+    }
 }
