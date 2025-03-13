@@ -12,7 +12,7 @@
 //limitations under the License.
 //========================================================================
 
-package com.dyuproject.fbsgen.compiler;
+package com.dyuproject.fbsgen.parser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +29,16 @@ import com.dyuproject.fbsgen.parser.Service;
  * @author David Yu
  * @created Sep 12, 2014
  */
-public interface Registry extends com.dyuproject.fbsgen.parser.Registry
+public interface Registry
 {
-    void add(EnumGroup eg, ProtoModule module);
-    void add(Message message, ProtoModule module);
-    void add(Service service, ProtoModule module);
-    void add(Proto proto, ProtoModule module);
+    List<Proto> getProtos();
+    List<Message> getMessages();
+    List<EnumGroup> getEnumGroups();
+    List<Service> getServices();
     
-    Registry complete(ProtoModule module);
+    Map<String,Proto> getProtoPathMap();
+    Map<String,ArrayList<Proto>>  getPkgProtoMapping();
+    Map<String,ArrayList<Proto>>  getStgProtoMapping();
+    Map<String,ArrayList<Message>>  getStgMessageMapping();
+    Map<String,ArrayList<EnumGroup>>  getStgEnumGroupMapping();
 }
