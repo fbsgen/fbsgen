@@ -20,7 +20,9 @@ import com.dyuproject.fbsgen.parser.Field;
 import com.dyuproject.fbsgen.parser.Message;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -31,6 +33,14 @@ import java.util.List;
  */
 public final class SortMap extends FakeMap
 {
+    static final Comparator<Field<?>> ORDER_COMPARATOR = 
+            new Comparator<Field<?>>()
+    {
+        public int compare(Field<?> f1, Field<?> f2)
+        {
+            return f1.getName().compareTo(f2.getName());
+        }
+    };
     public interface Function
     {
         Object sort(Object arg);
@@ -57,6 +67,17 @@ public final class SortMap extends FakeMap
     
     public enum Functions implements Function
     {
+        FIELDS
+        {
+            @SuppressWarnings("unchecked")
+            @Override
+            public Object sort(Object arg)
+            {
+                ArrayList<Field<?>> list = new ArrayList<Field<?>>((Collection<Field<?>>)arg);
+                Collections.sort(list, ORDER_COMPARATOR);
+                return list;
+            }
+        },
         FBS_CREATE_FIELDS
         {
             @Override
