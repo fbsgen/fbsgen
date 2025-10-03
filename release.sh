@@ -13,7 +13,9 @@ echo "Releasing $VERSION - are you sure? (y/n):" && read CONFIRM && [ "$CONFIRM"
 
 mvn versions:set -DnewVersion=$VERSION -DgenerateBackupPoms=false && \
 git add -u . && git commit -m "$VERSION" && \
-mvn -Prelease deploy && mvn scm:tag && \
+mvn -Prelease deploy && mvn scm:tag
+
+echo "Press any key to set to snapshot and push" && read VERSION
 mvn versions:set -DnewVersion=$PR_VERSION -DgenerateBackupPoms=false && \
 git add -u . && git commit -m "$PR_VERSION" && \
 git push origin master
