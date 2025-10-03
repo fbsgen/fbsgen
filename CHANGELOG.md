@@ -1,3 +1,7 @@
+## 1.2.0 (2025-10-03)
+
+* Refactor core api to have no deps
+
 ## 1.1.2 (2024-09-13)
 
 * add helper functions for List/Map instances
