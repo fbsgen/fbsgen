@@ -1,3 +1,7 @@
+## 1.2.1 (2025-10-03)
+
+* workaround central-publishing-maven-plugin quirks
+
 ## 1.2.0 (2025-10-03)
 
 * Refactor core api to have no deps
