@@ -38,7 +38,7 @@ public final class Service extends AnnotationContainer implements UserDefinedTyp
     // cache
     private String relativeName, cppRelativeName;
     
-    private Service()
+    Service()
     {
         this.name = null;
         this.parentMessage = null;
@@ -281,7 +281,7 @@ public final class Service extends AnnotationContainer implements UserDefinedTyp
         
         Message argType, returnType;
         
-        private RpcMethod()
+        RpcMethod()
         {
             this.name = null;
             this.service = null;
