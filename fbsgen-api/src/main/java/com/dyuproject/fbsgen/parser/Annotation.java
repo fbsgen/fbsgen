@@ -33,6 +33,12 @@ public final class Annotation implements HasName
     final LinkedHashMap<String,Object> refs = new LinkedHashMap<String,Object>(); 
     final LinkedHashMap<String,Object> params = new LinkedHashMap<String,Object>();
     
+    private Annotation()
+    {
+        this.name = null;
+        this.proto = null;
+    }
+    
     public Annotation(String name, Proto proto)
     {
         this.name = name;

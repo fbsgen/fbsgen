@@ -78,6 +78,13 @@ public final class Message extends AnnotationContainer implements UserDefinedTyp
     // cache these formats
     private java.lang.String nameCC;
     
+    private Message()
+    {
+        this.name = null;
+        this.parentMessage = null;
+        this.proto = null;
+    }
+    
     public Message(String name, Message parentMessage, Proto proto)
     {
         this.name = name;

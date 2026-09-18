@@ -76,6 +76,13 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
     // cache
     private String relativeName, cppRelativeName;
     
+    private EnumGroup()
+    {
+        this.name = null;
+        this.parentMessage = null;
+        this.proto = null;
+    }
+    
     public EnumGroup(String name, Message parentMessage, Proto proto)
     {
         this.name = name;
@@ -542,6 +549,13 @@ public final class EnumGroup extends AnnotationContainer implements UserDefinedT
         
         public final EnumField field = new EnumField(this);
 
+        private Value()
+        {
+            this.name = null;
+            this.number = 0;
+            this.enumGroup = null;
+        }
+        
         public Value(String name, int number, EnumGroup enumGroup)
         {
             this.name = name;

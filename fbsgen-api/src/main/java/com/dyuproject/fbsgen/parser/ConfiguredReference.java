@@ -51,6 +51,12 @@ public final class ConfiguredReference
     final LinkedHashMap<String,Object> source, destination;
     String enclosingNamespace;
     
+    private ConfiguredReference()
+    {
+        this.source = null;
+        this.destination = null;
+    }
+    
     public ConfiguredReference(LinkedHashMap<String,Object> source, 
             LinkedHashMap<String,Object> destination, String enclosingNamespace)
     {
