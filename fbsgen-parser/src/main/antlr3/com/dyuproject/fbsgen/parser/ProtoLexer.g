@@ -102,6 +102,10 @@ PKG
 SYNTAX
     :   'syntax'
     ;
+
+EDITION
+    :   'edition'
+    ;
     
 IMPORT
     :   'import'

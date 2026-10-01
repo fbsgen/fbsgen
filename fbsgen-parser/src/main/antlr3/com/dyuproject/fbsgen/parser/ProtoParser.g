@@ -205,11 +205,16 @@ annotation_keyval [Proto proto, Annotation annotation]
     ;
 
 header_syntax [Proto proto]
-    :   SYNTAX ASSIGN STRING_LITERAL SEMICOLON! {
+    :   (SYNTAX|EDITION) ASSIGN STRING_LITERAL SEMICOLON! {
+            /*
+            // Allow:
+            // - syntax = "proto2|proto3";
+            // - edition = "2023|2024";
             if (!"proto2".equals(getStringFromStringLiteral($STRING_LITERAL.text))) {
                 throw err(proto, "Syntax isn't proto2: '" +
                         getStringFromStringLiteral($STRING_LITERAL.text)+"'");
             }
+            */
             
             proto.checkAnnotations();
         }
