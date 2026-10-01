@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 com/dyuproject/fbsgen/parser/ProtoLexer.g 2023-06-07 18:10:04
+// $ANTLR 3.5.2 com/dyuproject/fbsgen/parser/ProtoLexer.g 2026-10-01 14:38:08
 
     package com.dyuproject.fbsgen.parser;
 
@@ -21,56 +21,57 @@ public class ProtoLexer extends AbstractLexer {
 	public static final int DEFAULT=11;
 	public static final int DOC_COMMENT=12;
 	public static final int DOUBLE=13;
-	public static final int ENUM=14;
-	public static final int ESC_SEQ=15;
-	public static final int EXP=16;
-	public static final int FALSE=17;
-	public static final int FLOAT=18;
-	public static final int FULL_ID=19;
-	public static final int HEX=20;
-	public static final int HEX_DIGIT=21;
-	public static final int ID=22;
-	public static final int IMPORT=23;
-	public static final int INT16=24;
-	public static final int INT32=25;
-	public static final int INT64=26;
-	public static final int INT8=27;
-	public static final int LEFTCURLY=28;
-	public static final int LEFTPAREN=29;
-	public static final int LEFTSQUARE=30;
-	public static final int MAX=31;
-	public static final int MESSAGE=32;
-	public static final int MINUS=33;
-	public static final int NUMDOUBLE=34;
-	public static final int NUMFLOAT=35;
-	public static final int NUMINT=36;
-	public static final int OCTAL=37;
-	public static final int OCTAL_ESC=38;
-	public static final int OPTION=39;
-	public static final int OPTIONAL=40;
-	public static final int PKG=41;
-	public static final int PLUS=42;
-	public static final int REPEATED=43;
-	public static final int REQUIRED=44;
-	public static final int RETURNS=45;
-	public static final int RIGHTCURLY=46;
-	public static final int RIGHTPAREN=47;
-	public static final int RIGHTSQUARE=48;
-	public static final int RPC=49;
-	public static final int SEMICOLON=50;
-	public static final int SERVICE=51;
-	public static final int STRING=52;
-	public static final int STRING_LITERAL=53;
-	public static final int SYNTAX=54;
-	public static final int TO=55;
-	public static final int TRUE=56;
-	public static final int UINT16=57;
-	public static final int UINT32=58;
-	public static final int UINT64=59;
-	public static final int UINT8=60;
-	public static final int UNICODE_ESC=61;
-	public static final int VOID=62;
-	public static final int WS=63;
+	public static final int EDITION=14;
+	public static final int ENUM=15;
+	public static final int ESC_SEQ=16;
+	public static final int EXP=17;
+	public static final int FALSE=18;
+	public static final int FLOAT=19;
+	public static final int FULL_ID=20;
+	public static final int HEX=21;
+	public static final int HEX_DIGIT=22;
+	public static final int ID=23;
+	public static final int IMPORT=24;
+	public static final int INT16=25;
+	public static final int INT32=26;
+	public static final int INT64=27;
+	public static final int INT8=28;
+	public static final int LEFTCURLY=29;
+	public static final int LEFTPAREN=30;
+	public static final int LEFTSQUARE=31;
+	public static final int MAX=32;
+	public static final int MESSAGE=33;
+	public static final int MINUS=34;
+	public static final int NUMDOUBLE=35;
+	public static final int NUMFLOAT=36;
+	public static final int NUMINT=37;
+	public static final int OCTAL=38;
+	public static final int OCTAL_ESC=39;
+	public static final int OPTION=40;
+	public static final int OPTIONAL=41;
+	public static final int PKG=42;
+	public static final int PLUS=43;
+	public static final int REPEATED=44;
+	public static final int REQUIRED=45;
+	public static final int RETURNS=46;
+	public static final int RIGHTCURLY=47;
+	public static final int RIGHTPAREN=48;
+	public static final int RIGHTSQUARE=49;
+	public static final int RPC=50;
+	public static final int SEMICOLON=51;
+	public static final int SERVICE=52;
+	public static final int STRING=53;
+	public static final int STRING_LITERAL=54;
+	public static final int SYNTAX=55;
+	public static final int TO=56;
+	public static final int TRUE=57;
+	public static final int UINT16=58;
+	public static final int UINT32=59;
+	public static final int UINT64=60;
+	public static final int UINT8=61;
+	public static final int UNICODE_ESC=62;
+	public static final int VOID=63;
+	public static final int WS=64;
 
 	// delegates
 	// delegators
@@ -452,13 +453,34 @@ public class ProtoLexer extends AbstractLexer {
 	}
 	// $ANTLR end "SYNTAX"
 
+	// $ANTLR start "EDITION"
+	public final void mEDITION() throws RecognitionException {
+		try {
+			int _type = EDITION;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:107:5: ( 'edition' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:107:9: 'edition'
+			{
+			match("edition"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "EDITION"
+
 	// $ANTLR start "IMPORT"
 	public final void mIMPORT() throws RecognitionException {
 		try {
 			int _type = IMPORT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:107:5: ( 'import' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:107:9: 'import'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:111:5: ( 'import' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:111:9: 'import'
 			{
 			match("import"); 
 
@@ -478,8 +500,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = OPTION;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:111:5: ( 'option' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:111:9: 'option'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:115:5: ( 'option' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:115:9: 'option'
 			{
 			match("option"); 
 
@@ -499,8 +521,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = MESSAGE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:115:5: ( 'message' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:115:9: 'message'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:119:5: ( 'message' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:119:9: 'message'
 			{
 			match("message"); 
 
@@ -520,8 +542,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = SERVICE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:119:5: ( 'service' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:119:9: 'service'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:123:5: ( 'service' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:123:9: 'service'
 			{
 			match("service"); 
 
@@ -541,8 +563,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = ENUM;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:123:5: ( 'enum' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:123:9: 'enum'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:127:5: ( 'enum' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:127:9: 'enum'
 			{
 			match("enum"); 
 
@@ -562,8 +584,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = REQUIRED;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:127:5: ( 'required' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:127:9: 'required'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:131:5: ( 'required' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:131:9: 'required'
 			{
 			match("required"); 
 
@@ -583,8 +605,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = OPTIONAL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:131:5: ( 'optional' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:131:9: 'optional'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:135:5: ( 'optional' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:135:9: 'optional'
 			{
 			match("optional"); 
 
@@ -604,8 +626,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = REPEATED;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:135:5: ( 'repeated' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:135:9: 'repeated'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:139:5: ( 'repeated' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:139:9: 'repeated'
 			{
 			match("repeated"); 
 
@@ -625,8 +647,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = RPC;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:151:5: ( 'rpc' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:151:9: 'rpc'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:155:5: ( 'rpc' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:155:9: 'rpc'
 			{
 			match("rpc"); 
 
@@ -646,8 +668,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = RETURNS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:155:5: ( 'returns' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:155:9: 'returns'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:159:5: ( 'returns' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:159:9: 'returns'
 			{
 			match("returns"); 
 
@@ -667,8 +689,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = INT8;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:159:5: ( 'int8' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:159:9: 'int8'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:163:5: ( 'int8' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:163:9: 'int8'
 			{
 			match("int8"); 
 
@@ -688,8 +710,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = INT16;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:163:5: ( 'int16' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:163:9: 'int16'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:167:5: ( 'int16' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:167:9: 'int16'
 			{
 			match("int16"); 
 
@@ -709,8 +731,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = INT32;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:167:5: ( 'int32' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:167:9: 'int32'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:171:5: ( 'int32' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:171:9: 'int32'
 			{
 			match("int32"); 
 
@@ -730,8 +752,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = INT64;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:171:5: ( 'int64' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:171:9: 'int64'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:175:5: ( 'int64' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:175:9: 'int64'
 			{
 			match("int64"); 
 
@@ -751,8 +773,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = UINT8;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:175:5: ( 'uint8' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:175:9: 'uint8'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:179:5: ( 'uint8' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:179:9: 'uint8'
 			{
 			match("uint8"); 
 
@@ -772,8 +794,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = UINT16;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:179:5: ( 'uint16' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:179:9: 'uint16'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:183:5: ( 'uint16' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:183:9: 'uint16'
 			{
 			match("uint16"); 
 
@@ -793,8 +815,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = UINT32;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:183:5: ( 'uint32' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:183:9: 'uint32'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:187:5: ( 'uint32' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:187:9: 'uint32'
 			{
 			match("uint32"); 
 
@@ -814,8 +836,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = UINT64;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:187:5: ( 'uint64' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:187:9: 'uint64'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:191:5: ( 'uint64' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:191:9: 'uint64'
 			{
 			match("uint64"); 
 
@@ -835,8 +857,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = FLOAT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:191:5: ( 'float' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:191:9: 'float'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:195:5: ( 'float' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:195:9: 'float'
 			{
 			match("float"); 
 
@@ -856,8 +878,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = DOUBLE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:195:5: ( 'double' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:195:9: 'double'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:199:5: ( 'double' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:199:9: 'double'
 			{
 			match("double"); 
 
@@ -877,8 +899,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = BOOL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:199:5: ( 'bool' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:199:9: 'bool'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:203:5: ( 'bool' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:203:9: 'bool'
 			{
 			match("bool"); 
 
@@ -898,8 +920,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = STRING;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:203:5: ( 'string' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:203:9: 'string'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:207:5: ( 'string' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:207:9: 'string'
 			{
 			match("string"); 
 
@@ -919,8 +941,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = BYTES;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:207:5: ( 'bytes' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:207:9: 'bytes'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:211:5: ( 'bytes' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:211:9: 'bytes'
 			{
 			match("bytes"); 
 
@@ -940,8 +962,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = DEFAULT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:211:5: ( 'default' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:211:9: 'default'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:215:5: ( 'default' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:215:9: 'default'
 			{
 			match("default"); 
 
@@ -961,8 +983,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = MAX;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:215:5: ( 'max' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:215:9: 'max'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:219:5: ( 'max' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:219:9: 'max'
 			{
 			match("max"); 
 
@@ -982,8 +1004,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = VOID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:219:5: ( 'void' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:219:9: 'void'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:223:5: ( 'void' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:223:9: 'void'
 			{
 			match("void"); 
 
@@ -1003,12 +1025,12 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = FULL_ID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:223:5: ( ID ( '.' ID )+ )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:223:7: ID ( '.' ID )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:227:5: ( ID ( '.' ID )+ )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:227:7: ID ( '.' ID )+
 			{
 			mID(); 
 
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:223:10: ( '.' ID )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:227:10: ( '.' ID )+
 			int cnt1=0;
 			loop1:
 			while (true) {
@@ -1020,7 +1042,7 @@ public class ProtoLexer extends AbstractLexer {
 
 				switch (alt1) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:223:11: '.' ID
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:227:11: '.' ID
 					{
 					match('.'); 
 					mID(); 
@@ -1052,8 +1074,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = ID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:227:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:227:9: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:231:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:231:9: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -1063,7 +1085,7 @@ public class ProtoLexer extends AbstractLexer {
 				recover(mse);
 				throw mse;
 			}
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:227:33: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:231:33: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
 			loop2:
 			while (true) {
 				int alt2=2;
@@ -1108,8 +1130,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = EXP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:231:5: ( NUMINT ( 'e' | 'E' ) NUMINT )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:231:9: NUMINT ( 'e' | 'E' ) NUMINT
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:235:5: ( NUMINT ( 'e' | 'E' ) NUMINT )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:235:9: NUMINT ( 'e' | 'E' ) NUMINT
 			{
 			mNUMINT(); 
 
@@ -1139,22 +1161,22 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = NUMDOUBLE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:235:5: ( ( NUMFLOAT | NUMINT ) 'e' ( '0' .. '9' )+ )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:235:9: ( NUMFLOAT | NUMINT ) 'e' ( '0' .. '9' )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:239:5: ( ( NUMFLOAT | NUMINT ) 'e' ( '0' .. '9' )+ )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:239:9: ( NUMFLOAT | NUMINT ) 'e' ( '0' .. '9' )+
 			{
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:235:9: ( NUMFLOAT | NUMINT )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:239:9: ( NUMFLOAT | NUMINT )
 			int alt3=2;
 			alt3 = dfa3.predict(input);
 			switch (alt3) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:235:10: NUMFLOAT
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:239:10: NUMFLOAT
 					{
 					mNUMFLOAT(); 
 
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:235:19: NUMINT
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:239:19: NUMINT
 					{
 					mNUMINT(); 
 
@@ -1164,7 +1186,7 @@ public class ProtoLexer extends AbstractLexer {
 			}
 
 			match('e'); 
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:236:13: ( '0' .. '9' )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:240:13: ( '0' .. '9' )+
 			int cnt4=0;
 			loop4:
 			while (true) {
@@ -1213,13 +1235,13 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = NUMFLOAT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:240:5: ( NUMINT '.' ( '0' .. '9' )+ ( 'f' )? )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:240:9: NUMINT '.' ( '0' .. '9' )+ ( 'f' )?
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:244:5: ( NUMINT '.' ( '0' .. '9' )+ ( 'f' )? )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:244:9: NUMINT '.' ( '0' .. '9' )+ ( 'f' )?
 			{
 			mNUMINT(); 
 
 			match('.'); 
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:240:20: ( '0' .. '9' )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:244:20: ( '0' .. '9' )+
 			int cnt5=0;
 			loop5:
 			while (true) {
@@ -1252,7 +1274,7 @@ public class ProtoLexer extends AbstractLexer {
 				cnt5++;
 			}
 
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:240:30: ( 'f' )?
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:244:30: ( 'f' )?
 			int alt6=2;
 			int LA6_0 = input.LA(1);
 			if ( (LA6_0=='f') ) {
@@ -1260,7 +1282,7 @@ public class ProtoLexer extends AbstractLexer {
 			}
 			switch (alt6) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:240:30: 'f'
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:244:30: 'f'
 					{
 					match('f'); 
 					}
@@ -1284,7 +1306,7 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = NUMINT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:244:5: ( '0' | ( MINUS )? '1' .. '9' ( '0' .. '9' )* )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:248:5: ( '0' | ( MINUS )? '1' .. '9' ( '0' .. '9' )* )
 			int alt9=2;
 			int LA9_0 = input.LA(1);
 			if ( (LA9_0=='0') ) {
@@ -1302,15 +1324,15 @@ public class ProtoLexer extends AbstractLexer {
 
 			switch (alt9) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:244:9: '0'
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:248:9: '0'
 					{
 					match('0'); 
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:244:15: ( MINUS )? '1' .. '9' ( '0' .. '9' )*
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:248:15: ( MINUS )? '1' .. '9' ( '0' .. '9' )*
 					{
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:244:15: ( MINUS )?
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:248:15: ( MINUS )?
 					int alt7=2;
 					int LA7_0 = input.LA(1);
 					if ( (LA7_0=='-') ) {
@@ -1334,7 +1356,7 @@ public class ProtoLexer extends AbstractLexer {
 					}
 
 					matchRange('1','9'); 
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:244:31: ( '0' .. '9' )*
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:248:31: ( '0' .. '9' )*
 					loop8:
 					while (true) {
 						int alt8=2;
@@ -1381,10 +1403,10 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = HEX;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:248:5: ( ( MINUS )? '0' ( 'x' | 'X' ) ( HEX_DIGIT )+ )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:248:9: ( MINUS )? '0' ( 'x' | 'X' ) ( HEX_DIGIT )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:252:5: ( ( MINUS )? '0' ( 'x' | 'X' ) ( HEX_DIGIT )+ )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:252:9: ( MINUS )? '0' ( 'x' | 'X' ) ( HEX_DIGIT )+
 			{
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:248:9: ( MINUS )?
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:252:9: ( MINUS )?
 			int alt10=2;
 			int LA10_0 = input.LA(1);
 			if ( (LA10_0=='-') ) {
@@ -1416,7 +1438,7 @@ public class ProtoLexer extends AbstractLexer {
 				recover(mse);
 				throw mse;
 			}
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:248:30: ( HEX_DIGIT )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:252:30: ( HEX_DIGIT )+
 			int cnt11=0;
 			loop11:
 			while (true) {
@@ -1465,11 +1487,11 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = OCTAL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:252:5: ( '0' ( '0' .. '7' )+ )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:252:9: '0' ( '0' .. '7' )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:256:5: ( '0' ( '0' .. '7' )+ )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:256:9: '0' ( '0' .. '7' )+
 			{
 			match('0'); 
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:252:13: ( '0' .. '7' )+
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:256:13: ( '0' .. '7' )+
 			int cnt12=0;
 			loop12:
 			while (true) {
@@ -1518,15 +1540,15 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = DOC_COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:256:5: ( '///' ( (~ ( '\\n' | '\\r' ) )* ) ( '\\r' )? '\\n' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:256:9: '///' ( (~ ( '\\n' | '\\r' ) )* ) ( '\\r' )? '\\n'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:260:5: ( '///' ( (~ ( '\\n' | '\\r' ) )* ) ( '\\r' )? '\\n' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:260:9: '///' ( (~ ( '\\n' | '\\r' ) )* ) ( '\\r' )? '\\n'
 			{
 			match("///"); 
 
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:256:15: ( (~ ( '\\n' | '\\r' ) )* )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:256:16: (~ ( '\\n' | '\\r' ) )*
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:260:15: ( (~ ( '\\n' | '\\r' ) )* )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:260:16: (~ ( '\\n' | '\\r' ) )*
 			{
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:256:16: (~ ( '\\n' | '\\r' ) )*
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:260:16: (~ ( '\\n' | '\\r' ) )*
 			loop13:
 			while (true) {
 				int alt13=2;
@@ -1557,7 +1579,7 @@ public class ProtoLexer extends AbstractLexer {
 
 			}
 
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:256:31: ( '\\r' )?
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:260:31: ( '\\r' )?
 			int alt14=2;
 			int LA14_0 = input.LA(1);
 			if ( (LA14_0=='\r') ) {
@@ -1565,7 +1587,7 @@ public class ProtoLexer extends AbstractLexer {
 			}
 			switch (alt14) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:256:31: '\\r'
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:260:31: '\\r'
 					{
 					match('\r'); 
 					}
@@ -1590,7 +1612,7 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:260:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:264:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
 			int alt18=2;
 			int LA18_0 = input.LA(1);
 			if ( (LA18_0=='/') ) {
@@ -1624,11 +1646,11 @@ public class ProtoLexer extends AbstractLexer {
 
 			switch (alt18) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:260:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:264:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
 					{
 					match("//"); 
 
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:260:14: (~ ( '\\n' | '\\r' ) )*
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:264:14: (~ ( '\\n' | '\\r' ) )*
 					loop15:
 					while (true) {
 						int alt15=2;
@@ -1657,7 +1679,7 @@ public class ProtoLexer extends AbstractLexer {
 						}
 					}
 
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:260:28: ( '\\r' )?
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:264:28: ( '\\r' )?
 					int alt16=2;
 					int LA16_0 = input.LA(1);
 					if ( (LA16_0=='\r') ) {
@@ -1665,7 +1687,7 @@ public class ProtoLexer extends AbstractLexer {
 					}
 					switch (alt16) {
 						case 1 :
-							// com/dyuproject/fbsgen/parser/ProtoLexer.g:260:28: '\\r'
+							// com/dyuproject/fbsgen/parser/ProtoLexer.g:264:28: '\\r'
 							{
 							match('\r'); 
 							}
@@ -1678,11 +1700,11 @@ public class ProtoLexer extends AbstractLexer {
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:261:9: '/*' ( options {greedy=false; } : . )* '*/'
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:265:9: '/*' ( options {greedy=false; } : . )* '*/'
 					{
 					match("/*"); 
 
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:261:14: ( options {greedy=false; } : . )*
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:265:14: ( options {greedy=false; } : . )*
 					loop17:
 					while (true) {
 						int alt17=2;
@@ -1703,7 +1725,7 @@ public class ProtoLexer extends AbstractLexer {
 
 						switch (alt17) {
 						case 1 :
-							// com/dyuproject/fbsgen/parser/ProtoLexer.g:261:42: .
+							// com/dyuproject/fbsgen/parser/ProtoLexer.g:265:42: .
 							{
 							matchAny(); 
 							}
@@ -1735,8 +1757,8 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:264:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:264:9: ( ' ' | '\\t' | '\\r' | '\\n' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:268:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:268:9: ( ' ' | '\\t' | '\\r' | '\\n' )
 			{
 			if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
 				input.consume();
@@ -1763,11 +1785,11 @@ public class ProtoLexer extends AbstractLexer {
 		try {
 			int _type = STRING_LITERAL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:272:5: ( '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"' )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:272:9: '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"'
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:276:5: ( '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"' )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:276:9: '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"'
 			{
 			match('\"'); 
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:272:13: ( ESC_SEQ |~ ( '\\\\' | '\"' ) )*
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:276:13: ( ESC_SEQ |~ ( '\\\\' | '\"' ) )*
 			loop19:
 			while (true) {
 				int alt19=3;
@@ -1781,14 +1803,14 @@ public class ProtoLexer extends AbstractLexer {
 
 				switch (alt19) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:272:15: ESC_SEQ
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:276:15: ESC_SEQ
 					{
 					mESC_SEQ(); 
 
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:272:25: ~ ( '\\\\' | '\"' )
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:276:25: ~ ( '\\\\' | '\"' )
 					{
 					if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
 						input.consume();
@@ -1821,7 +1843,7 @@ public class ProtoLexer extends AbstractLexer {
 	// $ANTLR start "HEX_DIGIT"
 	public final void mHEX_DIGIT() throws RecognitionException {
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:276:5: ( ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:280:5: ( ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
 			// com/dyuproject/fbsgen/parser/ProtoLexer.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'F')||(input.LA(1) >= 'a' && input.LA(1) <= 'f') ) {
@@ -1844,7 +1866,7 @@ public class ProtoLexer extends AbstractLexer {
 	// $ANTLR start "ESC_SEQ"
 	public final void mESC_SEQ() throws RecognitionException {
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:280:5: ( '\\\\' ( 'a' | 'v' | 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | '\\\\' ( 'x' | 'X' ) HEX_DIGIT HEX_DIGIT | UNICODE_ESC | OCTAL_ESC )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:284:5: ( '\\\\' ( 'a' | 'v' | 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | '\\\\' ( 'x' | 'X' ) HEX_DIGIT HEX_DIGIT | UNICODE_ESC | OCTAL_ESC )
 			int alt20=4;
 			int LA20_0 = input.LA(1);
 			if ( (LA20_0=='\\') ) {
@@ -1907,7 +1929,7 @@ public class ProtoLexer extends AbstractLexer {
 
 			switch (alt20) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:280:9: '\\\\' ( 'a' | 'v' | 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:284:9: '\\\\' ( 'a' | 'v' | 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
 					{
 					match('\\'); 
 					if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||(input.LA(1) >= 'a' && input.LA(1) <= 'b')||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t'||input.LA(1)=='v' ) {
@@ -1921,7 +1943,7 @@ public class ProtoLexer extends AbstractLexer {
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:281:9: '\\\\' ( 'x' | 'X' ) HEX_DIGIT HEX_DIGIT
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:285:9: '\\\\' ( 'x' | 'X' ) HEX_DIGIT HEX_DIGIT
 					{
 					match('\\'); 
 					if ( input.LA(1)=='X'||input.LA(1)=='x' ) {
@@ -1939,14 +1961,14 @@ public class ProtoLexer extends AbstractLexer {
 					}
 					break;
 				case 3 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:282:9: UNICODE_ESC
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:286:9: UNICODE_ESC
 					{
 					mUNICODE_ESC(); 
 
 					}
 					break;
 				case 4 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:283:9: OCTAL_ESC
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:287:9: OCTAL_ESC
 					{
 					mOCTAL_ESC(); 
 
@@ -1964,7 +1986,7 @@ public class ProtoLexer extends AbstractLexer {
 	// $ANTLR start "OCTAL_ESC"
 	public final void mOCTAL_ESC() throws RecognitionException {
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:287:5: ( '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:291:5: ( '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) )
 			int alt21=3;
 			int LA21_0 = input.LA(1);
 			if ( (LA21_0=='\\') ) {
@@ -2022,7 +2044,7 @@ public class ProtoLexer extends AbstractLexer {
 
 			switch (alt21) {
 				case 1 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:287:9: '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' )
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:291:9: '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' )
 					{
 					match('\\'); 
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '3') ) {
@@ -2052,7 +2074,7 @@ public class ProtoLexer extends AbstractLexer {
 					}
 					break;
 				case 2 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:288:9: '\\\\' ( '0' .. '7' ) ( '0' .. '7' )
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:292:9: '\\\\' ( '0' .. '7' ) ( '0' .. '7' )
 					{
 					match('\\'); 
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '7') ) {
@@ -2074,7 +2096,7 @@ public class ProtoLexer extends AbstractLexer {
 					}
 					break;
 				case 3 :
-					// com/dyuproject/fbsgen/parser/ProtoLexer.g:289:9: '\\\\' ( '0' .. '7' )
+					// com/dyuproject/fbsgen/parser/ProtoLexer.g:293:9: '\\\\' ( '0' .. '7' )
 					{
 					match('\\'); 
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '7') ) {
@@ -2099,8 +2121,8 @@ public class ProtoLexer extends AbstractLexer {
 	// $ANTLR start "UNICODE_ESC"
 	public final void mUNICODE_ESC() throws RecognitionException {
 		try {
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:293:5: ( '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT )
-			// com/dyuproject/fbsgen/parser/ProtoLexer.g:293:9: '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:297:5: ( '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT )
+			// com/dyuproject/fbsgen/parser/ProtoLexer.g:297:9: '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
 			{
 			match('\\'); 
 			match('u'); 
@@ -2123,8 +2145,8 @@ public class ProtoLexer extends AbstractLexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:8: ( ASSIGN | AT | LEFTCURLY | RIGHTCURLY | LEFTPAREN | RIGHTPAREN | LEFTSQUARE | RIGHTSQUARE | COLON | SEMICOLON | COMMA | PLUS | MINUS | TO | TRUE | FALSE | PKG | SYNTAX | IMPORT | OPTION | MESSAGE | SERVICE | ENUM | REQUIRED | OPTIONAL | REPEATED | RPC | RETURNS | INT8 | INT16 | INT32 | INT64 | UINT8 | UINT16 | UINT32 | UINT64 | FLOAT | DOUBLE | BOOL | STRING | BYTES | DEFAULT | MAX | VOID | FULL_ID | ID | EXP | NUMDOUBLE | NUMFLOAT | NUMINT | HEX | OCTAL | DOC_COMMENT | COMMENT | WS | STRING_LITERAL )
-		int alt22=56;
+		// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:8: ( ASSIGN | AT | LEFTCURLY | RIGHTCURLY | LEFTPAREN | RIGHTPAREN | LEFTSQUARE | RIGHTSQUARE | COLON | SEMICOLON | COMMA | PLUS | MINUS | TO | TRUE | FALSE | PKG | SYNTAX | EDITION | IMPORT | OPTION | MESSAGE | SERVICE | ENUM | REQUIRED | OPTIONAL | REPEATED | RPC | RETURNS | INT8 | INT16 | INT32 | INT64 | UINT8 | UINT16 | UINT32 | UINT64 | FLOAT | DOUBLE | BOOL | STRING | BYTES | DEFAULT | MAX | VOID | FULL_ID | ID | EXP | NUMDOUBLE | NUMFLOAT | NUMINT | HEX | OCTAL | DOC_COMMENT | COMMENT | WS | STRING_LITERAL )
+		int alt22=57;
 		alt22 = dfa22.predict(input);
 		switch (alt22) {
 			case 1 :
@@ -2254,266 +2276,273 @@ public class ProtoLexer extends AbstractLexer {
 				}
 				break;
 			case 19 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:143: IMPORT
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:143: EDITION
+				{
+				mEDITION(); 
+
+				}
+				break;
+			case 20 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:151: IMPORT
 				{
 				mIMPORT(); 
 
 				}
 				break;
-			case 20 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:150: OPTION
+			case 21 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:158: OPTION
 				{
 				mOPTION(); 
 
 				}
 				break;
-			case 21 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:157: MESSAGE
+			case 22 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:165: MESSAGE
 				{
 				mMESSAGE(); 
 
 				}
 				break;
-			case 22 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:165: SERVICE
+			case 23 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:173: SERVICE
 				{
 				mSERVICE(); 
 
 				}
 				break;
-			case 23 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:173: ENUM
+			case 24 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:181: ENUM
 				{
 				mENUM(); 
 
 				}
 				break;
-			case 24 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:178: REQUIRED
+			case 25 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:186: REQUIRED
 				{
 				mREQUIRED(); 
 
 				}
 				break;
-			case 25 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:187: OPTIONAL
+			case 26 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:195: OPTIONAL
 				{
 				mOPTIONAL(); 
 
 				}
 				break;
-			case 26 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:196: REPEATED
+			case 27 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:204: REPEATED
 				{
 				mREPEATED(); 
 
 				}
 				break;
-			case 27 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:205: RPC
+			case 28 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:213: RPC
 				{
 				mRPC(); 
 
 				}
 				break;
-			case 28 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:209: RETURNS
+			case 29 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:217: RETURNS
 				{
 				mRETURNS(); 
 
 				}
 				break;
-			case 29 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:217: INT8
+			case 30 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:225: INT8
 				{
 				mINT8(); 
 
 				}
 				break;
-			case 30 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:222: INT16
+			case 31 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:230: INT16
 				{
 				mINT16(); 
 
 				}
 				break;
-			case 31 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:228: INT32
+			case 32 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:236: INT32
 				{
 				mINT32(); 
 
 				}
 				break;
-			case 32 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:234: INT64
+			case 33 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:242: INT64
 				{
 				mINT64(); 
 
 				}
 				break;
-			case 33 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:240: UINT8
+			case 34 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:248: UINT8
 				{
 				mUINT8(); 
 
 				}
 				break;
-			case 34 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:246: UINT16
+			case 35 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:254: UINT16
 				{
 				mUINT16(); 
 
 				}
 				break;
-			case 35 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:253: UINT32
+			case 36 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:261: UINT32
 				{
 				mUINT32(); 
 
 				}
 				break;
-			case 36 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:260: UINT64
+			case 37 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:268: UINT64
 				{
 				mUINT64(); 
 
 				}
 				break;
-			case 37 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:267: FLOAT
+			case 38 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:275: FLOAT
 				{
 				mFLOAT(); 
 
 				}
 				break;
-			case 38 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:273: DOUBLE
+			case 39 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:281: DOUBLE
 				{
 				mDOUBLE(); 
 
 				}
 				break;
-			case 39 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:280: BOOL
+			case 40 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:288: BOOL
 				{
 				mBOOL(); 
 
 				}
 				break;
-			case 40 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:285: STRING
+			case 41 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:293: STRING
 				{
 				mSTRING(); 
 
 				}
 				break;
-			case 41 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:292: BYTES
+			case 42 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:300: BYTES
 				{
 				mBYTES(); 
 
 				}
 				break;
-			case 42 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:298: DEFAULT
+			case 43 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:306: DEFAULT
 				{
 				mDEFAULT(); 
 
 				}
 				break;
-			case 43 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:306: MAX
+			case 44 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:314: MAX
 				{
 				mMAX(); 
 
 				}
 				break;
-			case 44 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:310: VOID
+			case 45 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:318: VOID
 				{
 				mVOID(); 
 
 				}
 				break;
-			case 45 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:315: FULL_ID
+			case 46 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:323: FULL_ID
 				{
 				mFULL_ID(); 
 
 				}
 				break;
-			case 46 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:323: ID
+			case 47 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:331: ID
 				{
 				mID(); 
 
 				}
 				break;
-			case 47 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:326: EXP
+			case 48 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:334: EXP
 				{
 				mEXP(); 
 
 				}
 				break;
-			case 48 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:330: NUMDOUBLE
+			case 49 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:338: NUMDOUBLE
 				{
 				mNUMDOUBLE(); 
 
 				}
 				break;
-			case 49 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:340: NUMFLOAT
+			case 50 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:348: NUMFLOAT
 				{
 				mNUMFLOAT(); 
 
 				}
 				break;
-			case 50 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:349: NUMINT
+			case 51 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:357: NUMINT
 				{
 				mNUMINT(); 
 
 				}
 				break;
-			case 51 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:356: HEX
+			case 52 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:364: HEX
 				{
 				mHEX(); 
 
 				}
 				break;
-			case 52 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:360: OCTAL
+			case 53 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:368: OCTAL
 				{
 				mOCTAL(); 
 
 				}
 				break;
-			case 53 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:366: DOC_COMMENT
+			case 54 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:374: DOC_COMMENT
 				{
 				mDOC_COMMENT(); 
 
 				}
 				break;
-			case 54 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:378: COMMENT
+			case 55 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:386: COMMENT
 				{
 				mCOMMENT(); 
 
 				}
 				break;
-			case 55 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:386: WS
+			case 56 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:394: WS
 				{
 				mWS(); 
 
 				}
 				break;
-			case 56 :
-				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:389: STRING_LITERAL
+			case 57 :
+				// com/dyuproject/fbsgen/parser/ProtoLexer.g:1:397: STRING_LITERAL
 				{
 				mSTRING_LITERAL(); 
 
@@ -2579,51 +2608,53 @@ public class ProtoLexer extends AbstractLexer {
 		}
 		@Override
 		public String getDescription() {
-			return "235:9: ( NUMFLOAT | NUMINT )";
+			return "239:9: ( NUMFLOAT | NUMINT )";
 		}
 	}
 
 	static final String DFA22_eotS =
-		"\15\uffff\1\41\16\46\2\74\5\uffff\1\104\2\46\2\uffff\24\46\5\uffff\1\74"+
-		"\3\uffff\13\46\1\156\4\46\1\163\6\46\2\77\1\175\1\uffff\1\u0081\7\46\1"+
-		"\u0089\5\46\1\uffff\1\u008f\3\46\1\uffff\3\46\1\u0099\1\46\1\u009b\1\uffff"+
-		"\1\77\1\175\5\uffff\1\u009d\1\u009e\5\46\1\uffff\1\u00a4\1\u00a5\1\u00a6"+
-		"\2\46\1\uffff\3\46\1\u00ac\5\46\1\uffff\1\u00b2\4\uffff\1\46\1\u00b4\1"+
-		"\46\1\u00b6\1\u00b7\3\uffff\1\u00b9\4\46\1\uffff\1\u00be\1\u00bf\1\u00c0"+
-		"\1\u00c1\1\46\1\uffff\1\u00c3\1\uffff\1\u00c4\2\uffff\1\46\1\uffff\1\u00c6"+
-		"\2\46\1\u00c9\4\uffff\1\u00ca\2\uffff\1\u00cb\1\uffff\1\u00cc\1\u00cd"+
-		"\5\uffff";
+		"\15\uffff\1\41\16\46\2\75\5\uffff\1\105\2\46\2\uffff\25\46\5\uffff\1\75"+
+		"\3\uffff\15\46\1\162\3\46\1\166\6\46\2\100\1\u0080\1\uffff\1\u0084\7\46"+
+		"\1\u008c\1\46\1\u008e\5\46\1\uffff\3\46\1\uffff\3\46\1\u009d\1\46\1\u009f"+
+		"\1\uffff\1\100\1\u0080\5\uffff\1\u00a1\1\u00a2\5\46\1\uffff\1\46\1\uffff"+
+		"\1\u00a9\1\u00aa\1\u00ab\5\46\1\u00b1\5\46\1\uffff\1\u00b7\4\uffff\1\46"+
+		"\1\u00b9\1\46\1\u00bb\1\46\1\u00bd\3\uffff\1\u00bf\4\46\1\uffff\1\u00c4"+
+		"\1\u00c5\1\u00c6\1\u00c7\1\46\1\uffff\1\u00c9\1\uffff\1\u00ca\1\uffff"+
+		"\1\u00cb\1\uffff\1\46\1\uffff\1\u00cd\2\46\1\u00d0\4\uffff\1\u00d1\3\uffff"+
+		"\1\u00d2\1\uffff\1\u00d3\1\u00d4\5\uffff";
 	static final String DFA22_eofS =
-		"\u00ce\uffff";
+		"\u00d5\uffff";
 	static final String DFA22_minS =
-		"\1\11\14\uffff\1\60\20\56\1\52\4\uffff\3\56\2\uffff\24\56\1\uffff\1\55"+
-		"\1\60\2\uffff\1\56\1\0\2\uffff\27\56\3\60\1\0\16\56\1\uffff\4\56\1\uffff"+
-		"\6\56\1\uffff\1\60\1\145\1\uffff\1\0\1\12\2\uffff\7\56\1\uffff\5\56\1"+
-		"\uffff\11\56\1\uffff\1\56\4\uffff\5\56\3\uffff\5\56\1\uffff\5\56\1\uffff"+
-		"\1\56\1\uffff\1\56\2\uffff\1\56\1\uffff\4\56\4\uffff\1\56\2\uffff\1\56"+
-		"\1\uffff\2\56\5\uffff";
+		"\1\11\14\uffff\1\60\20\56\1\52\4\uffff\3\56\2\uffff\25\56\1\uffff\1\55"+
+		"\1\60\2\uffff\1\56\1\0\2\uffff\30\56\3\60\1\0\20\56\1\uffff\3\56\1\uffff"+
+		"\6\56\1\uffff\1\60\1\145\1\uffff\1\0\1\12\2\uffff\7\56\1\uffff\1\56\1"+
+		"\uffff\16\56\1\uffff\1\56\4\uffff\6\56\3\uffff\5\56\1\uffff\5\56\1\uffff"+
+		"\1\56\1\uffff\1\56\1\uffff\1\56\1\uffff\1\56\1\uffff\4\56\4\uffff\1\56"+
+		"\3\uffff\1\56\1\uffff\2\56\5\uffff";
 	static final String DFA22_maxS =
-		"\1\175\14\uffff\1\71\16\172\1\170\1\145\1\57\4\uffff\3\172\2\uffff\24"+
-		"\172\1\uffff\2\71\2\uffff\1\145\1\uffff\2\uffff\27\172\2\71\1\146\1\uffff"+
-		"\16\172\1\uffff\4\172\1\uffff\6\172\1\uffff\1\71\1\145\1\uffff\1\uffff"+
-		"\1\12\2\uffff\7\172\1\uffff\5\172\1\uffff\11\172\1\uffff\1\172\4\uffff"+
-		"\5\172\3\uffff\5\172\1\uffff\5\172\1\uffff\1\172\1\uffff\1\172\2\uffff"+
-		"\1\172\1\uffff\4\172\4\uffff\1\172\2\uffff\1\172\1\uffff\2\172\5\uffff";
+		"\1\175\14\uffff\1\71\16\172\1\170\1\145\1\57\4\uffff\3\172\2\uffff\25"+
+		"\172\1\uffff\2\71\2\uffff\1\145\1\uffff\2\uffff\30\172\2\71\1\146\1\uffff"+
+		"\20\172\1\uffff\3\172\1\uffff\6\172\1\uffff\1\71\1\145\1\uffff\1\uffff"+
+		"\1\12\2\uffff\7\172\1\uffff\1\172\1\uffff\16\172\1\uffff\1\172\4\uffff"+
+		"\6\172\3\uffff\5\172\1\uffff\5\172\1\uffff\1\172\1\uffff\1\172\1\uffff"+
+		"\1\172\1\uffff\1\172\1\uffff\4\172\4\uffff\1\172\3\uffff\1\172\1\uffff"+
+		"\2\172\5\uffff";
 	static final String DFA22_acceptS =
 		"\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\22\uffff"+
-		"\1\67\1\70\1\15\1\63\3\uffff\1\56\1\55\24\uffff\1\62\2\uffff\1\57\1\64"+
-		"\2\uffff\1\66\1\16\51\uffff\1\53\4\uffff\1\33\6\uffff\1\60\2\uffff\1\61"+
-		"\2\uffff\1\65\1\17\7\uffff\1\35\5\uffff\1\27\11\uffff\1\47\1\uffff\1\54"+
-		"\1\65\1\20\1\45\5\uffff\1\36\1\37\1\40\5\uffff\1\41\5\uffff\1\51\1\uffff"+
-		"\1\22\1\uffff\1\50\1\23\1\uffff\1\24\4\uffff\1\42\1\43\1\44\1\46\1\uffff"+
-		"\1\21\1\26\1\uffff\1\25\2\uffff\1\34\1\52\1\31\1\30\1\32";
+		"\1\70\1\71\1\15\1\64\3\uffff\1\57\1\56\25\uffff\1\63\2\uffff\1\60\1\65"+
+		"\2\uffff\1\67\1\16\54\uffff\1\54\3\uffff\1\34\6\uffff\1\61\2\uffff\1\62"+
+		"\2\uffff\1\66\1\17\7\uffff\1\30\1\uffff\1\36\16\uffff\1\50\1\uffff\1\55"+
+		"\1\66\1\20\1\46\6\uffff\1\37\1\40\1\41\5\uffff\1\42\5\uffff\1\52\1\uffff"+
+		"\1\22\1\uffff\1\51\1\uffff\1\24\1\uffff\1\25\4\uffff\1\43\1\44\1\45\1"+
+		"\47\1\uffff\1\21\1\27\1\23\1\uffff\1\26\2\uffff\1\35\1\53\1\32\1\31\1"+
+		"\33";
 	static final String DFA22_specialS =
-		"\102\uffff\1\0\34\uffff\1\2\36\uffff\1\1\117\uffff}>";
+		"\103\uffff\1\2\35\uffff\1\1\37\uffff\1\0\123\uffff}>";
 	static final String[] DFA22_transitionS = {
 			"\2\37\2\uffff\1\37\22\uffff\1\37\1\uffff\1\40\5\uffff\1\5\1\6\1\uffff"+
 			"\1\14\1\13\1\15\1\uffff\1\36\1\34\11\35\1\11\1\12\1\uffff\1\1\2\uffff"+
 			"\1\2\32\33\1\7\1\uffff\1\10\1\uffff\1\33\1\uffff\1\33\1\31\1\33\1\30"+
-			"\1\25\1\17\2\33\1\22\3\33\1\24\1\33\1\23\1\20\1\33\1\26\1\21\1\16\1\27"+
+			"\1\22\1\17\2\33\1\23\3\33\1\25\1\33\1\24\1\20\1\33\1\26\1\21\1\16\1\27"+
 			"\1\32\4\33\1\3\1\uffff\1\4",
 			"",
 			"",
@@ -2645,266 +2676,277 @@ public class ProtoLexer extends AbstractLexer {
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\52\31\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\54\16"+
 			"\45\1\55\4\45\1\53\1\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\14\45\1\56\1"+
-			"\57\14\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\17\45\1\60\12"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\3\45\1\56\11"+
+			"\45\1\57\14\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\14\45\1\60\1"+
+			"\61\14\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\17\45\1\62\12"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\62\3\45\1\61"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\64\3\45\1\63"+
 			"\25\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\15\45\1\63\14"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\65\12"+
+			"\45\1\66\12\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\10\45\1\67\21"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\64\12"+
-			"\45\1\65\12\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\10\45\1\66\21"+
-			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\70\11"+
-			"\45\1\67\13\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\16\45\1\71\11"+
-			"\45\1\72\1\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\16\45\1\73\13"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\71\11"+
+			"\45\1\70\13\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\16\45\1\72\11"+
+			"\45\1\73\1\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\16\45\1\74\13"+
 			"\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"\1\76\1\uffff\10\100\15\uffff\1\77\22\uffff\1\42\14\uffff\1\75\22\uffff"+
+			"\1\77\1\uffff\10\101\15\uffff\1\100\22\uffff\1\42\14\uffff\1\76\22\uffff"+
 			"\1\42",
-			"\1\76\1\uffff\12\101\13\uffff\1\77\37\uffff\1\75",
-			"\1\103\4\uffff\1\102",
+			"\1\77\1\uffff\12\102\13\uffff\1\100\37\uffff\1\76",
+			"\1\104\4\uffff\1\103",
 			"",
 			"",
 			"",
 			"",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\24\45\1\105\5"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\24\45\1\106\5"+
 			"\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
 			"",
 			"",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\13\45\1\106\16"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\13\45\1\107\16"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\16\45\1\107\13"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\16\45\1\110\13"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\2\45\1\110\27"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\2\45\1\111\27"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\15\45\1\111\14"+
-			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\21\45\1\112\10"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\15\45\1\112\14"+
 			"\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\21\45\1\113\10"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\17\45\1\114\12"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\21\45\1\114\10"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\115\6"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\10\45\1\115\21"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\116\6"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\24\45\1\116\5"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\22\45\1\117\7"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\17\45\1\117\12"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\27\45\1\120\2"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\120\6"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\24\45\1\121\5"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\121\6"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\17\45\1\123\1"+
-			"\122\2\45\1\124\6\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\2\45\1\125\27"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\22\45\1\122\7"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\15\45\1\126\14"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\27\45\1\123\2"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\24\45\1\127\5"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\17\45\1\125\1"+
+			"\124\2\45\1\126\6\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\2\45\1\127\27"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\5\45\1\130\24"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\15\45\1\130\14"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\16\45\1\131\13"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\24\45\1\131\5"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\132\6"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\5\45\1\132\24"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\10\45\1\133\21"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\16\45\1\133\13"+
+			"\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\134\6"+
+			"\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\10\45\1\135\21"+
 			"\45",
 			"",
-			"\1\77\2\uffff\1\134\11\135",
-			"\12\136",
+			"\1\100\2\uffff\1\136\11\137",
+			"\12\140",
 			"",
 			"",
-			"\1\76\1\uffff\12\101\13\uffff\1\77\37\uffff\1\75",
-			"\57\103\1\137\uffd0\103",
+			"\1\77\1\uffff\12\102\13\uffff\1\100\37\uffff\1\76",
+			"\57\104\1\141\uffd0\104",
 			"",
 			"",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\140\25"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\142\25"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\22\45\1\141\7"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\22\45\1\143\7"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\142\31\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\12\45\1\143\17"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\144\31\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\12\45\1\145\17"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\144\6"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\146\6"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\25\45\1\145\4"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\25\45\1\147\4"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\10\45\1\146\21"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\10\45\1\150\21"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\16\45\1\147\13"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\151\6"+
 			"\45",
-			"\1\47\1\uffff\1\45\1\151\1\45\1\152\2\45\1\153\1\45\1\150\1\45\7\uffff"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\14\45\1\152\15"+
+			"\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\16\45\1\153\13"+
+			"\45",
+			"\1\47\1\uffff\1\45\1\155\1\45\1\156\2\45\1\157\1\45\1\154\1\45\7\uffff"+
 			"\32\45\4\uffff\1\45\1\uffff\32\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\10\45\1\154\21"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\10\45\1\160\21"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\22\45\1\155\7"+
-			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\14\45\1\157\15"+
-			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\24\45\1\160\5"+
-			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\161\25"+
-			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\24\45\1\162\5"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\22\45\1\161\7"+
 			"\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\164\6"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\24\45\1\163\5"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\45\1\165\30"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\164\25"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\166\31\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\13\45\1\167\16"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\24\45\1\165\5"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\170\25"+
-			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\3\45\1\171\26"+
-			"\45",
-			"\12\172",
-			"\12\173",
-			"\12\136\53\uffff\1\172\1\174",
-			"\12\176\1\u0080\2\176\1\177\ufff2\176",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\u0082"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\167\6"+
+			"\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\45\1\170\30"+
+			"\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\171\31\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\13\45\1\172\16"+
+			"\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\173\25"+
+			"\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\3\45\1\174\26"+
+			"\45",
+			"\12\175",
+			"\12\176",
+			"\12\140\53\uffff\1\175\1\177",
+			"\12\u0081\1\u0083\2\u0081\1\u0082\ufff2\u0081",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\u0085"+
 			"\25\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\u0083"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\u0086"+
 			"\6\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\u0084\31\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\u0085\31\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\10\45\1\u0086"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\u0087\31\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\u0088\31\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\10\45\1\u0089"+
 			"\21\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\15\45\1\u0087"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\15\45\1\u008a"+
 			"\14\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\21\45\1\u0088"+
-			"\10\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"\1\47\1\uffff\6\45\1\u008a\3\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32"+
-			"\45",
-			"\1\47\1\uffff\2\45\1\u008b\7\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32"+
-			"\45",
-			"\1\47\1\uffff\4\45\1\u008c\5\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32"+
-			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\16\45\1\u008d"+
-			"\13\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\u008e\31\45",
-			"",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\10\45\1\u0090"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\10\45\1\u008b"+
 			"\21\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\u0091\31\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\21\45\1\u0092"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\21\45\1\u008d"+
+			"\10\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
+			"\1\47\1\uffff\6\45\1\u008f\3\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32"+
+			"\45",
+			"\1\47\1\uffff\2\45\1\u0090\7\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32"+
+			"\45",
+			"\1\47\1\uffff\4\45\1\u0091\5\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32"+
+			"\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\16\45\1\u0092"+
+			"\13\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\u0093\31\45",
+			"",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\10\45\1\u0094"+
+			"\21\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\u0095\31\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\21\45\1\u0096"+
 			"\10\45",
 			"",
-			"\1\47\1\uffff\1\45\1\u0094\1\45\1\u0095\2\45\1\u0096\1\45\1\u0093\1"+
+			"\1\47\1\uffff\1\45\1\u0098\1\45\1\u0099\2\45\1\u009a\1\45\1\u0097\1"+
 			"\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\13\45\1\u0097"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\13\45\1\u009b"+
 			"\16\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\24\45\1\u0098"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\24\45\1\u009c"+
 			"\5\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\22\45\1\u009a"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\22\45\1\u009e"+
 			"\7\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
 			"",
-			"\12\173",
-			"\1\172",
+			"\12\176",
+			"\1\175",
 			"",
-			"\12\176\1\u0080\2\176\1\177\ufff2\176",
-			"\1\u0080",
+			"\12\u0081\1\u0083\2\u0081\1\u0082\ufff2\u0081",
+			"\1\u0083",
 			"",
 			"",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\6\45\1\u009f"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\6\45\1\u00a3"+
 			"\23\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\27\45\1\u00a0"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\27\45\1\u00a4"+
 			"\2\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\2\45\1\u00a1"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\2\45\1\u00a5"+
 			"\27\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\6\45\1\u00a2"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\6\45\1\u00a6"+
 			"\23\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\u00a3"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\16\45\1\u00a7"+
+			"\13\45",
+			"",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\u00a8"+
 			"\6\45",
 			"",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\15\45\1\u00a7"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\15\45\1\u00ac"+
 			"\14\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\6\45\1\u00a8"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\6\45\1\u00ad"+
 			"\23\45",
-			"",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\21\45\1\u00a9"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\21\45\1\u00ae"+
 			"\10\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\u00aa"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\u00af"+
 			"\6\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\15\45\1\u00ab"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\15\45\1\u00b0"+
 			"\14\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"\1\47\1\uffff\6\45\1\u00ad\3\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32"+
+			"\1\47\1\uffff\6\45\1\u00b2\3\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32"+
 			"\45",
-			"\1\47\1\uffff\2\45\1\u00ae\7\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32"+
+			"\1\47\1\uffff\2\45\1\u00b3\7\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32"+
 			"\45",
-			"\1\47\1\uffff\4\45\1\u00af\5\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32"+
+			"\1\47\1\uffff\4\45\1\u00b4\5\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32"+
 			"\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\u00b0"+
-			"\25\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\13\45\1\u00b1"+
-			"\16\45",
-			"",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"",
-			"",
-			"",
-			"",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\u00b3"+
-			"\25\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\u00b5"+
 			"\25\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\13\45\1\u00b6"+
+			"\16\45",
+			"",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
+			"",
+			"",
+			"",
+			"",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\u00b8"+
+			"\25\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"",
-			"",
-			"",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\u00b8\31\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\u00ba"+
 			"\25\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\u00bb"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\15\45\1\u00bc"+
+			"\14\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
+			"",
+			"",
+			"",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\1\u00be\31\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\u00c0"+
 			"\25\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\u00bc"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\u00c1"+
 			"\25\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\22\45\1\u00bd"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\4\45\1\u00c2"+
+			"\25\45",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\22\45\1\u00c3"+
 			"\7\45",
 			"",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\u00c2"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\23\45\1\u00c8"+
 			"\6\45",
 			"",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
 			"",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
 			"",
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
 			"",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\13\45\1\u00c5"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\13\45\1\u00cc"+
 			"\16\45",
 			"",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\3\45\1\u00c7"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\3\45\1\u00ce"+
 			"\26\45",
-			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\3\45\1\u00c8"+
+			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\3\45\1\u00cf"+
 			"\26\45",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
 			"",
@@ -2912,6 +2954,7 @@ public class ProtoLexer extends AbstractLexer {
 			"",
 			"",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
+			"",
 			"",
 			"",
 			"\1\47\1\uffff\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
@@ -2956,7 +2999,7 @@ public class ProtoLexer extends AbstractLexer {
 		}
 		@Override
 		public String getDescription() {
-			return "1:1: Tokens : ( ASSIGN | AT | LEFTCURLY | RIGHTCURLY | LEFTPAREN | RIGHTPAREN | LEFTSQUARE | RIGHTSQUARE | COLON | SEMICOLON | COMMA | PLUS | MINUS | TO | TRUE | FALSE | PKG | SYNTAX | IMPORT | OPTION | MESSAGE | SERVICE | ENUM | REQUIRED | OPTIONAL | REPEATED | RPC | RETURNS | INT8 | INT16 | INT32 | INT64 | UINT8 | UINT16 | UINT32 | UINT64 | FLOAT | DOUBLE | BOOL | STRING | BYTES | DEFAULT | MAX | VOID | FULL_ID | ID | EXP | NUMDOUBLE | NUMFLOAT | NUMINT | HEX | OCTAL | DOC_COMMENT | COMMENT | WS | STRING_LITERAL );";
+			return "1:1: Tokens : ( ASSIGN | AT | LEFTCURLY | RIGHTCURLY | LEFTPAREN | RIGHTPAREN | LEFTSQUARE | RIGHTSQUARE | COLON | SEMICOLON | COMMA | PLUS | MINUS | TO | TRUE | FALSE | PKG | SYNTAX | EDITION | IMPORT | OPTION | MESSAGE | SERVICE | ENUM | REQUIRED | OPTIONAL | REPEATED | RPC | RETURNS | INT8 | INT16 | INT32 | INT64 | UINT8 | UINT16 | UINT32 | UINT64 | FLOAT | DOUBLE | BOOL | STRING | BYTES | DEFAULT | MAX | VOID | FULL_ID | ID | EXP | NUMDOUBLE | NUMFLOAT | NUMINT | HEX | OCTAL | DOC_COMMENT | COMMENT | WS | STRING_LITERAL );";
 		}
 		@Override
 		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
@@ -2964,28 +3007,28 @@ public class ProtoLexer extends AbstractLexer {
 			int _s = s;
 			switch ( s ) {
 					case 0 : 
-						int LA22_66 = input.LA(1);
+						int LA22_129 = input.LA(1);
 						s = -1;
-						if ( (LA22_66=='/') ) {s = 95;}
-						else if ( ((LA22_66 >= '\u0000' && LA22_66 <= '.')||(LA22_66 >= '0' && LA22_66 <= '\uFFFF')) ) {s = 67;}
+						if ( (LA22_129=='\r') ) {s = 130;}
+						else if ( (LA22_129=='\n') ) {s = 131;}
+						else if ( ((LA22_129 >= '\u0000' && LA22_129 <= '\t')||(LA22_129 >= '\u000B' && LA22_129 <= '\f')||(LA22_129 >= '\u000E' && LA22_129 <= '\uFFFF')) ) {s = 129;}
 						if ( s>=0 ) return s;
 						break;
 
 					case 1 : 
-						int LA22_126 = input.LA(1);
+						int LA22_97 = input.LA(1);
 						s = -1;
-						if ( (LA22_126=='\r') ) {s = 127;}
-						else if ( (LA22_126=='\n') ) {s = 128;}
-						else if ( ((LA22_126 >= '\u0000' && LA22_126 <= '\t')||(LA22_126 >= '\u000B' && LA22_126 <= '\f')||(LA22_126 >= '\u000E' && LA22_126 <= '\uFFFF')) ) {s = 126;}
+						if ( ((LA22_97 >= '\u0000' && LA22_97 <= '\t')||(LA22_97 >= '\u000B' && LA22_97 <= '\f')||(LA22_97 >= '\u000E' && LA22_97 <= '\uFFFF')) ) {s = 129;}
+						else if ( (LA22_97=='\r') ) {s = 130;}
+						else if ( (LA22_97=='\n') ) {s = 131;}
 						if ( s>=0 ) return s;
 						break;
 
 					case 2 : 
-						int LA22_95 = input.LA(1);
+						int LA22_67 = input.LA(1);
 						s = -1;
-						if ( ((LA22_95 >= '\u0000' && LA22_95 <= '\t')||(LA22_95 >= '\u000B' && LA22_95 <= '\f')||(LA22_95 >= '\u000E' && LA22_95 <= '\uFFFF')) ) {s = 126;}
-						else if ( (LA22_95=='\r') ) {s = 127;}
-						else if ( (LA22_95=='\n') ) {s = 128;}
+						if ( (LA22_67=='/') ) {s = 97;}
+						else if ( ((LA22_67 >= '\u0000' && LA22_67 <= '.')||(LA22_67 >= '0' && LA22_67 <= '\uFFFF')) ) {s = 68;}
 						if ( s>=0 ) return s;
 						break;
 			}
