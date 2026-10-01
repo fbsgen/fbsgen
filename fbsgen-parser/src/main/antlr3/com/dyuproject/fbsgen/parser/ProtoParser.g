@@ -71,7 +71,7 @@ statement [Proto proto]
 
 // some keywords that might possibly be used as a variable
 var_reserved
-    :   TO | PKG | SYNTAX | IMPORT | OPTION | MESSAGE | SERVICE | ENUM | 
+    :   TO | PKG | SYNTAX | EDITION | IMPORT | OPTION | MESSAGE | SERVICE | ENUM | 
         REQUIRED | OPTIONAL | REPEATED | 
         //EXTENSIONS | EXTEND | GROUP | 
         RPC | RETURNS | 
