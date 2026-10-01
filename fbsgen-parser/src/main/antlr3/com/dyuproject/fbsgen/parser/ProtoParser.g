@@ -316,12 +316,13 @@ message_body [Proto proto, Message message]
     
 message_field [Proto proto, HasFields message]
 @init {
-    Field.Modifier modifier = null;
+    Field.Modifier modifier = Field.Modifier.OPTIONAL;
     FieldHolder fieldHolder = null;
 }
-    :   (OPTIONAL { modifier = Field.Modifier.OPTIONAL;  } 
+    :   
+      (OPTIONAL 
         |   REQUIRED { modifier = Field.Modifier.REQUIRED; } 
-        |   REPEATED { modifier = Field.Modifier.REPEATED; }) {
+        |   REPEATED { modifier = Field.Modifier.REPEATED; })? {
             fieldHolder = new FieldHolder();
         }
         field_type[proto, message, fieldHolder] 

@@ -40,6 +40,8 @@ public class OptionTest extends TestCase
         assertEquals("something",
                 aMessage.getField("anotherMessage").getOption("anOption"));
         assertEquals(Boolean.TRUE, aMessage.getExtraOption("message_set_wire_format"));
+        
+        assertEquals(Field.Modifier.OPTIONAL, aMessage.getField("status").modifier);
 
         Message anotherMessage = proto.getMessage("AnotherMessage");
         assertNotNull(anotherMessage);
