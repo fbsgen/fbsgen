@@ -28,15 +28,17 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
     
     public enum Modifier
     {
-        REPEATED(0),
-        OPTIONAL(1),
-        REQUIRED(2);
+        REPEATED(0, "repeated"),
+        OPTIONAL(1, "optional"),
+        REQUIRED(2, "required");
         
         public final int number;
+        public final java.lang.String alias;
         
-        private Modifier(int number)
+        private Modifier(int number, java.lang.String alias)
         {
             this.number = number;
+            this.alias = alias;
         }
         
         public int getNumber()
@@ -44,9 +46,20 @@ public abstract class Field<T> extends AnnotationContainer implements Comparable
             return number;
         }
         
+        public java.lang.String getAlias()
+        {
+            return alias;
+        }
+        
         public java.lang.String getName()
         {
             return name();
+        }
+        
+        @Override
+        public java.lang.String toString()
+        {
+            return alias;
         }
     }
     
